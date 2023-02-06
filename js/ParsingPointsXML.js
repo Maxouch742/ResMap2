@@ -1,21 +1,17 @@
+/** 
+ * This function parses the PRNx file (XML) to get
+ * all the points from the projects and add them 
+ * to the ol map
+ */
 function parsingPointsXML(xmlToParse) {
-
-    /* 
-
-    This function parses the PRNx file (XML) to get
-    all the points from the projects
-    and add them to the ol map
-
+    /*
     INPUT: XML toparse, coming from fr.result (FileReader method)
     OUPUT: [ Id list for fixed points, Id list for variable points ] (2D Array)
-
     */
-
 
     // Récupération des éléments des balises <point> des coordonnées approchées
     let approxCoords = xmlDoc.getElementsByTagName("coordinates")[0];
     let pointList = approxCoords.getElementsByTagName("point");
-
 
     // Séparation et listage des id des points nouveau (variables)
     let variablePoints = xmlDoc.getElementsByTagName("variablePoints")[2];
@@ -26,7 +22,6 @@ function parsingPointsXML(xmlToParse) {
         variablePointsListId.push(id);
     };
     
-
     // Initialisation des Vector Layer et du tableau des if de pts fixes
     pointsSource = new ol.source.Vector({});
     VariablesPointsSource = new ol.source.Vector({});
@@ -66,10 +61,7 @@ function parsingPointsXML(xmlToParse) {
       };
     };
 
-
-
     // <------ POINTS FIXES ------>
-
     // Création du style labelText pt fixe
     textStyleFixedPoints = new ol.style.Text({
         textAlign: "center",
@@ -108,11 +100,7 @@ function parsingPointsXML(xmlToParse) {
     pointsLayer.setZIndex(98);
     console.log("Fixed points has been added to map");
 
-
-
-    
     // <------ POINTS NOUVEAUX ------>
-
     // Création du style labelText pt nouv
     textStyleVariablePoints = new ol.style.Text({
       textAlign: "center",
@@ -149,8 +137,6 @@ function parsingPointsXML(xmlToParse) {
     map.addLayer(pointsVariableLayer);
     pointsVariableLayer.setZIndex(99);
     console.log("Variable points has been added to map");
-
-
 
     return listAllPoints;
 };

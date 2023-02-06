@@ -15,278 +15,219 @@
 
 
   <body>
-
+    <!--
     <main class="" role="main">
       <div id="map"><div id="popup"></div>
-    </main>
-    
-    <!-- Fenetre pop up -->
-    <div class="boxMenu absolutePosition">
+    </main>-->
 
-      <!-- Logo -->
-      <img class="py-2 center" src="./img/ResMap_logo.svg" >
-      
-      <!-- Box pour importer le fichier .PRNx -->
-      <div class="mt-2 greyBackground border border-dark p-1">
-        <h5 class="mx-2">Import du fichier .PRNx</h5>
-        <input class="mx-2 my-1 pr-2 inputFile" type="file" id="inputfile" accept=".prnx"></input>
-        <p class="mx-2 my-1 importInfo" id="outputTest"> </p>
-      </div>
+    <div class="container-fluid">
+      <div class="row">
 
-      <!-- Accordéon pour menu -->
-      <button class ="accordion mt-2 py-1" id="coucheButton">Menu</button>
-      <div class="panel scroller">
-        
-        <div class="mt-2">
-          <button class="accordion py-1">Points</button>
-          <div class="panel">
+        <!-- Partie gauche : MENU & PARAMETRES -->
+        <div class="col-3" id="param">
 
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxPointsFixes" onchange="changeLayerVisibilityFixedPoints()" checked>
-              <label class="checkboxLabel" for="checkboxPointsFixes">
-                Points fixes
-              </label>
-            </div>
-            <div class="NoPtsDecalage">
-              <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsFixesNo" onchange="changeLayerVisibilityTextFixedPoints()" checked>
-              <label class="checkboxLabel NoPtsTxt" for="checkboxPointsFixesNo">
-                N° points fixes
-              </label>
-            </div>
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxPointsNouv" onchange="changeLayerVisibilityVariablePoints()" checked>
-              <label class="checkboxLabel" for="checkboxPointsNouv">
-                Points nouveaux
-              </label>
-            </div>
-        
-            <div class="NoPtsDecalage">
-              <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsVariableNo" onchange="changeLayerVisibilityTextVariablePoints()" checked>
-              <label class="checkboxLabel NoPtsTxt" for="checkboxPointsVariableNo">
-                N° points nouveaux
-              </label>
-            </div>
-
+          <!-- Image logo -->
+          <div class="logo-header">
+            <img id="logo" src="./img/ResMap_logo.svg" alt="Logo de ResMap">
           </div>
-        </div>
 
-
-        <div class="mt-2">
-          <button class="accordion py-1">Observations terrestres</button>
-          <div class="panel">
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxDirections" onchange="changeLayerVisibilityDirections()" checked>
-              <label class="checkboxLabel" for="checkboxDirections" id="legendeDir">
-                Directions
-              </label>
-            </div>
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxDistances" onchange="changeLayerVisibilityDistances()" checked>
-              <label class="checkboxLabel" for="checkboxDistances" id="legendeDist">
-                Distances
-              </label>
-            </div>
-
+          <!-- Box pour importer le fichier .PRNx -->
+          <div class="mt-2 greyBackground border border-dark p-1">
+            <h5 class="mx-2">Import du fichier .PRNx</h5>
+            <input class="mx-2 my-1 pr-2 inputFile" type="file" id="inputfile" accept=".prnx"></input>
+            <p class="mx-2 my-1 importInfo" id="outputTest"> </p>
           </div>
-        </div>
 
+          <!-- Abriss planimétrique -->
+          <button class ="accordion mt-2 py-1" id="coucheButton">Planimétrie</button>
+          <div class="panel scroller">
+            
+            <!-- Menu : Points -->
+            <div class="mt-2">
+              <button class="accordion py-1">Points</button>
+              <div class="panel">
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxPointsFixes" onchange="changeLayerVisibilityFixedPoints()" checked>
+                  <label class="checkboxLabel" for="checkboxPointsFixes">
+                    Points fixes
+                  </label>
+                </div>
+                <div class="NoPtsDecalage">
+                  <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsFixesNo" onchange="changeLayerVisibilityTextFixedPoints()" checked>
+                  <label class="checkboxLabel NoPtsTxt" for="checkboxPointsFixesNo">
+                    N° points fixes
+                  </label>
+                </div>
 
-        <div class="mt-2">
-          <button class="accordion py-1">Observations de coordonnées</button>
-          <div class="panel">
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxCoordE" onchange="changeLayerVisibilityCoordE()" >
-              <label class="checkboxLabel" for="checkboxCoordE">
-                E / Y
-              </label>
-            </div>
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxCoordN" onchange="changeLayerVisibilityCoordN()" >
-              <label class="checkboxLabel" for="checkboxCoordN">
-                N / X
-              </label>
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="mt-2">
-          <button class="accordion py-1" clicked>Sessions GNSS</button>
-      
-          <div class="panel">
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxGnss" onchange="changeLayerVisibilityGnss()">
-              <label class="checkboxLabel" for="checkboxGnss">
-                Session 1,2,3, etc.
-              </label>
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="mt-2">
-          <button class="accordion py-1">Indicateurs de précisions</button>
-          <div class="panel">
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxEllipses" onchange="changeLayerVisibilityEllipses()">
-              <label class="checkboxLabel" for="checkboxEllipses">
-                Ellipses de confiance
-              </label>
-              <div>
-                <div class="textEchelleLegende" id="AffichageEchelleEllipse">⤷ Echelle: </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxPointsNouv" onchange="changeLayerVisibilityVariablePoints()" checked>
+                  <label class="checkboxLabel" for="checkboxPointsNouv">
+                    Points nouveaux
+                  </label>
+                </div>
+                <div class="NoPtsDecalage">
+                  <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsVariableNo" onchange="changeLayerVisibilityTextVariablePoints()" checked>
+                  <label class="checkboxLabel NoPtsTxt" for="checkboxPointsVariableNo">
+                    N° points nouveaux
+                  </label>
+                </div>
               </div>
             </div>
 
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxEllipsesRela" onchange="changeLayerVisibilityEllipsesRela()">
-              <label class="checkboxLabel" for="checkboxEllipsesRela" id="legendeEllRela">
-                Ellipses de confiance relatives
-              </label>
-              <div>
-                <div class="textEchelleLegende" id="AffichageEchelleEllipseRela">⤷ Echelle: </div>
+            <!-- Menu : Observations terrestres -->
+            <div class="mt-2">
+              <button class="accordion py-1">Observations terrestres</button>
+              <div class="panel">
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxDirections" onchange="changeLayerVisibilityDirections()" checked>
+                  <label class="checkboxLabel" for="checkboxDirections" id="legendeDir">
+                    Directions
+                  </label>
+                </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxDistances" onchange="changeLayerVisibilityDistances()" checked>
+                  <label class="checkboxLabel" for="checkboxDistances" id="legendeDist">
+                    Distances
+                  </label>
+                </div>
               </div>
             </div>
 
+            <!-- Menu : Observations des coordonnées -->
+            <div class="mt-2">
+              <button class="accordion py-1">Observations de coordonnées</button>
+              <div class="panel">
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxCoordE" onchange="changeLayerVisibilityCoordE()" >
+                  <label class="checkboxLabel" for="checkboxCoordE">
+                    E / Y
+                  </label>
+                </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxCoordN" onchange="changeLayerVisibilityCoordN()" >
+                  <label class="checkboxLabel" for="checkboxCoordN">
+                    N / X
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu : Session GNSS -->
+            <div class="mt-2">
+              <button class="accordion py-1" clicked>Sessions GNSS</button>
+              <div class="panel">
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxGnss" onchange="changeLayerVisibilityGnss()">
+                  <label class="checkboxLabel" for="checkboxGnss">
+                    Session 1,2,3, etc.
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu : Indicateurs de précisions -->
+            <div class="mt-2">
+              <button class="accordion py-1">Indicateurs de précisions</button>
+              <div class="panel">
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxEllipses" onchange="changeLayerVisibilityEllipses()">
+                  <label class="checkboxLabel" for="checkboxEllipses">
+                    Ellipses de confiance
+                  </label>
+                  <div>
+                    <div class="textEchelleLegende" id="AffichageEchelleEllipse">⤷ Echelle: </div>
+                  </div>
+                </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxEllipsesRela" onchange="changeLayerVisibilityEllipsesRela()">
+                  <label class="checkboxLabel" for="checkboxEllipsesRela" id="legendeEllRela">
+                    Ellipses de confiance relatives
+                  </label>
+                  <div>
+                    <div class="textEchelleLegende" id="AffichageEchelleEllipseRela">⤷ Echelle: </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu : Indicateurs de fiabilité -->
+            <div class="mt-2">
+              <button class="accordion py-1" clicked>Indicateurs de fiabilité</button>
+              <div class="panel">
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxRectangles" onchange="changeLayerVisibilityRectangles()">
+                  <label class="checkboxLabel" for="checkboxRectangles">
+                    Rectangles de fiabilité externe
+                  </label>
+                  <div>
+                    <div class="textEchelleLegende" id="AffichageEchelleRectangles">⤷ Echelle: </div>
+                  </div>
+                </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxRectanglesRela" onchange="changeLayerVisibilityRectanglesRela()">
+                  <label class="checkboxLabel" for="checkboxRectanglesRela" id="legendeRectRela">
+                    Rectangles de fiab. ext. relatifs
+                  </label>
+                  <div>
+                    <div class="textEchelleLegende" id="AffichageEchelleRectanglesRela">⤷ Echelle: </div>
+                  </div>
+                </div>
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxFiabLoc" onchange="changeLayerVisibilityFiabLoc()">
+                  <label class="checkboxLabel" for="checkboxFiabLoc">
+                    Carte des fiabilités locales (zi)
+                  </label>
+                  <div>
+                    <div class="textEchelleLegende fontColorFiab1">――  0 - 25 %</div>
+                    <div class="textEchelleLegende fontColorFiab2">――  25 - 50 %</div>
+                    <div class="textEchelleLegende fontColorFiab3">――  50 - 75 %</div>
+                    <div class="textEchelleLegende fontColorFiab4">――  75 - 100 %</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu : Résidus normés -->
+            <div class="mt-2">
+              <button class="accordion py-1">Résidus normés</button>
+              <div class="panel">
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxResidusNormes" onchange="changeLayerVisibilityWi()">
+                  <label class="checkboxLabel" for="checkboxResidusNormes" id="legendeWi">
+                    Carte des résidus normés (wi)
+                  </label>
+                  <div>
+                    <div class="textEchelleLegende fontColorFiab1" id="palierWi1">――  x - ∞</div>
+                    <div class="textEchelleLegende fontColorFiab2" id="palierWi2">――  x - x</div>
+                    <div class="textEchelleLegende fontColorFiab4" id="palierWi3">――  0.0 - x</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu : Différences avec les coordonnées initiales -->
+            <div class="mt-2">
+              <button class="accordion py-1">Diff. avec coordonnées initiales</button>
+              <div class="panel">
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxVect" onchange="changeLayerVisibilityVect()">
+                  <label class="checkboxLabel" for="checkboxVect">
+                    Vecteurs DY/DX
+                  </label>
+                </div>
+                <div>
+                  <div class="textEchelleLegende" id="AffichageEchelleVect">⤷ Echelle: </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
 
-
-        <div class="mt-2">
-          <button class="accordion py-1" clicked>Indicateurs de fiabilité</button>
-      
-          <div class="panel">
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxRectangles" onchange="changeLayerVisibilityRectangles()">
-              <label class="checkboxLabel" for="checkboxRectangles">
-                Rectanlges de fiabilité externe
-              </label>
-              <div>
-                <div class="textEchelleLegende" id="AffichageEchelleRectangles">⤷ Echelle: </div>
-              </div>
-            </div>
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxRectanglesRela" onchange="changeLayerVisibilityRectanglesRela()">
-              <label class="checkboxLabel" for="checkboxRectanglesRela" id="legendeRectRela">
-                Rectanlges de fiab. ext. relatifs
-              </label>
-              <div>
-                <div class="textEchelleLegende" id="AffichageEchelleRectanglesRela">⤷ Echelle: </div>
-              </div>
-            </div>
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxFiabLoc" onchange="changeLayerVisibilityFiabLoc()">
-              <label class="checkboxLabel" for="checkboxFiabLoc">
-                Carte des fiabilités locales (zi)
-              </label>
-              <div>
-                <div class="textEchelleLegende fontColorFiab1">――  0 - 25 %</div>
-                <div class="textEchelleLegende fontColorFiab2">――  25 - 50 %</div>
-                <div class="textEchelleLegende fontColorFiab3">――  50 - 75 %</div>
-                <div class="textEchelleLegende fontColorFiab4">――  75 - 100 %</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="mt-2">
-          <button class="accordion py-1">Résidus normés</button>
-          <div class="panel">
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxResidusNormes" onchange="changeLayerVisibilityWi()">
-              <label class="checkboxLabel" for="checkboxResidusNormes" id="legendeWi">
-                Carte des résidus normés (wi)
-              </label>
-              <div>
-                <div class="textEchelleLegende fontColorFiab1" id="palierWi1">――  x - ∞</div>
-                <div class="textEchelleLegende fontColorFiab2" id="palierWi2">――  x - x</div>
-                <div class="textEchelleLegende fontColorFiab4" id="palierWi3">――  0.0 - x</div>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-
-        <div class="mt-2">
-          <button class="accordion py-1">Diff. avec coordonnées initiales</button>
-          <div class="panel">
-
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxVect" onchange="changeLayerVisibilityVect()">
-              <label class="checkboxLabel" for="checkboxVect">
-                Vecteurs DY/DX
-              </label>
-            </div>
-            <div>
-              <div class="textEchelleLegende" id="AffichageEchelleVect">⤷ Echelle: </div>
-            </div>
-
-          </div>
-        </div>
-      </div>        
-    </div>
-
-
-    <!-- PopUp pour le slider des échelles -->
-    <div class="slidecontainer">
-      <input type="range" min="0" max="9999" step="10" value="1000" class="slider" id="myRange">
-      <div>
-        <span class="textEchelle">Echelle des ellipses, rectangles et vecteurs → </span>
-        <span id="textEchelle" class="textEchelle"></span>
-        <span class="textEchelle">:1</span>
-        <div class="textEchelle" id="nivConfiance">Niveau de confiance des ellipses → </div>
-      </div>
-    </div>
-
-    <!-- Bouton pour changer le fond de carte -->
-    <div class="WMSabsolutePosition">
-      <button class="accordion py-2"><img src="./img/mapWMS_MENU.png" width="50"></button>
-      <div class="panel">
-        <div>
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="cb_CN" onchange="changeBackground()" checked>
-          <label class="form-check-label" for="cb_CN">
-            CN
-          </label>
-        </div>
-        <div>
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="cb_MO" onchange="changeBackground()">
-          <label class="form-check-label" for="cb_MO">
-            MO
-          </label>
-        </div>
-        <div>
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="cb_img" onchange="changeBackground()">
-          <label class="form-check-label" for="cb_img">
-            ortho
-          </label>
-        </div>
-        <div>
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="cb_relief" onchange="changeBackground()">
-          <label class="form-check-label" for="cb_relief">
-            relief
-          </label>
-        </div>
-        <div>
-        <div>
           
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="cb_none" onchange="changeBackground()">
-          <label class="form-check-label" for="cb_none">
-            -
-          </label>
+        </div>        
+
+        <!-- Partie droite : CARTE -->
+        <div class="col">
+          <div id="map"></div>
         </div>
       </div>
     </div>
@@ -326,63 +267,7 @@
     <script src="./js/Export.js"></script>
 
 
-    <script> 
-    // ---------------  SCRIPT PRINCIPAL  ---------------
-
-      console.log("OK");
-
-      // Importer le module fileSystem
-      import * as fs from 'fs-web';
-      
-
-      // Compte global du nombre d'observations supprimées
-      nbObsSuppr = 0
-
-      // Ajout d'écouteur d'événement sur le "change" du open-folder
-      document.getElementById('inputfile').addEventListener('change', function() {
-
-        // Récupération du nom de fichier PRNx
-        fileName = document.getElementById('inputfile').files[0]
-
-        // Lecture du contenu du fichier PRNx et appel des fonctions de parsing et création d'entités
-        let fr = new FileReader();
-        fr.onload=function() {
-          xmlToParse = fr.result;
-          parser = new DOMParser();
-          xmlDoc = parser.parseFromString(xmlToParse,"text/xml");
-          let listAllPoints = parsingPointsXML(xmlToParse);
-          centerViewOnProject(listAllPoints);
-          // CHANGER ECHELLE ELLIPSES ET RECTANGLES PAR DEFAULT CI-DESSSOUS 
-          echelleEllipses = 1000.0
-
-          // Lancement des traitement pour affichages
-          parsingViseesXML(xmlToParse);
-          parsingEllipsesXML(xmlToParse);
-          parsingEllipsesRelaXML(xmlToParse);
-          parsingRectanglesXML(xmlToParse);
-          parsingRectanglesRelaXML(xmlToParse);
-          parsingGNSS(xmlToParse);
-          parsingObsCoord(xmlToParse);
-          parsingVectXML(xmlToParse);
-          map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
-          map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-          fiabLocale();
-          parsingViseesXML(xmlToParse);
-          normedResidualsWi();
-          map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
-          map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-          parsingViseesXML(xmlToParse);
-          fiabLocale();
-          map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
-          map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-          parsingViseesXML(xmlToParse);
-          document.getElementById("outputTest").textContent = "Import effectué ✓";
-          
-        };
-        fr.readAsText(fileName);
-      });
-      
-    </script>
+    <script src="./js/main.js"></script>
 
   </body>
 </html>

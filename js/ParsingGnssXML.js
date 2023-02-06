@@ -1,16 +1,9 @@
+/** This function parses the PRNx file (language : XML) to get all the GNSS session,
+ *  add them to the map and style them with forms and/or color
+ * 
+ * @param {object} xmlToParse : coming from fr.result (FileReader method)
+ */
 function parsingGNSS(xmlToParse) {
-
-    /* 
-
-    This function parses the PRNx file (XML) to get
-    all the GNSS sessions, add them to the map
-    and style them with forms and/or color
-
-    INPUT: XML toparse, coming from fr.result (FileReader method)
-    OUPUT: None
-
-    */
-
     
     let planimetricAbriss = xmlDoc.getElementsByTagName("planimetricAbriss")[0];
     let stationsList = planimetricAbriss.getElementsByTagName("station");
@@ -55,35 +48,16 @@ function parsingGNSS(xmlToParse) {
         };
     };
 
-
     gnssLayer = new ol.layer.Vector({
         source: gnssSource,
         style: gnssStyle,
         opacity: 1.0,
     });
 
-
     map.addLayer(gnssLayer);
     changeLayerVisibilityGnss();
     gnssLayer.setZIndex(80);
     console.log("GNSS sessions has been added to map");
-
-
-    
-
-
-    
-    
-
-
-
-
-
-
-
-
-
-
 };
 
 

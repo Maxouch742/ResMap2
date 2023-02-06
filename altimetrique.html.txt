@@ -1,0 +1,37 @@
+<!-- Abriss altimétrique -->
+          <button class ="accordion mt-2 py-1" id="coucheButton">Altimétrie</button>
+          <div class="panel scroller">
+
+            <!-- Menu : Points -->
+            <div class="mt-2">
+              <button class="accordion py-1">Points</button>
+              <div class="panel">
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxPointsFixes" onchange="changeLayerVisibilityFixedPoints()" checked>
+                  <label class="checkboxLabel" for="checkboxPointsFixes">
+                    Points fixes
+                  </label>
+                </div>
+                <div class="NoPtsDecalage">
+                  <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsFixesNo" onchange="changeLayerVisibilityTextFixedPoints()" checked>
+                  <label class="checkboxLabel NoPtsTxt" for="checkboxPointsFixesNo">
+                    N° points fixes
+                  </label>
+                </div>
+
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxPointsNouv" onchange="changeLayerVisibilityVariablePoints()" checked>
+                  <label class="checkboxLabel" for="checkboxPointsNouv">
+                    Points nouveaux
+                  </label>
+                </div>
+                <div class="NoPtsDecalage">
+                  <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsVariableNo" onchange="changeLayerVisibilityTextVariablePoints()" checked>
+                  <label class="checkboxLabel NoPtsTxt" for="checkboxPointsVariableNo">
+                    N° points nouveaux
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </div>
