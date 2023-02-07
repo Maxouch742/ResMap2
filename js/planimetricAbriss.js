@@ -318,7 +318,7 @@ function parsingEllipsesXML_planimetric() {
   
     map.addLayer(ellipseLayer);
     ellipseLayer.setZIndex(89)
-    changeLayerVisibilityEllipses()
+    changeLayerVisibilityEllipses_planimetric()
     document.getElementById("AffichageEchelleEllipse").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     console.log("Ellipses have been added to map");
 };
@@ -443,7 +443,7 @@ function parsingEllipsesRelaXML_planimetric() {
         });
         
         map.addLayer(ellipseRelaLayer);
-        changeLayerVisibilityEllipsesRela()
+        changeLayerVisibilityEllipsesRela_planimetric()
         ellipseRelaLayer.setZIndex(90);
         document.getElementById("AffichageEchelleEllipseRela").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
         console.log("Relative ellipses have been added to map");
@@ -556,7 +556,7 @@ function parsingRectanglesXML_planimetric() {
     
         map.addLayer(rectangleLayer);
         rectangleLayer.setZIndex(88);
-        changeLayerVisibilityRectangles();
+        changeLayerVisibilityRectangles_planimetric();
         document.getElementById("AffichageEchelleRectangles").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
         console.log("Rectangles have been added to map");
     }
@@ -662,7 +662,7 @@ function parsingRectanglesRelaXML_planimetric() {
         rectangleRelaLayer.setZIndex(91);
         document.getElementById("AffichageEchelleRectanglesRela").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
         map.addLayer(rectangleRelaLayer);
-        changeLayerVisibilityRectanglesRela();
+        changeLayerVisibilityRectanglesRela_planimetric();
         console.log("Relative rectangles have been added to map");
     
     } else {
@@ -727,7 +727,7 @@ function parsingGNSS_planimetric() {
     });
 
     map.addLayer(gnssLayer);
-    changeLayerVisibilityGnss();
+    changeLayerVisibilityGnss_planimetric();
     gnssLayer.setZIndex(80);
     console.log("GNSS sessions has been added to map");
 };
@@ -831,8 +831,8 @@ function parsingObsCoord_planimetric() {
 
     map.addLayer(obsCoordELayer);
     map.addLayer(obsCoordNLayer);
-    changeLayerVisibilityCoordE();
-    changeLayerVisibilityCoordN();
+    changeLayerVisibilityCoordE_planimetric();
+    changeLayerVisibilityCoordN_planimetric();
     obsCoordELayer.setZIndex(99);
     obsCoordNLayer.setZIndex(99);
     console.log("Coordinates observations has been added to map");
@@ -932,7 +932,7 @@ function parsingVectXML_planimetric() {
     // Ajout à la carte
     map.addLayer(vectLayer);
     vectLayer.setZIndex(99);
-    changeLayerVisibilityVect();
+    changeLayerVisibilityVect_planimetric();
     document.getElementById("AffichageEchelleVect").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     console.log("Diff. vectors have been added to map");
 };
