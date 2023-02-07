@@ -4,7 +4,6 @@
  *  0.50 - 0.75
  *  0.75 - 1.00
  */
-
 function fiabLocale() {
 
     // Créer la source comprenant les features d'observations (sources de base)

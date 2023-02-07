@@ -140,11 +140,3 @@ function parsingPointsXML(xmlToParse) {
 
     return listAllPoints;
 };
-
-
-
-
-
-  
-
-

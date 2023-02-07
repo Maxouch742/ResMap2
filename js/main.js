@@ -19,26 +19,33 @@ document.getElementById('inputfile').addEventListener('change', function() {
         echelleEllipses = 1000.0
 
         // Lancement des traitement pour affichages
-        parsingViseesXML(xmlToParse);
-        parsingEllipsesXML(xmlToParse);
-        parsingEllipsesRelaXML(xmlToParse);
-        parsingRectanglesXML(xmlToParse);
-        parsingRectanglesRelaXML(xmlToParse);
-        parsingGNSS(xmlToParse);
-        parsingObsCoord(xmlToParse);
-        parsingVectXML(xmlToParse);
+        // Abriss planimétrique
+        parsingViseesXML_planimetric();
+        parsingEllipsesXML_planimetric();
+        parsingEllipsesRelaXML_planimetric();
+        parsingRectanglesXML_planimetric();
+        parsingRectanglesRelaXML_planimetric();
+        parsingGNSS_planimetric();
+        parsingObsCoord_planimetric();
+        parsingVectXML_planimetric();
         map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
         map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-        fiabLocale();
-        parsingViseesXML(xmlToParse);
-        normedResidualsWi();
+        fiabLocale_planimetric();
+        parsingViseesXML_planimetric(xmlToParse);
+        normedResidualsWi_planimetric();
         map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
         map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-        parsingViseesXML(xmlToParse);
-        fiabLocale();
+        parsingViseesXML_planimetric(xmlToParse);
+        fiabLocale_planimetric();
         map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
         map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-        parsingViseesXML(xmlToParse);
+        parsingViseesXML_planimetric(xmlToParse);
+
+
+        // Abriss altimétrique
+
+
+        // Dire à l'utilisateur que l'import s'est bien effectué
         document.getElementById("outputTest").textContent = "Import effectué ✓";
 
     };

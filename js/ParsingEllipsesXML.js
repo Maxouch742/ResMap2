@@ -14,13 +14,13 @@ function range(start, stop, step){
   return arr;
 };
 
-/** This function parses the PRNx file (language : XML) to get and
+/** 
+ * This function parses the PRNx file (language : XML) to get and
  *  generate the ellipses on the map (with scale factor)
  * 
  * @param {object} xmlToParse : XML imported
- * @return {None}
  */
-function parsingEllipsesXML(xmlToParse) {
+function parsingEllipsesXML() {
 
   // Récupération des éléments des balises <coordinates>
   let coordinates = xmlDoc.getElementsByTagName("coordinates")[0];
