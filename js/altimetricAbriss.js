@@ -265,3 +265,108 @@ function parsingGNSS_altimetric() {
     gnssLayer.setZIndex(80);
     console.log("GNSS altimetric sessions has been added to map");
 };
+
+function parsingEllipsesXML_altimetric() {
+  
+    // Récupération des éléments des balises <coordinates>
+    let coordinates = xmlDoc.getElementsByTagName("coordinates")[0];
+    let pointsList = coordinates.getElementsByTagName("point");
+  
+    // ------- NIVEAU DE CONFIANCE ELLIPSES -------
+    let progvers = xmlDoc.getElementsByTagName("progvers")[0];
+    titreProg = progvers.getAttribute("name");
+    nameProg = progvers.textContent;
+  
+    let nivConfianceEllipses;
+    switch(nameProg){
+        case "1" :
+            nivConfianceEllipses = "95%";
+            kSigma = 2.45; //  pour passer de 1 sigma à k sigma
+            break;
+        case "2" :
+            nivConfianceEllipses = "68%";
+            kSigma = 1.0;
+            break;
+        case "3" :
+            nivConfianceEllipses = "68%";
+            kSigma = 1.0;
+            break;
+        case "4" :
+            nivConfianceEllipses = "68%";
+            kSigma = 1.0;
+            break;
+        case "5" :
+            nivConfianceEllipses = "68%";
+            kSigma = 1.0;
+            break;
+    };
+  
+    // Récupération des éléments du fichier
+    let allListHellipse = []
+    for (i=0; i<pointsList.length; i++){
+        if (pointsList[i].getAttribute("meanErrorH") != null){
+            console.log(pointsList[i].getAttribute("name"));
+
+            allListHellipse.push([
+                pointsList[i].getAttribute("name"),
+                pointsList[i].getAttribute("meanErrorH")/1000.0,
+                pointsList[i].getAttribute("altimetricElements"),
+                parseFloat(listAllPoints.get(pointsList[i].getAttribute("name"))[0]),
+                parseFloat(listAllPoints.get(pointsList[i].getAttribute("name"))[1]),
+                parseFloat(listAllPoints.get(pointsList[i].getAttribute("name"))[2])
+            ]);
+        };
+    };
+
+    // Creation du style
+    const featureEllipseStyle = new ol.style.Style({
+        image: new ol.style.Circle({
+            //radius: 10, //TODO : modifier taille du cercle en fonction de l'échelle
+            fill: null,
+            stroke: new ol.style.Stroke({ 
+                color: '#009933',
+                width: 1
+            })
+        }),    
+        text: new ol.style.Text({
+            textAlign: "center",
+            textBaseline: "middle",
+            font: "italic 13px Calibri",
+            fill: new ol.style.Fill({
+                color: "#009933"
+            }),
+            stroke: new ol.style.Stroke({
+                color: "#ffffff", width: 3
+            }),
+            offsetX: -10,
+            offsetY: 10,
+            rotation: 0,
+            placement: "point"
+        })
+    });
+
+    // Création de la source du layer
+    let ellipseSourceAltimetric = new ol.source.Vector( {} );
+    for (i=0; i<allListHellipse.length; i++){
+        const featureEllipse = new ol.Feature({
+            geometry: new ol.geom.Point([
+                allListHellipse[i][3],
+                allListHellipse[i][4]
+            ]),
+            properties: String(allListHellipse[i][1]*1000) + "mm",
+        });
+        featureEllipseStyle.getText().setText( String(allListHellipse[i][1]*1000) + "mm" ); 
+        featureEllipse.setStyle(featureEllipseStyle);
+        ellipseSourceAltimetric.addFeature(featureEllipse);
+    };
+
+    // Creation du layer
+    ellipseLayerAltimetric = new ol.layer.Vector({});
+    ellipseLayerAltimetric.setSource(ellipseSourceAltimetric);
+
+    // Ajout du layer à la carte
+    map.addLayer(ellipseLayerAltimetric);
+    ellipseLayerAltimetric.setZIndex(89);
+    changeLayerVisibilityEllipses_altimetric();
+};
+

@@ -265,8 +265,10 @@ function parsingEllipsesXML_planimetric() {
             allListCenter.push([center[0],center[1]]);
             
             let listENellipse = []
-            t.forEach(gis => listENellipse.push( [parseFloat(a*kSigma*echelleEllipses*Math.cos(gis*3.1415/180.0)+center[0]),
-            parseFloat(b*kSigma*echelleEllipses*Math.sin(gis*3.1415/180.0)+center[1])]) )
+            t.forEach(gis => listENellipse.push([
+                parseFloat(a*kSigma*echelleEllipses*Math.cos(gis*3.1415/180.0)+center[0]),
+                parseFloat(b*kSigma*echelleEllipses*Math.sin(gis*3.1415/180.0)+center[1])
+            ]))
             allListENellipse.push(listENellipse); // tableau de toutes les coordonnées de chaque ellipses (grand)
         };
     };
@@ -732,8 +734,6 @@ function parsingGNSS_planimetric() {
     //console.log("GNSS sessions has been added to map");
 };
 
-
-
 /** 
  * This function parses the PRNx file (XML) to get all 
  * the coordinates observation (most of them for 
@@ -936,7 +936,6 @@ function parsingVectXML_planimetric() {
     document.getElementById("AffichageEchelleVect").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     //console.log("Diff. vectors have been added to map");
 };
-
 
 /** The function creates a layer to show the local reliability with a 4-colors map (intervals)
  *  0.00 - 0.25

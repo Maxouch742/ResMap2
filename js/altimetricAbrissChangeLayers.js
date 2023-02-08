@@ -16,8 +16,16 @@ function changeLayerVisibilityGnss_altimetric() {
 
 function changeLayerVisibilityCoordH() {
     if (document.getElementById("checkboxCoordH").checked === true) {
-        obsCoordELayer.setVisible(true);
+        obsCoordHLayer.setVisible(true);
     } else {
-        obsCoordELayer.setVisible(false);
+        obsCoordHLayer.setVisible(false);
+    };
+};
+
+function changeLayerVisibilityEllipses_altimetric() {
+    if (document.getElementById("checkboxEllipses_altimetric").checked === true) {
+        ellipseLayerAltimetric.setVisible(true);
+    } else {
+        ellipseLayerAltimetric.setVisible(false);
     };
 };

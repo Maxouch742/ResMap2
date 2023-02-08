@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <title>ResMap</title>
+    <title>ResMap DB</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./img/tab_icon.png" />
@@ -244,7 +244,7 @@
               <button class="accordion py-1">Observations de coordonnées</button>
               <div class="panel">
                 <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxCoordH" onchange="">
+                  <input class="form-check-input" type="checkbox" id="checkboxCoordH" onchange="changeLayerVisibilityCoordH()">
                   <label class="checkboxLabel" for="checkboxCoordH">
                     H
                   </label>
@@ -270,7 +270,7 @@
               <button class="accordion py-1">Indicateurs de précisions</button>
               <div class="panel">
                 <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxEllipses_altimetric" onchange="">
+                  <input class="form-check-input" type="checkbox" id="checkboxEllipses_altimetric" onchange="changeLayerVisibilityEllipses_altimetric()">
                   <label class="checkboxLabel" for="checkboxEllipses_altimetric">
                     Ellipses de confiance
                   </label>
