@@ -370,3 +370,97 @@ function parsingEllipsesXML_altimetric() {
     changeLayerVisibilityEllipses_altimetric();
 };
 
+function parsingEllipsesRelaXML_altimetric() {
+
+    // Check si il y a bien des ellipses relatives dans le PRNx 
+    if (xmlDoc.getElementsByTagName("relativeEllipses").length != 0){
+  
+        // Récupérer que les ellipses relatives altimétriques
+        const relativeEllip = xmlDoc.getElementsByTagName("relativeEllipses");
+        let relativeEllipAlti = null;
+        for (i=0; i<relativeEllip.length; i++){
+            if (relativeEllip[i].getAttribute("type") === "altimetric") {
+                relativeEllipAlti = relativeEllip[i]
+            };
+        };
+        
+        // Si on a des ellipses relatives altimétriques
+        if (relativeEllipAlti !== null){
+            // récupération des ellipses de confiances relatives
+            const ellRelaAltiList = relativeEllipAlti.getElementsByTagName("ellipse");
+
+            // Creation de la source du layer
+            let ellipRelaAltiSource = new ol.source.Vector({});
+
+            for (i=0; i<ellRelaAltiList.length; i++){
+                pt1 = ellRelaAltiList[i].getAttribute("point1");
+                pt2 = ellRelaAltiList[i].getAttribute("point2");
+                erH = ellRelaAltiList[i].getAttribute("meanErrorA");
+
+                // Feature line pour montrer la line entre les 2 points
+                const ellipRelaAltiFeature_line = new ol.Feature({
+                    geometry: new ol.geom.LineString([
+                        [parseFloat(listAllPoints.get(pt1)[0]),parseFloat(listAllPoints.get(pt1)[1])],
+                        [parseFloat(listAllPoints.get(pt2)[0]),parseFloat(listAllPoints.get(pt2)[1])]
+                    ]),
+                    style: new ol.style.Style({
+                        stroke: new ol.style.Stroke({ 
+                            color: '#009933', 
+                            width: 1, 
+                            lineDash: [6,2]
+                        })
+                    }),
+                });
+                ellipRelaAltiSource.addFeature(ellipRelaAltiFeature_line);
+
+                // Feature point avec style de cercle pour la valeur
+                const dE = (parseFloat(listAllPoints.get(pt1)[0]) + parseFloat(listAllPoints.get(pt2)[0]))/2.0
+                const dN = (parseFloat(listAllPoints.get(pt1)[1]) + parseFloat(listAllPoints.get(pt2)[1]))/2.0
+                const ellipRelaAltiFeature_point = new ol.Feature({
+                    geometry: new ol.geom.Point([dE, dN]),
+                    style: new ol.style.Style({
+                        image: new ol.style.Circle({
+                            //radius: 10, //TODO : modifier taille du cercle en fonction de l'échelle
+                            fill: null,
+                            stroke: new ol.style.Stroke({ 
+                                color: '#009933',
+                                width: 1
+                            })
+                        }),    
+                        text: new ol.style.Text({
+                            text: String(erH)+"mm",
+                            textAlign: "center",
+                            textBaseline: "middle",
+                            font: "italic 13px Calibri",
+                            fill: new ol.style.Fill({
+                                color: "#009933"
+                            }),
+                            stroke: new ol.style.Stroke({
+                                color: "#ffffff", width: 3
+                            }),
+                            offsetX: -10,
+                            offsetY: 10,
+                            rotation: 0,
+                            placement: "point"
+                        })
+                    })
+                });
+                ellipRelaAltiSource.addFeature(ellipRelaAltiFeature_point);
+            };
+
+            // Creation du layer
+            ellipRelaAltiLayer = new ol.layer.Vector({
+                source: ellipRelaAltiSource
+            });
+            
+            // Ajout du layer à la carte
+            map.addLayer(ellipRelaAltiLayer);
+            ellipRelaAltiLayer.setZIndex(90);
+            changeLayerVisibilityEllipses_altimetric();
+            document.getElementById("AffichageEchelleEllipseRela_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
+        };
+    } else {
+        //console.log("There's no relatives ellipses")
+        document.getElementById("legendeEllRela").className = "checkboxLabel legendeBarree";
+    };
+};

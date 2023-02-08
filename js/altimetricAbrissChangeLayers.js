@@ -29,3 +29,11 @@ function changeLayerVisibilityEllipses_altimetric() {
         ellipseLayerAltimetric.setVisible(false);
     };
 };
+
+function changeLayerVisibilityEllipsesRela_altimetric() {
+    if (document.getElementById("checkboxEllipsesRela_altimetric").checked === true) {
+        ellipseLayerAltimetric.setVisible(true);
+    } else {
+        ellipseLayerAltimetric.setVisible(false);
+    };
+};

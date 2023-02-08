@@ -47,6 +47,7 @@ document.getElementById('inputfile').addEventListener('change', function() {
         parsingGNSS_altimetric();
         parsingObsCoord_altimetric();
         parsingEllipsesXML_altimetric();
+        parsingEllipsesRelaXML_altimetric();
 
 
         // Dire à l'utilisateur que l'import s'est bien effectué
