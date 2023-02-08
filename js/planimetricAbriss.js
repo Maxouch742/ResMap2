@@ -105,7 +105,7 @@ function parsingViseesXML_planimetric() {
         // console.log(featureDistance.getProperties().properties)
     };
     map.addLayer(distanceLayer);
-    console.log("Distances have been added to map")
+    //console.log("Distances have been added to map")
   
     // <------------- DIRECTIONS --------------->
     // Récupérer les paires [No Station, No Point visé] (No en str) - directions
@@ -198,7 +198,7 @@ function parsingViseesXML_planimetric() {
         directionLayer.setSource(directionLineSource);
     };
     map.addLayer(directionLayer);
-    console.log("Directions have been added to map")
+    //console.log("Directions have been added to map")
   
     // Passer les points au dessus (ZIndex)
     distanceLayer.setZIndex(2);
@@ -320,7 +320,7 @@ function parsingEllipsesXML_planimetric() {
     ellipseLayer.setZIndex(89)
     changeLayerVisibilityEllipses_planimetric()
     document.getElementById("AffichageEchelleEllipse").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
-    console.log("Ellipses have been added to map");
+    //console.log("Ellipses have been added to map");
 };
 
   
@@ -446,9 +446,9 @@ function parsingEllipsesRelaXML_planimetric() {
         changeLayerVisibilityEllipsesRela_planimetric()
         ellipseRelaLayer.setZIndex(90);
         document.getElementById("AffichageEchelleEllipseRela").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
-        console.log("Relative ellipses have been added to map");
+        //console.log("Relative ellipses have been added to map");
     } else {
-        console.log("There's no relatives ellipses")
+        //console.log("There's no relatives ellipses")
         document.getElementById("legendeEllRela").className = "checkboxLabel legendeBarree";
     };
 };
@@ -558,7 +558,7 @@ function parsingRectanglesXML_planimetric() {
         rectangleLayer.setZIndex(88);
         changeLayerVisibilityRectangles_planimetric();
         document.getElementById("AffichageEchelleRectangles").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
-        console.log("Rectangles have been added to map");
+        //console.log("Rectangles have been added to map");
     }
 };
 
@@ -663,10 +663,10 @@ function parsingRectanglesRelaXML_planimetric() {
         document.getElementById("AffichageEchelleRectanglesRela").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
         map.addLayer(rectangleRelaLayer);
         changeLayerVisibilityRectanglesRela_planimetric();
-        console.log("Relative rectangles have been added to map");
+        //console.log("Relative rectangles have been added to map");
     
     } else {
-        console.log("There's no relatives rectangles")
+        //console.log("There's no relatives rectangles")
         document.getElementById("legendeRectRela").className = "checkboxLabel legendeBarree";
     };
 };
@@ -729,7 +729,7 @@ function parsingGNSS_planimetric() {
     map.addLayer(gnssLayer);
     changeLayerVisibilityGnss_planimetric();
     gnssLayer.setZIndex(80);
-    console.log("GNSS sessions has been added to map");
+    //console.log("GNSS sessions has been added to map");
 };
 
 
@@ -835,7 +835,7 @@ function parsingObsCoord_planimetric() {
     changeLayerVisibilityCoordN_planimetric();
     obsCoordELayer.setZIndex(99);
     obsCoordNLayer.setZIndex(99);
-    console.log("Coordinates observations has been added to map");
+    //console.log("Coordinates observations has been added to map");
 };
 
 /**
@@ -934,7 +934,7 @@ function parsingVectXML_planimetric() {
     vectLayer.setZIndex(99);
     changeLayerVisibilityVect_planimetric();
     document.getElementById("AffichageEchelleVect").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
-    console.log("Diff. vectors have been added to map");
+    //console.log("Diff. vectors have been added to map");
 };
 
 
@@ -1003,7 +1003,7 @@ function fiabLocale_planimetric() {
     map.addLayer(fiabLocalLayer);
     fiabLocalLayer.setVisible(false);
     fiabLocalLayer.setZIndex(80);
-    console.log("Carte des fiabilité locales zi ajoutée")
+    //console.log("Carte des fiabilité locales zi ajoutée")
 };
 
 
@@ -1079,7 +1079,7 @@ function normedResidualsWi_planimetric() {
         map.addLayer(wiLayer);
         wiLayer.setVisible(false);
         wiLayer.setZIndex(80);
-        console.log("Carte des résidus normés wi ajoutée")
+        //console.log("Carte des résidus normés wi ajoutée")
 
         // Gestion des intervalles de la légende en fonction du Wi limite (issu des param. du calcul LTOP)
         document.getElementById("palierWi1").textContent = "――  "+String(limitWi)+" - ∞";
@@ -1087,7 +1087,7 @@ function normedResidualsWi_planimetric() {
         document.getElementById("palierWi3").textContent = "――  0.0 - "+String(limitInf);
 
     } else { // Si c'est une pré-analyse
-        console.log("Pas de wi dans une pré-analyse")
+        //console.log("Pas de wi dans une pré-analyse")
         document.getElementById("legendeWi").className = "checkboxLabel legendeBarree";
     };
 };
