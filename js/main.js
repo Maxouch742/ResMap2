@@ -31,18 +31,19 @@ document.getElementById('inputfile').addEventListener('change', function() {
         map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
         map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
         fiabLocale_planimetric();
-        parsingViseesXML_planimetric(xmlToParse);
+        parsingViseesXML_planimetric();
         normedResidualsWi_planimetric();
         map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
         map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-        parsingViseesXML_planimetric(xmlToParse);
+        parsingViseesXML_planimetric();
         fiabLocale_planimetric();
         map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
         map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-        parsingViseesXML_planimetric(xmlToParse);
+        parsingViseesXML_planimetric();
 
 
         // Abriss altimétrique
+        parsingViseesXML_altimetric();
 
 
         // Dire à l'utilisateur que l'import s'est bien effectué

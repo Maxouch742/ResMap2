@@ -3,7 +3,7 @@
  * all the points from the projects and add them 
  * to the ol map
  */
-function parsingPointsXML(xmlToParse) {
+function parsingPointsXML() {
     /*
     INPUT: XML toparse, coming from fr.result (FileReader method)
     OUPUT: [ Id list for fixed points, Id list for variable points ] (2D Array)
@@ -35,7 +35,8 @@ function parsingPointsXML(xmlToParse) {
       if (pointName_i !== "NULLBERN") {
         E_i = parseFloat(pointList[i].getAttribute("easting")).toFixed(4);
         N_i = parseFloat(pointList[i].getAttribute("northing")).toFixed(4);
-        listAllPoints.set(pointName_i,[E_i,N_i]);
+        H_i = parseFloat(pointList[i].getAttribute("height")).toFixed(4);
+        listAllPoints.set(pointName_i,[E_i,N_i,H_i]);
 
         // Création d'une Feature ol pour Point i (MN95)
         let featurePointMN95 = new ol.Feature({

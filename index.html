@@ -38,42 +38,42 @@
             <p class="mx-2 my-1 importInfo" id="outputTest"> </p>
           </div>
 
+          <!-- Points -->
+          <button class="accordion mt-2 py-1" id="coucheButton">
+            Points
+          </button>
+          
+          <div class="panel scoller">
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxPointsFixes" onchange="changeLayerVisibilityFixedPoints_planimetric()" checked>
+              <label class="checkboxLabel" for="checkboxPointsFixes">
+                Points fixes
+              </label>
+            </div>
+            <div class="NoPtsDecalage">
+              <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsFixesNo" onchange="changeLayerVisibilityTextFixedPoints_planimetric()" checked>
+              <label class="checkboxLabel NoPtsTxt" for="checkboxPointsFixesNo">
+                N° points fixes
+              </label>
+            </div>
+
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxPointsNouv" onchange="changeLayerVisibilityVariablePoints_planimetric()" checked>
+              <label class="checkboxLabel" for="checkboxPointsNouv">
+                Points nouveaux
+              </label>
+            </div>
+            <div class="NoPtsDecalage">
+              <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsVariableNo" onchange="changeLayerVisibilityTextVariablePoints_planimetric()" checked>
+              <label class="checkboxLabel NoPtsTxt" for="checkboxPointsVariableNo">
+                N° points nouveaux
+              </label>
+            </div>
+          </div>
+
           <!-- Abriss planimétrique -->
           <button class ="accordion mt-2 py-1" id="coucheButton">Planimétrie</button>
           <div class="panel scroller">
-            
-            <!-- Menu : Points -->
-            <div class="mt-2">
-              <button class="accordion py-1">Points</button>
-              <div class="panel">
-                <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxPointsFixes" onchange="changeLayerVisibilityFixedPoints_planimetric()" checked>
-                  <label class="checkboxLabel" for="checkboxPointsFixes">
-                    Points fixes
-                  </label>
-                </div>
-                <div class="NoPtsDecalage">
-                  <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsFixesNo" onchange="changeLayerVisibilityTextFixedPoints_planimetric()" checked>
-                  <label class="checkboxLabel NoPtsTxt" for="checkboxPointsFixesNo">
-                    N° points fixes
-                  </label>
-                </div>
-
-                <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxPointsNouv" onchange="changeLayerVisibilityVariablePoints_planimetric()" checked>
-                  <label class="checkboxLabel" for="checkboxPointsNouv">
-                    Points nouveaux
-                  </label>
-                </div>
-                <div class="NoPtsDecalage">
-                  <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsVariableNo" onchange="changeLayerVisibilityTextVariablePoints_planimetric()" checked>
-                  <label class="checkboxLabel NoPtsTxt" for="checkboxPointsVariableNo">
-                    N° points nouveaux
-                  </label>
-                </div>
-              </div>
-            </div>
-
             <!-- Menu : Observations terrestres -->
             <div class="mt-2">
               <button class="accordion py-1">Observations terrestres</button>
@@ -226,44 +226,12 @@
           <button class ="accordion mt-2 py-1" id="coucheButton">Altimétrie</button>
           <div class="panel scroller">
 
-            <!-- Menu : Points -->
-            <div class="mt-2">
-              <button class="accordion py-1">Points</button>
-              <div class="panel">
-                <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxPointsFixes_altimetric" onchange="" checked>
-                  <label class="checkboxLabel" for="checkboxPointsFixes_altimetric">
-                    Points fixes
-                  </label>
-                </div>
-                <div class="NoPtsDecalage">
-                  <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsFixesNo_altimetric" onchange="" checked>
-                  <label class="checkboxLabel NoPtsTxt" for="checkboxPointsFixesNo_altimetric">
-                    N° points fixes
-                  </label>
-                </div>
-
-                <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxPointsNouv_altimetric" onchange="" checked>
-                  <label class="checkboxLabel" for="checkboxPointsNouv_altimetric">
-                    Points nouveaux
-                  </label>
-                </div>
-                <div class="NoPtsDecalage">
-                  <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsVariableNo_altimetric" onchange="" checked>
-                  <label class="checkboxLabel NoPtsTxt" for="checkboxPointsVariableNo_altimetric">
-                    N° points nouveaux
-                  </label>
-                </div>
-              </div>
-            </div>
-
             <!-- Menu : Observations terrestres -->
             <div class="mt-2">
               <button class="accordion py-1">Observations terrestres</button>
               <div class="panel">
                 <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxDenivelee" onchange="" checked>
+                  <input class="form-check-input" type="checkbox" id="checkboxDenivelee" onchange="changeLayerVisibilityDenivelee_altimetric()">
                   <label class="checkboxLabel" for="checkboxDenivelee">
                     Dénivelée
                   </label>
@@ -276,7 +244,7 @@
               <button class="accordion py-1">Observations de coordonnées</button>
               <div class="panel">
                 <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxCoordH" onchange="" >
+                  <input class="form-check-input" type="checkbox" id="checkboxCoordH" onchange="">
                   <label class="checkboxLabel" for="checkboxCoordH">
                     H
                   </label>
@@ -426,6 +394,10 @@
     
     <script src="./js/planimetricAbriss.js"></script>
     <script src="./js/planimetricAbrissChangeLayers.js"></script>
+
+    <script src="./js/altimetricAbriss.js"></script>
+    <script src="./js/altimetricAbrissChangeLayers.js"></script>
+
     
 
     <script src="./js/PopUpCoords.js"></script>

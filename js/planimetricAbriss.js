@@ -20,13 +20,13 @@ function parsingViseesXML_planimetric() {
             noSt = stationXml.getAttribute("name");
             observationsXml = stationXml.getElementsByTagName("obs");
             for (j = 0; j < observationsXml.length; j++) {
-            noVis = observationsXml[j].getAttribute("target");
-            zi_i = observationsXml[j].getAttribute("zi");
-            noObs = observationsXml[j].getAttribute("obsNr");
-            wi_i = observationsXml[j].getAttribute("wi");
-            nabla_rzi = observationsXml[j].getAttribute("nabla_rzi");
-            v = observationsXml[j].getAttribute("improv");
-            noPointsDistances.push([noSt,noVis,zi_i,noObs,wi_i,nabla_rzi,v]);
+                noVis = observationsXml[j].getAttribute("target");
+                zi_i = observationsXml[j].getAttribute("zi");
+                noObs = observationsXml[j].getAttribute("obsNr");
+                wi_i = observationsXml[j].getAttribute("wi");
+                nabla_rzi = observationsXml[j].getAttribute("nabla_rzi");
+                v = observationsXml[j].getAttribute("improv");
+                noPointsDistances.push([noSt,noVis,zi_i,noObs,wi_i,nabla_rzi,v]);
             };
         };
     };
