@@ -44,6 +44,8 @@ document.getElementById('inputfile').addEventListener('change', function() {
 
         // Abriss altimétrique
         parsingViseesXML_altimetric();
+        parsingGNSS_altimetric();
+        parsingObsCoord_altimetric();
 
 
         // Dire à l'utilisateur que l'import s'est bien effectué

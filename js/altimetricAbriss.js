@@ -109,12 +109,10 @@ function parsingViseesXML_altimetric() {
 
             deniveleeSource.addFeature(deniveleeFeatureSymbol);
             deniveleeLayer.setSource(deniveleeSource);
-            console.log("Add symbol");
         };
         deniveleeFeature.setStyle(deniveleeStyle);
         deniveleeSource.addFeature(deniveleeFeature);
         
-
         deniveleeLayer.setSource(deniveleeSource);
     };
 
@@ -139,4 +137,131 @@ function gisement(dx, dy){
       gisement += 400;
     };
     return gisement*Math.PI/200.0
-  };
+};
+
+
+function parsingObsCoord_altimetric() {
+    console.log("OK")
+
+    // Récupérer les stations (avec observations)
+    let planimetricAbriss = xmlDoc.getElementsByTagName("altimetricAbriss")[0];
+    let stationsList = planimetricAbriss.getElementsByTagName("station");
+
+    // Initialisation du Vector Source
+    let obsCoordSourceH = new ol.source.Vector({});
+
+    // Récupérer les No des observation de coordonnées YX et obtenir les coordonnées des points concernés
+    for (let i = 0; i < stationsList.length; i++) {
+
+        if (stationsList[i].getAttribute("obsType") == "connectionPoints") {
+
+            let pointObs = stationsList[i];
+            let listTargets = pointObs.getElementsByTagName("target");
+
+            for (let j = 0; j < listTargets.length; j++) {
+                let targetObs = listTargets[j];
+                let pointName_i = targetObs.getAttribute("name");
+                let E = parseFloat(listAllPoints.get(pointName_i)[0]);
+                let N = parseFloat(listAllPoints.get(pointName_i)[1]);
+                let H = parseFloat(listAllPoints.get(pointName_i)[2]);
+
+                // Création d'une Feature ol pour chaque point avec des obs. de coord.
+                const featureObsCoordH = new ol.Feature({
+                    geometry: new ol.geom.Point([E,N]),
+                    name: pointName_i,
+                    // TODO : ajouter les properties
+                });
+                obsCoordSourceH.addFeature(featureObsCoordH);
+            };
+        };
+    };
+
+    // Création du layer
+    obsCoordHLayer = new ol.layer.Vector({
+        source: obsCoordSourceH,
+        style: new ol.style.Style({
+            image: new ol.style.Icon({
+                src: './img/E_obs.png',
+                scale: '0.13',
+                color: '#000000',
+                width: 5,
+                rotation: Math.PI/4,
+            }),
+        }),
+    });
+
+    map.addLayer(obsCoordHLayer);
+    changeLayerVisibilityCoordH();
+    obsCoordHLayer.setZIndex(99);
+    console.log("Coordinates altimetric observations has been added to map");
+};
+
+
+/** 
+ * 
+ */
+function parsingGNSS_altimetric() {
+    
+    // Récupérer les stations (avec observations GNSS)
+    const altimetricAbriss = xmlDoc.getElementsByTagName("altimetricAbriss")[0];
+    let stationsList = altimetricAbriss.getElementsByTagName("station");
+
+    // Initialisation de la source du layer
+    let gnssSource = new ol.source.Vector({});
+    let gnssStyle = new ol.style.Style({});
+    let sessionNo = 0
+
+    // Récupérer les numéros de points de chaque session GNSS et les stocker dans une liste (listPointsNameOfSession)
+    for (let i = 0; i < stationsList.length; i++) {
+        if (stationsList[i].getAttribute("obsType") === "gpsSession") {
+            
+            let sessionGNSS = stationsList[i];
+            let listTargets = sessionGNSS.getElementsByTagName("target");
+            let Listradius = [0.10,0.13,0.16,0.19,0.22,0.25,0.28,0.31,0.33];
+            let listColorSession = ["#FF7C3F", "#00CEF7", "#3FFF67", "#6900F7", "#F700F6", "#F7F300", "#FFF33F", "#FF3FF0", "#FFC23F"];
+            
+            for (let j = 0; j < listTargets.length; j++) {
+                let pointName_i = listTargets[j].getAttribute("name");
+                let E = listAllPoints.get(pointName_i)[0];
+                let N = listAllPoints.get(pointName_i)[1];
+                
+                // Création d'une Feature ol pour chaque point de la session GNSS et ajout à la source
+                featurePointGnss = new ol.Feature({
+                    geometry: new ol.geom.Point([parseFloat(E), parseFloat(N)]),
+                    name: pointName_i,
+                    properties: {
+                        "session":String(sessionNo)
+                        //ajouter H,
+                        //ajouter v
+                        //ajouter wi
+                        //ajouter zi
+                        //ajouter E.M.
+                        //ajouter nabla
+                    }
+                });
+                gnssStyle = new ol.style.Style({
+                    // stroke: new ol.style.Stroke({ color: listColorSession[sessionNo], width: 4}),
+                    image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+                        src: './img/Pentagon_blanc.png',
+                        scale: Listradius[sessionNo],
+                        color: listColorSession[sessionNo],
+                    })),
+                });
+                featurePointGnss.setStyle(gnssStyle);
+                gnssSource.addFeature(featurePointGnss);
+            };
+            sessionNo = sessionNo + 1;
+        };
+    };
+
+    gnssLayerAltimetric = new ol.layer.Vector({
+        source: gnssSource,
+        style: gnssStyle,
+        opacity: 1.0,
+    });
+
+    map.addLayer(gnssLayerAltimetric);
+    changeLayerVisibilityGnss_altimetric();
+    gnssLayer.setZIndex(80);
+    console.log("GNSS altimetric sessions has been added to map");
+};
