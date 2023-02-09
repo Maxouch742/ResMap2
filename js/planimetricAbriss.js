@@ -431,7 +431,11 @@ function parsingEllipsesRelaXML_planimetric() {
     
         // Création du style ellipses
         let styleEllipse = new ol.style.Style({
-            stroke: new ol.style.Stroke({ color: '#FFAF42', width: 1, lineDash: [6,2] }),
+            stroke: new ol.style.Stroke({
+                color: '#FFAF42', 
+                width: 1, 
+                lineDash: [6,2] 
+            }),
             text: textStyleEllipse
         });
     

@@ -102,7 +102,6 @@ function changeLayerVisibilityVect_altimetric() {
     };
 };
 
-
 function altimetricActivateCheckBox() {
     document.getElementById("checkboxDenivelee").disabled = false;
     document.getElementById("checkboxCoordH").disabled = false;

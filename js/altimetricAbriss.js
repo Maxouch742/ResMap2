@@ -302,29 +302,40 @@ function parsingEllipsesXML_altimetric() {
   
     // Récupération des éléments du fichier
     let allListHellipse = []
+    let allListHellipseGeom = []
     for (i=0; i<pointsList.length; i++){
         if (pointsList[i].getAttribute("meanErrorH") != null){
 
+            const errH = pointsList[i].getAttribute("meanErrorH")/1000.0
+            const center = [
+                parseFloat(listAllPoints.get(pointsList[i].getAttribute("name"))[0]),
+                parseFloat(listAllPoints.get(pointsList[i].getAttribute("name"))[1])
+            ];
+
             allListHellipse.push([
                 pointsList[i].getAttribute("name"),
-                pointsList[i].getAttribute("meanErrorH")/1000.0,
+                errH,
                 pointsList[i].getAttribute("altimetricElements"),
-                parseFloat(listAllPoints.get(pointsList[i].getAttribute("name"))[0]),
-                parseFloat(listAllPoints.get(pointsList[i].getAttribute("name"))[1]),
+                center[0],
+                center[1],
                 parseFloat(listAllPoints.get(pointsList[i].getAttribute("name"))[2])
             ]);
+
+            let listHellipse = []
+            let t = range(0, 390, 10);
+            t.forEach(gis => listHellipse.push([
+                parseFloat(errH*kSigma*echelleEllipses*Math.cos(gis*Math.PI/180.0)+center[0]),
+                parseFloat(errH*kSigma*echelleEllipses*Math.sin(gis*Math.PI/180.0)+center[1])
+            ]))
+            allListHellipseGeom.push(listHellipse); // tableau de toutes les coordonnées de chaque ellipses (grand)
         };
     };
 
     // Creation du style
     const featureEllipseStyle = new ol.style.Style({
-        image: new ol.style.Circle({
-            //radius: 10, //TODO : modifier taille du cercle en fonction de l'échelle
-            fill: null,
-            stroke: new ol.style.Stroke({ 
-                color: '#009933',
-                width: 1
-            })
+        stroke: new ol.style.Stroke({ 
+            color: '#009933',
+            width: 1
         }),    
         text: new ol.style.Text({
             textAlign: "center",
@@ -347,10 +358,9 @@ function parsingEllipsesXML_altimetric() {
     let ellipseSourceAltimetric = new ol.source.Vector( {} );
     for (i=0; i<allListHellipse.length; i++){
         const featureEllipse = new ol.Feature({
-            geometry: new ol.geom.Point([
-                allListHellipse[i][3],
-                allListHellipse[i][4]
-            ]),
+            geometry: new ol.geom.LineString(
+                allListHellipseGeom[i]
+            ),
             properties: String(allListHellipse[i][1]*1000) + "mm",
         });
         featureEllipseStyle.getText().setText( String(allListHellipse[i][1]*1000) + "mm" ); 
@@ -366,8 +376,6 @@ function parsingEllipsesXML_altimetric() {
     map.addLayer(ellipseLayerAltimetric);
     ellipseLayerAltimetric.setZIndex(89);
     changeLayerVisibilityEllipses_altimetric();
-    //document.getElementById("AffichageEchelleEllipse_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
-    
 };
 
 function parsingEllipsesRelaXML_altimetric() {
@@ -394,14 +402,18 @@ function parsingEllipsesRelaXML_altimetric() {
 
             for (i=0; i<ellRelaAltiList.length; i++){
                 pt1 = ellRelaAltiList[i].getAttribute("point1");
+                pt1_E = parseFloat(listAllPoints.get(pt1)[0]);
+                pt1_N = parseFloat(listAllPoints.get(pt1)[1]);
                 pt2 = ellRelaAltiList[i].getAttribute("point2");
+                pt2_E = parseFloat(listAllPoints.get(pt2)[0]);
+                pt2_N = parseFloat(listAllPoints.get(pt2)[1]);
                 erH = ellRelaAltiList[i].getAttribute("meanErrorA");
 
                 // Feature line pour montrer la line entre les 2 points
                 const ellipRelaAltiFeature_line = new ol.Feature({
                     geometry: new ol.geom.LineString([
-                        [parseFloat(listAllPoints.get(pt1)[0]),parseFloat(listAllPoints.get(pt1)[1])],
-                        [parseFloat(listAllPoints.get(pt2)[0]),parseFloat(listAllPoints.get(pt2)[1])]
+                        [pt1_E, pt1_N],
+                        [pt2_E, pt2_N]
                     ]),
                     style: new ol.style.Style({
                         stroke: new ol.style.Stroke({ 
@@ -414,18 +426,25 @@ function parsingEllipsesRelaXML_altimetric() {
                 ellipRelaAltiSource.addFeature(ellipRelaAltiFeature_line);
 
                 // Feature point avec style de cercle pour la valeur
-                const dE = (parseFloat(listAllPoints.get(pt1)[0]) + parseFloat(listAllPoints.get(pt2)[0]))/2.0
-                const dN = (parseFloat(listAllPoints.get(pt1)[1]) + parseFloat(listAllPoints.get(pt2)[1]))/2.0
-                const ellipRelaAltiFeature_point = new ol.Feature({
-                    geometry: new ol.geom.Point([dE, dN]),
+                moyCenter = [
+                    (pt1_E + pt2_E)/2.0,
+                    (pt1_N + pt2_N)/2.0
+                ];
+                // Calcul des coords (echelleEllipses = échelle d'affichage des rect. et ell.)
+                let listHellipseRela = [];
+                let t = range(0, 410, 10);
+                t.forEach( gis => listHellipseRela.push([
+                    parseFloat(erH/1000*kSigma*echelleEllipses*Math.cos(gis*Math.PI/200.0)+moyCenter[0]),
+                    parseFloat(erH/1000*kSigma*echelleEllipses*Math.sin(gis*Math.PI/200.0)+moyCenter[1])
+                ]));
+
+                const ellipRelaAltiFeature_LineCircle = new ol.Feature({
+                    geometry: new ol.geom.LineString(listHellipseRela),
                     style: new ol.style.Style({
-                        image: new ol.style.Circle({
-                            //radius: 10, //TODO : modifier taille du cercle en fonction de l'échelle
-                            fill: null,
-                            stroke: new ol.style.Stroke({ 
-                                color: '#009933',
-                                width: 1
-                            })
+                        stroke: new ol.style.Stroke({ 
+                            color: '#009933',
+                            width: 1,
+                            lineDash: [6,2],
                         }),    
                         text: new ol.style.Text({
                             text: String(erH)+"mm",
@@ -445,7 +464,7 @@ function parsingEllipsesRelaXML_altimetric() {
                         })
                     })
                 });
-                ellipRelaAltiSource.addFeature(ellipRelaAltiFeature_point);
+                ellipRelaAltiSource.addFeature(ellipRelaAltiFeature_LineCircle);
             };
 
             // Creation du layer
@@ -456,15 +475,14 @@ function parsingEllipsesRelaXML_altimetric() {
             // Ajout du layer à la carte
             map.addLayer(ellipRelaAltiLayer);
             ellipRelaAltiLayer.setZIndex(90);
-            changeLayerVisibilityEllipses_altimetric();
-            //document.getElementById("AffichageEchelleEllipseRela_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
+            changeLayerVisibilityEllipsesRela_altimetric();
         } else {
             // Si on n'a pas d'ellipses relatives altimetriques
             //console.log("There's no relatives ellipses")
             document.getElementById("legendeEllRela_altimetric").className = "checkboxLabel legendeGrise";
             document.getElementById("checkboxEllipsesRela_altimetric").disabled = true;
         };
-    }
+    };
 };
 
 
@@ -559,7 +577,6 @@ function parsingVectXML_altimetric() {
     map.addLayer(vectLayerAltimetric);
     vectLayerAltimetric.setZIndex(79);
     changeLayerVisibilityVect_altimetric();
-    document.getElementById("AffichageEchelleVect_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
-    console.log("Diff. heights vectors have been added to map");
+    //console.log("Diff. heights vectors have been added to map");
 };
 
