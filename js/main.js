@@ -53,6 +53,10 @@ document.getElementById('inputfile').addEventListener('change', function() {
         parsingVectXML_altimetric();
 
 
+        // Activer les boutons
+        altimetricActivateCheckBox();
+
+
         // Dire à l'utilisateur que l'import s'est bien effectué
         document.getElementById("outputTest").textContent = "Import effectué ✓";
 

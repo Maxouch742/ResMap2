@@ -366,7 +366,7 @@ function parsingEllipsesXML_altimetric() {
     map.addLayer(ellipseLayerAltimetric);
     ellipseLayerAltimetric.setZIndex(89);
     changeLayerVisibilityEllipses_altimetric();
-    document.getElementById("AffichageEchelleEllipse_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
+    //document.getElementById("AffichageEchelleEllipse_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     
 };
 
@@ -457,12 +457,14 @@ function parsingEllipsesRelaXML_altimetric() {
             map.addLayer(ellipRelaAltiLayer);
             ellipRelaAltiLayer.setZIndex(90);
             changeLayerVisibilityEllipses_altimetric();
-            document.getElementById("AffichageEchelleEllipseRela_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
+            //document.getElementById("AffichageEchelleEllipseRela_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
+        } else {
+            // Si on n'a pas d'ellipses relatives altimetriques
+            console.log("There's no relatives ellipses 2707")
+            document.getElementById("legendeEllRela_altimetric").className = "checkboxLabel legendeGrise";
+            document.getElementById("checkboxEllipsesRela_altimetric").disabled = true;
         };
-    } else {
-        //console.log("There's no relatives ellipses")
-        document.getElementById("legendeEllRela").className = "checkboxLabel legendeBarree";
-    };
+    }
 };
 
 
