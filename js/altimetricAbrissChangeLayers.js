@@ -64,13 +64,13 @@ function changeLayerVisibilityRectRela_altimetric(){
 
 function changeLayerVisibilityFiabiliteLocales_altimetric(){
     if (document.getElementById("checkboxFiabLoc_altimetric").checked === true){
-        //   .setVisible(true);
+        fiabLocalLayerAlti.setVisible(true);
         document.getElementById("fiabiliteLocal_altimetric1").textContent = "――  0 - 25 %";
         document.getElementById("fiabiliteLocal_altimetric2").textContent = "―― 25 - 50 %";
         document.getElementById("fiabiliteLocal_altimetric3").textContent = "―― 50 - 75 %";
         document.getElementById("fiabiliteLocal_altimetric4").textContent = "―― 75 - 100 %";
     } else {
-        //    .setVisible(false);
+        fiabLocalLayerAlti.setVisible(false);
         document.getElementById("fiabiliteLocal_altimetric1").textContent = "";
         document.getElementById("fiabiliteLocal_altimetric2").textContent = "";
         document.getElementById("fiabiliteLocal_altimetric3").textContent = "";

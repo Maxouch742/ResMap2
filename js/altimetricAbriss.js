@@ -28,19 +28,19 @@ function parsingViseesXML_altimetric() {
                 const visee_H = listAllPoints.get(visee_no)[2];
                 
                 NoPointsDenivelee.push([
-                    station_no, 
-                    station_E, 
-                    station_N, 
-                    station_H,
-                    visee_no, 
-                    visee_E, 
-                    visee_N, 
-                    visee_H,
-                    observation_no,
-                    visee_zi,
-                    visee_wi,
-                    visee_nabla,
-                    visee_v
+                    station_no,     // 0
+                    station_E,      // 1
+                    station_N,      // 2
+                    station_H,      // 3
+                    visee_no,       // 4
+                    visee_E,        // 5
+                    visee_N,        // 6
+                    visee_H,        // 7
+                    observation_no, // 8
+                    visee_zi,       // 9
+                    visee_wi,       // 10
+                    visee_nabla,    // 11
+                    visee_v         // 12
                 ]);
             };
         };
@@ -50,7 +50,7 @@ function parsingViseesXML_altimetric() {
     deniveleeLayer = new ol.layer.Vector({});
 
     // Création de la source du layer et ajout des features à la source
-    let deniveleeSource = new ol.source.Vector({});
+    deniveleeSource = new ol.source.Vector({});
     for (i=0; i<NoPointsDenivelee.length; i++){
         // coordonnées de la ligne
         const coordArray = [ 
@@ -70,8 +70,8 @@ function parsingViseesXML_altimetric() {
                 "no":NoPointsDenivelee[i][8],
                 "zi":NoPointsDenivelee[i][9],
                 "wi":NoPointsDenivelee[i][10],
+                "nabla":NoPointsDenivelee[i][11],
                 "v":NoPointsDenivelee[i][12],
-                "nabla":NoPointsDenivelee[i][11]
             }
         });
 
@@ -483,6 +483,72 @@ function parsingEllipsesRelaXML_altimetric() {
             document.getElementById("checkboxEllipsesRela_altimetric").disabled = true;
         };
     };
+};
+
+
+
+
+function fiabLocale_altimetric() {
+    // Créer la source comprenant les features d'observations (sources de base)
+    fiabLocaleSourceBase = new ol.source.Vector({});
+    fiabLocaleSourceBase.addFeatures(deniveleeSource.getFeatures());
+
+    // Création de la source pour traitement graphique et nouveau layer
+    fiabLocaleSource = new ol.source.Vector({});
+    fiabLocalLayerAlti = new ol.layer.Vector({});
+
+    // Parcourir la source et gérer les styles pour chaque features
+    for (let i=0; i<fiabLocaleSourceBase.getFeatures().length; i++) {
+
+        let feature = fiabLocaleSourceBase.getFeatures()[i].clone();
+        //console.log(feature.getProperties());
+        
+
+        if (feature.getProperties().properties != null){
+            const zi = parseFloat(feature.getProperties().properties.zi);
+            const noObs = feature.getProperties().properties.no;
+
+            // Attribution des couleurs de zi
+            if (zi < 25.0) {
+                colorFiab = "#FF1700";
+                widthFiab = 3;
+                zIndex = 99;
+            } else if (zi <= 50.0) {
+                colorFiab = "#FFD000";
+                widthFiab = 1.5;
+                zIndex = 98;
+            } else if (zi <= 75.0) {
+                colorFiab = "#ABFF00";
+                widthFiab = 0;
+                zIndex = 1;
+            } else if (zi <= 100.0) {
+                colorFiab = "#2AE100";
+                widthFiab = 0;
+                zIndex = 1;
+            };
+
+            // Si l'obs. est supprimée
+            if (noObs === "") { 
+                colorFiab ="rgba(0, 0, 0, 0.0)" // transparent
+            };
+
+            // Attribution du style en fonction du zi et du typeObs (variables)
+            feature.getStyle().setZIndex(zIndex);
+            feature.getStyle().getStroke().setColor(colorFiab);
+            let widthF = feature.getStyle().getStroke().getWidth();
+            feature.getStyle().getStroke().setWidth(widthF+widthFiab); // épaissir en fonction du zi
+
+            // Ajout des features au vector source
+            fiabLocaleSource.addFeature(feature);
+        };
+    };
+    
+    // Ajout de la source (contenant les features) au Layer + divers
+    fiabLocalLayerAlti.setSource(fiabLocaleSource);
+    map.addLayer(fiabLocalLayerAlti);
+    fiabLocalLayerAlti.setVisible(false);
+    fiabLocalLayerAlti.setZIndex(80);
+    //console.log("Carte des fiabilité locales zi ajoutée")*/
 };
 
 
