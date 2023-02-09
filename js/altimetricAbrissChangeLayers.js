@@ -32,8 +32,20 @@ function changeLayerVisibilityEllipses_altimetric() {
 
 function changeLayerVisibilityEllipsesRela_altimetric() {
     if (document.getElementById("checkboxEllipsesRela_altimetric").checked === true) {
-        ellipseLayerAltimetric.setVisible(true);
+        ellipRelaAltiLayer.setVisible(true);
     } else {
-        ellipseLayerAltimetric.setVisible(false);
+        ellipRelaAltiLayer.setVisible(false);
     };
 };
+
+function changeLayerVisibilityVect_altimetric() {
+    if (document.getElementById("checkboxVect_altimetric").checked === true) {
+        vectLayerAltimetric.setVisible(true);
+    } else {
+        vectLayerAltimetric.setVisible(false);
+    };
+};
+
+
+
+

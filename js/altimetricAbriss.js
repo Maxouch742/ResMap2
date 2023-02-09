@@ -141,7 +141,6 @@ function gisement(dx, dy){
 
 
 function parsingObsCoord_altimetric() {
-    console.log("OK")
 
     // Récupérer les stations (avec observations)
     let planimetricAbriss = xmlDoc.getElementsByTagName("altimetricAbriss")[0];
@@ -305,7 +304,6 @@ function parsingEllipsesXML_altimetric() {
     let allListHellipse = []
     for (i=0; i<pointsList.length; i++){
         if (pointsList[i].getAttribute("meanErrorH") != null){
-            console.log(pointsList[i].getAttribute("name"));
 
             allListHellipse.push([
                 pointsList[i].getAttribute("name"),
@@ -368,6 +366,8 @@ function parsingEllipsesXML_altimetric() {
     map.addLayer(ellipseLayerAltimetric);
     ellipseLayerAltimetric.setZIndex(89);
     changeLayerVisibilityEllipses_altimetric();
+    document.getElementById("AffichageEchelleEllipse_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
+    
 };
 
 function parsingEllipsesRelaXML_altimetric() {
@@ -464,3 +464,100 @@ function parsingEllipsesRelaXML_altimetric() {
         document.getElementById("legendeEllRela").className = "checkboxLabel legendeBarree";
     };
 };
+
+
+function parsingVectXML_altimetric() {
+
+    // Récupération des éléments des balises <coordinates>
+    let coordinates = xmlDoc.getElementsByTagName("coordinates")[0];
+    let pointsList = coordinates.getElementsByTagName("point");
+
+    let vectLineSource = new ol.source.Vector({});
+
+
+    for (i=0; i<pointsList.length; i++){
+        // Tri pour garder uniquement les valeurs existantes de dh
+        if ( pointsList[i].getAttribute("dh") != null ) {
+            // Tri pour garder uniquement les dy et dx non-nuls (si dy!=0.0 et dx!=0.0)
+            if ( pointsList[i].getAttribute("dh") != 0.0) {
+
+                // Attribution des éléments des vecteurs
+                const pointName = pointsList[i].getAttribute("name");
+                const dh = parseFloat(pointsList[i].getAttribute("dh"))/1000.0; // en [m]
+                const norm = Math.sqrt(dh**2); // en [m]
+                const center = [parseFloat(listAllPoints.get(pointName)[0]),parseFloat(listAllPoints.get(pointName)[1])];
+                const Earrow = center[0]
+                const Narrow = center[1]+echelleEllipses*dh;
+
+                // Calcul des éléments pour la flèches  du vecteur [g] et [m]
+                let gisArrow1 = 200.0 + 50.0;
+                let gisArrow2 = 200.0 - 50.0;
+                if (dh < 0){
+                    gisArrow1 = 350.0;
+                    gisArrow2 = 50.0;
+                }
+
+                const Ea1 = (norm/5)*echelleEllipses*Math.sin(gisArrow1*Math.PI/200.0) + Earrow;
+                const Na1 = (norm/5)*echelleEllipses*Math.cos(gisArrow1*Math.PI/200.0) + Narrow;
+                const Ea2 = (norm/5)*echelleEllipses*Math.sin(gisArrow2*Math.PI/200.0) + Earrow;
+                const Na2 = (norm/5)*echelleEllipses*Math.cos(gisArrow2*Math.PI/200.0) + Narrow;
+
+                // Calcul des coordonnées du vecteur avec la flèche
+                const listENvect = [ 
+                    center, 
+                    [Earrow, Narrow], 
+                    [Ea1, Na1],
+                    [Earrow, Narrow], 
+                    [Ea2, Na2]
+                ];                                       
+                
+                // Création de la Feature
+                let featureEllipse = new ol.Feature({
+                    geometry: new ol.geom.LineString(listENvect),
+                    properties: String((norm*1000.0).toFixed(1)) + 'mm',  // norme du vecteur de diff. pour affichage
+                });
+                vectLineSource.addFeature(featureEllipse);
+            };
+        };
+    };
+
+    // Création du style labelText pour demi-grand axe a
+    let textStyleVect = new ol.style.Text({
+        textAlign: "center",
+        textBaseline: "middle",
+        font: "13px Calibri",
+        fill: new ol.style.Fill({
+        color: "#FF0000"
+        }),
+        stroke: new ol.style.Stroke({
+        color: "#ffffff", width: 3
+        }),
+        offsetX: -10,
+        offsetY: -10,
+        rotation: 0,
+        placement: "point"
+    });
+
+    // Création du style vecteurs
+    let styleVect = new ol.style.Style({
+        stroke: new ol.style.Stroke({ color: '#FF0000', width: 1 }),
+        text: textStyleVect
+    });
+
+    // Création du Layer ellipses
+    vectLayerAltimetric = new ol.layer.Vector({
+        source: vectLineSource,
+        style: function (feature) { // la propriété style prend un callback qui doit retourner un style
+            styleVect.getText().setText(feature.get("properties")); 
+            return styleVect;
+        }
+    });
+
+    // Ajout à la carte
+    map.addLayer(vectLayerAltimetric);
+    vectLayerAltimetric.setZIndex(79);
+    changeLayerVisibilityVect_altimetric();
+    document.getElementById("AffichageEchelleVect_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
+    console.log("Diff. heights vectors have been added to map");
+};
+

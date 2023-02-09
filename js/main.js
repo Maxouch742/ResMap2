@@ -50,6 +50,9 @@ document.getElementById('inputfile').addEventListener('change', function() {
         parsingEllipsesRelaXML_altimetric();
 
 
+        parsingVectXML_altimetric();
+
+
         // Dire à l'utilisateur que l'import s'est bien effectué
         document.getElementById("outputTest").textContent = "Import effectué ✓";
 
