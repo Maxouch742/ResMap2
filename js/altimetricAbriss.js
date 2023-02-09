@@ -460,7 +460,7 @@ function parsingEllipsesRelaXML_altimetric() {
             //document.getElementById("AffichageEchelleEllipseRela_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
         } else {
             // Si on n'a pas d'ellipses relatives altimetriques
-            console.log("There's no relatives ellipses 2707")
+            //console.log("There's no relatives ellipses")
             document.getElementById("legendeEllRela_altimetric").className = "checkboxLabel legendeGrise";
             document.getElementById("checkboxEllipsesRela_altimetric").disabled = true;
         };

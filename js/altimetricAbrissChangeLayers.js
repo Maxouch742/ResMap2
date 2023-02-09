@@ -98,7 +98,7 @@ function changeLayerVisibilityVect_altimetric() {
         document.getElementById("AffichageEchelleVect_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
         vectLayerAltimetric.setVisible(false);
-        document.getElementById("AffichageEchelleVect_altimetric") = "";
+        document.getElementById("AffichageEchelleVect_altimetric").textContent = "";
     };
 };
 
