@@ -486,15 +486,13 @@ function parsingEllipsesRelaXML_altimetric() {
 };
 
 
-
-
 function fiabLocale_altimetric() {
     // Créer la source comprenant les features d'observations (sources de base)
     fiabLocaleSourceBase = new ol.source.Vector({});
     fiabLocaleSourceBase.addFeatures(deniveleeSource.getFeatures());
 
     // Création de la source pour traitement graphique et nouveau layer
-    fiabLocaleSource = new ol.source.Vector({});
+    fiabLocaleSourceAlti = new ol.source.Vector({});
     fiabLocalLayerAlti = new ol.layer.Vector({});
 
     // Parcourir la source et gérer les styles pour chaque features
@@ -539,16 +537,106 @@ function fiabLocale_altimetric() {
             feature.getStyle().getStroke().setWidth(widthF+widthFiab); // épaissir en fonction du zi
 
             // Ajout des features au vector source
-            fiabLocaleSource.addFeature(feature);
+            fiabLocaleSourceAlti.addFeature(feature);
         };
     };
     
     // Ajout de la source (contenant les features) au Layer + divers
-    fiabLocalLayerAlti.setSource(fiabLocaleSource);
+    fiabLocalLayerAlti.setSource(fiabLocaleSourceAlti);
     map.addLayer(fiabLocalLayerAlti);
     fiabLocalLayerAlti.setVisible(false);
     fiabLocalLayerAlti.setZIndex(80);
     //console.log("Carte des fiabilité locales zi ajoutée")*/
+};
+
+
+function normedResidualsWi_altimetric() {
+
+    // Wi pas disponibles si une pré-analyse
+    if (xmlDoc.getElementsByTagName("biggestWi").length != 0) {
+        let statistics = xmlDoc.getElementsByTagName("statistics");
+
+        // Récupérer les WI maxi
+        let biggestWi;
+        for (let i=0; i<statistics.length; i++){
+            if (statistics[i].getAttribute("type") == "altimetric"){
+                biggestWi = statistics[i].getElementsByTagName("biggestWi");
+                biggestWi = biggestWi[0];
+            }
+            //TODO : bloquer la carte etc si pas de résidus altimétriques
+        };
+
+        // Créer la source comprenant les features d'observations (sources de base)
+        wiSourceBaseAltitude = new ol.source.Vector({});
+        wiSourceBaseAltitude.addFeatures(deniveleeSource.getFeatures());
+
+        // Création de la source pour traitement graphique et nouveau layer
+        wiSourceAlti = new ol.source.Vector({});
+        wiLayerAlti = new ol.layer.Vector({});
+
+        // Récupération des valeurs pour les bornes
+        limitWiAlti = parseFloat(biggestWi.getAttribute("biggerThan"));
+        limitInfAlti = limitWiAlti - 0.2;
+
+        /*
+
+        // parcourir la source et géréer les styles pour chaques features
+        for (let i=0; i<wiSourceBaseAltitude.getFeatures().length; i++) {
+
+            let feature = wiSourceBaseAltitude.getFeatures()[i].clone();
+            let propertiesWi = feature.getProperties().properties
+            if (propertiesWi != null){
+                let wi = Math.abs(parseFloat(propertiesWi.wi).toFixed(2)); // get le wi et le stocker en int (valeur absolue)
+                let noObs = propertiesWi.no // get le numéro d'obs. et le stocker en str
+                
+                // Attribution des couleurs des paliers de wi
+                if (wi >= limitWiAlti) {
+                    colorWi = "#FF1700";
+                    widthWi = 3;
+                    zIndex = 99;
+                } else if (wi > limitInfAlti) {
+                    colorWi = "#FFD000";
+                    widthWi = 2;
+                    zIndex = 98;
+                } else if (wi < limitInfAlti) {
+                    colorWi = "#2AE100";
+                    widthWi = 0;
+                    zIndex = 1;
+                };
+
+                // Si l'obs. est supprimée
+                if (noObs === "") { 
+                    colorWi ="rgba(0, 0, 0, 0.0)" // transparent
+                };
+
+                // Attribution du style en fonction du wi et du typeObs (variables)
+                feature.getStyle().setZIndex(zIndex);
+                feature.getStyle().getStroke().setColor(colorWi);
+                let widthF = feature.getStyle().getStroke().getWidth();
+                feature.getStyle().getStroke().setWidth(widthF + widthWi); // épaissir en fonction du wi
+
+                // Ajout des features au vector source
+                wiSourceAlti.addFeature(feature);
+            };
+        };
+
+        // Ajout de la source (contenant les features) au Layer + divers
+        wiLayerAlti.setSource(wiSourceAlti);
+        wiLayerAlti.setVisible(false);
+        wiLayerAlti.setZIndex(80);
+        map.addLayer(wiLayerAlti);
+        changeLayerVisibilityResidusNormes_altimetric();
+        //console.log("Carte des résidus normés wi ajoutée")
+
+        // Gestion des intervalles de la légende en fonction du Wi limite (issu des param. du calcul LTOP)
+        document.getElementById("palierWi1").textContent = "――  "+String(limitWiAlti)+" - ∞";
+        document.getElementById("palierWi2").textContent = "――  "+String(limitInfAlti)+" - "+String(limitWiAlti);
+        document.getElementById("palierWi3").textContent = "――  0.0 - "+String(limitInfAlti);
+
+    } else { // Si c'est une pré-analyse
+        //console.log("Pas de wi dans une pré-analyse")
+        document.getElementById("legendeWi").className = "checkboxLabel legendeBarree";
+    };*/
 };
 
 

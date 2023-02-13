@@ -276,3 +276,7 @@ TSWLatexianTemp*
 *.lpz
 *.tex
 *.pdf
+
+
+## Personnel
+rapport/

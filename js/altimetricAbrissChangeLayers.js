@@ -80,12 +80,15 @@ function changeLayerVisibilityFiabiliteLocales_altimetric(){
 
 function changeLayerVisibilityResidusNormes_altimetric(){
     if (document.getElementById("checkboxResidusNormes_altimetric").checked === true){
-        //   .setVisible(true);
-        document.getElementById("palierWi1").textContent = "――  x - ∞";
-        document.getElementById("palierWi2").textContent = "――  x - x";
-        document.getElementById("palierWi3").textContent = "――  0.0 - x";
+        deniveleeLayer.setVisible(false);
+        wiLayerAlti.setVisible(true);
+        document.getElementById("palierWi1").textContent = "――  "+String(limitWiAlti)+" - ∞";
+        document.getElementById("palierWi2").textContent = "――  "+String(limitInfAlti)+" - "+String(limitWiAlti);
+        document.getElementById("palierWi3").textContent = "――  0.0 - "+String(limitInfAlti);
     } else {
-        //    .setVisible(false);
+        wiLayerAlti.setVisible(false);
+        //deniveleeLayer.setVisible(true);
+        document.getElementById("checkboxDenivelee").checked = true;
         document.getElementById("palierWi1").textContent = "";
         document.getElementById("palierWi2").textContent = "";
         document.getElementById("palierWi3").textContent = "";
