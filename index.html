@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 
+  <!-- NOte du soir : 
+      Vérifier la création des layers et régléer le problème des layers
+      Une solution : 
+      1. Importer le fichier
+      2. Parser le fichier et créer un objet
+      3. Une fonction crée un layer depuis l'objet
+      4. Une autre fonction parse les wi, zi et les affiches -->
+
   <head>
     <title>ResMap DB</title>
     <meta charset="utf-8">
@@ -79,7 +87,7 @@
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxDirections" onchange="changeLayerVisibilityDirections_planimetric()" checked>
               <label class="checkboxLabel" for="checkboxDirections" id="legendeDir">
-                Mesures de directions
+                Obs. directions
               </label>
             </div>
 
@@ -87,7 +95,7 @@
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxDistances" onchange="changeLayerVisibilityDistances_planimetric()" checked>
               <label class="checkboxLabel" for="checkboxDistances" id="legendeDist">
-                Mesures de distances
+                Obs. distances
               </label>
             </div>
 
@@ -95,7 +103,7 @@
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxCoordE" onchange="changeLayerVisibilityCoordE_planimetric()" >
               <label class="checkboxLabel" for="checkboxCoordE">
-                Coordonnée E/Y (Libre-ajusté)
+                Obs. coordonnée E/Y (Libre-ajusté)
               </label>
             </div>
 
@@ -103,7 +111,7 @@
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxCoordN" onchange="changeLayerVisibilityCoordN_planimetric()" >
               <label class="checkboxLabel" for="checkboxCoordN">
-                Coordonnée N/X (Libre-ajusté)
+                Obs. coordonnée N/X (Libre-ajusté)
               </label>
             </div>
 
@@ -122,7 +130,7 @@
                 Ellipses de confiance
               </label>
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleEllipse">⤷ Echelle: </div>
+                <div class="textEchelleLegende" id="AffichageEchelleEllipse"></div>
               </div>
             </div>
 
@@ -133,7 +141,7 @@
                 Ellipses de confiance relatives
               </label>
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleEllipseRela">⤷ Echelle: </div>
+                <div class="textEchelleLegende" id="AffichageEchelleEllipseRela"></div>
               </div>
             </div>
 
@@ -144,7 +152,7 @@
                 Rectangles de fiabilité externe
               </label>
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleRectangles">⤷ Echelle: </div>
+                <div class="textEchelleLegende" id="AffichageEchelleRectangles"></div>
               </div>
             </div>
 
@@ -155,7 +163,7 @@
                 Rectangles de fiab. ext. relatifs
               </label>
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleRectanglesRela">⤷ Echelle: </div>
+                <div class="textEchelleLegende" id="AffichageEchelleRectanglesRela"></div>
               </div>
             </div>
 
@@ -166,10 +174,10 @@
                 Carte des fiabilités locales (zi)
               </label>
               <div>
-                <div class="textEchelleLegende fontColorFiab1">――  0 - 25 %</div>
-                <div class="textEchelleLegende fontColorFiab2">――  25 - 50 %</div>
-                <div class="textEchelleLegende fontColorFiab3">――  50 - 75 %</div>
-                <div class="textEchelleLegende fontColorFiab4">――  75 - 100 %</div>
+                <div id="fiabiliteLocal_planimetric1" class="textEchelleLegende fontColorFiab1"></div>
+                <div id="fiabiliteLocal_planimetric2" class="textEchelleLegende fontColorFiab2"></div>
+                <div id="fiabiliteLocal_planimetric3" class="textEchelleLegende fontColorFiab3"></div>
+                <div id="fiabiliteLocal_planimetric4" class="textEchelleLegende fontColorFiab4"></div>
               </div>
             </div>
 
@@ -180,9 +188,9 @@
                 Carte des résidus normés (wi)
               </label>
               <div>
-                <div class="textEchelleLegende fontColorFiab1" id="palierWi1">――  x - ∞</div>
-                <div class="textEchelleLegende fontColorFiab2" id="palierWi2">――  x - x</div>
-                <div class="textEchelleLegende fontColorFiab4" id="palierWi3">――  0.0 - x</div>
+                <div class="textEchelleLegende fontColorFiab1" id="palierWi1"></div>
+                <div class="textEchelleLegende fontColorFiab2" id="palierWi2"></div>
+                <div class="textEchelleLegende fontColorFiab4" id="palierWi3"></div>
               </div>
             </div>
 
@@ -193,7 +201,7 @@
                 Vecteurs DY/DX
               </label>
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleVect">⤷ Echelle: </div>
+                <div class="textEchelleLegende" id="AffichageEchelleVect"></div>
               </div>
             </div>
           </div>

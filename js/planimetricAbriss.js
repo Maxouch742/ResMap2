@@ -203,7 +203,10 @@ function parsingViseesXML_planimetric() {
     // Passer les points au dessus (ZIndex)
     distanceLayer.setZIndex(2);
     directionLayer.setZIndex(1);
-  };
+
+    changeLayerVisibilityDirections_planimetric();
+    changeLayerVisibilityDistances_planimetric();
+};
 
   
 /** 
@@ -1035,8 +1038,8 @@ function normedResidualsWi_planimetric() {
 
         // Récupération des balises avec la limite du wi select. par l'utilisateur lors du calcul LTOP
         let biggestWi = xmlDoc.getElementsByTagName("biggestWi");
-        let limitWi = parseFloat(biggestWi[0].getAttribute("biggerThan")); // PLANI uniquement = [0] , ALTI = [1]
-        let limitInf = limitWi - 0.2; // pour paliers
+        limitWi = parseFloat(biggestWi[0].getAttribute("biggerThan")); // PLANI uniquement = [0] , ALTI = [1]
+        limitInf = limitWi - 0.2; // pour paliers
 
         // parcourir la source et géréer les styles pour chaques features
         for (let i=0; i<wiSourceBase.getFeatures().length; i++) {

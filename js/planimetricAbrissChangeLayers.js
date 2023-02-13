@@ -33,32 +33,40 @@ function changeLayerVisibilityDirections_planimetric() {
 function changeLayerVisibilityEllipses_planimetric() {
     if (document.getElementById("checkboxEllipses").checked === true) {
         ellipseLayer.setVisible(true);
+        document.getElementById("AffichageEchelleEllipse").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
         ellipseLayer.setVisible(false);
+        document.getElementById("AffichageEchelleEllipse").textContent = "";
     };
 };
 
 function changeLayerVisibilityEllipsesRela_planimetric() {
     if (document.getElementById("checkboxEllipsesRela").checked === true) {
         ellipseRelaLayer.setVisible(true);
+        document.getElementById("AffichageEchelleEllipseRela").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
         ellipseRelaLayer.setVisible(false);
+        document.getElementById("AffichageEchelleEllipseRela").textContent = "";
     };
 };
 
 function changeLayerVisibilityRectangles_planimetric() {
     if (document.getElementById("checkboxRectangles").checked === true) {
         rectangleLayer.setVisible(true);
+        document.getElementById("AffichageEchelleRectangles").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
         rectangleLayer.setVisible(false);
+        document.getElementById("AffichageEchelleRectangles").textContent = "";
     };
 };
 
 function changeLayerVisibilityRectanglesRela_planimetric() {
     if (document.getElementById("checkboxRectanglesRela").checked === true) {
         rectangleRelaLayer.setVisible(true);
+        document.getElementById("AffichageEchelleRectanglesRela").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
         rectangleRelaLayer.setVisible(false);
+        document.getElementById("AffichageEchelleRectanglesRela").textContent = "";
     };
 };
 
@@ -97,8 +105,17 @@ function changeLayerVisibilityFiabLoc_planimetric() {
         };
         distanceLayer.setVisible(false);
         directionLayer.setVisible(false);
+        document.getElementById("fiabiliteLocal_planimetric1").textContent = "――  0 - 25 %";
+        document.getElementById("fiabiliteLocal_planimetric2").textContent = "――  25 - 50 %";
+        document.getElementById("fiabiliteLocal_planimetric3").textContent = "――  50 - 75 %";
+        document.getElementById("fiabiliteLocal_planimetric4").textContent = "――  75 - 100 %";
     } else {
         fiabLocalLayer.setVisible(false);
+        document.getElementById("fiabiliteLocal_planimetric1").textContent = "";
+        document.getElementById("fiabiliteLocal_planimetric2").textContent = "";
+        document.getElementById("fiabiliteLocal_planimetric3").textContent = "";
+        document.getElementById("fiabiliteLocal_planimetric4").textContent = "";
+    
     };
 };
 
@@ -111,8 +128,15 @@ function changeLayerVisibilityWi_planimetric() {
         fiabLocalLayer.setVisible(false);
         distanceLayer.setVisible(false);
         directionLayer.setVisible(false);  
+
+        document.getElementById("palierWi1").textContent = "――  "+String(limitWi)+" - ∞";
+        document.getElementById("palierWi2").textContent = "――  "+String(limitInf)+" - "+String(limitWi);
+        document.getElementById("palierWi3").textContent = "――  0.0 - "+String(limitInf);
     } else {
         wiLayer.setVisible(false);
+        document.getElementById("palierWi1").textContent = "";
+        document.getElementById("palierWi2").textContent = "";
+        document.getElementById("palierWi3").textContent = "";
     };
 };
 
@@ -120,8 +144,10 @@ function changeLayerVisibilityWi_planimetric() {
 function changeLayerVisibilityVect_planimetric() {
     if (document.getElementById("checkboxVect").checked === true) {
         vectLayer.setVisible(true);
+        document.getElementById("AffichageEchelleVect").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
         vectLayer.setVisible(false);
+        document.getElementById("AffichageEchelleVect").textContent = "";
     };
 };
 

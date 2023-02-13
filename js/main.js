@@ -28,18 +28,18 @@ document.getElementById('inputfile').addEventListener('change', function() {
         parsingGNSS_planimetric();
         parsingObsCoord_planimetric();
         parsingVectXML_planimetric();
-        map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
-        map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
+        //map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
+        //map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
         fiabLocale_planimetric();
-        parsingViseesXML_planimetric();
+        //parsingViseesXML_planimetric();
         normedResidualsWi_planimetric();
-        map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
-        map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-        parsingViseesXML_planimetric();
-        fiabLocale_planimetric();
-        map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
-        map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-        parsingViseesXML_planimetric();
+        //map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
+        //map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
+        //parsingViseesXML_planimetric();
+        //fiabLocale_planimetric();
+        //map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
+        //map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
+        //parsingViseesXML_planimetric();
 
 
         // Abriss altimétrique
