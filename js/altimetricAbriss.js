@@ -636,7 +636,8 @@ function normedResidualsWi_altimetric() {
     } else { // Si c'est une pré-analyse
         //console.log("Pas de wi dans une pré-analyse")
         document.getElementById("legendeWi").className = "checkboxLabel legendeBarree";
-    };*/
+    */
+    };
 };
 
 
