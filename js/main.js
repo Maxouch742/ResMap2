@@ -18,9 +18,10 @@ document.getElementById('inputfile').addEventListener('change', function() {
         // CHANGER ECHELLE ELLIPSES ET RECTANGLES PAR DEFAULT CI-DESSSOUS 
         echelleEllipses = 1000.0
 
-        // Lancement des traitement pour affichages
+        
         // Abriss planimétrique
-        parsingViseesXML_planimetric();
+        parsingVisee();
+        layerObservationsTerrestres();
         parsingEllipsesXML_planimetric();
         parsingEllipsesRelaXML_planimetric();
         parsingRectanglesXML_planimetric();
@@ -28,18 +29,8 @@ document.getElementById('inputfile').addEventListener('change', function() {
         parsingGNSS_planimetric();
         parsingObsCoord_planimetric();
         parsingVectXML_planimetric();
-        map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
-        map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
         fiabLocale_planimetric();
-        parsingViseesXML_planimetric();
         normedResidualsWi_planimetric();
-        map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
-        map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-        parsingViseesXML_planimetric();
-        fiabLocale_planimetric();
-        map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
-        map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-        parsingViseesXML_planimetric();
 
 
         // Abriss altimétrique

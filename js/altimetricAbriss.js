@@ -261,7 +261,7 @@ function parsingGNSS_altimetric() {
 
     map.addLayer(gnssLayerAltimetric);
     changeLayerVisibilityGnss_altimetric();
-    gnssLayer.setZIndex(80);
+    gnssLayerAltimetric.setZIndex(80);
     console.log("GNSS altimetric sessions has been added to map");
 };
 
@@ -636,7 +636,8 @@ function normedResidualsWi_altimetric() {
     } else { // Si c'est une pré-analyse
         //console.log("Pas de wi dans une pré-analyse")
         document.getElementById("legendeWi").className = "checkboxLabel legendeBarree";
-    };*/
+    */
+    };
 };
 
 
