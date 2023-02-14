@@ -122,12 +122,19 @@ function changeLayerVisibilityFiabLoc_planimetric() {
 function changeLayerVisibilityWi_planimetric() {
     if (document.getElementById("checkboxResidusNormes").checked === true) {
         wiLayer.setVisible(true);
+        
         document.getElementById("checkboxFiabLoc").checked = false;
-        document.getElementById("checkboxDistances").checked = false;
-        document.getElementById("checkboxDirections").checked = false;
         fiabLocalLayer.setVisible(false);
+        document.getElementById("fiabiliteLocal_planimetric1").textContent = "";
+        document.getElementById("fiabiliteLocal_planimetric2").textContent = "";
+        document.getElementById("fiabiliteLocal_planimetric3").textContent = "";
+        document.getElementById("fiabiliteLocal_planimetric4").textContent = "";
+
         distanceLayer.setVisible(false);
-        directionLayer.setVisible(false);  
+        document.getElementById("checkboxDistances").checked = false;
+
+        directionLayer.setVisible(false); 
+        document.getElementById("checkboxDirections").checked = false;
 
         document.getElementById("palierWi1").textContent = "――  "+String(limitWi)+" - ∞";
         document.getElementById("palierWi2").textContent = "――  "+String(limitInf)+" - "+String(limitWi);

@@ -932,8 +932,6 @@ function parsingVectXML_planimetric() {
     map.addLayer(vectLayer);
     vectLayer.setZIndex(99);
     changeLayerVisibilityVect_planimetric();
-    document.getElementById("AffichageEchelleVect").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
-    //console.log("Diff. vectors have been added to map");
 };
 
 
