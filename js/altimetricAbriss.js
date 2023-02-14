@@ -543,7 +543,7 @@ function fiabLocale_altimetric() {
             colorFiab ="rgba(0, 0, 0, 0.0)" // transparent
         };
 
-        // Création de l'observation
+        // Création du feature de l'observation
         const deniveleeFeature = new ol.Feature({
             geometry: new ol.geom.LineString([ 
                 [parseFloat(obser[1]), parseFloat(obser[2])],
@@ -636,172 +636,119 @@ function normedResidualsWi_altimetric() {
             //TODO : bloquer la carte etc si pas de résidus altimétriques
         };
 
-        // Créer la source comprenant les features d'observations (sources de base)
-        wiSourceBaseAltitude = new ol.source.Vector({});
-        wiSourceBaseAltitude.addFeatures(deniveleeSource.getFeatures());
-
         // Création de la source pour traitement graphique et nouveau layer
         wiSourceAlti = new ol.source.Vector({});
-        wiLayerAlti = new ol.layer.Vector({});
 
         // Récupération des valeurs pour les bornes
         limitWiAlti = parseFloat(biggestWi.getAttribute("biggerThan"));
         limitInfAlti = limitWiAlti - 0.2;
 
-        /*
-
         // parcourir la source et géréer les styles pour chaques features
-        for (let i=0; i<wiSourceBaseAltitude.getFeatures().length; i++) {
+        for (let i=0; i<observationsTerrestresAltimetric.length; i++) {
 
-            let feature = wiSourceBaseAltitude.getFeatures()[i].clone();
-            let propertiesWi = feature.getProperties().properties
-            if (propertiesWi != null){
-                let wi = Math.abs(parseFloat(propertiesWi.wi).toFixed(2)); // get le wi et le stocker en int (valeur absolue)
-                let noObs = propertiesWi.no // get le numéro d'obs. et le stocker en str
-                
-                // Attribution des couleurs des paliers de wi
-                if (wi >= limitWiAlti) {
-                    colorWi = "#FF1700";
-                    widthWi = 3;
-                    zIndex = 99;
-                } else if (wi > limitInfAlti) {
-                    colorWi = "#FFD000";
-                    widthWi = 2;
-                    zIndex = 98;
-                } else if (wi < limitInfAlti) {
-                    colorWi = "#2AE100";
-                    widthWi = 0;
-                    zIndex = 1;
-                };
+            const obser = observationsTerrestresAltimetric[i];
+            const obsNo = obser[8];
+            const wi_i = obser[14];
 
-                // Si l'obs. est supprimée
-                if (noObs === "") { 
-                    colorWi ="rgba(0, 0, 0, 0.0)" // transparent
-                };
+            // Coordonnées des stations & visée
+            const coordArray_i = [
+                [parseFloat(obser[1]), parseFloat(obser[2])],
+                [parseFloat(obser[5]), parseFloat(obser[6])]
+            ];
 
-                // Attribution du style en fonction du wi et du typeObs (variables)
-                feature.getStyle().setZIndex(zIndex);
-                feature.getStyle().getStroke().setColor(colorWi);
-                let widthF = feature.getStyle().getStroke().getWidth();
-                feature.getStyle().getStroke().setWidth(widthF + widthWi); // épaissir en fonction du wi
-
-                // Ajout des features au vector source
-                wiSourceAlti.addFeature(feature);
+            // Paramètres visualisation wi
+            let colorWi;
+            let widthWi;
+            let zIndex;
+            // Attribution des couleurs des paliers de wi
+            if (wi_i >= limitWi) {
+                colorWi = "#FF1700";
+                widthWi = 3;
+                zIndex = 99;
+            } else if (wi_i > limitInf) {
+                colorWi = "#FFD000";
+                widthWi = 2;
+                zIndex = 98;
+            } else if (wi_i < limitInf) {
+                colorWi = "#2AE100";
+                widthWi = 0;
+                zIndex = 1;
             };
-        };
+            // Si l'obs. est supprimée
+            if (obsNo === "") { 
+                colorWi ="rgba(0, 0, 0, 0.0)" // transparent
+            };
 
-        // Ajout de la source (contenant les features) au Layer + divers
-        wiLayerAlti.setSource(wiSourceAlti);
-        wiLayerAlti.setVisible(false);
-        wiLayerAlti.setZIndex(80);
-        map.addLayer(wiLayerAlti);
-        changeLayerVisibilityResidusNormes_altimetric();
-        //console.log("Carte des résidus normés wi ajoutée")
-
-        // Gestion des intervalles de la légende en fonction du Wi limite (issu des param. du calcul LTOP)
-        document.getElementById("palierWi1").textContent = "――  "+String(limitWiAlti)+" - ∞";
-        document.getElementById("palierWi2").textContent = "――  "+String(limitInfAlti)+" - "+String(limitWiAlti);
-        document.getElementById("palierWi3").textContent = "――  0.0 - "+String(limitInfAlti);
-
-    } else { // Si c'est une pré-analyse
-        //console.log("Pas de wi dans une pré-analyse")
-        document.getElementById("legendeWi").className = "checkboxLabel legendeBarree";
-    */
-    };
-};
-
-
-function parsingVectXML_altimetric() {
-
-    // Récupération des éléments des balises <coordinates>
-    let coordinates = xmlDoc.getElementsByTagName("coordinates")[0];
-    let pointsList = coordinates.getElementsByTagName("point");
-
-    let vectLineSource = new ol.source.Vector({});
-
-
-    for (i=0; i<pointsList.length; i++){
-        // Tri pour garder uniquement les valeurs existantes de dh
-        if ( pointsList[i].getAttribute("dh") != null ) {
-            // Tri pour garder uniquement les dy et dx non-nuls (si dy!=0.0 et dx!=0.0)
-            if ( pointsList[i].getAttribute("dh") != 0.0) {
-
-                // Attribution des éléments des vecteurs
-                const pointName = pointsList[i].getAttribute("name");
-                const dh = parseFloat(pointsList[i].getAttribute("dh"))/1000.0; // en [m]
-                const norm = Math.sqrt(dh**2); // en [m]
-                const center = [parseFloat(listAllPoints.get(pointName)[0]),parseFloat(listAllPoints.get(pointName)[1])];
-                const Earrow = center[0]
-                const Narrow = center[1]+echelleEllipses*dh;
-
-                // Calcul des éléments pour la flèches  du vecteur [g] et [m]
-                let gisArrow1 = 200.0 + 50.0;
-                let gisArrow2 = 200.0 - 50.0;
-                if (dh < 0){
-                    gisArrow1 = 350.0;
-                    gisArrow2 = 50.0;
+            // Création du feature de l'observation
+            const deniveleeFeature = new ol.Feature({
+                geometry: new ol.geom.LineString(coordArray_i),
+                name: [
+                    obser[0],
+                    obser[4]
+                ],
+                properties: {
+                    "type":"dénivelée",
+                    "no_obs":obser[8],
+                    "station":obser[0],
+                    "visee":obser[4],
+                    "v":obser[10],
+                    "errMoy":obser[11],
+                    "zi":obser[12],
+                    "nabla":obser[13],
+                    "wi":obser[14]
                 }
+            });
 
-                const Ea1 = (norm/5)*echelleEllipses*Math.sin(gisArrow1*Math.PI/200.0) + Earrow;
-                const Na1 = (norm/5)*echelleEllipses*Math.cos(gisArrow1*Math.PI/200.0) + Narrow;
-                const Ea2 = (norm/5)*echelleEllipses*Math.sin(gisArrow2*Math.PI/200.0) + Earrow;
-                const Na2 = (norm/5)*echelleEllipses*Math.cos(gisArrow2*Math.PI/200.0) + Narrow;
+            // Calcul de l'emplacement du symbole et de la rotation
+            const dE = (parseFloat(obser[5]) - parseFloat(obser[1]))*0.22;
+            const dN = (parseFloat(obser[6]) - parseFloat(obser[2]))*0.22;
+            const rot = gisement(dE, dN);
 
-                // Calcul des coordonnées du vecteur avec la flèche
-                const listENvect = [ 
-                    center, 
-                    [Earrow, Narrow], 
-                    [Ea1, Na1],
-                    [Earrow, Narrow], 
-                    [Ea2, Na2]
-                ];                                       
-                
-                // Création de la Feature
-                let featureEllipse = new ol.Feature({
-                    geometry: new ol.geom.LineString(listENvect),
-                    properties: String((norm*1000.0).toFixed(1)) + 'mm',  // norme du vecteur de diff. pour affichage
+            // Style des features
+            if (obser[8] === "" ) { // si l'obs. a pas de numéro (supp.), elle sera en rose et épaisse
+                deniveleeFeature.setStyle( new ol.style.Style({
+                    stroke: new ol.style.Stroke({ 
+                        color: colorWi, 
+                        width: 0
+                    })
+                }));
+            } else { // Si l'obs a un numéro = elle est gardée
+                deniveleeFeature.setStyle( new ol.style.Style({
+                    stroke: new ol.style.Stroke({ 
+                        color: colorWi,
+                        width: 1 + widthWi,
+                    })
+                }));
+                // Feature du symbole de la denivele
+                const deniveleeFeatureSymbol = new ol.Feature({ 
+                    geometry: new ol.geom.Point([
+                        parseFloat(obser[1])+dE, 
+                        parseFloat(obser[2])+dN
+                    ]),
                 });
-                vectLineSource.addFeature(featureEllipse);
+                deniveleeFeatureSymbol.setStyle( new ol.style.Style({
+                    image: new ol.style.Icon({
+                        src: 'img/triangle_'+String(colorWi).slice(1,10)+'.svg',
+                        scale: 0.015 + widthWi/100,
+                        rotation: rot,
+                        color: colorWi
+                    }),
+                }));
+                deniveleeFeatureSymbol.getStyle().setZIndex(zIndex);
+                wiSourceAlti.addFeature(deniveleeFeatureSymbol);
             };
+            deniveleeFeature.getStyle().setZIndex(zIndex);
+            wiSourceAlti.addFeature(deniveleeFeature);
         };
+
+        // Création du layer
+        wiLayerAlti = new ol.layer.Vector({
+            source: wiSourceAlti
+        });
+
+        // Ajout du layer à la map
+        map.addLayer(wiLayerAlti);
+        wiLayerAlti.setVisible(false);
+        wiLayerAlti.setZIndex(50);
     };
-
-    // Création du style labelText pour demi-grand axe a
-    let textStyleVect = new ol.style.Text({
-        textAlign: "center",
-        textBaseline: "middle",
-        font: "13px Calibri",
-        fill: new ol.style.Fill({
-        color: "#FF0000"
-        }),
-        stroke: new ol.style.Stroke({
-        color: "#ffffff", width: 3
-        }),
-        offsetX: -10,
-        offsetY: -10,
-        rotation: 0,
-        placement: "point"
-    });
-
-    // Création du style vecteurs
-    let styleVect = new ol.style.Style({
-        stroke: new ol.style.Stroke({ color: '#FF0000', width: 1 }),
-        text: textStyleVect
-    });
-
-    // Création du Layer ellipses
-    vectLayerAltimetric = new ol.layer.Vector({
-        source: vectLineSource,
-        style: function (feature) { // la propriété style prend un callback qui doit retourner un style
-            styleVect.getText().setText(feature.get("properties")); 
-            return styleVect;
-        }
-    });
-
-    // Ajout à la carte
-    map.addLayer(vectLayerAltimetric);
-    vectLayerAltimetric.setZIndex(79);
-    changeLayerVisibilityVect_altimetric();
-    //console.log("Diff. heights vectors have been added to map");
 };
-

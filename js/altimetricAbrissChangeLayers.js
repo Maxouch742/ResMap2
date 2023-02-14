@@ -79,19 +79,18 @@ function changeLayerVisibilityFiabiliteLocales_altimetric(){
 };
 
 function changeLayerVisibilityResidusNormes_altimetric(){
+    
     if (document.getElementById("checkboxResidusNormes_altimetric").checked === true){
         deniveleeLayer.setVisible(false);
         wiLayerAlti.setVisible(true);
-        document.getElementById("palierWi1").textContent = "――  "+String(limitWiAlti)+" - ∞";
-        document.getElementById("palierWi2").textContent = "――  "+String(limitInfAlti)+" - "+String(limitWiAlti);
-        document.getElementById("palierWi3").textContent = "――  0.0 - "+String(limitInfAlti);
+        document.getElementById("palierWi1_Alti").textContent = "――  "+String(limitWiAlti)+" - ∞";
+        document.getElementById("palierWi2_Alti").textContent = "――  "+String(limitInfAlti)+" - "+String(limitWiAlti);
+        document.getElementById("palierWi3_Alti").textContent = "――  0.0 - "+String(limitInfAlti);
     } else {
         wiLayerAlti.setVisible(false);
-        //deniveleeLayer.setVisible(true);
-        document.getElementById("checkboxDenivelee").checked = true;
-        document.getElementById("palierWi1").textContent = "";
-        document.getElementById("palierWi2").textContent = "";
-        document.getElementById("palierWi3").textContent = "";
+        document.getElementById("palierWi1_Alti").textContent = "";
+        document.getElementById("palierWi2_Alti").textContent = "";
+        document.getElementById("palierWi3_Alti").textContent = "";
     }
 };
 

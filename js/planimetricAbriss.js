@@ -1198,7 +1198,7 @@ function fiabLocale_planimetric() {
     // Ajout de la source
     fiabLocalLayer = new ol.layer.Vector({
         source: fiabLocaleSource
-    })
+    });
 
     // Ajout du layer à la map
     map.addLayer(fiabLocalLayer);
