@@ -20,19 +20,19 @@ document.getElementById('inputfile').addEventListener('change', function() {
 
         // Lancement des traitement pour affichages
         // Abriss planimétrique
-        parsingViseesXML_planimetric();
-        parsingEllipsesXML_planimetric();
-        parsingEllipsesRelaXML_planimetric();
-        parsingRectanglesXML_planimetric();
-        parsingRectanglesRelaXML_planimetric();
-        parsingGNSS_planimetric();
-        parsingObsCoord_planimetric();
-        parsingVectXML_planimetric();
+        //parsingViseesXML_planimetric();
+        //parsingEllipsesXML_planimetric();
+        //parsingEllipsesRelaXML_planimetric();
+        //parsingRectanglesXML_planimetric();
+        //parsingRectanglesRelaXML_planimetric();
+        //parsingGNSS_planimetric();
+        //parsingObsCoord_planimetric();
+        //parsingVectXML_planimetric();
         //map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
         //map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
-        fiabLocale_planimetric();
+        //fiabLocale_planimetric();
         //parsingViseesXML_planimetric();
-        normedResidualsWi_planimetric();
+        //normedResidualsWi_planimetric();
         //map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
         //map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
         //parsingViseesXML_planimetric();
@@ -40,6 +40,17 @@ document.getElementById('inputfile').addEventListener('change', function() {
         //map.removeLayer(directionLayer); //pour ordre d'affichage et gestion des animations
         //map.removeLayer(distanceLayer); //pour ordre d'affichage et gestion des animations
         //parsingViseesXML_planimetric();
+
+        // Abriss planimétrique
+        parsingVisee();
+        layerObservationsTerrestres();
+        parsingEllipsesXML_planimetric();
+        parsingEllipsesRelaXML_planimetric();
+        parsingRectanglesXML_planimetric();
+        parsingRectanglesRelaXML_planimetric();
+        parsingGNSS_planimetric();
+        parsingObsCoord_planimetric();
+        parsingVectXML_planimetric();
 
 
         // Abriss altimétrique

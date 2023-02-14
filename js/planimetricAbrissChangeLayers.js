@@ -14,20 +14,20 @@ function changeLayerVisibilityVariablePoints_planimetric() {
     };
 };
 
-function changeLayerVisibilityDistances_planimetric() {
-    if (document.getElementById("checkboxDistances").checked === true) {
-        distanceLayer.setVisible(true);
-    } else {
-        distanceLayer.setVisible(false);
-    }
-};
-
 function changeLayerVisibilityDirections_planimetric() {
     if (document.getElementById("checkboxDirections").checked === true) {
         directionLayer.setVisible(true);
     } else {
         directionLayer.setVisible(false);
     };
+};
+
+function changeLayerVisibilityDistances_planimetric() {
+    if (document.getElementById("checkboxDistances").checked === true) {
+        distanceLayer.setVisible(true);
+    } else {
+        distanceLayer.setVisible(false);
+    }
 };
 
 function changeLayerVisibilityEllipses_planimetric() {

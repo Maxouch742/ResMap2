@@ -109,7 +109,7 @@ function parsingViseesXML_planimetric() {
   
     // <------------- DIRECTIONS --------------->
     // Récupérer les paires [No Station, No Point visé] (No en str) - directions
-    noPointsDirections = []
+    noPointsDirections = [];
     for (i = 0; i < stationsList.length; i++) {
         obsType = stationsList[i].getAttribute("obsType");
         if (obsType === "direction") {
@@ -1099,3 +1099,273 @@ function normedResidualsWi_planimetric() {
 };
 
 
+
+
+///////////////////////////////////////////////////
+function parsingVisee() {
+    // Ancien nom : parsingViseesXML
+
+    // Récupération des éléments des balises <station> 
+    const planimetricAbriss = xmlDoc.getElementsByTagName("planimetricAbriss")[0];
+    const stationsList = planimetricAbriss.getElementsByTagName("station");
+  
+    // <--------------- OBSERVATIONS TERRESTRES --------------->
+    observationsTerrestres = []
+    for (i = 0; i < stationsList.length; i++) {
+
+        // Infos types de la station
+        const stationXML = stationsList[i];
+        const station = stationXML.getAttribute("name");
+        const obsType = stationXML.getAttribute("obsType");
+
+        if (obsType === "distance" || obsType === "direction") {
+
+            // Observations de la station
+            const observationsXMLList = stationXML.getElementsByTagName("obs");
+            for (let i=0; i<observationsXMLList.length; i++) {
+                const observationXML = observationsXMLList[i];
+                
+                const noObs = observationXML.getAttribute("obsNr");
+                const noVis = observationXML.getAttribute("target");
+                const noGro = observationXML.getAttribute("group");
+                const resid = observationXML.getAttribute("v");
+                const erMoy = observationXML.getAttribute("meanErrApriori");
+                const zi = observationXML.getAttribute("zi");
+                const nabla = observationXML.getAttribute("nabla_rzi");
+                const wi = observationXML.getAttribute("wi");
+                const giCoor = observationXML.getAttribute("coordAzi");
+                const diCoor = observationXML.getAttribute("coordDist");
+                const erLat = observationXML.getAttribute("lateralErr");
+
+                // Ajout des éléments dans l'array
+                observationsTerrestres.push([
+                    station, // 0
+                    noVis,   // 1
+                    obsType, // 2
+                    noObs,   // 3
+                    noGro,   // 4
+                    resid,   // 5
+                    erMoy,   // 6
+                    zi,      // 7
+                    nabla,   // 8
+                    wi,      // 9
+                    giCoor,  // 10
+                    diCoor,  // 11
+                    erLat    // 12
+                ]);
+            };
+        };
+    };
+};
+
+function layerObservationsTerrestres() {
+
+    // Création des sources et layers pour les directions horizontales
+    const directionSource = new ol.source.Vector({});
+    directionLayer = new ol.layer.Vector({});
+
+    const distanceSource = new ol.source.Vector({});
+    distanceLayer = new ol.layer.Vector({});
+
+    // Parcours du tableau des observations terrestres pour créer les features
+    for (let i=0; i<observationsTerrestres.length; i++){
+        const obser = observationsTerrestres[i];
+        const obsNo = obser[3];
+
+        // Coordonnées des stations & visée
+        const E_St = parseFloat(listAllPoints.get(obser[0])[0]);
+        const N_St = parseFloat(listAllPoints.get(obser[0])[1]);
+        const E_Vis = parseFloat(listAllPoints.get(obser[1])[0]);
+        const N_Vis = parseFloat(listAllPoints.get(obser[1])[1]);
+
+        const coordArray_i = [
+            [E_St, N_St],
+            [E_Vis, N_Vis]
+        ];
+
+        //--------------------------------------------------- DIRECTIONS
+        // Calcul des coordonnées "Trait plein - Trait pointillé"
+        const dE_inf = (E_Vis - E_St)*0.7;
+        const dN_inf = (N_Vis - N_St)*0.7;
+        const coordArray_i_plein = [
+            [E_St, N_St],
+            [E_St+dE_inf, N_St+dN_inf]
+        ];
+        
+        // Création du feature "Trait plein"
+        const featureDirPlein = new ol.Feature({
+            geometry: new ol.geom.LineString(coordArray_i_plein),
+            properties:{
+                "no_obs":obsNo,
+                "type_obs":obser[4],
+                "station":obser[0],
+                "visee":obser[1],
+                "v":obser[5],
+                "errMoy":obser[6],
+                "zi":obser[7],
+                "nabla":obser[8],
+                "wi":obser[9]
+            }
+        });
+        if (obsNo != "") {
+            featureDirPlein.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: '#717171', 
+                    width: 1 
+                })
+            }))
+        } else {
+            featureDirPlein.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: 'rgba(0, 0, 0, 0.0)', 
+                    width: 0 
+                })
+            }))
+        };
+
+        // Création du feature "Trait pointillé"
+        const featureDir = new ol.Feature({
+            geometry: new ol.geom.LineString(coordArray_i),
+            properties:{
+                "no_obs":obsNo,
+                "type_obs":obser[4],
+                "station":obser[0],
+                "visee":obser[1],
+                "v":obser[5],
+                "errMoy":obser[6],
+                "zi":obser[7],
+                "nabla":obser[8],
+                "wi":obser[9]
+            }
+        });
+        if (obsNo != "" ) { // si l'obs. a un numéro, elle est figurée normalement
+            featureDir.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: '#717171', 
+                    width: 1, 
+                    lineDash: [15,7]
+                })
+            }));
+        }
+        else { // Si l'obs a un numéro = elle est figurée normalement
+            featureDir.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: 'rgba(0, 0, 0, 0.0)', 
+                    width: 0
+                })
+            }));
+        };
+
+        directionSource.addFeature(featureDir);
+        directionSource.addFeature(featureDirPlein);  
+
+
+        //--------------------------------------------------- DIRECTIONS
+        // Calcul des coordonnées pour la symbologie
+        const dE_min = (E_Vis - E_St)*0.1;
+        const dN_min = (N_Vis - N_St)*0.1;
+        const dE_max = (E_Vis - E_St)*0.2;
+        const dN_max = (N_Vis - N_St)*0.2;
+        const coordArray_distance = [
+            [E_St+dE_min, N_St+dN_min],
+            [E_St+dE_max, N_St+dN_max]
+        ];
+
+        // Création de la feature pour la symbologie
+        const featureDisSymb = new ol.Feature({
+            geometry: new ol.geom.LineString(coordArray_distance),
+            properties: {
+                "no_obs":obsNo,
+                "type_obs":obser[4],
+                "station":obser[0],
+                "visee":obser[1],
+                "v":obser[5],
+                "errMoy":obser[6],
+                "zi":obser[7],
+                "nabla":obser[8],
+                "wi":obser[9]
+            }
+        });
+        if (obsNo != "" ) {
+            featureDisSymb.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: '#000000', 
+                    width: 5, 
+                    lineCap: "square"
+                })
+            }));
+        } else { // si obs. supp.
+            featureDisSymb.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'rgba(0, 0, 0, 0.0)',
+                    width: 0
+                })
+            }))
+        };
+
+        // Création du feature
+        const featureDistance = new ol.Feature({
+            geometry: new ol.geom.LineString(coordArray_i),
+            properties: {
+                "no_obs":obsNo,
+                "type_obs":obser[4],
+                "station":obser[0],
+                "visee":obser[1],
+                "v":obser[5],
+                "errMoy":obser[6],
+                "zi":obser[7],
+                "nabla":obser[8],
+                "wi":obser[9]
+            }
+        });
+        if (obsNo != "" ) {
+            featureDistance.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: '#000000', 
+                    width: 1
+                })
+            }));
+        } else { // si obs. supp.
+            featureDistance.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'rgba(0, 0, 0, 0.0)',
+                    width: 0
+                })
+            }))
+        };
+
+        // Ajout des features
+        distanceSource.addFeature(featureDisSymb);
+        distanceSource.addFeature(featureDistance);
+    };
+
+    // Création des layers de directions et distances
+    directionLayer = new ol.layer.Vector({ 
+        source: directionSource 
+    });
+    distanceLayer = new ol.layer.Vector({
+        source: distanceSource
+    });
+
+    // Ajout du layer à la carte
+    map.addLayer(directionLayer);
+    map.addLayer(distanceLayer);
+    changeLayerVisibilityDirections_planimetric();
+    changeLayerVisibilityDistances_planimetric();
+}
+
+function listeStation(){
+    let station = [];
+    for (let i=0; i<observations.length;i++){
+        station.push(observations.station);
+    };
+    return station;
+};
+
+function listeVisee(){
+    let visee = [];
+    for (let i=0; i<observations.length;i++){
+        visee.push(observations.visee);
+    };
+    return visee;
+};

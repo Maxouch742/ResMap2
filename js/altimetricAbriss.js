@@ -261,7 +261,7 @@ function parsingGNSS_altimetric() {
 
     map.addLayer(gnssLayerAltimetric);
     changeLayerVisibilityGnss_altimetric();
-    gnssLayer.setZIndex(80);
+    gnssLayerAltimetric.setZIndex(80);
     console.log("GNSS altimetric sessions has been added to map");
 };
 
