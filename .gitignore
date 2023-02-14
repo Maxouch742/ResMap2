@@ -277,6 +277,5 @@ TSWLatexianTemp*
 *.tex
 *.pdf
 
-
-## Personnel
+# Folder perso
 rapport/
