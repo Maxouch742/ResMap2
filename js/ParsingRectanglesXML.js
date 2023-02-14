@@ -1,16 +1,11 @@
+/**
+ * This function parses the PRNX file (language : XML) to get and
+ * generate the external reliability rectangles on the map (with
+ * scale factor; some as ellipses)
+ * 
+ * @param {object} xmlToParse 
+ */
 function parsingRectanglesXML(xmlToParse) {
-
-    /* 
-  
-    This function parses the PRNx file (XML) to get and 
-    generate the external reliability
-    rectangles on the map (with scale factor(same as ellipses))
-  
-    INPUT: XML toparse, coming from fr.result (FileReader method)
-    OUPUT: None
-    
-    */
-
 
   // Récupération des éléments des balises <externalReliabilityApriori>
   // Check si il y a bien des rectangles de fiabilité dans le PRNx 
@@ -59,7 +54,6 @@ function parsingRectanglesXML(xmlToParse) {
 
         allListENrectangle.push(listENrectangle);
       };
-
     };
 
     
@@ -67,7 +61,6 @@ function parsingRectanglesXML(xmlToParse) {
     let rectanglesLineSource = new ol.source.Vector({});
 
     for (let i = 0; i < allListENrectangle.length; i++) {
-      
       coordArray_i = allListENrectangle[i];
       featureRectangle = new ol.Feature({
         geometry: new ol.geom.LineString(coordArray_i),
@@ -76,7 +69,6 @@ function parsingRectanglesXML(xmlToParse) {
       featureRectangle.getGeometry().rotate(allListAzimut[i],allListCenter[i])   
       rectanglesLineSource.addFeature(featureRectangle);
     };
-
 
     // Création du style labelText pour demi-grand axe na du rect.
     let textStyleRectangle = new ol.style.Text({
@@ -115,12 +107,5 @@ function parsingRectanglesXML(xmlToParse) {
     changeLayerVisibilityRectangles();
     document.getElementById("AffichageEchelleRectangles").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     console.log("Rectangles have been added to map");
-    
   }
-
-
-
-
-
-
 }
