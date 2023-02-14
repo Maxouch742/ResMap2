@@ -324,8 +324,6 @@ function parsingEllipsesXML_planimetric() {
     map.addLayer(ellipseLayer);
     ellipseLayer.setZIndex(89)
     changeLayerVisibilityEllipses_planimetric()
-    document.getElementById("AffichageEchelleEllipse").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
-    //console.log("Ellipses have been added to map");
 };
 
   
@@ -454,8 +452,6 @@ function parsingEllipsesRelaXML_planimetric() {
         map.addLayer(ellipseRelaLayer);
         changeLayerVisibilityEllipsesRela_planimetric()
         ellipseRelaLayer.setZIndex(90);
-        document.getElementById("AffichageEchelleEllipseRela").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
-        //console.log("Relative ellipses have been added to map");
     } else {
         //console.log("There's no relatives ellipses")
         document.getElementById("legendeEllRela").className = "checkboxLabel legendeBarree";
@@ -566,8 +562,6 @@ function parsingRectanglesXML_planimetric() {
         map.addLayer(rectangleLayer);
         rectangleLayer.setZIndex(88);
         changeLayerVisibilityRectangles_planimetric();
-        document.getElementById("AffichageEchelleRectangles").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
-        //console.log("Rectangles have been added to map");
     }
 };
 
@@ -669,10 +663,8 @@ function parsingRectanglesRelaXML_planimetric() {
         });
         
         rectangleRelaLayer.setZIndex(91);
-        document.getElementById("AffichageEchelleRectanglesRela").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
         map.addLayer(rectangleRelaLayer);
         changeLayerVisibilityRectanglesRela_planimetric();
-        //console.log("Relative rectangles have been added to map");
     
     } else {
         //console.log("There's no relatives rectangles")
@@ -944,162 +936,6 @@ function parsingVectXML_planimetric() {
     //console.log("Diff. vectors have been added to map");
 };
 
-/** The function creates a layer to show the local reliability with a 4-colors map (intervals)
- *  0.00 - 0.25
- *  0.25 - 0.50
- *  0.50 - 0.75
- *  0.75 - 1.00
- */
-function fiabLocale_planimetric() {
-    // Ancien nom : fiabLocale
-
-    // Créer la source comprenant les features d'observations (sources de base)
-    fiabLocaleSourceBase = new ol.source.Vector({});
-    fiabLocaleSourceBase.addFeatures(distanceLineSource.getFeatures());
-    fiabLocaleSourceBase.addFeatures(directionLineSource.getFeatures());
-
-    // Création de la source pour traitement graphique et nouveau layer
-    fiabLocaleSource = new ol.source.Vector({});
-    fiabLocalLayer = new ol.layer.Vector({});
-
-    // Parcourir la source et gérer les styles pour chaque features
-    for (let i=0; i<fiabLocaleSourceBase.getFeatures().length; i++) {
-
-        let feature = fiabLocaleSourceBase.getFeatures()[i].clone();
-        let propetiesFiab = feature.getProperties().properties
-        let zi = parseFloat(propetiesFiab.split("/")[2]);  // chercher le zi et le stocker en int
-        let noObs = propetiesFiab.split("/")[0] // get le numéro d'obs. et le stocker en str
-        
-        // Attribution des couleurs des paliers de zi
-        if (zi < 25.0) {
-            colorFiab = "#FF1700";
-            widthFiab = 3;
-            zIndex = 99;
-        } else if (zi <= 50.0) {
-            colorFiab = "#FFD000";
-            widthFiab = 1.5;
-            zIndex = 98;
-        } else if (zi <= 75.0) {
-            colorFiab = "#ABFF00";
-            widthFiab = 0;
-            zIndex = 1;
-        } else if (zi <= 100.0) {
-            colorFiab = "#2AE100";
-            widthFiab = 0;
-            zIndex = 1;
-        };
-
-        // Si l'obs. est supprimée
-        if (noObs === "") { 
-            colorFiab ="rgba(0, 0, 0, 0.0)" // transparent
-        };
-
-        // Attribution du style en fonction du zi et du typeObs (variables)
-        feature.getStyle().setZIndex(zIndex);
-        feature.getStyle().getStroke().setColor(colorFiab);
-        let widthF = feature.getStyle().getStroke().getWidth();
-        feature.getStyle().getStroke().setWidth(widthF+widthFiab); // épaissir en fonction du zi
-
-        // Ajout des features au vector source
-        fiabLocaleSource.addFeature(feature);
-    };
-    
-    // Ajout de la source (contenant les features) au Layer + divers
-    fiabLocalLayer.setSource(fiabLocaleSource);
-    map.addLayer(fiabLocalLayer);
-    fiabLocalLayer.setVisible(false);
-    fiabLocalLayer.setZIndex(80);
-    //console.log("Carte des fiabilité locales zi ajoutée")
-};
-
-
-/**
- * This function creates a layer to show the normed
- * residuals (wi) with a 3-colors map (intervals) :
- * wi limite     - infinite
- * wi inf limite - wi limite
- * 0             - wi inf limite
- */
-function normedResidualsWi_planimetric() {
-    // Ancien nom : normedResidualsWi
-
-    // Wi pas disponibles si une pré-analyse
-    if (xmlDoc.getElementsByTagName("biggestWi").length != 0) { 
-
-        // Créer la source comprenant les features d'observations (sources de base)
-        wiSourceBase = new ol.source.Vector({});
-        wiSourceBase.addFeatures(distanceLineSource.getFeatures());
-        wiSourceBase.addFeatures(directionLineSource.getFeatures());
-
-        // Création de la source pour traitement graphique et nouveau layer
-        wiSource = new ol.source.Vector({});
-        wiLayer = new ol.layer.Vector({});
-
-
-        // Récupération des balises avec la limite du wi select. par l'utilisateur lors du calcul LTOP
-        let biggestWi = xmlDoc.getElementsByTagName("biggestWi");
-        limitWi = parseFloat(biggestWi[0].getAttribute("biggerThan")); // PLANI uniquement = [0] , ALTI = [1]
-        limitInf = limitWi - 0.2; // pour paliers
-
-        // parcourir la source et géréer les styles pour chaques features
-        for (let i=0; i<wiSourceBase.getFeatures().length; i++) {
-
-            let feature = wiSourceBase.getFeatures()[i].clone();
-            let propetiesWi = feature.getProperties().properties
-            let wi = Math.abs(parseFloat(propetiesWi.split("/")[3]).toFixed(2)); // get le wi et le stocker en int (valeur absolue)
-            let noObs = propetiesWi.split("/")[0] // get le numéro d'obs. et le stocker en str
-            
-            // Attribution des couleurs des paliers de wi
-            if (wi >= limitWi) {
-                colorWi = "#FF1700";
-                widthWi = 3;
-                zIndex = 99;
-            } else if (wi > limitInf) {
-                colorWi = "#FFD000";
-                widthWi = 2;
-                zIndex = 98;
-            } else if (wi < limitInf) {
-                colorWi = "#2AE100";
-                widthWi = 0;
-                zIndex = 1;
-            };
-
-            // Si l'obs. est supprimée
-            if (noObs === "") { 
-                colorWi ="rgba(0, 0, 0, 0.0)" // transparent
-            };
-
-            // Attribution du style en fonction du wi et du typeObs (variables)
-            feature.getStyle().setZIndex(zIndex);
-            feature.getStyle().getStroke().setColor(colorWi);
-            let widthF = feature.getStyle().getStroke().getWidth();
-            feature.getStyle().getStroke().setWidth(widthF + widthWi); // épaissir en fonction du wi
-
-            // Ajout des features au vector source
-            wiSource.addFeature(feature);
-
-        };
-
-        // Ajout de la source (contenant les features) au Layer + divers
-        wiLayer.setSource(wiSource);
-        map.addLayer(wiLayer);
-        wiLayer.setVisible(false);
-        wiLayer.setZIndex(80);
-        //console.log("Carte des résidus normés wi ajoutée")
-
-        // Gestion des intervalles de la légende en fonction du Wi limite (issu des param. du calcul LTOP)
-        document.getElementById("palierWi1").textContent = "――  "+String(limitWi)+" - ∞";
-        document.getElementById("palierWi2").textContent = "――  "+String(limitInf)+" - "+String(limitWi);
-        document.getElementById("palierWi3").textContent = "――  0.0 - "+String(limitInf);
-
-    } else { // Si c'est une pré-analyse
-        //console.log("Pas de wi dans une pré-analyse")
-        document.getElementById("legendeWi").className = "checkboxLabel legendeBarree";
-    };
-};
-
-
-
 
 ///////////////////////////////////////////////////
 function parsingVisee() {
@@ -1260,7 +1096,7 @@ function layerObservationsTerrestres() {
         directionSource.addFeature(featureDirPlein);  
 
 
-        //--------------------------------------------------- DIRECTIONS
+        //--------------------------------------------------- DISTANCES
         // Calcul des coordonnées pour la symbologie
         const dE_min = (E_Vis - E_St)*0.1;
         const dN_min = (N_Vis - N_St)*0.1;
@@ -1354,18 +1190,484 @@ function layerObservationsTerrestres() {
     changeLayerVisibilityDistances_planimetric();
 }
 
-function listeStation(){
-    let station = [];
-    for (let i=0; i<observations.length;i++){
-        station.push(observations.station);
+
+/** The function creates a layer to show the local reliability with a 4-colors map (intervals)
+ *  0.00 - 0.25
+ *  0.25 - 0.50
+ *  0.50 - 0.75
+ *  0.75 - 1.00
+ */
+function fiabLocale_planimetric() {
+
+    // Création de la source pour traitement graphique et nouveau layer
+    const fiabLocaleSource = new ol.source.Vector({});
+
+    // Parcourir le tableau des observations terrestres
+    for (let i=0; i<observationsTerrestres.length; i++) {
+        const obser = observationsTerrestres[i];
+        const obsNo = obser[3];
+        const zi_i = obser[7];
+        const typeObs = obser[2];
+
+        // Coordonnées des stations & visée
+        const E_St = parseFloat(listAllPoints.get(obser[0])[0]);
+        const N_St = parseFloat(listAllPoints.get(obser[0])[1]);
+        const E_Vis = parseFloat(listAllPoints.get(obser[1])[0]);
+        const N_Vis = parseFloat(listAllPoints.get(obser[1])[1]);
+        const coordArray_i = [
+            [E_St, N_St],
+            [E_Vis, N_Vis]
+        ];
+
+        // Paramètres de la fiabilité locale
+        let colorFiab;
+        let widthFiab;
+        let zIndex;
+        
+        // Attribution des couleurs des paliers de zi
+        if (zi_i < 25.0) {
+            colorFiab = "#FF1700";
+            widthFiab = 3;
+            zIndex = 99;
+        } else if (zi_i <= 50.0) {
+            colorFiab = "#FFD000";
+            widthFiab = 1.5;
+            zIndex = 98;
+        } else if (zi_i <= 75.0) {
+            colorFiab = "#ABFF00";
+            widthFiab = 0;
+            zIndex = 1;
+        } else if (zi_i <= 100.0) {
+            colorFiab = "#2AE100";
+            widthFiab = 0;
+            zIndex = 1;
+        };
+
+        // Si l'obs. est supprimée
+        if (obsNo === "") { 
+            colorFiab = "rgba(0, 0, 0, 0.0)"; // transparent
+            widthFiab = 0;
+        };
+
+        if (typeObs == "direction") {
+            // Calcul des coordonnées "Trait plein - Trait pointillé"
+            const dE_inf = (E_Vis - E_St)*0.7;
+            const dN_inf = (N_Vis - N_St)*0.7;
+            const coordArray_i_plein = [
+                [E_St, N_St],
+                [E_St+dE_inf, N_St+dN_inf]
+            ];
+            
+            // Création du feature "Trait plein"
+            const featureDirPlein = new ol.Feature({
+                geometry: new ol.geom.LineString(coordArray_i_plein),
+                properties:{
+                    "no_obs":obsNo,
+                    "type_obs":obser[4],
+                    "station":obser[0],
+                    "visee":obser[1],
+                    "v":obser[5],
+                    "errMoy":obser[6],
+                    "zi":obser[7],
+                    "nabla":obser[8],
+                    "wi":obser[9]
+                }
+            });
+            if (obsNo != "") {
+                featureDirPlein.setStyle( new ol.style.Style({
+                    stroke: new ol.style.Stroke({ 
+                        color: colorFiab, 
+                        width: 1 + widthFiab
+                    })
+                }))
+            } else {
+                featureDirPlein.setStyle( new ol.style.Style({
+                    stroke: new ol.style.Stroke({ 
+                        color: colorFiab, 
+                        width: 0
+                    })
+                }))
+            };
+            featureDirPlein.getStyle().setZIndex(zIndex);
+
+            // Création du feature "Trait pointillé"
+            const featureDir = new ol.Feature({
+                geometry: new ol.geom.LineString(coordArray_i),
+                properties:{
+                    "no_obs":obsNo,
+                    "type_obs":obser[4],
+                    "station":obser[0],
+                    "visee":obser[1],
+                    "v":obser[5],
+                    "errMoy":obser[6],
+                    "zi":obser[7],
+                    "nabla":obser[8],
+                    "wi":obser[9]
+                }
+            });
+            if (obsNo != "" ) { // si l'obs. a un numéro, elle est figurée normalement
+                featureDir.setStyle( new ol.style.Style({
+                    stroke: new ol.style.Stroke({ 
+                        color: colorFiab, 
+                        width: 1 + widthFiab, 
+                        lineDash: [15,7]
+                    })
+                }));
+            }
+            else { // Si l'obs a un numéro = elle est figurée normalement
+                featureDir.setStyle( new ol.style.Style({
+                    stroke: new ol.style.Stroke({ 
+                        color: colorFiab, 
+                        width: 0
+                    })
+                }));
+            };
+            featureDir.getStyle().setZIndex(zIndex);
+
+            fiabLocaleSource.addFeature(featureDir);
+            fiabLocaleSource.addFeature(featureDirPlein);  
+
+        } else if (typeObs == "distance") {
+            // Calcul des coordonnées pour la symbologie
+            const dE_min = (E_Vis - E_St)*0.1;
+            const dN_min = (N_Vis - N_St)*0.1;
+            const dE_max = (E_Vis - E_St)*0.2;
+            const dN_max = (N_Vis - N_St)*0.2;
+            const coordArray_distance = [
+                [E_St+dE_min, N_St+dN_min],
+                [E_St+dE_max, N_St+dN_max]
+            ];
+
+            // Création de la feature pour la symbologie
+            const featureDisSymb = new ol.Feature({
+                geometry: new ol.geom.LineString(coordArray_distance),
+                properties: {
+                    "no_obs":obsNo,
+                    "type_obs":obser[4],
+                    "station":obser[0],
+                    "visee":obser[1],
+                    "v":obser[5],
+                    "errMoy":obser[6],
+                    "zi":obser[7],
+                    "nabla":obser[8],
+                    "wi":obser[9]
+                }
+            });
+            if (obsNo != "" ) {
+                featureDisSymb.setStyle( new ol.style.Style({
+                    stroke: new ol.style.Stroke({ 
+                        color: colorFiab, 
+                        width: 5 + widthFiab, 
+                        lineCap: "square"
+                    })
+                }));
+            } else { // si obs. supp.
+                featureDisSymb.setStyle( new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: colorFiab,
+                        width: 0
+                    })
+                }))
+            };
+            featureDisSymb.getStyle().setZIndex(zIndex);
+
+            // Création du feature
+            const featureDistance = new ol.Feature({
+                geometry: new ol.geom.LineString(coordArray_i),
+                properties: {
+                    "no_obs":obsNo,
+                    "type_obs":obser[4],
+                    "station":obser[0],
+                    "visee":obser[1],
+                    "v":obser[5],
+                    "errMoy":obser[6],
+                    "zi":obser[7],
+                    "nabla":obser[8],
+                    "wi":obser[9]
+                }
+            });
+            if (obsNo != "" ) {
+                featureDistance.setStyle( new ol.style.Style({
+                    stroke: new ol.style.Stroke({ 
+                        color: colorFiab, 
+                        width: 1 + widthFiab
+                    })
+                }));
+            } else { // si obs. supp.
+                featureDistance.setStyle( new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: colorFiab,
+                        width: 0
+                    })
+                }))
+            };
+            featureDistance.getStyle().setZIndex(zIndex);
+
+            // Ajout des features
+            fiabLocaleSource.addFeature(featureDisSymb);
+            fiabLocaleSource.addFeature(featureDistance);
+        };
     };
-    return station;
+    // Ajout de la source
+    fiabLocalLayer = new ol.layer.Vector({
+        source: fiabLocaleSource
+    })
+
+    // Ajout du layer à la map
+    map.addLayer(fiabLocalLayer);
+    changeLayerVisibilityFiabLoc_planimetric();
 };
 
-function listeVisee(){
-    let visee = [];
-    for (let i=0; i<observations.length;i++){
-        visee.push(observations.visee);
+/**
+ * This function creates a layer to show the normed
+ * residuals (wi) with a 3-colors map (intervals) :
+ * wi limite     - infinite
+ * wi inf limite - wi limite
+ * 0             - wi inf limite
+ */
+function normedResidualsWi_planimetric() {
+
+    // Wi pas disponibles si une pré-analyse
+    if (xmlDoc.getElementsByTagName("biggestWi").length != 0) { 
+
+        let statistics = xmlDoc.getElementsByTagName("statistics");
+
+        // Récupérer les WI maxi
+        let biggestWi;
+        for (let i=0; i<statistics.length; i++){
+            if (statistics[i].getAttribute("type") == "planimetric"){
+                biggestWi = statistics[i].getElementsByTagName("biggestWi");
+                biggestWi = biggestWi[0];
+            }
+            //TODO : bloquer la carte etc si pas de résidus planimetrique
+        };
+
+        // Création de la source pour traitement graphique et nouveau layer
+        wiSource = new ol.source.Vector({});
+
+        // Récupération des balises avec la limite du wi select. par l'utilisateur lors du calcul LTOP
+        limitWi = parseFloat(biggestWi.getAttribute("biggerThan")); // PLANI uniquement = [0] , ALTI = [1]
+        limitInf = limitWi - 0.2; // pour paliers
+
+        // parcourir la source et géréer les styles pour chaques features
+        for (let i=0; i<observationsTerrestres.length; i++) {
+            const obser = observationsTerrestres[i];
+            const obsNo = obser[3];
+            const wi_i = obser[9];
+            const typeObs = obser[2];
+
+            // Coordonnées des stations & visée
+            const E_St = parseFloat(listAllPoints.get(obser[0])[0]);
+            const N_St = parseFloat(listAllPoints.get(obser[0])[1]);
+            const E_Vis = parseFloat(listAllPoints.get(obser[1])[0]);
+            const N_Vis = parseFloat(listAllPoints.get(obser[1])[1]);
+            const coordArray_i = [
+                [E_St, N_St],
+                [E_Vis, N_Vis]
+            ];
+
+            // Paramètres visualisation wi
+            let colorWi;
+            let widthWi;
+            let zIndex;
+            
+            // Attribution des couleurs des paliers de wi
+            if (wi_i >= limitWi) {
+                colorWi = "#FF1700";
+                widthWi = 3;
+                zIndex = 99;
+            } else if (wi_i > limitInf) {
+                colorWi = "#FFD000";
+                widthWi = 2;
+                zIndex = 98;
+            } else if (wi_i < limitInf) {
+                colorWi = "#2AE100";
+                widthWi = 0;
+                zIndex = 1;
+            };
+
+            // Si l'obs. est supprimée
+            if (obsNo === "") { 
+                colorWi ="rgba(0, 0, 0, 0.0)" // transparent
+            };
+
+            if (typeObs == "direction") {
+                // Calcul des coordonnées "Trait plein - Trait pointillé"
+                const dE_inf = (E_Vis - E_St)*0.7;
+                const dN_inf = (N_Vis - N_St)*0.7;
+                const coordArray_i_plein = [
+                    [E_St, N_St],
+                    [E_St+dE_inf, N_St+dN_inf]
+                ];
+                
+                // Création du feature "Trait plein"
+                const featureDirPlein = new ol.Feature({
+                    geometry: new ol.geom.LineString(coordArray_i_plein),
+                    properties:{
+                        "no_obs":obsNo,
+                        "type_obs":obser[4],
+                        "station":obser[0],
+                        "visee":obser[1],
+                        "v":obser[5],
+                        "errMoy":obser[6],
+                        "zi":obser[7],
+                        "nabla":obser[8],
+                        "wi":obser[9]
+                    }
+                });
+                if (obsNo != "") {
+                    featureDirPlein.setStyle( new ol.style.Style({
+                        stroke: new ol.style.Stroke({ 
+                            color: colorWi, 
+                            width: 1 + widthWi
+                        })
+                    }))
+                } else {
+                    featureDirPlein.setStyle( new ol.style.Style({
+                        stroke: new ol.style.Stroke({ 
+                            color: colorWi, 
+                            width: 0
+                        })
+                    }))
+                };
+                featureDirPlein.getStyle().setZIndex(zIndex);
+    
+                // Création du feature "Trait pointillé"
+                const featureDir = new ol.Feature({
+                    geometry: new ol.geom.LineString(coordArray_i),
+                    properties:{
+                        "no_obs":obsNo,
+                        "type_obs":obser[4],
+                        "station":obser[0],
+                        "visee":obser[1],
+                        "v":obser[5],
+                        "errMoy":obser[6],
+                        "zi":obser[7],
+                        "nabla":obser[8],
+                        "wi":obser[9]
+                    }
+                });
+                if (obsNo != "" ) { // si l'obs. a un numéro, elle est figurée normalement
+                    featureDir.setStyle( new ol.style.Style({
+                        stroke: new ol.style.Stroke({ 
+                            color: colorWi, 
+                            width: 1 + widthWi, 
+                            lineDash: [15,7]
+                        })
+                    }));
+                }
+                else { // Si l'obs a un numéro = elle est figurée normalement
+                    featureDir.setStyle( new ol.style.Style({
+                        stroke: new ol.style.Stroke({ 
+                            color: colorWi, 
+                            width: 0
+                        })
+                    }));
+                };
+                featureDir.getStyle().setZIndex(zIndex);
+    
+                wiSource.addFeature(featureDir);
+                wiSource.addFeature(featureDirPlein);  
+    
+            } else if (typeObs == "distance") {
+                // Calcul des coordonnées pour la symbologie
+                const dE_min = (E_Vis - E_St)*0.1;
+                const dN_min = (N_Vis - N_St)*0.1;
+                const dE_max = (E_Vis - E_St)*0.2;
+                const dN_max = (N_Vis - N_St)*0.2;
+                const coordArray_distance = [
+                    [E_St+dE_min, N_St+dN_min],
+                    [E_St+dE_max, N_St+dN_max]
+                ];
+    
+                // Création de la feature pour la symbologie
+                const featureDisSymb = new ol.Feature({
+                    geometry: new ol.geom.LineString(coordArray_distance),
+                    properties: {
+                        "no_obs":obsNo,
+                        "type_obs":obser[4],
+                        "station":obser[0],
+                        "visee":obser[1],
+                        "v":obser[5],
+                        "errMoy":obser[6],
+                        "zi":obser[7],
+                        "nabla":obser[8],
+                        "wi":obser[9]
+                    }
+                });
+                if (obsNo != "" ) {
+                    featureDisSymb.setStyle( new ol.style.Style({
+                        stroke: new ol.style.Stroke({ 
+                            color: colorWi, 
+                            width: 5 + widthWi, 
+                            lineCap: "square"
+                        })
+                    }));
+                } else { // si obs. supp.
+                    featureDisSymb.setStyle( new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: colorWi,
+                            width: 0
+                        })
+                    }))
+                };
+                featureDisSymb.getStyle().setZIndex(zIndex);
+    
+                // Création du feature
+                const featureDistance = new ol.Feature({
+                    geometry: new ol.geom.LineString(coordArray_i),
+                    properties: {
+                        "no_obs":obsNo,
+                        "type_obs":obser[4],
+                        "station":obser[0],
+                        "visee":obser[1],
+                        "v":obser[5],
+                        "errMoy":obser[6],
+                        "zi":obser[7],
+                        "nabla":obser[8],
+                        "wi":obser[9]
+                    }
+                });
+                if (obsNo != "" ) {
+                    featureDistance.setStyle( new ol.style.Style({
+                        stroke: new ol.style.Stroke({ 
+                            color: colorWi, 
+                            width: 1 + widthWi
+                        })
+                    }));
+                } else { // si obs. supp.
+                    featureDistance.setStyle( new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: colorWi,
+                            width: 0
+                        })
+                    }))
+                };
+                featureDistance.getStyle().setZIndex(zIndex);
+    
+                // Ajout des features
+                wiSource.addFeature(featureDisSymb);
+                wiSource.addFeature(featureDistance);
+            };
+        };
+
+        // Création du layer
+        wiLayer = new ol.layer.Vector({
+            source: wiSource
+        })
+
+        // Ajout du layer à la carte + divers
+        map.addLayer(wiLayer);
+        wiLayer.setZIndex(80);
+        changeLayerVisibilityWi_planimetric();
+        
+        // Gestion des intervalles de la légende en fonction du Wi limite (issu des param. du calcul LTOP)
+        //document.getElementById("palierWi1").textContent = "――  "+String(limitWi)+" - ∞";
+        //document.getElementById("palierWi2").textContent = "――  "+String(limitInf)+" - "+String(limitWi);
+        //document.getElementById("palierWi3").textContent = "――  0.0 - "+String(limitInf);
+
+    } else { // Si c'est une pré-analyse
+        //console.log("Pas de wi dans une pré-analyse")
+        document.getElementById("legendeWi").className = "checkboxLabel legendeBarree";
     };
-    return visee;
 };
