@@ -1,11 +1,5 @@
-/**
- * This function parses the PRNx file (XML) to get
- * all the points from the projects (approximate 
- * coordinates) and add them on the ol map
- */
-function parsingViseesXML_planimetric() {
-    // Ancien nom : parsingViseesXML
 
+<<<<<<< Updated upstream
     // Récupération des éléments des balises <station> 
     let planimetricAbriss = xmlDoc.getElementsByTagName("planimetricAbriss")[0];
     let stationsList = planimetricAbriss.getElementsByTagName("station");
@@ -207,6 +201,8 @@ function parsingViseesXML_planimetric() {
     changeLayerVisibilityDirections_planimetric();
     changeLayerVisibilityDistances_planimetric();
 };
+=======
+>>>>>>> Stashed changes
 
   
 /** 
