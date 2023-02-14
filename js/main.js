@@ -19,7 +19,7 @@ document.getElementById('inputfile').addEventListener('change', function() {
         echelleEllipses = 1000.0
 
         
-        // Abriss planimétrique
+        //-------------------------------- Abriss planimétrique
         parsingVisee();
         layerObservationsTerrestres();
         parsingEllipsesXML_planimetric();
@@ -33,19 +33,15 @@ document.getElementById('inputfile').addEventListener('change', function() {
         normedResidualsWi_planimetric();
 
 
-        // Abriss altimétrique
-        parsingViseesXML_altimetric();
+        //-------------------------------- Abriss altimétrique
+        parsingVisees_altimetric();
+        layerObservationsTerrestres_altimetric();
         parsingGNSS_altimetric();
         parsingObsCoord_altimetric();
         parsingEllipsesXML_altimetric();
         parsingEllipsesRelaXML_altimetric();
-
-
         fiabLocale_altimetric();
         normedResidualsWi_altimetric();
-        parsingVectXML_altimetric();
-
-
         // Activer les boutons
         altimetricActivateCheckBox();
 

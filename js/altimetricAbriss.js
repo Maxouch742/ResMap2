@@ -1,13 +1,18 @@
-function parsingViseesXML_altimetric() {
+function parsingVisees_altimetric() {
     
     // Récupérer les stations (avec observations)
     const altimetricAbriss = xmlDoc.getElementsByTagName("altimetricAbriss")[0];
     let stationsList = altimetricAbriss.getElementsByTagName("station");
 
     // Récupérer les informations sur l'observation (No station, No point visée, zi, wi, ...)
-    let NoPointsDenivelee = []
+    observationsTerrestresAltimetric = []
+
     for (i=0; i<stationsList.length; i++){
+
+        // Infos de la stations
         const typeObs = stationsList[i].getAttribute("obsType");
+
+        // Vérifier qu'il y a des dénivelées
         if (typeObs == "heightDiff"){
             const station_XML = stationsList[i];
             const station_no = station_XML.getAttribute("name");
@@ -15,10 +20,15 @@ function parsingViseesXML_altimetric() {
             for (j=0; j<observation_XML.length; j++){
                 const observation_no = observation_XML[j].getAttribute("obsNr");
                 const visee_no = observation_XML[j].getAttribute("target");
-                const visee_zi = observation_XML[j].getAttribute("zi");
-                const visee_wi = observation_XML[j].getAttribute("wi");
-                const visee_nabla = observation_XML[j].getAttribute("nabla_rzi");
-                const visee_v = observation_XML[j].getAttribute("improv");
+                const noGro = observation_XML[j].getAttribute("group");
+                const resid = observation_XML[j].getAttribute("improv");
+                const erMoy = observation_XML[j].getAttribute("meanErrApriori");
+                const zi = observation_XML[j].getAttribute("zi");
+                const nabla = observation_XML[j].getAttribute("nabla_rzi");
+                const wi = observation_XML[j].getAttribute("wi");
+                const giCoor = observation_XML[j].getAttribute("coordAzi");
+                const diCoor = observation_XML[j].getAttribute("coordDist");
+                const erLat = observation_XML[j].getAttribute("lateralErr");
 
                 const station_E = listAllPoints.get(station_no)[0];
                 const station_N = listAllPoints.get(station_no)[1];
@@ -27,7 +37,7 @@ function parsingViseesXML_altimetric() {
                 const visee_N = listAllPoints.get(visee_no)[1];
                 const visee_H = listAllPoints.get(visee_no)[2];
                 
-                NoPointsDenivelee.push([
+                observationsTerrestresAltimetric.push([
                     station_no,     // 0
                     station_E,      // 1
                     station_N,      // 2
@@ -37,41 +47,53 @@ function parsingViseesXML_altimetric() {
                     visee_N,        // 6
                     visee_H,        // 7
                     observation_no, // 8
-                    visee_zi,       // 9
-                    visee_wi,       // 10
-                    visee_nabla,    // 11
-                    visee_v         // 12
+                    noGro,          // 9
+                    resid,          // 10
+                    erMoy,          // 11
+                    zi,             // 12
+                    nabla,          // 13
+                    wi,             // 14
+                    giCoor,         // 15
+                    diCoor,         // 16
+                    erLat           // 17
                 ]);
             };
         };
     };
+};
 
-    // Création du layer
+
+function layerObservationsTerrestres_altimetric() {
+    // Création du layer et de la source
     deniveleeLayer = new ol.layer.Vector({});
-
-    // Création de la source du layer et ajout des features à la source
     deniveleeSource = new ol.source.Vector({});
-    for (i=0; i<NoPointsDenivelee.length; i++){
+
+    for (i=0; i<observationsTerrestresAltimetric.length; i++){
+        obser = observationsTerrestresAltimetric[i];
+
         // coordonnées de la ligne
         const coordArray = [ 
-            [parseFloat(NoPointsDenivelee[i][1]), parseFloat(NoPointsDenivelee[i][2])],
-            [parseFloat(NoPointsDenivelee[i][5]), parseFloat(NoPointsDenivelee[i][6])] 
+            [parseFloat(obser[1]), parseFloat(obser[2])],
+            [parseFloat(obser[5]), parseFloat(obser[6])] 
         ];
 
         // Feature normal
         const deniveleeFeature = new ol.Feature({
             geometry: new ol.geom.LineString(coordArray),
             name: [
-                NoPointsDenivelee[i][0],
-                NoPointsDenivelee[i][4]
+                obser[0],
+                obser[4]
             ],
             properties: {
                 "type":"dénivelée",
-                "no":NoPointsDenivelee[i][8],
-                "zi":NoPointsDenivelee[i][9],
-                "wi":NoPointsDenivelee[i][10],
-                "nabla":NoPointsDenivelee[i][11],
-                "v":NoPointsDenivelee[i][12],
+                "no_obs":obser[8],
+                "station":obser[0],
+                "visee":obser[4],
+                "v":obser[10],
+                "errMoy":obser[11],
+                "zi":obser[12],
+                "nabla":obser[13],
+                "wi":obser[14]
             }
         });
 
@@ -81,45 +103,44 @@ function parsingViseesXML_altimetric() {
         const rot = gisement(dE, dN);
         
         // Style des features
-        let deniveleeStyle;
-        let deniveleeFeatureSymbol;
-        if (NoPointsDenivelee[i][8] === "" ) { // si l'obs. a pas de numéro (supp.), elle sera en rose et épaisse
-            deniveleeStyle = new ol.style.Style({
-                stroke: new ol.style.Stroke({ color: 'rgba(0, 0, 0, 0.0)', width: 0, })
-            });
+        if (obser[8] === "" ) { // si l'obs. a pas de numéro (supp.), elle sera en rose et épaisse
+            deniveleeFeature.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: 'rgba(0, 0, 0, 0.0)', 
+                    width: 0
+                })
+            }));
         } else { // Si l'obs a un numéro = elle est gardée
-            deniveleeStyle = new ol.style.Style({
-                stroke: new ol.style.Stroke({ color: '#000000', width: 1 })
-            });
+            deniveleeFeature.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: '#000000',
+                    width: 1 
+                })
+            }));
             // Feature du symbole de la denivele
-            deniveleeFeatureSymbol = new ol.Feature({ 
+            const deniveleeFeatureSymbol = new ol.Feature({ 
                 geometry: new ol.geom.Point([
                     coordArray[0][0]+dE, 
                     coordArray[0][1]+dN
                 ]),
             });
-            deniveleeFeatureSymbolStyle = new ol.style.Style({
+            deniveleeFeatureSymbol.setStyle( new ol.style.Style({
                 image: new ol.style.Icon({
                     src: 'img/blackTriangle_icon.png',
                     scale: 0.02,
-                    rotation: rot,
+                    rotation: rot
                 }),
-            });
-            deniveleeFeatureSymbol.setStyle(deniveleeFeatureSymbolStyle);
-
+            }));
             deniveleeSource.addFeature(deniveleeFeatureSymbol);
             deniveleeLayer.setSource(deniveleeSource);
         };
-        deniveleeFeature.setStyle(deniveleeStyle);
         deniveleeSource.addFeature(deniveleeFeature);
-        
         deniveleeLayer.setSource(deniveleeSource);
     };
 
     // Ajout de la carte
     map.addLayer(deniveleeLayer);
-    changeLayerVisibilityDenivelee_altimetric();
-    console.log("Height's differences have been added to map");            
+    changeLayerVisibilityDenivelee_altimetric();          
 };
 
 
@@ -196,9 +217,6 @@ function parsingObsCoord_altimetric() {
 };
 
 
-/** 
- * 
- */
 function parsingGNSS_altimetric() {
     
     // Récupérer les stations (avec observations GNSS)
@@ -487,66 +505,118 @@ function parsingEllipsesRelaXML_altimetric() {
 
 
 function fiabLocale_altimetric() {
-    // Créer la source comprenant les features d'observations (sources de base)
-    fiabLocaleSourceBase = new ol.source.Vector({});
-    fiabLocaleSourceBase.addFeatures(deniveleeSource.getFeatures());
-
     // Création de la source pour traitement graphique et nouveau layer
     fiabLocaleSourceAlti = new ol.source.Vector({});
-    fiabLocalLayerAlti = new ol.layer.Vector({});
 
     // Parcourir la source et gérer les styles pour chaque features
-    for (let i=0; i<fiabLocaleSourceBase.getFeatures().length; i++) {
+    for (let i=0; i<observationsTerrestresAltimetric.length; i++) {
 
-        let feature = fiabLocaleSourceBase.getFeatures()[i].clone();
-        //console.log(feature.getProperties());
-        
+        const obser = observationsTerrestresAltimetric[i]
+        const zi = parseFloat(obser[12]);
+        const noObs = obser[8];
 
-        if (feature.getProperties().properties != null){
-            const zi = parseFloat(feature.getProperties().properties.zi);
-            const noObs = feature.getProperties().properties.no;
-
-            // Attribution des couleurs de zi
-            if (zi < 25.0) {
-                colorFiab = "#FF1700";
-                widthFiab = 3;
-                zIndex = 99;
-            } else if (zi <= 50.0) {
-                colorFiab = "#FFD000";
-                widthFiab = 1.5;
-                zIndex = 98;
-            } else if (zi <= 75.0) {
-                colorFiab = "#ABFF00";
-                widthFiab = 0;
-                zIndex = 1;
-            } else if (zi <= 100.0) {
-                colorFiab = "#2AE100";
-                widthFiab = 0;
-                zIndex = 1;
-            };
-
-            // Si l'obs. est supprimée
-            if (noObs === "") { 
-                colorFiab ="rgba(0, 0, 0, 0.0)" // transparent
-            };
-
-            // Attribution du style en fonction du zi et du typeObs (variables)
-            feature.getStyle().setZIndex(zIndex);
-            feature.getStyle().getStroke().setColor(colorFiab);
-            let widthF = feature.getStyle().getStroke().getWidth();
-            feature.getStyle().getStroke().setWidth(widthF+widthFiab); // épaissir en fonction du zi
-
-            // Ajout des features au vector source
-            fiabLocaleSourceAlti.addFeature(feature);
+        // Paramètres des zi
+        let colorFiab;
+        let widthFiab;
+        let zIndex;
+        // Attribution des couleurs de zi
+        if (zi < 25.0) {
+            colorFiab = "#FF1700";
+            widthFiab = 3;
+            zIndex = 99;
+        } else if (zi <= 50.0) {
+            colorFiab = "#FFD000";
+            widthFiab = 1.5;
+            zIndex = 98;
+        } else if (zi <= 75.0) {
+            colorFiab = "#ABFF00";
+            widthFiab = 0;
+            zIndex = 1;
+        } else if (zi <= 100.0) {
+            colorFiab = "#2AE100";
+            widthFiab = 0;
+            zIndex = 1;
         };
+
+        // Si l'obs. est supprimée
+        if (noObs === "") { 
+            colorFiab ="rgba(0, 0, 0, 0.0)" // transparent
+        };
+
+        // Création de l'observation
+        const deniveleeFeature = new ol.Feature({
+            geometry: new ol.geom.LineString([ 
+                [parseFloat(obser[1]), parseFloat(obser[2])],
+                [parseFloat(obser[5]), parseFloat(obser[6])] 
+            ]),
+            name: [
+                obser[0],
+                obser[4]
+            ],
+            properties: {
+                "type":"dénivelée",
+                "no_obs":obser[8],
+                "station":obser[0],
+                "visee":obser[4],
+                "v":obser[10],
+                "errMoy":obser[11],
+                "zi":obser[12],
+                "nabla":obser[13],
+                "wi":obser[14]
+            }
+        });
+
+        // Calcul de l'emplacement du symbole et de la rotation
+        const dE = (parseFloat(obser[5]) - parseFloat(obser[1]))*0.22;
+        const dN = (parseFloat(obser[6]) - parseFloat(obser[2]))*0.22;
+        const rot = gisement(dE, dN);
+        
+        // Style des features
+        if (obser[8] === "" ) { // si l'obs. a pas de numéro (supp.), elle sera en rose et épaisse
+            deniveleeFeature.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: colorFiab, 
+                    width: 0
+                })
+            }));
+        } else { // Si l'obs a un numéro = elle est gardée
+            deniveleeFeature.setStyle( new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: colorFiab,
+                    width: 1 + widthFiab,
+                })
+            }));
+            // Feature du symbole de la denivele
+            const deniveleeFeatureSymbol = new ol.Feature({ 
+                geometry: new ol.geom.Point([
+                    parseFloat(obser[1])+dE, 
+                    parseFloat(obser[2])+dN
+                ]),
+            });
+            deniveleeFeatureSymbol.setStyle( new ol.style.Style({
+                image: new ol.style.Icon({
+                    src: 'img/triangle_'+String(colorFiab).slice(1,10)+'.svg',
+                    scale: 0.015 + widthFiab/100,
+                    rotation: rot,
+                    color: colorFiab
+                }),
+            }));
+            deniveleeFeatureSymbol.getStyle().setZIndex(zIndex);
+            fiabLocaleSourceAlti.addFeature(deniveleeFeatureSymbol);
+        };
+        deniveleeFeature.getStyle().setZIndex(zIndex);
+        fiabLocaleSourceAlti.addFeature(deniveleeFeature);
     };
     
-    // Ajout de la source (contenant les features) au Layer + divers
-    fiabLocalLayerAlti.setSource(fiabLocaleSourceAlti);
+    // Création du layer
+    fiabLocalLayerAlti = new ol.layer.Vector({
+        source: fiabLocaleSourceAlti
+    });
+
+    // Ajout du layer à la map
     map.addLayer(fiabLocalLayerAlti);
     fiabLocalLayerAlti.setVisible(false);
     fiabLocalLayerAlti.setZIndex(80);
-    //console.log("Carte des fiabilité locales zi ajoutée")*/
 };
 
 
