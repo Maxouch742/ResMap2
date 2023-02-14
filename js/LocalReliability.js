@@ -1,10 +1,15 @@
-/** The function creates a layer to show the local reliability with a 4-colors map (intervals)
- *  0.00 - 0.25
- *  0.25 - 0.50
- *  0.50 - 0.75
- *  0.75 - 1.00
- */
 function fiabLocale() {
+
+    /*
+    This function crates a layer to show the local
+    reliability with  a 4-colors map (intervals)
+    0.00-0.25
+    0.25-0.50
+    0.50-0.75
+    0.75-1.00
+
+    */
+
 
     // Créer la source comprenant les features d'observations (sources de base)
     fiabLocaleSourceBase =  new ol.source.Vector({});
@@ -15,12 +20,12 @@ function fiabLocale() {
     fiabLocaleSource = new ol.source.Vector({});
     fiabLocalLayer = new ol.layer.Vector({});
 
-    // Parcourir la source et gérer les styles pour chaque features
+    // parcourir la source et géréer les styles pour chaques features
     for (let i=0; i<fiabLocaleSourceBase.getFeatures().length; i++) {
 
         let feature = fiabLocaleSourceBase.getFeatures()[i].clone();
         let propetiesFiab = feature.getProperties().properties
-        let zi = parseFloat(propetiesFiab.split("/")[2]);  // chercher le zi et le stocker en int
+        let zi = parseFloat(propetiesFiab.split("/")[2]);  // get le zi et le stocker en int
         let noObs = propetiesFiab.split("/")[0] // get le numéro d'obs. et le stocker en str
         
         // Attribution des couleurs des paliers de zi
@@ -56,7 +61,10 @@ function fiabLocale() {
         // Ajout des features au vector source
         fiabLocaleSource.addFeature(feature);
         
+
     };
+
+
     
     // Ajout de la source (contenant les features) au Layer + divers
     fiabLocalLayer.setSource(fiabLocaleSource);
@@ -64,5 +72,7 @@ function fiabLocale() {
     fiabLocalLayer.setVisible(false);
     fiabLocalLayer.setZIndex(80);
     console.log("Carte des fiabilité locales zi ajoutée")
+
+    
 
 };

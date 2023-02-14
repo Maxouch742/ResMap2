@@ -1,17 +1,21 @@
-/** 
- * This function parses the PRNx file (XML) to get
- * all the points from the projects and add them 
- * to the ol map
- */
-function parsingPointsXML() {
-    /*
+function parsingPointsXML(xmlToParse) {
+
+    /* 
+
+    This function parses the PRNx file (XML) to get
+    all the points from the projects
+    and add them to the ol map
+
     INPUT: XML toparse, coming from fr.result (FileReader method)
     OUPUT: [ Id list for fixed points, Id list for variable points ] (2D Array)
+
     */
+
 
     // Récupération des éléments des balises <point> des coordonnées approchées
     let approxCoords = xmlDoc.getElementsByTagName("coordinates")[0];
     let pointList = approxCoords.getElementsByTagName("point");
+
 
     // Séparation et listage des id des points nouveau (variables)
     let variablePoints = xmlDoc.getElementsByTagName("variablePoints")[2];
@@ -22,6 +26,7 @@ function parsingPointsXML() {
         variablePointsListId.push(id);
     };
     
+
     // Initialisation des Vector Layer et du tableau des if de pts fixes
     pointsSource = new ol.source.Vector({});
     VariablesPointsSource = new ol.source.Vector({});
@@ -35,8 +40,7 @@ function parsingPointsXML() {
       if (pointName_i !== "NULLBERN") {
         E_i = parseFloat(pointList[i].getAttribute("easting")).toFixed(4);
         N_i = parseFloat(pointList[i].getAttribute("northing")).toFixed(4);
-        H_i = parseFloat(pointList[i].getAttribute("height")).toFixed(4);
-        listAllPoints.set(pointName_i,[E_i,N_i,H_i]);
+        listAllPoints.set(pointName_i,[E_i,N_i]);
 
         // Création d'une Feature ol pour Point i (MN95)
         let featurePointMN95 = new ol.Feature({
@@ -62,7 +66,10 @@ function parsingPointsXML() {
       };
     };
 
+
+
     // <------ POINTS FIXES ------>
+
     // Création du style labelText pt fixe
     textStyleFixedPoints = new ol.style.Text({
         textAlign: "center",
@@ -101,7 +108,11 @@ function parsingPointsXML() {
     pointsLayer.setZIndex(98);
     console.log("Fixed points has been added to map");
 
+
+
+    
     // <------ POINTS NOUVEAUX ------>
+
     // Création du style labelText pt nouv
     textStyleVariablePoints = new ol.style.Text({
       textAlign: "center",
@@ -139,5 +150,15 @@ function parsingPointsXML() {
     pointsVariableLayer.setZIndex(99);
     console.log("Variable points has been added to map");
 
+
+
     return listAllPoints;
 };
+
+
+
+
+
+  
+
+

@@ -48,7 +48,7 @@
     overflow-y: scroll;
     scrollbar-width: thin;
     margin-top: 2px;
-}
+  }
 
 
 
@@ -81,8 +81,8 @@
     background-color: white;
     padding: 10px 5px 10px 5px;
     box-shadow: 0px 0px 20px grey;
-}
-.slider {
+  }
+  .slider {
     -webkit-appearance: none;  
     appearance: none;
     width: 90%; 
@@ -92,24 +92,26 @@
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s;
-}
-.slider:hover {
+  }
+  /* Mouse-over effects */
+  .slider:hover {
     opacity: 1; /* Fully shown on mouse-over */
-}
-.slider::-webkit-slider-thumb {
+  }
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
     width: 20px; /* Set a specific slider handle width */
     height: 20px; /* Slider handle height */
     background: rgb(76,118,171); /* Green background */
     cursor: pointer; /* Cursor on hover */
-}
-.slider::-moz-range-thumb {
+  }
+  .slider::-moz-range-thumb {
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
     background: #04AA6D; /* Green background */
     cursor: pointer; /* Cursor on hover */
-}
+  }
 .textEchelle {
     font-size: 15px;
 }
@@ -121,27 +123,9 @@
 
 /* ------   DIVERS   -------- */
 
-.param {
-    
-}
-
-.logo-header {
-    display: flex;
-    justify-content: center;
-}
-
-#logo {
-    width: 80px;
-    margin: 10px;
-    
-}
-
 #map {
     height: 100vh;
-    /*width: 100vw;*/
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
+    width: 100vw;
 }
 
 .boxPageWeb {
@@ -258,9 +242,8 @@ p {
 }
 
 .legendeGrise {
-    color: #919191;
+    color:rgb(145, 145, 145);
 }
-
 
 
 .fontColorFiab1 {
@@ -307,110 +290,3 @@ hr {
 
 
 
-
-/************* SWITCH BOX *************/
-.switch-div {
-    position: absolute;
-}
-.switch {
-	position: relative;
-	display: block;
-	vertical-align: top;
-	width: 60px;
-	height: 30px;
-	padding: 3px;
-	margin: 0 10px 10px 0;
-	background: linear-gradient(to bottom, #eeeeee, #FFFFFF 25px);
-	background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF 25px);
-	border-radius: 18px;
-	box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);
-	cursor: pointer;
-	box-sizing:content-box;
-}
-.switch-input {
-	position: absolute;
-	top: 0;
-	left: 0;
-	opacity: 0;
-	box-sizing:content-box;
-}
-.switch-label {
-	position: relative;
-	display: block;
-	height: inherit;
-	font-size: 10px;
-	text-transform: uppercase;
-	background: #eceeef;
-	border-radius: inherit;
-	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
-	box-sizing:content-box;
-}
-.switch-label:before, .switch-label:after {
-	position: absolute;
-	top: 50%;
-	margin-top: -.5em;
-	line-height: 1;
-	-webkit-transition: inherit;
-	-moz-transition: inherit;
-	-o-transition: inherit;
-	transition: inherit;
-	box-sizing:content-box;
-}
-.switch-label:before {
-	content: attr(data-off);
-	right: 11px;
-	color: #aaaaaa;
-	text-shadow: 0 1px rgba(255, 255, 255, 0.5);
-}
-.switch-label:after {
-	content: attr(data-on);
-	left: 11px;
-	color: #FFFFFF;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.2);
-	opacity: 0;
-}
-.switch-input:checked ~ .switch-label {
-	background: #246FB5;
-	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
-}
-.switch-input:checked ~ .switch-label:before {
-	opacity: 0;
-}
-.switch-input:checked ~ .switch-label:after {
-	opacity: 1;
-}
-.switch-handle {
-	position: absolute;
-	top: 4px;
-	left: 4px;
-	width: 28px;
-	height: 28px;
-	background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
-	background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
-	border-radius: 100%;
-	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-}
-.switch-handle:before {
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: -6px 0 0 -6px;
-	width: 12px;
-	height: 12px;
-	background: linear-gradient(to bottom, #eeeeee, #FFFFFF);
-	background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF);
-	border-radius: 6px;
-	box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
-}
-.switch-input:checked ~ .switch-handle {
-	left: 34px;
-	box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
-}
-/* Transition du switch */
-.switch-label, .switch-handle {
-	transition: All 0.3s ease;
-	-webkit-transition: All 0.3s ease;
-	-moz-transition: All 0.3s ease;
-	-o-transition: All 0.3s ease;
-}

@@ -1,13 +1,18 @@
-
-/** This function parses the PRNx file (XML) to get all 
- *  the coordinates observation (most of them for 
- *  "libre-ajusté" compensation), add them to the map 
- *  and style them with forms and/or color.
- * 
- * @param {object} xmlToParse : 
- */
 function parsingObsCoord(xmlToParse) {
 
+    /* 
+
+    This function parses the PRNx file (XML) to get
+    all the coordinates observation (most of them for "libre-ajusté"
+    compensation), add them to the map
+    and style them with forms and/or color.
+
+    INPUT: XML toparse, coming from fr.result (FileReader method)
+    OUPUT: None
+
+    */
+
+    
     let parser = new DOMParser();
     let xmlDoc = parser.parseFromString(xmlToParse,"text/xml");
     let planimetricAbriss = xmlDoc.getElementsByTagName("planimetricAbriss")[0];
@@ -68,9 +73,15 @@ function parsingObsCoord(xmlToParse) {
                         });
                         obsCoordSourceN.addFeature(featureObsCoord);
                     };
+
+
                 };
+            
+                
             };
+
         };
+    
     };
 
     obsCoordELayer = new ol.layer.Vector({
@@ -84,7 +95,6 @@ function parsingObsCoord(xmlToParse) {
             })),
         }),
     });
-
     obsCoordNLayer = new ol.layer.Vector({
         source: obsCoordSourceN,
         style: new ol.style.Style({
@@ -96,6 +106,7 @@ function parsingObsCoord(xmlToParse) {
         }),
     });
 
+
     map.addLayer(obsCoordELayer);
     map.addLayer(obsCoordNLayer);
     changeLayerVisibilityCoordE();
@@ -103,4 +114,10 @@ function parsingObsCoord(xmlToParse) {
     obsCoordELayer.setZIndex(99);
     obsCoordNLayer.setZIndex(99);
     console.log("Coordinates observations has been added to map");
+
+
+
+
+
+
 };

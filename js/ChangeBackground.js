@@ -1,9 +1,12 @@
-/** This function Cette fonction permet de gérer 
- *  l'affichage des fonds WMTS selon le choix de 
- *  l'utilisateur
- */
 function changeBackground() {
 
+    /**  
+     
+    Cette fonction permet de gérer l'affichage des fonds WMTS
+    selon le choix de l'utilisateur
+
+    **/
+    
     if (document.getElementById("cb_CN").checked == false) {
         map.removeLayer(carteNationale);
     };
@@ -25,6 +28,7 @@ function changeBackground() {
         map.addLayer(swissImage);
     };
 
+
     if (document.getElementById("cb_relief").checked == false) {
         map.removeLayer(SwissSURFACE3D);
     };
@@ -39,4 +43,6 @@ function changeBackground() {
         map.removeLayer(SwissSURFACE3D);
         map.removeLayer(MO_nb);
     };
+
+
 };

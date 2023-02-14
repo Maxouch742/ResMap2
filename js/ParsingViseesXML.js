@@ -1,17 +1,28 @@
-/**
- * This function parses the PRNx file (XML) to get
- * all the points from the projects (approximate 
- * coordinates) and add them on the ol map
- */
-function parsingViseesXML() {
+function parsingViseesXML(xmlToParse) {
+
+  /* 
+
+  This function parses the PRNx file (XML) to get
+  all the points from the projects (approximate coordinates)
+  and add them on the ol map
+
+  INPUT: XML toparse, coming from fr.result (FileReader method)
+  OUPUT: None
+  
+  */
+
 
   // Récupération des éléments des balises <station> 
   let planimetricAbriss = xmlDoc.getElementsByTagName("planimetricAbriss")[0];
   let stationsList = planimetricAbriss.getElementsByTagName("station");
 
+
+
   // <--------------- DISTANCES --------------->
+
   // Récupérer les paires [No Station, No Point visé] (No en str) - distances
   noPointsDistances = []
+
   for (i = 0; i < stationsList.length; i++) {
     obsType = stationsList[i].getAttribute("obsType");
     if (obsType === "distance") {
@@ -32,6 +43,7 @@ function parsingViseesXML() {
 
   // Récupérer les coord des St et Vis [E1,N1,E2,N2] - distances
   geometryDistances = []
+  
   for (i = 0; i < noPointsDistances.length; i++) {
     noSt = noPointsDistances[i][0];
     noVis = noPointsDistances[i][1];
@@ -52,7 +64,9 @@ function parsingViseesXML() {
 
   // création et ajout des lignes de distances sur la map - distances
   distanceLineSource = new ol.source.Vector({});
+
   for (i = 0; i < geometryDistances.length; i++) {
+    
     let coordArray_i = [ [parseFloat(geometryDistances[i][0]),parseFloat(geometryDistances[i][1])] ,
                          [parseFloat(geometryDistances[i][2]),parseFloat(geometryDistances[i][3])] ];
     
@@ -62,7 +76,7 @@ function parsingViseesXML() {
     let dN_inf = (coordArray_i[1][1] - coordArray_i[0][1])*0.1
     let dN_sup = (coordArray_i[1][1] - coordArray_i[0][1])*0.2
     let coordArray_i_epais = [ [dE_inf+coordArray_i[0][0] , dN_inf+coordArray_i[0][1]] ,
-                               [dE_sup+coordArray_i[0][0] , dN_sup+coordArray_i[0][1]] ];
+                              [dE_sup+coordArray_i[0][0] , dN_sup+coordArray_i[0][1]] ];
 
     // Création de la feature pour la symbologie de distance (sinon transparent pour obs. supp)
     featureDistanceEpais = new ol.Feature({
@@ -103,12 +117,21 @@ function parsingViseesXML() {
     distanceLayer.setSource(distanceLineSource);
     // console.log(featureDistance.getProperties().properties)
   };
+  
   map.addLayer(distanceLayer);
   console.log("Distances have been added to map")
 
+
+
+
+
+
+
   // <------------- DIRECTIONS --------------->
+
   // Récupérer les paires [No Station, No Point visé] (No en str) - directions
   noPointsDirections = []
+
   for (i = 0; i < stationsList.length; i++) {
     obsType = stationsList[i].getAttribute("obsType");
     if (obsType === "direction") {
@@ -129,6 +152,7 @@ function parsingViseesXML() {
 
   // Récupérer les coord des St et Vis [E1,N1,E2,N2] - directions
   geometryDirections = []
+  
   for (i = 0; i < noPointsDirections.length; i++) {
     noSt = noPointsDirections[i][0];
     noVis = noPointsDirections[i][1];
@@ -144,12 +168,15 @@ function parsingViseesXML() {
     geometryDirections.push([E_St,N_St,E_Vis,N_Vis,zi_i,noObs,wi_i,nabla_rzi,v]);
   };
 
+
   // Création du layer distance
   directionLayer = new ol.layer.Vector({});
 
   // création et ajout des lignes de distances sur la map - directions
   directionLineSource = new ol.source.Vector({});
+
   for (i = 0; i < geometryDirections.length; i++) {
+    
     coordArray_i = [[geometryDirections[i][0],geometryDirections[i][1]],[geometryDirections[i][2],geometryDirections[i][3]]];
     
     // Calculs pour faire figurer les traits pleins jusqu'à 70% de la visée
@@ -195,11 +222,27 @@ function parsingViseesXML() {
     directionLineSource.addFeature(featureDirection);
     directionLineSource.addFeature(featureDirPlein);
     directionLayer.setSource(directionLineSource);
+    // console.log(featureDirection.getProperties().properties)
+
   };
+  
+
   map.addLayer(directionLayer);
   console.log("Directions have been added to map")
 
+  
   // Passer les points au dessus (ZIndex)
   distanceLayer.setZIndex(2);
   directionLayer.setZIndex(1);
+  
+
+
+  
+
+
+
+
+
+
+
 };

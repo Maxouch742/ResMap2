@@ -1,10 +1,17 @@
-/**
- * This function parses the PRNx file (language : XML) to get
- * and generate the relatives reliability rectangles on the map
- * 
- * @param {object} xmlToParse 
- */
+
 function parsingRectanglesRelaXML(xmlToParse) {
+
+  /* 
+
+  This function parses the PRNx file (XML) to get and 
+  generate the relatives reliability rectangles 
+  on the map.
+
+  INPUT: XML toparse, coming from fr.result (FileReader method)
+  OUPUT: None
+  
+  */
+
 
   // Check si il y a bien des ellipses relatives dans le PRNx 
   if (xmlDoc.getElementsByTagName("relativeRectangles").length != 0){
@@ -45,12 +52,14 @@ function parsingRectanglesRelaXML(xmlToParse) {
 
         allListENrect.push(listENrectangle); // tableau de toutes les coordonnées de chaque rectangle (grand)
       };
+
     };
 
-    // création et ajout des recangles sur la map (MultiLineString)
+      // création et ajout des recangles sur la map (MultiLineString)
     let rectanglesRelaLineSource = new ol.source.Vector({});
 
-    for (let i = 0; i < allListENrect.length; i++) {      
+    for (let i = 0; i < allListENrect.length; i++) {
+      
       let featureRectangle = new ol.Feature({
         geometry: new ol.geom.LineString(allListENrect[i]),
         properties: listNA[i][0],
@@ -62,7 +71,9 @@ function parsingRectanglesRelaXML(xmlToParse) {
       featureRectangle.getGeometry().rotate(allListAzimut[i],allListCenters[i]);
       rectanglesRelaLineSource.addFeature(featureRectangle);
       rectanglesRelaLineSource.addFeature(featureLineP1P2);
+      
     };
+
 
     // Création du style labelText pour demi-grand axe na du rect.
     let textStyleRectangle = new ol.style.Text({
@@ -95,6 +106,7 @@ function parsingRectanglesRelaXML(xmlToParse) {
         return styleRectangle;
       }
     });
+
     
     rectangleRelaLayer.setZIndex(91);
     document.getElementById("AffichageEchelleRectanglesRela").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
@@ -102,8 +114,11 @@ function parsingRectanglesRelaXML(xmlToParse) {
     changeLayerVisibilityRectanglesRela();
     console.log("Relative rectangles have been added to map");
 
+
   } else {
     console.log("There's no relatives rectangles")
     document.getElementById("legendeRectRela").className = "checkboxLabel legendeBarree";
   };
+
+
 };

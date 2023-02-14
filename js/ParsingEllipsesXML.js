@@ -1,10 +1,6 @@
-/** Function used to create an array with steps between 2 values
- * 
- * @param {int} start : value to start array
- * @param {int} stop : value to stop array
- * @param {int} step : step of value's array
- * @return {array} arr : array returned
- */
+
+// simple function used to create an array with steps
+// between 2 values
 function range(start, stop, step){
   step = step || 1;
   var arr = [];
@@ -14,47 +10,55 @@ function range(start, stop, step){
   return arr;
 };
 
-/** 
- * This function parses the PRNx file (language : XML) to get and
- *  generate the ellipses on the map (with scale factor)
- * 
- * @param {object} xmlToParse : XML imported
- */
-function parsingEllipsesXML() {
+
+function parsingEllipsesXML(xmlToParse) {
+
+    /* 
+  
+    This function parses the PRNx file (XML) to get and 
+    generate the ellipses on the map (with scale factor)
+  
+    INPUT: XML to parse, coming from fr.result (FileReader method)
+    OUPUT: None
+    
+    */
+
+  
+
 
   // Récupération des éléments des balises <coordinates>
   let coordinates = xmlDoc.getElementsByTagName("coordinates")[0];
   let pointsList = coordinates.getElementsByTagName("point");
+
 
   // ------- NIVEAU DE CONFIANCE ELLIPSES -------
   let progvers = xmlDoc.getElementsByTagName("progvers")[0];
   titreProg = progvers.getAttribute("name");
   nameProg = progvers.textContent;
 
-  let nivConfianceEllipses;
+  if (nameProg==="1") {
+    nivConfianceEllipses = "95%";
+    kSigma = 2.45; //  pour passer de 1 sigma à k sigma
+  }
+  else if (nameProg==="2") {
+    nivConfianceEllipses = "39%";
+    kSigma = 1.0;
+  }
+  else if (nameProg==="3") {
+    nivConfianceEllipses = "39%";
+    kSigma = 1.0;
+  }
+  else if (nameProg==="4") {
+    nivConfianceEllipses = "39%";
+    kSigma = 1.0;
+  }
+  else if (nameProg==="5") {
+    nivConfianceEllipses = "39%";
+    kSigma = 1.0;
+  }
+  document.getElementById("nivConfiance").textContent = "Niveau de confiance des ellipses → " + String(nivConfianceEllipses)
 
-  switch(nameProg){
-    case "1" :
-      nivConfianceEllipses = "95%";
-      kSigma = 2.45; //  pour passer de 1 sigma à k sigma
-      break;
-    case "2" :
-      nivConfianceEllipses = "39%";
-      kSigma = 1.0;
-      break;
-    case "3" :
-      nivConfianceEllipses = "39%";
-      kSigma = 1.0;
-      break;
-    case "4" :
-      nivConfianceEllipses = "39%";
-      kSigma = 1.0;
-      break;
-    case "5" :
-      nivConfianceEllipses = "39%";
-      kSigma = 1.0;
-      break;
-  };
+
 
   // Initialisation des boucles pour création d'ellipses
   let t = range(0, 390, 10);
@@ -81,6 +85,8 @@ function parsingEllipsesXML() {
     };
 
   };
+
+  
 
   // création et ajout des feature dans la source (contient geom) pour ellipses (LineString)
   let ellipsesLineSource = new ol.source.Vector({});
@@ -133,4 +139,7 @@ function parsingEllipsesXML() {
   changeLayerVisibilityEllipses()
   document.getElementById("AffichageEchelleEllipse").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
   console.log("Ellipses have been added to map");
+
+
+
 };

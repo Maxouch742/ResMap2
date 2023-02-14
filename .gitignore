@@ -274,8 +274,8 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
-*.tex
-*.pdf
 
-# Folder perso
+
+
+## Folder perso
 rapport/

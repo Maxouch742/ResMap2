@@ -1,11 +1,17 @@
-/**
- * This function parses the PRNx file (XML) to get and
- * generate the vectors from the differences DY/DX between
- * initial coordinates and compensated coordinates
- * 
- * @param {*} xmlToParse 
- */
+
 function parsingVectXML(xmlToParse) {
+
+    /* 
+  
+    This function parses the PRNx file (XML) to get and 
+    generate the vectors from the differences DY/DX between
+    initial coordinates and compensated coordinates
+  
+    INPUT: XML toparse, coming from fr.result (FileReader method)
+    OUPUT: None
+    
+    */
+
     // Récupération des éléments des balises <coordinates>
 
     let coordinates = xmlDoc.getElementsByTagName("coordinates")[0];
@@ -54,6 +60,7 @@ function parsingVectXML(xmlToParse) {
                     properties: String((norm*1000.0).toFixed(1)) + 'mm',  // norme du vecteur de diff. pour affichage
                 });
                 vectLineSource.addFeature(featureEllipse);
+
             };
         };
     };
@@ -75,6 +82,7 @@ function parsingVectXML(xmlToParse) {
         placement: "point"
     });
 
+
     // Création du style vecteurs
     let styleVect = new ol.style.Style({
         stroke: new ol.style.Stroke({ color: '#FF0000', width: 1 }),
@@ -90,10 +98,14 @@ function parsingVectXML(xmlToParse) {
         }
     });
 
+
     // Ajout à la carte
     map.addLayer(vectLayer);
     vectLayer.setZIndex(99);
     changeLayerVisibilityVect();
     document.getElementById("AffichageEchelleVect").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     console.log("Diff. vectors have been added to map");
+    
+
+    
 };

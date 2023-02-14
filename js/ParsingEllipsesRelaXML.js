@@ -1,10 +1,18 @@
-/** This function parses the PRNx file (language : XML) to get
- *  and generate the relatives ellipses on the map (with scale factor)
- * 
- * @param {object} xmlToParse : comming from fr.result (FileReader method) 
- * @return{None}
- */
+
 function parsingEllipsesRelaXML(xmlToParse) {
+
+    /* 
+  
+    This function parses the PRNx file (XML) to get and 
+    generate the relatives ellipses on the map (with scale factor)
+  
+    INPUT: XML toparse, coming from fr.result (FileReader method)
+    OUPUT: None
+    
+    */
+
+  
+    
 
   // Check si il y a bien des ellipses relatives dans le PRNx 
   if (xmlDoc.getElementsByTagName("relativeEllipses").length != 0){
@@ -69,6 +77,7 @@ function parsingEllipsesRelaXML(xmlToParse) {
       ellipsesRelaLineSource.addFeature(featureLineP1P2);
     };
 
+
     // Création du style labelText pour demi-grand axe a
     let textStyleEllipse = new ol.style.Text({
       textAlign: "center",
@@ -107,8 +116,17 @@ function parsingEllipsesRelaXML(xmlToParse) {
     document.getElementById("AffichageEchelleEllipseRela").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     console.log("Relative ellipses have been added to map");
     
+
+  
+
+
+
   } else {
     console.log("There's no relatives ellipses")
     document.getElementById("legendeEllRela").className = "checkboxLabel legendeBarree";
   };
+
+
+
+
 };
