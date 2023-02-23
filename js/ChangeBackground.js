@@ -2,7 +2,26 @@
  *  l'affichage des fonds WMTS selon le choix de 
  *  l'utilisateur
  */
-function changeBackground() {
+function changeBackground(layer) {
+
+    // Désactivation des couches
+    map.removeLayer(carteNationale);
+    map.removeLayer(swissImage);
+    map.removeLayer(SwissSURFACE3D);
+    map.removeLayer(MO_nb);
+
+    if (layer === 'CN'){
+        map.addLayer(carteNationale);
+    } else if (layer === 'swissImage'){
+        map.addLayer(swissImage);
+    } else if (layer === 'swissSurface3D'){
+        map.addLayer(SwissSURFACE3D);
+    } else if (layer === 'MO'){
+        map.addLayer(MO_nb);
+    } ;
+
+
+    /*
 
     if (document.getElementById("cb_CN").checked == false) {
         map.removeLayer(carteNationale);
@@ -39,6 +58,8 @@ function changeBackground() {
         map.removeLayer(SwissSURFACE3D);
         map.removeLayer(MO_nb);
     };
+
+    */
 };
 
 

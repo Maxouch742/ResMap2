@@ -12,6 +12,7 @@
     <!----------- CSS  ----------->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
   </head>
 
@@ -315,39 +316,40 @@
 
         <!-- Partie droite : CARTE -->
         <div class="col">
-          <div id="map">
-
-
-            <div class="dropdown">
-              <button class="dropbtn">
-                <img src="./img/layers.png" alt="layers" class="imgLayers" />
-              </button>
-              <div class="dropdown-content">
-                <a href="#">Carte Nationale</a>
-                <a href="#">swissImage</a>
-                <a href="#">swissSurface3D</a>
-                <a href="#">Mens. Off.</a>
-                <a href="#">-</a>
-              </div>
-            </div>
-            
-            
-            <!--<div class="dropdown">
-              <input type="image" src="./img/layers.png" onclick="functionLayers()" class="dropbtn">
-                  <!-- <img class="img-layers" src="img/layers.jpg"> -->
-              <!--</input>
-              <div id="myDropdown" class="dropdown-content">
-                  <a onclick="changefondCarte('CN')">Carte Nationale</a>
-                  <a onclick="changefondCarte('swissImage')">swissImage</a>
-                  <a onclick="changefondCarte('swiss3D')">swissSurface3D</a>
-                  <a onclick="changefondCarte('MO')">Mens. Off.</a>
-              </div>
-            </div>-->
-            
-          </div>
+          <div id="map"></div>
         </div>
 
       </div>
+
+
+      <!-- Button for layers -->
+      <div class="w3-dropdown-hover w3-right">
+        <button class="w3-button">
+          <img src="./img/layers.png" alt="layers" class="imgLayers" />
+        </button>
+        <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+          <a onclick="changeBackground('CN')" class="w3-bar-item w3-button">Carte Nationale</a>
+          <a onclick="changeBackground('swissImage')" class="w3-bar-item w3-button">swissImage</a>
+          <a onclick="changeBackground('swissSurface3D')" class="w3-bar-item w3-button">swissSurface3D</a>
+          <a onclick="changeBackground('MO')" class="w3-bar-item w3-button">Mens. Off.</a>
+          <a onclick="changeBackground('nothing')" class="w3-bar-item w3-button">-</a>
+        </div>
+      </div>
+      
+      
+      <!--<div class="dropdown">
+        <input type="image" src="./img/layers.png" onclick="functionLayers()" class="dropbtn">
+            <!-- <img class="img-layers" src="img/layers.jpg"> -->
+        <!--</input>
+    <img src="./img/layers.png" alt="layers" class="imgLayers" />
+        <div id="myDropdown" class="dropdown-content">
+            <a onclick="changefondCarte('CN')">Carte Nationale</a>
+            <a onclick="changefondCarte('swissImage')">swissImage</a>
+            <a onclick="changefondCarte('swiss3D')">swissSurface3D</a>
+            <a onclick="changefondCarte('MO')">Mens. Off.</a>
+        </div>
+      </div>-->
+
     </div>
 
 
