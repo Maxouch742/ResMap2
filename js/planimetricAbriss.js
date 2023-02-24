@@ -1,4 +1,3 @@
-  
 /** 
  * This function parses the PRNx file (language : XML) to get and
  * generate the ellipses on the map (with scale factor)

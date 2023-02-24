@@ -13,8 +13,8 @@ document.getElementById('inputfile').addEventListener('change', function() {
         xmlToParse = fr.result;
         parser = new DOMParser();
         xmlDoc = parser.parseFromString(xmlToParse,"text/xml");
-        let listAllPoints = parsingPointsXML(xmlToParse);
-        centerViewOnProject(listAllPoints);
+        parsingPointsXML(xmlToParse);
+        centerViewOnProject();
         // CHANGER ECHELLE ELLIPSES ET RECTANGLES PAR DEFAULT CI-DESSSOUS 
         echelleEllipses = 1000.0
 

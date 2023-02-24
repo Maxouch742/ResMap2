@@ -1,3 +1,19 @@
+function changeLayerVisibilityFixedPoints_altimetric() {
+    if (document.getElementById("checkboxPointsFixes_altimetric").checked === true){
+        pointsLayerAltimetric.setVisible(true);
+    } else {
+        pointsLayerAltimetric.setVisible(false);
+    };
+};
+
+function changeLayerVisibilityVariablePoints_altimetric() {
+    if (document.getElementById("checkboxPointsNouv_altimetric").checked === true) {
+        pointsVariableLayerAltimetric.setVisible(true);
+    } else {
+        pointsVariableLayerAltimetric.setVisible(false);
+    };
+};
+
 function changeLayerVisibilityDenivelee_altimetric() {
     if (document.getElementById("checkboxDenivelee").checked === true) {
         deniveleeLayer.setVisible(true);
@@ -105,6 +121,8 @@ function changeLayerVisibilityVect_altimetric() {
 };
 
 function altimetricActivateCheckBox() {
+    document.getElementById("checkboxPointsFixes_altimetric").disabled = false;
+    document.getElementById("checkboxPointsNouv_altimetric").disabled = false;
     document.getElementById("checkboxDenivelee").disabled = false;
     document.getElementById("checkboxCoordH").disabled = false;
     document.getElementById("checkboxGnss_altimetric").disabled = false;

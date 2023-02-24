@@ -10,11 +10,8 @@ function logMapElements(value, key, map) {
     listCoordsProject.push(value);
 };
 
-/** This function set view and zoom on the zone of the project (mean of coords)
- * 
- * @param {array} listAllPoints 
- */
-function centerViewOnProject(listAllPoints) {
+
+function centerViewOnProject() {
     listAllPoints.forEach(logMapElements);
     extentProject = ol.extent.boundingExtent(listCoordsProject);
     bufferProject = ol.extent.buffer(extentProject,50);
