@@ -10,16 +10,21 @@ slider.oninput = function() {
     map.removeLayer(ellipseLayer);
     map.removeLayer(rectangleLayer);
     map.removeLayer(vectLayer);
+    map.removeLayer(ellipseLayerAltimetric);
+    // map.removeLayer(rectangleLayerAltimetric);
+    map.removeLayer(vectLayerAltimetric);
     if (xmlDoc.getElementsByTagName("relativeEllipses").length != 0){ // On retire uniquement le Layer ellipseRelaLayer si il y en a
         map.removeLayer(ellipseRelaLayer);
+        map.removeLayer(ellipRelaAltiLayer);
     }; 
     if (xmlDoc.getElementsByTagName("relativeRectangles").length != 0){ // On retire uniquement le Layer rectangleRelaLayer si il y en a
         map.removeLayer(rectangleRelaLayer);
+        // map.removeLayer(rectangleRelaLayerAltimetric);
     };
     echelleEllipses = parseFloat(this.value);
-    parsingEllipsesXML(xmlToParse);
-    parsingRectanglesXML(xmlToParse);
-    parsingEllipsesRelaXML(xmlToParse);
-    parsingRectanglesRelaXML(xmlToParse);
-    parsingVectXML(xmlToParse);
+    parsingEllipsesXML_planimetric();
+    parsingEllipsesRelaXML_planimetric();
+    parsingRectanglesXML_planimetric();
+    parsingRectanglesRelaXML_planimetric();
+    parsingVectXML_planimetric();
 };
