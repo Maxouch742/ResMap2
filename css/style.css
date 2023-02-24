@@ -34,7 +34,7 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-out;
-} 
+}
 
 
 
@@ -49,10 +49,6 @@
     scrollbar-width: thin;
     margin-top: 2px;
 }
-
-
-
-
 
 
 
@@ -73,14 +69,16 @@
 
 /* ------   SLIDING BAR (ech. ellipses)   -------- */
 .slidecontainer {
-    position: fixed;
-    left: 50%;
-    bottom: 25px;
-    width: 360px;
+    /*position: fixed;*/
+    /*width: 360px;*/
     text-align: center; 
     background-color: white;
     padding: 10px 5px 10px 5px;
-    box-shadow: 0px 0px 20px grey;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    /*box-shadow: 0px 0px 20px grey;*/
+    margin-top: 15px;
 }
 .slider {
     -webkit-appearance: none;  
@@ -120,7 +118,8 @@
 /* ------   DIVERS   -------- */
 
 .param {
-    
+    max-height: 100%;
+    overflow: auto;
 }
 
 .logo-header {
@@ -248,7 +247,6 @@ hr {
 }
 
 
-/* ------   POP UP LAYERS   -------- */
 /***************** ANIMATIONS LAYERS *****************/
 .imgLayers {
     width: 40px;
@@ -272,4 +270,20 @@ hr {
 
 .w3-bar-item {
     font-size: 14px;
+}
+
+
+/***************** PRINT CONTROL *****************/
+.ol-print {
+    /*width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 20px;
+    top: 50px;*/
+    pointer-events: auto;
+}
+
+.button-print{
+    width: 40px;
+    height: 40px;
 }

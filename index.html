@@ -34,14 +34,15 @@
 
           <!-- Image logo -->
           <div class="logo-header">
-            <img id="logo" src="./img/ResMap_logo.svg" alt="Logo de ResMap">
+            <!-- <img id="logo" src="./img/ResMap_logo.svg" alt="Logo de ResMap"> -->
+            <img id="logo" src="./img/temporary.jpeg" alt="Logo temporaire">
           </div>
 
           <!-- Box pour importer le fichier .PRNx -->
           <div class="mt-2 greyBackground border border-dark p-1">
             <h5 class="mx-2">Import du fichier .PRNx</h5>
             <input class="mx-2 my-1 pr-2 inputFile" type="file" id="inputfile" accept=".prnx"></input>
-            <p class="mx-2 my-1 importInfo" id="outputTest"> </p>
+            <p class="mx-2 my-1 importInfo" id="outputTest"></p>
           </div>
 
           <!-- Points -->
@@ -313,13 +314,28 @@
                 <div class="textEchelleLegende" id="AffichageEchelleVect_altimetric"></div>
               </div>
             </div>
+          </div>
 
+          <!-- Box for slider -->
+          <div class="slidecontainer">
+            <input type="range" min="0" max="9999" step="10" value="1000" class="slider" id="myRange">
+            <div>
+              <span class="textEchelle">Echelle des ellipses, rectangles et vecteurs → </span>
+              <span id="textEchelle" class="textEchelle"></span>
+              <span class="textEchelle">:1</span>
+              <div class="textEchelle" id="nivConfiance">Niveau de confiance des ellipses → </div>
+            </div>
           </div>
         </div>        
 
         <!-- Partie droite : CARTE -->
         <div class="col">
-          <div id="map"></div>
+          <div id="map">
+            <!-- Button for print -->
+            <!--<div class="ol-print ol-unselectable ol-control">
+              <button class="button-print" type="button" title="Print" ></button>
+            </div>-->
+          </div>
         </div>
 
       </div>
@@ -337,11 +353,6 @@
           <a onclick="changeBackground('MO')" class="w3-bar-item w3-button">Mens. Off.</a>
           <a onclick="changeBackground('nothing')" class="w3-bar-item w3-button">-</a>
         </div>
-      </div>
-      
-      <!-- Button for print -->
-      <div class="ol-print ol-unselectable ol-control" style="pointer-events: auto;">
-        <button type="button" title="Print"></button>
       </div>
 
     </div>
