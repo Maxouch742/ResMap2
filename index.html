@@ -49,130 +49,145 @@
           <button class ="accordion mt-2 py-1" id="coucheButton">Planimétrie</button>
           <div class="panel scroller">
             
-            <!-- Checkbox : Points fixes -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxPointsFixes" onchange="changeLayerVisibilityFixedPoints_planimetric()" checked>
-              <label class="checkboxLabel" for="checkboxPointsFixes">
-                Points fixes
-              </label>
-            </div>
-
-            <!-- Checkbox : Points nouveaux -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxPointsNouv" onchange="changeLayerVisibilityVariablePoints_planimetric()" checked>
-              <label class="checkboxLabel" for="checkboxPointsNouv">
-                Points nouveaux
-              </label>
-            </div>
-
-            <!-- Checkbox : Observations de directions -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxDirections" onchange="changeLayerVisibilityDirections_planimetric()" checked>
-              <label class="checkboxLabel" for="checkboxDirections" id="legendeDir">
-                Obs. directions
-              </label>
-            </div>
-
-            <!-- Checkbox : Observations de distances -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxDistances" onchange="changeLayerVisibilityDistances_planimetric()" checked>
-              <label class="checkboxLabel" for="checkboxDistances" id="legendeDist">
-                Obs. distances
-              </label>
-            </div>
-
-            <!-- Checkbox : Observations des coordonnées Est (Réseau libre-ajusté) -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxCoordE" onchange="changeLayerVisibilityCoordE_planimetric()" >
-              <label class="checkboxLabel" for="checkboxCoordE">
-                Obs. coordonnée E/Y (Libre-ajusté)
-              </label>
-            </div>
-
-            <!-- Checkbox : Observations des coordonnées Nord (Réseau libre-ajusté) -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxCoordN" onchange="changeLayerVisibilityCoordN_planimetric()" >
-              <label class="checkboxLabel" for="checkboxCoordN">
-                Obs. coordonnée N/X (Libre-ajusté)
-              </label>
-            </div>
-
-            <!-- Checkbox : Sessions GNSS -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxGnss" onchange="changeLayerVisibilityGnss_planimetric()">
-              <label class="checkboxLabel" for="checkboxGnss">
-                Transformation de similitude (GNSS)
-              </label>
-            </div>
-
-            <!-- Checkbox : Ellipses de confiances -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxEllipses" onchange="changeLayerVisibilityEllipses_planimetric()">
-              <label class="checkboxLabel" for="checkboxEllipses">
-                Ellipses de confiance
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Points fixes -->
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleEllipse"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxPointsFixes" onchange="changeLayerVisibilityFixedPoints_planimetric()" checked>
+                <label class="checkboxLabel" for="checkboxPointsFixes">
+                  Points fixes
+                </label>
+              </div>
+
+              <!-- Checkbox : Points nouveaux -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxPointsNouv" onchange="changeLayerVisibilityVariablePoints_planimetric()" checked>
+                <label class="checkboxLabel" for="checkboxPointsNouv">
+                  Points nouveaux
+                </label>
               </div>
             </div>
 
-            <!-- Checkbox : Ellipses de confiance relatives -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxEllipsesRela" onchange="changeLayerVisibilityEllipsesRela_planimetric()">
-              <label class="checkboxLabel" for="checkboxEllipsesRela" id="legendeEllRela">
-                Ellipses de confiance relatives
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Observations de directions -->
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleEllipseRela"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxDirections" onchange="changeLayerVisibilityDirections_planimetric()" checked>
+                <label class="checkboxLabel" for="checkboxDirections" id="legendeDir">
+                  Obs. directions
+                </label>
+              </div>
+
+              <!-- Checkbox : Observations de distances -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxDistances" onchange="changeLayerVisibilityDistances_planimetric()" checked>
+                <label class="checkboxLabel" for="checkboxDistances" id="legendeDist">
+                  Obs. distances
+                </label>
               </div>
             </div>
 
-            <!-- Checkbox : Rectangles de fiabilités -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxRectangles" onchange="changeLayerVisibilityRectangles_planimetric()">
-              <label class="checkboxLabel" for="checkboxRectangles">
-                Rectangles de fiabilité externe
-              </label>
+            <div class="div-box-separator">
+              <!-- #TODO: faire apparaître les checkbox que si on est en Libre-ajusté -->
+              <!-- Checkbox : Observations des coordonnées Est (Réseau libre-ajusté) -->
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleRectangles"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxCoordE" onchange="changeLayerVisibilityCoordE_planimetric()" >
+                <label class="checkboxLabel" for="checkboxCoordE">
+                  Obs. coordonnée E/Y (Libre-ajusté)
+                </label>
+              </div>
+
+              <!-- Checkbox : Observations des coordonnées Nord (Réseau libre-ajusté) -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxCoordN" onchange="changeLayerVisibilityCoordN_planimetric()" >
+                <label class="checkboxLabel" for="checkboxCoordN">
+                  Obs. coordonnée N/X (Libre-ajusté)
+                </label>
               </div>
             </div>
 
-            <!-- Checkbox : Rectangles de fiabilités relatifs -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxRectanglesRela" onchange="changeLayerVisibilityRectanglesRela_planimetric()">
-              <label class="checkboxLabel" for="checkboxRectanglesRela" id="legendeRectRela">
-                Rectangles de fiab. ext. relatifs
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Sessions GNSS -->
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleRectanglesRela"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxGnss" onchange="changeLayerVisibilityGnss_planimetric()">
+                <label class="checkboxLabel" for="checkboxGnss">
+                  Transf. de similitude (session GNSS)
+                </label>
               </div>
             </div>
 
-            <!-- Checkbox : Fiabilité locale (zi) -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxFiabLoc" onchange="changeLayerVisibilityFiabLoc_planimetric()">
-              <label class="checkboxLabel" for="checkboxFiabLoc">
-                Carte des fiabilités locales (zi)
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Ellipses de confiances -->
               <div>
-                <div id="fiabiliteLocal_planimetric1" class="textEchelleLegende fontColorFiab1"></div>
-                <div id="fiabiliteLocal_planimetric2" class="textEchelleLegende fontColorFiab2"></div>
-                <div id="fiabiliteLocal_planimetric3" class="textEchelleLegende fontColorFiab3"></div>
-                <div id="fiabiliteLocal_planimetric4" class="textEchelleLegende fontColorFiab4"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxEllipses" onchange="changeLayerVisibilityEllipses_planimetric()">
+                <label class="checkboxLabel" for="checkboxEllipses">
+                  Ellipses de confiance
+                </label>
+                <div>
+                  <div class="textEchelleLegende" id="AffichageEchelleEllipse"></div>
+                </div>
+              </div>
+
+              <!-- Checkbox : Ellipses de confiance relatives -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxEllipsesRela" onchange="changeLayerVisibilityEllipsesRela_planimetric()">
+                <label class="checkboxLabel" for="checkboxEllipsesRela" id="legendeEllRela">
+                  Ellipses de confiance relatives
+                </label>
+                <div>
+                  <div class="textEchelleLegende" id="AffichageEchelleEllipseRela"></div>
+                </div>
               </div>
             </div>
 
-            <!-- Checkbox : Résidus normés (wi) -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxResidusNormes" onchange="changeLayerVisibilityWi_planimetric()">
-              <label class="checkboxLabel" for="checkboxResidusNormes" id="legendeWi">
-                Carte des résidus normés (wi)
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Rectangles de fiabilités -->
               <div>
-                <div class="textEchelleLegende fontColorFiab1" id="palierWi1"></div>
-                <div class="textEchelleLegende fontColorFiab2" id="palierWi2"></div>
-                <div class="textEchelleLegende fontColorFiab4" id="palierWi3"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxRectangles" onchange="changeLayerVisibilityRectangles_planimetric()">
+                <label class="checkboxLabel" for="checkboxRectangles">
+                  Rectangles de fiabilité externe
+                </label>
+                <div>
+                  <div class="textEchelleLegende" id="AffichageEchelleRectangles"></div>
+                </div>
+              </div>
+
+              <!-- Checkbox : Rectangles de fiabilités relatifs -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxRectanglesRela" onchange="changeLayerVisibilityRectanglesRela_planimetric()">
+                <label class="checkboxLabel" for="checkboxRectanglesRela" id="legendeRectRela">
+                  Rectangles de fiab. ext. relatifs
+                </label>
+                <div>
+                  <div class="textEchelleLegende" id="AffichageEchelleRectanglesRela"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="div-box-separator">
+              <!-- Checkbox : Fiabilité locale (zi) -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxFiabLoc" onchange="changeLayerVisibilityFiabLoc_planimetric()">
+                <label class="checkboxLabel" for="checkboxFiabLoc">
+                  Carte des fiabilités locales (zi)
+                </label>
+                <div>
+                  <div id="fiabiliteLocal_planimetric1" class="textEchelleLegende fontColorFiab1"></div>
+                  <div id="fiabiliteLocal_planimetric2" class="textEchelleLegende fontColorFiab2"></div>
+                  <div id="fiabiliteLocal_planimetric3" class="textEchelleLegende fontColorFiab3"></div>
+                  <div id="fiabiliteLocal_planimetric4" class="textEchelleLegende fontColorFiab4"></div>
+                </div>
+              </div>
+
+              <!-- Checkbox : Résidus normés (wi) -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxResidusNormes" onchange="changeLayerVisibilityWi_planimetric()">
+                <label class="checkboxLabel" for="checkboxResidusNormes" id="legendeWi">
+                  Carte des résidus normés (wi)
+                </label>
+                <div>
+                  <div class="textEchelleLegende fontColorFiab1" id="palierWi1"></div>
+                  <div class="textEchelleLegende fontColorFiab2" id="palierWi2"></div>
+                  <div class="textEchelleLegende fontColorFiab4" id="palierWi3"></div>
+                </div>
               </div>
             </div>
 
@@ -192,114 +207,126 @@
           <button class ="accordion mt-2 py-1" id="coucheButton">Altimétrie</button>
           <div class="panel scroller">
 
-            <!-- Checkbox : Points fixes -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxPointsFixes_altimetric" onchange="changeLayerVisibilityFixedPoints_altimetric()" checked>
-              <label class="checkboxLabel" for="checkboxPointsFixes_altimetric">
-                Points fixes
-              </label>
-            </div>
-
-            <!-- Checkbox : Points nouveaux -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxPointsNouv_altimetric" onchange="changeLayerVisibilityVariablePoints_altimetric()" checked>
-              <label class="checkboxLabel" for="checkboxPointsNouv_altimetric">
-                Points nouveaux
-              </label>
-            </div>
-
-            <!-- Checkbox : Observations terrestres -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxDenivelee" onchange="changeLayerVisibilityDenivelee_altimetric()" disabled>
-              <label class="checkboxLabel" for="checkboxDenivelee">
-                Obs. DH
-              </label>
-            </div>
-
-            <!-- Checkbox : Observations des coordonnées -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxCoordH" onchange="changeLayerVisibilityCoordH()" disabled>
-              <label class="checkboxLabel" for="checkboxCoordH">
-                Obs. coordonnée H
-              </label>
-            </div>
-
-            <!-- Checkbox : Session GNSS -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxGnss_altimetric" onchange="changeLayerVisibilityGnss_altimetric()" disabled>
-              <label class="checkboxLabel" for="checkboxGnss_altimetric">
-                Session GNSS
-              </label>
-            </div>
-
-            <!-- Checkbox : Ellipses de confiance -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxEllipses_altimetric" onchange="changeLayerVisibilityEllipses_altimetric()" disabled>
-              <label class="checkboxLabel" for="checkboxEllipses_altimetric">
-                Ellipses de confiance
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Points fixes -->
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleEllipse_altimetric"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxPointsFixes_altimetric" onchange="changeLayerVisibilityFixedPoints_altimetric()" checked>
+                <label class="checkboxLabel" for="checkboxPointsFixes_altimetric">
+                  Points fixes
+                </label>
+              </div>
+
+              <!-- Checkbox : Points nouveaux -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxPointsNouv_altimetric" onchange="changeLayerVisibilityVariablePoints_altimetric()" checked>
+                <label class="checkboxLabel" for="checkboxPointsNouv_altimetric">
+                  Points nouveaux
+                </label>
               </div>
             </div>
 
-            <!-- Checkbox : Ellipses de confiance relatives -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxEllipsesRela_altimetric" onchange="changeLayerVisibilityEllipsesRela_altimetric()" disabled>
-              <label class="checkboxLabel" for="checkboxEllipsesRela_altimetric" id="legendeEllRela_altimetric">
-                Ellipses de confiance relatives
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Observations terrestres -->
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleEllipseRela_altimetric"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxDenivelee" onchange="changeLayerVisibilityDenivelee_altimetric()" disabled>
+                <label class="checkboxLabel" for="checkboxDenivelee">
+                  Obs. DH
+                </label>
+              </div>
+
+              <!-- Checkbox : Observations des coordonnées -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxCoordH" onchange="changeLayerVisibilityCoordH()" disabled>
+                <label class="checkboxLabel" for="checkboxCoordH">
+                  Obs. coordonnée H (LI-AJ)
+                </label>
               </div>
             </div>
 
-            <!-- Checkbox : Rect. de fiabilité ext. -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxRectangles_altimetric" onchange="changeLayerVisibilityRect_altimetric()" disabled>
-              <label class="checkboxLabel" for="checkboxRectangles_altimetric">
-                Rectangles de fiabilité externe
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Session GNSS -->
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleRectangles_altimetric"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxGnss_altimetric" onchange="changeLayerVisibilityGnss_altimetric()" disabled>
+                <label class="checkboxLabel" for="checkboxGnss_altimetric">
+                  Transf. de similitude (session GNSS)
+                </label>
               </div>
             </div>
 
-            <!-- Checkbox : Rect. de fiabilité relatifs -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxRectanglesRela_altimetric" onchange="changeLayerVisibilityRectRela_altimetric()" disabled>
-              <label class="checkboxLabel" for="checkboxRectanglesRela_altimetric" id="legendeRectRela_altimetric">
-                Rectangles de fiab. ext. relatifs
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Ellipses de confiance -->
               <div>
-                <div class="textEchelleLegende" id="AffichageEchelleRectanglesRela_altimetric"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxEllipses_altimetric" onchange="changeLayerVisibilityEllipses_altimetric()" disabled>
+                <label class="checkboxLabel" for="checkboxEllipses_altimetric">
+                  Ellipses de confiance
+                </label>
+                <div>
+                  <div class="textEchelleLegende" id="AffichageEchelleEllipse_altimetric"></div>
+                </div>
+              </div>
+
+              <!-- Checkbox : Ellipses de confiance relatives -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxEllipsesRela_altimetric" onchange="changeLayerVisibilityEllipsesRela_altimetric()" disabled>
+                <label class="checkboxLabel" for="checkboxEllipsesRela_altimetric" id="legendeEllRela_altimetric">
+                  Ellipses de confiance relatives
+                </label>
+                <div>
+                  <div class="textEchelleLegende" id="AffichageEchelleEllipseRela_altimetric"></div>
+                </div>
               </div>
             </div>
 
-            <!-- Checkbox : Fiabilités locales -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxFiabLoc_altimetric" onchange="changeLayerVisibilityFiabiliteLocales_altimetric()" disabled>
-              <label class="checkboxLabel" for="checkboxFiabLoc_altimetric">
-                Carte des fiabilités locales (zi)
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Rect. de fiabilité ext. -->
               <div>
-                <div id="fiabiliteLocal_altimetric1" class="textEchelleLegende fontColorFiab1"></div>
-                <div id="fiabiliteLocal_altimetric2" class="textEchelleLegende fontColorFiab2"></div>
-                <div id="fiabiliteLocal_altimetric3" class="textEchelleLegende fontColorFiab3"></div>
-                <div id="fiabiliteLocal_altimetric4" class="textEchelleLegende fontColorFiab4"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxRectangles_altimetric" onchange="changeLayerVisibilityRect_altimetric()" disabled>
+                <label class="checkboxLabel" for="checkboxRectangles_altimetric">
+                  Rectangles de fiabilité externe
+                </label>
+                <div>
+                  <div class="textEchelleLegende" id="AffichageEchelleRectangles_altimetric"></div>
+                </div>
+              </div>
+
+              <!-- Checkbox : Rect. de fiabilité relatifs -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxRectanglesRela_altimetric" onchange="changeLayerVisibilityRectRela_altimetric()" disabled>
+                <label class="checkboxLabel" for="checkboxRectanglesRela_altimetric" id="legendeRectRela_altimetric">
+                  Rectangles de fiab. ext. relatifs
+                </label>
+                <div>
+                  <div class="textEchelleLegende" id="AffichageEchelleRectanglesRela_altimetric"></div>
+                </div>
               </div>
             </div>
 
-            <!-- Checkbox : Résidus normés -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxResidusNormes_altimetric" onchange="changeLayerVisibilityResidusNormes_altimetric()" disabled>
-              <label class="checkboxLabel" for="checkboxResidusNormes_altimetric" id="legendeWi_altimetric">
-                Résidus normés (wi)
-              </label>
+            <div class="div-box-separator">
+              <!-- Checkbox : Fiabilités locales -->
               <div>
-                <div id="palierWi1_Alti" class="textEchelleLegende fontColorFiab1"></div>
-                <div id="palierWi2_Alti" class="textEchelleLegende fontColorFiab2"></div>
-                <div id="palierWi3_Alti" class="textEchelleLegende fontColorFiab4"></div>
+                <input class="form-check-input" type="checkbox" id="checkboxFiabLoc_altimetric" onchange="changeLayerVisibilityFiabiliteLocales_altimetric()" disabled>
+                <label class="checkboxLabel" for="checkboxFiabLoc_altimetric">
+                  Carte des fiabilités locales (zi)
+                </label>
+                <div>
+                  <div id="fiabiliteLocal_altimetric1" class="textEchelleLegende fontColorFiab1"></div>
+                  <div id="fiabiliteLocal_altimetric2" class="textEchelleLegende fontColorFiab2"></div>
+                  <div id="fiabiliteLocal_altimetric3" class="textEchelleLegende fontColorFiab3"></div>
+                  <div id="fiabiliteLocal_altimetric4" class="textEchelleLegende fontColorFiab4"></div>
+                </div>
+              </div>
+
+              <!-- Checkbox : Résidus normés -->
+              <div>
+                <input class="form-check-input" type="checkbox" id="checkboxResidusNormes_altimetric" onchange="changeLayerVisibilityResidusNormes_altimetric()" disabled>
+                <label class="checkboxLabel" for="checkboxResidusNormes_altimetric" id="legendeWi_altimetric">
+                  Résidus normés (wi)
+                </label>
+                <div>
+                  <div id="palierWi1_Alti" class="textEchelleLegende fontColorFiab1"></div>
+                  <div id="palierWi2_Alti" class="textEchelleLegende fontColorFiab2"></div>
+                  <div id="palierWi3_Alti" class="textEchelleLegende fontColorFiab4"></div>
+                </div>
               </div>
             </div>
 

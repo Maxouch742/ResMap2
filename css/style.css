@@ -246,6 +246,12 @@ hr {
     opacity: .25;
 }
 
+.div-box-separator{
+    border-bottom: 1px solid #444;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+}
+
 
 /***************** ANIMATIONS LAYERS *****************/
 .imgLayers {
