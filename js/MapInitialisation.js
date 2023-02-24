@@ -62,16 +62,14 @@ const view = new ol.View({
 });
 
 // Ajout de la Map
-const map = new ol.Map({
+map = new ol.Map({
     target: "map",
-    layers: [
-        carteNationale,
-    ],
+    layers: [carteNationale],
     view,
-    controls: ol.control.defaults({
+    /*controls: ol.control.defaults({
         attributionOptions: {
             collapsible: true, // Copyright affiché 
             visible: false
         }
-    })
+    }),*/
 });
