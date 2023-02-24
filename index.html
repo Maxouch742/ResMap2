@@ -43,45 +43,28 @@
             <h5 class="mx-2">Import du fichier .PRNx</h5>
             <input class="mx-2 my-1 pr-2 inputFile" type="file" id="inputfile" accept=".prnx"></input>
             <p class="mx-2 my-1 importInfo" id="outputTest"></p>
-          </div>
+          </div>      
 
-          <!-- Points -->
-          <button class="accordion mt-2 py-1" id="coucheButton">
-            Points
-          </button>
-          
-          <div class="panel scoller">
+          <!-- Abriss planimétrique -->
+          <button class ="accordion mt-2 py-1" id="coucheButton">Planimétrie</button>
+          <div class="panel scroller">
+            
+            <!-- Checkbox : Points fixes -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxPointsFixes" onchange="changeLayerVisibilityFixedPoints_planimetric()" checked>
               <label class="checkboxLabel" for="checkboxPointsFixes">
                 Points fixes
               </label>
             </div>
-            <div class="NoPtsDecalage">
-              <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsFixesNo" onchange="changeLayerVisibilityTextFixedPoints_planimetric()" checked>
-              <label class="checkboxLabel NoPtsTxt" for="checkboxPointsFixesNo">
-                N° points fixes
-              </label>
-            </div>
 
+            <!-- Checkbox : Points nouveaux -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxPointsNouv" onchange="changeLayerVisibilityVariablePoints_planimetric()" checked>
               <label class="checkboxLabel" for="checkboxPointsNouv">
                 Points nouveaux
               </label>
             </div>
-            <div class="NoPtsDecalage">
-              <input class="form-check-input NoPtsCheckbox" type="checkbox" id="checkboxPointsVariableNo" onchange="changeLayerVisibilityTextVariablePoints_planimetric()" checked>
-              <label class="checkboxLabel NoPtsTxt" for="checkboxPointsVariableNo">
-                N° points nouveaux
-              </label>
-            </div>
-          </div>
 
-          <!-- Abriss planimétrique -->
-          <button class ="accordion mt-2 py-1" id="coucheButton">Planimétrie</button>
-          <div class="panel scroller">
-            
             <!-- Checkbox : Observations de directions -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxDirections" onchange="changeLayerVisibilityDirections_planimetric()" checked>
@@ -208,6 +191,22 @@
           <!-- Abriss altimétrique -->
           <button class ="accordion mt-2 py-1" id="coucheButton">Altimétrie</button>
           <div class="panel scroller">
+
+            <!-- Checkbox : Points fixes -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxPointsFixes_altimetric" onchange="changeLayerVisibilityFixedPoints_altimetric()" checked>
+              <label class="checkboxLabel" for="checkboxPointsFixes_altimetric">
+                Points fixes
+              </label>
+            </div>
+
+            <!-- Checkbox : Points nouveaux -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxPointsNouv_altimetric" onchange="changeLayerVisibilityVariablePoints_altimetric()" checked>
+              <label class="checkboxLabel" for="checkboxPointsNouv_altimetric">
+                Points nouveaux
+              </label>
+            </div>
 
             <!-- Checkbox : Observations terrestres -->
             <div>
