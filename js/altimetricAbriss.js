@@ -710,6 +710,83 @@ function parsingRectanglesRelaXML_altimetric() {
     };
 };
 
+
+function parsingVectXML_altimetric() {
+    // Récupération de la balise complète <coordinate>
+    const coordinates = xmlDoc.getElementsByTagName("coordinates")[0];
+    const pointsList = coordinates.getElementsByTagName("point");
+
+    // Création de la source du layer des features
+    const vectLayerAlti_source = new ol.source.Vector({});
+
+    // Parcours de la liste des points
+    for (let i=0; i<pointsList.length; i++){
+
+        // On ne garde que les éléments dh
+        if (pointsList[i].getAttribute("dh") != null){
+
+            if (pointsList[i].getAttribute("dh") != 0.0){
+                // Attribution des éléments
+                const pt_name = pointsList[i].getAttribute("name");
+                const dh = parseFloat(pointsList[i].getAttribute("dh"))/1000.0;
+                const center = [
+                    parseFloat(listAllPoints.get(pt_name)[0]),
+                    parseFloat(listAllPoints.get(pt_name)[1])
+                ];
+
+                const arrow = [
+                    center,
+                    [ center[0], center[1]+echelleEllipses*dh ],
+                    [ center[0] + (Math.abs(dh)/5)*echelleEllipses*Math.sin(250*Math.PI/200.0), center[1]+echelleEllipses*dh + (Math.abs(dh)/5)*echelleEllipses*Math.cos(250*Math.PI/200.0) ],
+                    [ center[0], center[1]+echelleEllipses*dh ],
+                    [ center[0] + (Math.abs(dh)/5)*echelleEllipses*Math.sin(150*Math.PI/200.0), center[1]+echelleEllipses*dh + (Math.abs(dh)/5)*echelleEllipses*Math.cos(150*Math.PI/200.0) ],
+                ];
+
+                const featureVecAlti = new ol.Feature({
+                    geometry: new ol.geom.LineString(arrow),
+                    properties: String((dh*1000.0).toFixed(1)) + 'mm', 
+                });
+                vectLayerAlti_source.addFeature(featureVecAlti);
+            }
+        }
+    }
+
+    // Création du layer de la map
+    const styleVect = new ol.style.Style({
+        stroke: new ol.style.Stroke({ 
+            color: '#FF0000', 
+            width: 1 
+        }),
+        text: new ol.style.Text({
+            textAlign: "center",
+            textBaseline: "middle",
+            font: "13px Calibri",
+            fill: new ol.style.Fill({
+                color: "#FF0000"
+            }),
+            stroke: new ol.style.Stroke({
+                color: "#ffffff", width: 3
+            }),
+            offsetX: 10,
+            offsetY: -10,
+            rotation: 0,
+            placement: "point"
+        })
+    });
+    vectLayerAlti = new ol.layer.Vector({
+        source: vectLayerAlti_source,
+        style: function (feature) { // la propriété style prend un callback qui doit retourner un style
+            styleVect.getText().setText(feature.get("properties")); 
+            return styleVect;
+        }
+    });
+
+    // Ajout de layer à la map
+    map.addLayer(vectLayerAlti);
+    changeLayerVisibilityVect_altimetric();
+
+}
+
 function fiabLocale_altimetric() {
     // Création de la source pour traitement graphique et nouveau layer
     fiabLocaleSourceAlti = new ol.source.Vector({});

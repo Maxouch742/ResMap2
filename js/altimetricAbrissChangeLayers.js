@@ -112,10 +112,10 @@ function changeLayerVisibilityResidusNormes_altimetric(){
 
 function changeLayerVisibilityVect_altimetric() {
     if (document.getElementById("checkboxVect_altimetric").checked === true) {
-        vectLayerAltimetric.setVisible(true);
+        vectLayerAlti.setVisible(true);
         document.getElementById("AffichageEchelleVect_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
-        vectLayerAltimetric.setVisible(false);
+        vectLayerAlti.setVisible(false);
         document.getElementById("AffichageEchelleVect_altimetric").textContent = "";
     };
 };

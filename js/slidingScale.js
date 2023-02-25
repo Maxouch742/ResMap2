@@ -12,7 +12,7 @@ slider.oninput = function() {
     map.removeLayer(vectLayer);
     map.removeLayer(ellipseLayerAltimetric);
     map.removeLayer(rectangleLayerAltimetric);
-    //map.removeLayer(vectLayerAltimetric);
+    map.removeLayer(vectLayerAlti);
     if (xmlDoc.getElementsByTagName("relativeEllipses").length != 0){ // On retire uniquement le Layer ellipseRelaLayer si il y en a
         map.removeLayer(ellipseRelaLayer);
         map.removeLayer(ellipRelaAltiLayer);
@@ -32,4 +32,5 @@ slider.oninput = function() {
     parsingEllipsesRelaXML_altimetric();
     parsingRectanglesXML_altimetric();
     parsingRectanglesRelaXML_altimetric();
+    parsingVectXML_altimetric();
 };

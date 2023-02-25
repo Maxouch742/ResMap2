@@ -44,6 +44,7 @@ document.getElementById('inputfile').addEventListener('change', function() {
         parsingRectanglesRelaXML_altimetric();
         fiabLocale_altimetric();
         normedResidualsWi_altimetric();
+        parsingVectXML_altimetric();
         // Activer les boutons
         altimetricActivateCheckBox();
 
