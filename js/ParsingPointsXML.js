@@ -91,6 +91,17 @@ function parsingPointsXML() {
       E_i = parseFloat(pointList[i].getAttribute("easting")).toFixed(4);
       N_i = parseFloat(pointList[i].getAttribute("northing")).toFixed(4);
       H_i = parseFloat(pointList[i].getAttribute("height")).toFixed(4);
+
+      /*if (E_i < 2000000.0 && N_i < 1000000.0){
+        src = "EPSG:21781";
+        des = "EPSG:2056";
+        const pt = new ol.Feature({
+          geometry: new ol.geom.Point([E_i, N_i])
+        });
+        pt.getGeometry().transform(src, des);
+        console.log(pt.getGeometry().getCoordinates());
+      }*/
+
       listAllPoints.set(pointName_i,[E_i,N_i,H_i]);
     
       // Création d'une Feature ol pour Point i (MN95)

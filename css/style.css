@@ -257,27 +257,42 @@ hr {
 
 /***************** ANIMATIONS LAYERS *****************/
 .imgLayers {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 }
 
-.w3-dropdown-hover {
+.imgProjection {
+    width: 35px;
+    height: 35px;
+}
+
+#div-layers {
     position: absolute;
     right: 20px;
-    top: 20px;
+    top: 10px;
+}
+
+#div-projection{
+    position: absolute;
+    right: 20px;
+    top: 65px;
 }
 
 .w3-button {
     background-color: #ffffff;
-
     border-style: solid;
     border-width: 1px;
     border-color: black;
-    padding: 2px;
+    padding: 5px;
 }
 
 .w3-bar-item {
     font-size: 14px;
+}
+
+#div-projection-selection{
+    padding: 2px;
+    width: 50px;
 }
 
 

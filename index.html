@@ -203,7 +203,7 @@
           </div>
 
           <!-- Abriss altimétrique -->
-          <button class ="accordion mt-2 py-1" id="coucheButton">Altimétrie</button>
+          <button class="accordion mt-2 py-1" id="coucheButton">Altimétrie</button>
           <div class="panel scroller">
 
             <div class="div-box-separator">
@@ -351,6 +351,8 @@
               <div class="textEchelle" id="nivConfiance">Niveau de confiance des ellipses → </div>
             </div>
           </div>
+
+          
         </div>        
 
         <!-- Partie droite : CARTE -->
@@ -367,9 +369,9 @@
 
 
       <!-- Button for layers -->
-      <div class="w3-dropdown-hover w3-right">
+      <div class="w3-dropdown-hover w3-right" id="div-layers">
         <button class="w3-button">
-          <img src="./img/layers.png" alt="layers" class="imgLayers" />
+          <img src="./img/layers.svg" alt="layers" class="imgLayers" />
         </button>
         <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
           <a onclick="changeBackground('CN')" class="w3-bar-item w3-button">Carte Nationale</a>
@@ -377,6 +379,31 @@
           <a onclick="changeBackground('swissSurface3D')" class="w3-bar-item w3-button">swissSurface3D</a>
           <a onclick="changeBackground('MO')" class="w3-bar-item w3-button">Mens. Off.</a>
           <a onclick="changeBackground('nothing')" class="w3-bar-item w3-button">-</a>
+        </div>
+      </div>
+
+
+      <!-- Button for projection -->
+      <div class="w3-dropdown-hover w3-right" id="div-projection">
+        <button class="w3-button">
+          <img src="./img/projection.svg" alt="layers" class="imgProjection" />
+        </button>
+        <div class="w3-dropdown-content w3-bar-block w3-border" id="div-projection-selection" style="right:0">
+          <div>
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="2056" onchange="changeProjection(this.id)" checked>
+            <label class="form-check-label" for="2056">
+              MN95 (CH1903+)
+            </label>
+          </div>
+          <div>
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="21781" onchange="changeProjection(this.id)">
+            <label class="form-check-label" for="21781">
+              MN03 (CH1903)
+            </label>
+          </div>
+          <!-- 
+          <a onclick="" class="w3-bar-item w3-button">MN95</a>
+          <a onclick="" class="w3-bar-item w3-button">MN03</a> -->
         </div>
       </div>
 
@@ -407,6 +434,7 @@
     <!-- Script personnel -->
     <script src="./js/MapInitialisation.js"></script>
     <script src="./js/ChangeBackground.js"></script>
+    <script src="./js/changeProjection.js"></script>
     <script src="./js/slidingScale.js"></script>
     <script src="./js/accordionMenu.js"></script>
 

@@ -2,9 +2,14 @@
 
 // Définition de projection MN95 
 proj4.defs(
-    "EPSG:2056",
-    "+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1"
-    + " +x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs"
+    'EPSG:2056',
+    '+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1' +
+    '+x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs'
+);
+proj4.defs(
+    'EPSG:21781',
+    '+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1' +
+    '+x_0=600000 +y_0=200000 +ellps=bessel towgs84=674.4,15.1,405.3,0,0,0,0 +units=m +no_defs'
 );
 ol.proj.proj4.register(proj4);
 
@@ -12,6 +17,7 @@ ol.proj.proj4.register(proj4);
 // Fond WMTS CN à échelle dynamique
 const carteNationale = new ol.layer.Tile({
     source: new ol.source.TileWMS({
+        projection: 'EPSG:2056',
         url: "https://wms.geo.admin.ch/",
         params: { layers: "ch.swisstopo.pixelkarte-farbe" },
         attributions: ["&copy; <a href=\"https://www.geo.admin.ch/fr/home.html\">WMTS CarteNationale / geo.admin.ch</a>"]
@@ -53,7 +59,8 @@ const MO_nb = new ol.layer.Tile({
 
 // Vue de base (centre et zoom), avec projection
 const view = new ol.View({
-    center: [2660156.229, 1183629.320], // centre de la suisse géographique
+    center: [2660156.229, 1183629.320], // centre géographique de la Suisse en MN95
+    //center: [660155.685, 183629.529], // centre géographique de la Suisse en MN03
     projection: new ol.proj.Projection({
         code: "EPSG:2056",
         units: "m"
