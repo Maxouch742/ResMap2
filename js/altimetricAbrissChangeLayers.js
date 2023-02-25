@@ -60,20 +60,20 @@ function changeLayerVisibilityEllipsesRela_altimetric() {
 
 function changeLayerVisibilityRect_altimetric(){
     if (document.getElementById("checkboxRectangles_altimetric").checked === true){
-        //   .setVisible(true);
+        rectangleLayerAltimetric.setVisible(true);
         document.getElementById("AffichageEchelleRectangles_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
-        //    .setVisible(false);
+        rectangleLayerAltimetric.setVisible(false);
         document.getElementById("AffichageEchelleRectangles_altimetric").textContent = "";
     }
 };
 
 function changeLayerVisibilityRectRela_altimetric(){
     if (document.getElementById("checkboxRectanglesRela_altimetric").checked === true){
-        //   .setVisible(true);
+        rectangleRelaLayerAlti.setVisible(true);
         document.getElementById("AffichageEchelleRectanglesRela_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
-        //    .setVisible(false);
+        rectangleRelaLayerAlti.setVisible(false);
         document.getElementById("AffichageEchelleRectanglesRela_altimetric").textContent = "";
     }
 };
@@ -112,10 +112,10 @@ function changeLayerVisibilityResidusNormes_altimetric(){
 
 function changeLayerVisibilityVect_altimetric() {
     if (document.getElementById("checkboxVect_altimetric").checked === true) {
-        vectLayerAltimetric.setVisible(true);
+        vectLayerAlti.setVisible(true);
         document.getElementById("AffichageEchelleVect_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
-        vectLayerAltimetric.setVisible(false);
+        vectLayerAlti.setVisible(false);
         document.getElementById("AffichageEchelleVect_altimetric").textContent = "";
     };
 };

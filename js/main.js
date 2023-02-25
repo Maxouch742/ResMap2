@@ -40,8 +40,11 @@ document.getElementById('inputfile').addEventListener('change', function() {
         parsingObsCoord_altimetric();
         parsingEllipsesXML_altimetric();
         parsingEllipsesRelaXML_altimetric();
+        parsingRectanglesXML_altimetric();
+        parsingRectanglesRelaXML_altimetric();
         fiabLocale_altimetric();
         normedResidualsWi_altimetric();
+        parsingVectXML_altimetric();
         // Activer les boutons
         altimetricActivateCheckBox();
 

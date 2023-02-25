@@ -503,6 +503,289 @@ function parsingEllipsesRelaXML_altimetric() {
     };
 };
 
+function parsingRectanglesXML_altimetric() {
+    // Check s'il y a bien des carrés de fiabilité dans le PRNx
+    if (xmlDoc.getElementsByTagName("externalReliabilityApriori").length != 0){
+        // Récupération des éléments dans le fichier xml
+        let externalReliabilityApriori = xmlDoc.getElementsByTagName("externalReliabilityApriori")[0];
+        let pointsList = externalReliabilityApriori.getElementsByTagName("point");
+
+        // Création des listes
+        let listNH = [];
+        let listCarreAll = [];
+        for (let i=0; i<pointsList.length; i++){
+            // S'il y a une fiabilité externe
+            if (pointsList[i].getAttribute("nh") != null && pointsList[i].getAttribute("nh") != "infinite") {
+                const pointName = pointsList[i].getAttribute("name");
+                const nh = pointsList[i].getAttribute("nb")/1000.0; // en [m]
+                const center = [parseFloat(listAllPoints.get(pointName)[0]),parseFloat(listAllPoints.get(pointName)[1])];
+                listNH.push([String((nh*1000.0).toFixed(1)) + "mm"]);
+
+                let listCarre = [];
+                listCarre.push([center[0]+nh*echelleEllipses, center[1]+nh*echelleEllipses]);
+                listCarre.push([center[0]+nh*echelleEllipses, center[1]-nh*echelleEllipses]);
+                listCarre.push([center[0]-nh*echelleEllipses, center[1]-nh*echelleEllipses]);
+                listCarre.push([center[0]-nh*echelleEllipses, center[1]+nh*echelleEllipses]);
+                listCarre.push([center[0]+nh*echelleEllipses, center[1]+nh*echelleEllipses]);
+                listCarreAll.push(listCarre);
+            } else if (pointsList[i].getAttribute("nh") != null && pointsList[i].getAttribute("nh") === "infinite") { // S'il n'y a pas de fiabilité externe ; carré infini
+                const pointName = pointsList[i].getAttribute("name");
+                const center = [parseFloat(listAllPoints.get(pointName)[0]),parseFloat(listAllPoints.get(pointName)[1])];
+                listNH.push(["INFINI"]);
+
+                let listCarre = [];
+                for (let i=0; i<5; i++){
+                    listCarre.push(center);
+                };
+                listCarreAll.push(listCarre);
+            };
+        }
+
+        // Création du source du layer
+        const rectangleEllipseAltimetric = new ol.source.Vector({ });
+
+        for (let i=0; i<listCarreAll.length; i++){
+            coordArray_i = listCarreAll[i];
+            const featureSquare = new ol.Feature({
+                geometry: new ol.geom.LineString(coordArray_i),
+                properties: listNH[i][0],
+            });
+            rectangleEllipseAltimetric.addFeature(featureSquare);
+        };
+
+        // Création du style du layer
+        let styleSquare = new ol.style.Style({
+            stroke: new ol.style.Stroke({ 
+                color: '#00AD02', 
+                width: 1 
+            }),
+            text: new ol.style.Text({
+                textAlign: "center",
+                textBaseline: "middle",
+                font: "italic 13px Calibri",
+                fill: new ol.style.Fill({
+                    color: "#00AD02"
+                }),
+                stroke: new ol.style.Stroke({
+                    color: "#ffffff", width: 3
+                }),
+                offsetX: -10,
+                offsetY: 10,
+                rotation: 0,
+                placement: "point"
+            })
+        });
+
+        // Création du layer
+        rectangleLayerAltimetric = new ol.layer.Vector({
+            source: rectangleEllipseAltimetric,
+            style: function (feature) { // la propriété style prend un callback qui doit retourner un style
+                styleSquare.getText().setText(feature.get("properties")); 
+                return styleSquare;
+            }
+        });
+    
+        // Ajout de la carte à map
+        map.addLayer(rectangleLayerAltimetric);
+        changeLayerVisibilityRect_altimetric();
+    }
+};
+
+
+function parsingRectanglesRelaXML_altimetric() {
+    // Check s'il a des rectangles relatifs dans le fichier PRNx
+    if (xmlDoc.getElementsByTagName("relativeRectangles").length != 0){
+
+        // Récupération des balises
+        const relativeRectangles = xmlDoc.getElementsByTagName("relativeRectangles");
+        let relativeRectanglesAlti = null;
+        for (let i=0; i<relativeRectangles.length; i++){
+            if (relativeRectangles[i].getAttribute("type") === "altimetric"){
+                relativeRectanglesAlti = relativeRectangles[i];
+            }
+        };
+
+        // Si la variable contient vraiment quelque chose
+        if (relativeRectanglesAlti.length !== null){
+            // Lister les rectangles altimétriques relatifs
+            const relativeRectanglesAlti_list = relativeRectanglesAlti.getElementsByTagName("rectangle");
+            
+            // Créations des listes pour les features
+            let listCarreAll = [];
+            let listNH = [];
+            let listP1P2 = [];
+            let listCenter = []
+
+            // Récupération des rectangles individuellement
+            for (let i=0; i<relativeRectanglesAlti_list.length; i++){
+                if (relativeRectanglesAlti_list[i].getAttribute("na") != null){
+                    const pt1_name = relativeRectanglesAlti_list[i].getAttribute("point1");
+                    const pt2_name = relativeRectanglesAlti_list[i].getAttribute("point2");
+                    const nh = relativeRectanglesAlti_list[i].getAttribute("na")/1000.0;
+
+                    const coord1 = [
+                        parseFloat(listAllPoints.get(pt1_name)[0]),
+                        parseFloat(listAllPoints.get(pt1_name)[1]),
+                    ];
+                    const coord2 = [
+                        parseFloat(listAllPoints.get(pt2_name)[0]),
+                        parseFloat(listAllPoints.get(pt2_name)[1]),
+                    ];
+                    const center = [
+                        (coord1[0]+coord2[0])/2.0,
+                        (coord1[1]+coord2[1])/2.0
+                    ];
+
+                    listCarreAll.push([
+                        [center[0]+nh*echelleEllipses, center[1]+nh*echelleEllipses],
+                        [center[0]+nh*echelleEllipses, center[1]-nh*echelleEllipses],
+                        [center[0]-nh*echelleEllipses, center[1]-nh*echelleEllipses],
+                        [center[0]-nh*echelleEllipses, center[1]+nh*echelleEllipses],
+                        [center[0]+nh*echelleEllipses, center[1]+nh*echelleEllipses]
+                    ]);
+                    listNH.push([String((nh*1000.0).toFixed(1)) + "mm"]);
+                    listP1P2.push([
+                        coord1,
+                        coord2
+                    ]);
+                    listCenter.push(center);
+                };
+            };
+
+            // Création des features
+            const rectanglesRelaAltimetric_source = new ol.source.Vector({ });
+
+            for (let i=0; i<listCarreAll.length; i++){
+                const featureRectangleRela = new ol.Feature({
+                    geometry: new ol.geom.LineString(
+                        listCarreAll[i]
+                    ),
+                    properties: listNH[i][0]
+                });
+                const featureRectangleRela_line = new ol.Feature({
+                    geometry: new ol.geom.LineString(
+                        listP1P2[i]
+                    )
+                });
+
+                rectanglesRelaAltimetric_source.addFeature(featureRectangleRela);
+                rectanglesRelaAltimetric_source.addFeature(featureRectangleRela_line);
+            };
+
+            // Création du layer
+            const styleSquare = new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: '#00D5A7', 
+                    width: 1, 
+                    lineDash: [6,2]
+                }),
+                text: new ol.style.Text({
+                    textAlign: "center",
+                    textBaseline: "middle",
+                    font: "italic 13px Calibri",
+                    fill: new ol.style.Fill({
+                        color: "#00D5A7"
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: "#ffffff", width: 3
+                    }),
+                    offsetX: -10,
+                    offsetY: 10,
+                    rotation: 0,
+                    placement: "point"
+                })
+            });
+            rectangleRelaLayerAlti = new ol.layer.Vector({
+                source: rectanglesRelaAltimetric_source,
+                style: function (feature) { // la propriété style prend un callback qui doit retourner un style
+                    styleSquare.getText().setText(feature.get("properties")); 
+                return styleSquare;
+                }
+            });
+
+            // Ajout du layer à la map
+            map.addLayer(rectangleRelaLayerAlti);
+            changeLayerVisibilityRectRela_altimetric();
+        };
+    };
+};
+
+
+function parsingVectXML_altimetric() {
+    // Récupération de la balise complète <coordinate>
+    const coordinates = xmlDoc.getElementsByTagName("coordinates")[0];
+    const pointsList = coordinates.getElementsByTagName("point");
+
+    // Création de la source du layer des features
+    const vectLayerAlti_source = new ol.source.Vector({});
+
+    // Parcours de la liste des points
+    for (let i=0; i<pointsList.length; i++){
+
+        // On ne garde que les éléments dh
+        if (pointsList[i].getAttribute("dh") != null){
+
+            if (pointsList[i].getAttribute("dh") != 0.0){
+                // Attribution des éléments
+                const pt_name = pointsList[i].getAttribute("name");
+                const dh = parseFloat(pointsList[i].getAttribute("dh"))/1000.0;
+                const center = [
+                    parseFloat(listAllPoints.get(pt_name)[0]),
+                    parseFloat(listAllPoints.get(pt_name)[1])
+                ];
+
+                const arrow = [
+                    center,
+                    [ center[0], center[1]+echelleEllipses*dh ],
+                    [ center[0] + (Math.abs(dh)/5)*echelleEllipses*Math.sin(250*Math.PI/200.0), center[1]+echelleEllipses*dh + (Math.abs(dh)/5)*echelleEllipses*Math.cos(250*Math.PI/200.0) ],
+                    [ center[0], center[1]+echelleEllipses*dh ],
+                    [ center[0] + (Math.abs(dh)/5)*echelleEllipses*Math.sin(150*Math.PI/200.0), center[1]+echelleEllipses*dh + (Math.abs(dh)/5)*echelleEllipses*Math.cos(150*Math.PI/200.0) ],
+                ];
+
+                const featureVecAlti = new ol.Feature({
+                    geometry: new ol.geom.LineString(arrow),
+                    properties: String((dh*1000.0).toFixed(1)) + 'mm', 
+                });
+                vectLayerAlti_source.addFeature(featureVecAlti);
+            }
+        }
+    }
+
+    // Création du layer de la map
+    const styleVect = new ol.style.Style({
+        stroke: new ol.style.Stroke({ 
+            color: '#FF0000', 
+            width: 1 
+        }),
+        text: new ol.style.Text({
+            textAlign: "center",
+            textBaseline: "middle",
+            font: "13px Calibri",
+            fill: new ol.style.Fill({
+                color: "#FF0000"
+            }),
+            stroke: new ol.style.Stroke({
+                color: "#ffffff", width: 3
+            }),
+            offsetX: 10,
+            offsetY: -10,
+            rotation: 0,
+            placement: "point"
+        })
+    });
+    vectLayerAlti = new ol.layer.Vector({
+        source: vectLayerAlti_source,
+        style: function (feature) { // la propriété style prend un callback qui doit retourner un style
+            styleVect.getText().setText(feature.get("properties")); 
+            return styleVect;
+        }
+    });
+
+    // Ajout de layer à la map
+    map.addLayer(vectLayerAlti);
+    changeLayerVisibilityVect_altimetric();
+
+}
 
 function fiabLocale_altimetric() {
     // Création de la source pour traitement graphique et nouveau layer
