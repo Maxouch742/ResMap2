@@ -503,6 +503,94 @@ function parsingEllipsesRelaXML_altimetric() {
     };
 };
 
+function parsingRectanglesXML_altimetric() {
+    // Check s'il y a bien des carrés de fiabilité dans le PRNx
+    if (xmlDoc.getElementsByTagName("externalReliabilityApriori").length != 0){
+        // Récupération des éléments dans le fichier xml
+        let externalReliabilityApriori = xmlDoc.getElementsByTagName("externalReliabilityApriori")[0];
+        let pointsList = externalReliabilityApriori.getElementsByTagName("point");
+
+        // Création des listes
+        let listNH = [];
+        let listCarreAll = [];
+        for (let i=0; i<pointsList.length; i++){
+            // S'il y a une fiabilité externe
+            if (pointsList[i].getAttribute("nh") != null && pointsList[i].getAttribute("nh") != "infinite") {
+                const pointName = pointsList[i].getAttribute("name");
+                const nh = pointsList[i].getAttribute("nb")/1000.0; // en [m]
+                const center = [parseFloat(listAllPoints.get(pointName)[0]),parseFloat(listAllPoints.get(pointName)[1])];
+                listNH.push([String((nh*1000.0).toFixed(1)) + "mm"]);
+
+                let listCarre = [];
+                listCarre.push([center[0]+nh*echelleEllipses, center[1]+nh*echelleEllipses]);
+                listCarre.push([center[0]+nh*echelleEllipses, center[1]-nh*echelleEllipses]);
+                listCarre.push([center[0]-nh*echelleEllipses, center[1]-nh*echelleEllipses]);
+                listCarre.push([center[0]-nh*echelleEllipses, center[1]+nh*echelleEllipses]);
+                listCarre.push([center[0]+nh*echelleEllipses, center[1]+nh*echelleEllipses]);
+                listCarreAll.push(listCarre);
+            } else if (pointsList[i].getAttribute("nh") != null && pointsList[i].getAttribute("nh") === "infinite") { // S'il n'y a pas de fiabilité externe ; carré infini
+                const pointName = pointsList[i].getAttribute("name");
+                const center = [parseFloat(listAllPoints.get(pointName)[0]),parseFloat(listAllPoints.get(pointName)[1])];
+                listNH.push(["INFINI"]);
+
+                let listCarre = [];
+                for (let i=0; i<5; i++){
+                    listCarre.push(center);
+                };
+                listCarreAll.push(listCarre);
+            };
+        }
+
+        // Création du source du layer
+        const rectangleEllipseAltimetric = new ol.source.Vector({ });
+
+        for (let i=0; i<listCarreAll.length; i++){
+            coordArray_i = listCarreAll[i];
+            const featureSquare = new ol.Feature({
+                geometry: new ol.geom.LineString(coordArray_i),
+                properties: listNH[i][0],
+            });
+            rectangleEllipseAltimetric.addFeature(featureSquare);
+        };
+
+        // Création du style du layer
+        let styleSquare = new ol.style.Style({
+            stroke: new ol.style.Stroke({ 
+                color: '#00AD02', 
+                width: 1 
+            }),
+            text: new ol.style.Text({
+                textAlign: "center",
+                textBaseline: "middle",
+                font: "italic 13px Calibri",
+                fill: new ol.style.Fill({
+                    color: "#00AD02"
+                }),
+                stroke: new ol.style.Stroke({
+                    color: "#ffffff", width: 3
+                }),
+                offsetX: -10,
+                offsetY: 10,
+                rotation: 0,
+                placement: "point"
+            })
+        });
+
+        // Création du layer
+        rectangleLayerAltimetric = new ol.layer.Vector({
+            source: rectangleEllipseAltimetric,
+            style: function (feature) { // la propriété style prend un callback qui doit retourner un style
+                styleSquare.getText().setText(feature.get("properties")); 
+                return styleSquare;
+            }
+        });
+    
+        // Ajout de la carte à map
+        map.addLayer(rectangleLayerAltimetric);
+        rectangleLayerAltimetric.setZIndex(78);
+        changeLayerVisibilityRect_altimetric();
+    }
+}
 
 function fiabLocale_altimetric() {
     // Création de la source pour traitement graphique et nouveau layer
