@@ -446,7 +446,7 @@ function parsingRectanglesRelaXML_planimetric() {
         rectangleRelaLayer = new ol.layer.Vector({
             source: rectanglesRelaLineSource,
             style: function (feature) { // la propriété style prend un callback qui doit retourner un style
-            styleRectangle.getText().setText(feature.get("properties")); 
+                styleRectangle.getText().setText(feature.get("properties")); 
             return styleRectangle;
             }
         });
