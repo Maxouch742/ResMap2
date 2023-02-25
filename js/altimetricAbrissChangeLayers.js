@@ -70,10 +70,10 @@ function changeLayerVisibilityRect_altimetric(){
 
 function changeLayerVisibilityRectRela_altimetric(){
     if (document.getElementById("checkboxRectanglesRela_altimetric").checked === true){
-        //   .setVisible(true);
+        rectangleRelaLayerAlti.setVisible(true);
         document.getElementById("AffichageEchelleRectanglesRela_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
-        //    .setVisible(false);
+        rectangleRelaLayerAlti.setVisible(false);
         document.getElementById("AffichageEchelleRectanglesRela_altimetric").textContent = "";
     }
 };

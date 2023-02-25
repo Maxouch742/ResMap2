@@ -41,6 +41,7 @@ document.getElementById('inputfile').addEventListener('change', function() {
         parsingEllipsesXML_altimetric();
         parsingEllipsesRelaXML_altimetric();
         parsingRectanglesXML_altimetric();
+        parsingRectanglesRelaXML_altimetric();
         fiabLocale_altimetric();
         normedResidualsWi_altimetric();
         // Activer les boutons

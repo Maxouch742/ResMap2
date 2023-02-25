@@ -589,7 +589,126 @@ function parsingRectanglesXML_altimetric() {
         map.addLayer(rectangleLayerAltimetric);
         changeLayerVisibilityRect_altimetric();
     }
-}
+};
+
+
+function parsingRectanglesRelaXML_altimetric() {
+    // Check s'il a des rectangles relatifs dans le fichier PRNx
+    if (xmlDoc.getElementsByTagName("relativeRectangles").length != 0){
+
+        // Récupération des balises
+        const relativeRectangles = xmlDoc.getElementsByTagName("relativeRectangles");
+        let relativeRectanglesAlti = null;
+        for (let i=0; i<relativeRectangles.length; i++){
+            if (relativeRectangles[i].getAttribute("type") === "altimetric"){
+                relativeRectanglesAlti = relativeRectangles[i];
+            }
+        };
+
+        // Si la variable contient vraiment quelque chose
+        if (relativeRectanglesAlti.length !== null){
+            // Lister les rectangles altimétriques relatifs
+            const relativeRectanglesAlti_list = relativeRectanglesAlti.getElementsByTagName("rectangle");
+            
+            // Créations des listes pour les features
+            let listCarreAll = [];
+            let listNH = [];
+            let listP1P2 = [];
+            let listCenter = []
+
+            // Récupération des rectangles individuellement
+            for (let i=0; i<relativeRectanglesAlti_list.length; i++){
+                if (relativeRectanglesAlti_list[i].getAttribute("na") != null){
+                    const pt1_name = relativeRectanglesAlti_list[i].getAttribute("point1");
+                    const pt2_name = relativeRectanglesAlti_list[i].getAttribute("point2");
+                    const nh = relativeRectanglesAlti_list[i].getAttribute("na")/1000.0;
+
+                    const coord1 = [
+                        parseFloat(listAllPoints.get(pt1_name)[0]),
+                        parseFloat(listAllPoints.get(pt1_name)[1]),
+                    ];
+                    const coord2 = [
+                        parseFloat(listAllPoints.get(pt2_name)[0]),
+                        parseFloat(listAllPoints.get(pt2_name)[1]),
+                    ];
+                    const center = [
+                        (coord1[0]+coord2[0])/2.0,
+                        (coord1[1]+coord2[1])/2.0
+                    ];
+
+                    listCarreAll.push([
+                        [center[0]+nh*echelleEllipses, center[1]+nh*echelleEllipses],
+                        [center[0]+nh*echelleEllipses, center[1]-nh*echelleEllipses],
+                        [center[0]-nh*echelleEllipses, center[1]-nh*echelleEllipses],
+                        [center[0]-nh*echelleEllipses, center[1]+nh*echelleEllipses],
+                        [center[0]+nh*echelleEllipses, center[1]+nh*echelleEllipses]
+                    ]);
+                    listNH.push([String((nh*1000.0).toFixed(1)) + "mm"]);
+                    listP1P2.push([
+                        coord1,
+                        coord2
+                    ]);
+                    listCenter.push(center);
+                };
+            };
+
+            // Création des features
+            const rectanglesRelaAltimetric_source = new ol.source.Vector({ });
+
+            for (let i=0; i<listCarreAll.length; i++){
+                const featureRectangleRela = new ol.Feature({
+                    geometry: new ol.geom.LineString(
+                        listCarreAll[i]
+                    ),
+                    properties: listNH[i][0]
+                });
+                const featureRectangleRela_line = new ol.Feature({
+                    geometry: new ol.geom.LineString(
+                        listP1P2[i]
+                    )
+                });
+
+                rectanglesRelaAltimetric_source.addFeature(featureRectangleRela);
+                rectanglesRelaAltimetric_source.addFeature(featureRectangleRela_line);
+            };
+
+            // Création du layer
+            const styleSquare = new ol.style.Style({
+                stroke: new ol.style.Stroke({ 
+                    color: '#00D5A7', 
+                    width: 1, 
+                    lineDash: [6,2]
+                }),
+                text: new ol.style.Text({
+                    textAlign: "center",
+                    textBaseline: "middle",
+                    font: "italic 13px Calibri",
+                    fill: new ol.style.Fill({
+                        color: "#00D5A7"
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: "#ffffff", width: 3
+                    }),
+                    offsetX: -10,
+                    offsetY: 10,
+                    rotation: 0,
+                    placement: "point"
+                })
+            });
+            rectangleRelaLayerAlti = new ol.layer.Vector({
+                source: rectanglesRelaAltimetric_source,
+                style: function (feature) { // la propriété style prend un callback qui doit retourner un style
+                    styleSquare.getText().setText(feature.get("properties")); 
+                return styleSquare;
+                }
+            });
+
+            // Ajout du layer à la map
+            map.addLayer(rectangleRelaLayerAlti);
+            changeLayerVisibilityRectRela_altimetric();
+        };
+    };
+};
 
 function fiabLocale_altimetric() {
     // Création de la source pour traitement graphique et nouveau layer
