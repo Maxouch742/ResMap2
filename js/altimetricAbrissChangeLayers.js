@@ -60,10 +60,10 @@ function changeLayerVisibilityEllipsesRela_altimetric() {
 
 function changeLayerVisibilityRect_altimetric(){
     if (document.getElementById("checkboxRectangles_altimetric").checked === true){
-        //   .setVisible(true);
+        rectangleLayerAltimetric.setVisible(true);
         document.getElementById("AffichageEchelleRectangles_altimetric").textContent = "⤷ Echelle: " + echelleEllipses + ":1";
     } else {
-        //    .setVisible(false);
+        rectangleLayerAltimetric.setVisible(false);
         document.getElementById("AffichageEchelleRectangles_altimetric").textContent = "";
     }
 };

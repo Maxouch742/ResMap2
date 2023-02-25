@@ -587,7 +587,6 @@ function parsingRectanglesXML_altimetric() {
     
         // Ajout de la carte à map
         map.addLayer(rectangleLayerAltimetric);
-        rectangleLayerAltimetric.setZIndex(78);
         changeLayerVisibilityRect_altimetric();
     }
 }
