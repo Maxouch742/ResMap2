@@ -15,7 +15,7 @@ ol.proj.proj4.register(proj4);
 
 
 // Fond WMTS CN à échelle dynamique
-const carteNationale = new ol.layer.Tile({
+carteNationale = new ol.layer.Tile({
     source: new ol.source.TileWMS({
         projection: 'EPSG:2056',
         url: "https://wms.geo.admin.ch/",
@@ -73,10 +73,12 @@ map = new ol.Map({
     target: "map",
     layers: [carteNationale],
     view,
-    /*controls: ol.control.defaults({
+    /*
+    controls: ol.control.defaults({
         attributionOptions: {
             collapsible: true, // Copyright affiché 
             visible: false
         }
-    }),*/
+    })
+    */
 });

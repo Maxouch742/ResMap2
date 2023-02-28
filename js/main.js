@@ -20,6 +20,7 @@ document.getElementById('inputfile').addEventListener('change', function() {
 
         
         //-------------------------------- Abriss planimétrique
+        /*
         parsingVisee();
         layerObservationsTerrestres();
         parsingEllipsesXML_planimetric();
@@ -47,6 +48,7 @@ document.getElementById('inputfile').addEventListener('change', function() {
         parsingVectXML_altimetric();
         // Activer les boutons
         altimetricActivateCheckBox();
+        */
 
 
         // Dire à l'utilisateur que l'import s'est bien effectué
