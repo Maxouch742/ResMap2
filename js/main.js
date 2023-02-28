@@ -1,6 +1,9 @@
 // Compte global du nombre d'observations supprimées
 nbObsSuppr = 0
 
+// Nom et chemin du fichier
+fileName = false;
+
 // Import du fichier .PRNx (ajout d'écouteur d'événement sur le "change" du open-folder)
 document.getElementById('inputfile').addEventListener('change', function() {
 
