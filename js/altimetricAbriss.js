@@ -69,7 +69,7 @@ function layerObservationsTerrestres_altimetric() {
     deniveleeSource = new ol.source.Vector({});
 
     for (i=0; i<observationsTerrestresAltimetric.length; i++){
-        obser = observationsTerrestresAltimetric[i];
+        let obser = observationsTerrestresAltimetric[i];
 
         // coordonnées de la ligne
         const coordArray = [ 
@@ -212,7 +212,7 @@ function parsingObsCoord_altimetric() {
 
     map.addLayer(obsCoordHLayer);
     changeLayerVisibilityCoordH();
-    obsCoordHLayer.setZIndex(99);
+    // obsCoordHLayer.setZIndex(99);
     console.log("Coordinates altimetric observations has been added to map");
 };
 
@@ -243,7 +243,7 @@ function parsingGNSS_altimetric() {
                 let N = listAllPoints.get(pointName_i)[1];
                 
                 // Création d'une Feature ol pour chaque point de la session GNSS et ajout à la source
-                featurePointGnss = new ol.Feature({
+                const featurePointGnss = new ol.Feature({
                     geometry: new ol.geom.Point([parseFloat(E), parseFloat(N)]),
                     name: pointName_i,
                     properties: {
@@ -256,7 +256,7 @@ function parsingGNSS_altimetric() {
                         //ajouter nabla
                     }
                 });
-                gnssStyle = new ol.style.Style({
+                const gnssStyle = new ol.style.Style({
                     // stroke: new ol.style.Stroke({ color: listColorSession[sessionNo], width: 4}),
                     image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
                         src: './img/Pentagon_blanc.png',
@@ -290,9 +290,9 @@ function parsingEllipsesXML_altimetric() {
     let pointsList = coordinates.getElementsByTagName("point");
   
     // ------- NIVEAU DE CONFIANCE ELLIPSES -------
-    let progvers = xmlDoc.getElementsByTagName("progvers")[0];
-    titreProg = progvers.getAttribute("name");
-    nameProg = progvers.textContent;
+    const progvers = xmlDoc.getElementsByTagName("progvers")[0];
+    const titreProg = progvers.getAttribute("name");
+    const nameProg = progvers.textContent;
   
     let nivConfianceEllipses;
     switch(nameProg){
@@ -387,8 +387,9 @@ function parsingEllipsesXML_altimetric() {
     };
 
     // Creation du layer
-    ellipseLayerAltimetric = new ol.layer.Vector({});
-    ellipseLayerAltimetric.setSource(ellipseSourceAltimetric);
+    ellipseLayerAltimetric = new ol.layer.Vector({
+        source: ellipseSourceAltimetric
+    });
 
     // Ajout du layer à la carte
     map.addLayer(ellipseLayerAltimetric);
@@ -920,7 +921,7 @@ function normedResidualsWi_altimetric() {
         };
 
         // Création de la source pour traitement graphique et nouveau layer
-        wiSourceAlti = new ol.source.Vector({});
+        const wiSourceAlti = new ol.source.Vector({});
 
         // Récupération des valeurs pour les bornes
         limitWiAlti = parseFloat(biggestWi.getAttribute("biggerThan"));
@@ -1031,7 +1032,8 @@ function normedResidualsWi_altimetric() {
 
         // Ajout du layer à la map
         map.addLayer(wiLayerAlti);
-        wiLayerAlti.setVisible(false);
+        // wiLayerAlti.setVisible(false);
+        changeLayerVisibilityResidusNormes_altimetric();
         wiLayerAlti.setZIndex(50);
     };
 };

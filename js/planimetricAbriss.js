@@ -11,8 +11,8 @@ function parsingEllipsesXML_planimetric() {
   
     // ------- NIVEAU DE CONFIANCE ELLIPSES -------
     let progvers = xmlDoc.getElementsByTagName("progvers")[0];
-    titreProg = progvers.getAttribute("name");
-    nameProg = progvers.textContent;
+    let titreProg = progvers.getAttribute("name");
+    let nameProg = progvers.textContent;
   
     let nivConfianceEllipses;
   
@@ -784,10 +784,7 @@ function layerObservationsTerrestres() {
 
     // Création des sources et layers pour les directions horizontales
     const directionSource = new ol.source.Vector({});
-    directionLayer = new ol.layer.Vector({});
-
     const distanceSource = new ol.source.Vector({});
-    distanceLayer = new ol.layer.Vector({});
 
     // Parcours du tableau des observations terrestres pour créer les features
     for (let i=0; i<observationsTerrestres.length; i++){

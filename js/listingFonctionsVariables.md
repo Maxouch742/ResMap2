@@ -1,211 +1,608 @@
 # Listing des fonctions et variables
 
-## Fonction *parsingViseesXML_planimetric*
-### Description
-Parsage du fichier .PRNx pour récupérer et afficher les observations terrestres du réseau géodésique
+## Fichier `altimetricAbriss.js`
 
-### Parameters
+### Fonction `parsingVisees_altimetric`
+**Description :**
+-
+
+**Parameters :**
 None
 
-### Returns
+**Returns :**
 None
 
-### Variables globales
-- planimetricAbriss   ()                           :
-- stationsList        ()                           :
-- noPointsDistances   (array)                      :
-- geometryDistances   (array)                      :
-- distanceLayer       (ol.layer.Vector, Zindex=2)  :
-- distanceLineSource  (ol.source.Vector)           :
-- noPointsDirections  (array)                      :
-- geometryDirections  (array)                      :
-- directionLayer      (ol.layer.Vector, Zindex=1)  :
-- directionLineSource (ol.source.Vector)           :
+**Variables globales :**
+- observationsTerrestresAltimetric (array) : liste des observations avec tous les paramètres (fiabilité, précision, ...) sur les dénivelées de hauteur
 
 
-## Fonction *parsingEllipsesXML_planimetric*
-### Description
-Parsage du fichier .PRNx pour récupérer et afficher les ellipses de confiance planimétrique des points nouveaux
+### Fonction `layerObservationsTerrestres_altimetric`
+**Description :**
+-
 
-### Parameters
+**Parameters :**
 None
 
-### Returns
+**Returns :**
 None
 
-### Variables globales
-- coordinates          () :
-- pointsList           () :
-- progvers             () :
-- nameProg             () :
-- nivConfianceEllipses () :
-- t                    (array) : tableau de valeurs entre 0 et 390 avec un pas de 10
-- allListENellipse     (array)                      : 
-- allListAzimut        (array)                      :
-- allListCenter        (array)                      :
-- listA                (array)                      :
-- ellipsesLineSource   (ol.source.Vector)           :
-- textStyleEllipse     (ol.style.Text)              :
-- styleEllipse         (ol.style.Style)             :
-- ellipseLayer         (ol.layer.Vector, Zindex=89) :
+**Variables globales :**
+- deniveleeLayer (ol.layer.Vector) : 
+- deniveleeSource (ol.source.Vector) :
 
 
-## Fonction *range*
-### Description
-Créer un tableau de valeurs avec des spécifités
+### Fonction `gisement`
+**Description :**
+-
 
-### Parameters
-- start (int) : valeur de début du tableau
-- stop  (int) : valeur de fin du tableau
-- step  (int) : pas entre 2 valeurs
+**Parameters :**
+- dx (Number) : différence de coordonnée Est, unité : mètres
+- dy (Number) : différence de coordonnée Nord, unité : mètres
 
-### Returns
-- arr (array) : tableau des valeurs
-  
+**Returns :**
+- gisement (Number) : gisement des deltas de coordonnées, unité : radians
 
-## Fonction *parsingEllipsesRelaXML_planimetric*
-### Description
-Parsage du fichier .PRNx pour récupérer et afficher les ellipses de confiance relatives entre 2 points du réseau géodésique
-
-### Parameters
+** Variables globales :**
 None
 
-### Returns
+
+### Fonction `parsingObsCoord_altimetric`
+**Description :**
+-
+
+**Parameters :**
 None
 
-### Variables globales
-- relativeEllipses       () : 
-- ellRelaList            () : 
-- t                      (array) : tableau de valeurs entre 0 et410 avec un pas de 10
-- allListENellipse       (array)                      : 
-- allListAzimut          (array)                      : 
-- allListCenter          (array)                      : 
-- allListP1P2            (array)                      : 
-- listA                  (array)                      : 
-- ellipsesRelaLineSource (ol.source.Vector)           : 
-- textStyleEllipse       (ol.style.Text)              : 
-- styleEllipse           (ol.style.Style)             : 
-- ellipseRelaLayer       (ol.layer.Vector, Zindex=90) : 
-
-
-## Fonction *parsingRectanglesXML_planimetric*
-### Description
-Parsage du fichier .PRNx pour récupérer et afficher les rectangles de fiabilité des points nouveaux du réseau géodésique
-
-### Parameters
+**Returns :**
 None
 
-### Returns
+** Variables globales :**
+- obsCoordHLayer (ol.layer.Vector) :
+
+
+### Fonction `parsingGNSS_altimetric`
+**Description :**
+-
+
+**Parameters :**
 None
 
-### Variables globales
-- externalReliabilityApriori () :
-- pointsList () :
-- allListENrectangle (array) :
-- allListAzimut      (array) :
-- allListCenter      (array) :
-- listNA             (array) :
-- rectanglesLineSource (ol.source.Vector) :
-- textStyleRectangle   (ol.style.Text)    :
-- styleRectangle       (ol.style.Style)   :
-- rectangleLayer       (ol.layer.Vector)  :
-  
-
-## Fonction *parsingRectanglesRelaXML_planimetric*
-### Description
-Parsage du fichier .PRNx pour récupérer et afficher les rectangles de fiabilité entre des points
-
-### Parameters
+**Returns :**
 None
 
-### Returns
+** Variables globales :**
+- gnssLayerAltimetric (ol.layer.Vector) :
+
+
+### Fonction `parsingEllipsesXML_altimetric`
+**Description :**
+-
+
+**Parameters :**
 None
 
-### Variables globales
-- relativeRectangles () :
-- rectRelaList       () :
-- allListENrect      (array) :
-- allListAzimut      (array) :
-- allListCenters     (array) :
-- allListP1P2        (array) :
-- listNA             (array) :
-- rectanglesRelaLineSource (ol.source.Vector) :
-- textStyleRectangle       (ol.style.Text)    :
-- styleRectangle           (ol.style.Style)   :
-- rectangleRelaLayer       (ol.layer.Vector, Zindex=91) :
-
-## Fonction *parsingGNSS_planimetric*
-### Description
-
-### Parameters
-
-### Returns
-
-### Variables globales
-- planimetricAbriss () :
-- stationsList      (array) :
-- gnssSource (ol.source.Vector) :
-- gnssStyle (ol.style.Style) :
-- sessionNo (number) :
-- gnssLayer (ol.layer.Vector, Zindex=80) :
-
-## Fonction *parsingObsCoord_planimetric*
-### Description
-### Parameters
+**Returns :**
 None
 
-### Returns
+** Variables globales :**
+- ellipseLayerAltimetric (ol.layer.Vector) :
+
+
+### Fonction `parsingEllipsesRelaXML_altimetric`
+**Description :**
+-
+
+**Parameters :**
 None
 
-### Variables globales
-- planimetricAbriss () :
-- stationsList (array):
+**Returns :**
+None
+
+** Variables globales :**
+- ellipRelaAltiLayer (ol.layer.Vector) :
+
+
+### Fonction `parsingRectanglesXML_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+- rectangleRelaLayerAlti (ol.layer.Vector) :
+
+
+### Fonction `parsingVectXML_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+- vectLayerAlti (ol.layer.Vector) :
+
+
+### Fonction `fiabLocale_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+- fiabLocaleSourceAlti (ol.source.Vector) :
+- fiabLocalLayerAlti (ol.layer.Vector) :
+
+
+### Fonction `normedResidualsWi_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+- limitWiAlti (Number)
+- limitInfAlti (Number)
+- wiLayerAlti (ol.layer.Vector) :
+
+
+
+## Fichier `altimetricAbrissChangeLayers.js`
+
+### Fonction `changeLayerVisibilityFixedPoints_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityVariablePoints_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityDenivelee_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityGnss_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityCoordH`
+
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityEllipses_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityEllipsesRela_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityRect_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityRectRela_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityFiabiliteLocales_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityResidusNormes_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `changeLayerVisibilityVect_altimetric`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+### Fonction `altimetricActivateCheckBox`
+**Description :**
+-
+
+**Parameters :**
+None
+
+**Returns :**
+None
+
+** Variables globales :**
+None
+
+
+## Fichier `CenterViewOnProjet.js`
+** Variables globales :**
+- listCoordsProject (array) :
+
+### Fonction `logMapElements`
+** Description : **
+-
+
+** Parameters :**
+- value :
+- key :
+- map
+
+** Returns :**
+None
+
+** Variables globales :**
+None
+
+### Fonction `centerViewOnProjet.js`
+** Description : **
+-
+
+** Parameters :**
+None
+
+** Returns :**
+None
+
+** Variables globales :**
+- extentProject (ol.extent.boudingExtent) :
+- bufferProject (ol.extentbuffer) :
+
+
+## Fichier `changeBackground`
+### Fonction `changeBackground`
+** Description :**
+-
+
+** Parameters: **
+- layer (String) : nom de la couche souhaité par l'utilisateur
+
+** Returns :**
+None
+
+** Variables globales: **
+None
+
+
+
+## Fichier `main.js`
+** Variables globales :**
+- nbObsSuppr (Number) : compte global du nombre d'observations supprimées
+- fileName (String) : nom et chemin du fichier importé par l'utilisateur
+
+
+
+## Fichier `MapInitialisation.js`
+** Variables globales :**
+- map (ol.Map) : 
+
+
+
+## Fichier `parsingPointsXML.js`
+### Fonction `parsingPointsXML`
+** Description :**
+-
+
+** Parameters :**
+None
+
+** Returns :**
+None
+
+** Variables globales :**
+- listAllPoints (Map) :
+- pointsLayer (ol.layer.Vector) :
+- pointsVariableLayer (ol.layer.Vector) :
+- pointsLayerAltimetric (ol.layer.Vector) :
+- pointsVariableLayerAltimetric (ol.layer.Vector) :
+
+
+
+## Fichier `planimetricAbriss.js`
+### Fonction `parsingEllipsesXML_planimetric`
+** Description :**
+-
+
+** Parameters :**
+None
+
+** Returns :**
+None
+
+** Variables globales :**
+- ellipseLayer (ol.layer.Vector) :
+
+
+### Fonction `range`
+** Description :**
+-
+
+** Parameters :**
+- start (Number) :
+- stop (Number) :
+- step (Number) :
+
+** Returns :**
+- arr (array) :
+
+** Variables globales :**
+None
+
+
+### Fonction `parsingEllipsesRelaXML_planimetric`
+** Description :**
+-
+
+** Parameters :**
+None
+
+** Returns :**
+None
+
+** Variables globales :**
+- ellipseRelaLayer (ol.layer.Vector) :
+
+
+### Fonction `parsingRectanglesXML_planimetric`
+** Description :**
+-
+
+** Parameters :**
+None
+
+** Returns :**
+None
+
+** Variables globales :**
+- rectangleLayer (ol.layer.Vector) :
+
+
+### Fonction `parsingRectanglesRelaXML_planimetric`
+** Description :**
+-
+
+** Parameters :**
+None
+
+** Returns :**
+None
+
+** Variables globales :**
+- rectangleRelaLayer (ol.layer.Vector) :
+
+
+### Fonction `parsingGNSS_planimetric`
+** Description :**
+-
+
+** Parameters :**
+None
+
+** Returns :**
+None
+
+** Variables globales :**
+- gnssLayer (ol.layer.Vector) :
+
+
+### Fonction `parsingObsCoord_planimetric`
+** Description :**
+-
+
+** Parameters :**
+None
+
+** Returns :**
+None
+
+** Variables globales :**
 - obsCoordSourceE (ol.source.Vector) :
 - obsCoordSourceN (ol.source.Vector) :
-- obsCoordELayer (ol.layer.Vector, Zindex=99) :
-- obsCoordNLayer (ol.layer.Vector, Zindex=99) :
+- obsCoordELayer (ol.layer.Vector) :
+- obsCoordNLayer (ol.layer.Vector) :
 
 
-## Fonction *parsingVectXML_planimetric*
-### Description
-### Parameters
+### Fonction `parsingVectXML_planimetric`
+** Description :**
+-
+
+** Parameters :**
 None
 
-### Returns
+** Returns :**
 None
 
-### Variables globales
-- coordinates () : 
-- pointsList (array) :
-- vectLineSource (ol.source.Vector) :
-- textStyleVect (ol.style.Text) :
-- styleVect (ol.style.Style) :
-- ol.style.Style (ol.layer.Vector, Zindex=99) :
+** Variables globales :**
+- vectLayer (ol.layer.Vector) :
 
 
-## Fonction *fiabLocale_planimetric*
-### Description
-### Parameters
+### Fonction `parsingVisee`
+** Description :**
+-
+
+** Parameters :**
 None
 
-### Returns
+** Returns :**
 None
 
-### Variables globales
-- fiabLocaleSourceBase (ol.source.Vector) :
-- fiabLocaleSource (ol.source.Vector) :
-- fiabLocalLayer (ol.layer.Vector, Zindex=80) :
+** Variables globales :**
+- observationsTerrestres (array) :
 
 
-## Fonction *normedResidualsWi_planimetric*
-### Description
-### Parameters
+### Fonction `layerObservationsTerrestres`
+** Description :**
+-
+
+** Parameters :**
 None
 
-### Returns
+** Returns :**
 None
 
-### Variables globales
-- wiSourceBase (ol.source.Vector) :
+** Variables globales :**
+- directionLayer (ol.layer.Vector) :
+- distanceLayer (ol.layer.Vector) :
+
+
+### Fonction `fiabLocale_planimetric`
+** Description :**
+-
+
+** Parameters :**
+None
+
+** Returns :**
+None
+
+** Variables globales :**
+- fiabLocalLayer (ol.layer.Vector) :
+
+
+### Fonction `normedResidualsWi_planimetric`
+** Description :**
+-
+
+** Parameters :**
+None
+
+** Returns :**
+None
+
+** Variables globales :**
 - wiSource (ol.source.Vector) :
-- wiLayer (ol.layer.Vector, Zindex=80) :
+- limitWi (Number) :
+- limitInf (Number) :
+- wiLayer (ol.layer.Vector) :

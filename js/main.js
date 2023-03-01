@@ -7,12 +7,22 @@ fileName = false;
 // Import du fichier .PRNx (ajout d'écouteur d'événement sur le "change" du open-folder)
 document.getElementById('inputfile').addEventListener('change', function() {
 
+    // Supprimer les couches déjà existants (utile dans le cas d'un rappel sur le bouton)
+    initializeLayers();
+
     // Récupération du nom de fichier PRNx
     fileName = document.getElementById('inputfile').files[0]
 
     // Lecture du contenu du fichier PRNx et appel des fonctions de parsing et création d'entités
     let fr = new FileReader();
     fr.onload=function() {
+
+        
+        //TODO : créer une fonction qui supprime les layers existants
+        //TODO : remplacer la function (ligne 15) par une vraie fonction (possibilité de rappel dans le fichier refresh.js) 
+        //       ou pas car il faut se traiver la variable "fr"
+
+
         xmlToParse = fr.result;
         parser = new DOMParser();
         xmlDoc = parser.parseFromString(xmlToParse,"text/xml");
