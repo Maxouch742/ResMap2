@@ -15,14 +15,8 @@ document.getElementById('inputfile').addEventListener('change', function() {
 
     // Lecture du contenu du fichier PRNx et appel des fonctions de parsing et création d'entités
     let fr = new FileReader();
-    fr.onload=function() {
-
+    fr.onload = function(){
         
-        //TODO : créer une fonction qui supprime les layers existants
-        //TODO : remplacer la function (ligne 15) par une vraie fonction (possibilité de rappel dans le fichier refresh.js) 
-        //       ou pas car il faut se traiver la variable "fr"
-
-
         xmlToParse = fr.result;
         parser = new DOMParser();
         xmlDoc = parser.parseFromString(xmlToParse,"text/xml");
@@ -31,7 +25,6 @@ document.getElementById('inputfile').addEventListener('change', function() {
         // CHANGER ECHELLE ELLIPSES ET RECTANGLES PAR DEFAULT CI-DESSSOUS 
         echelleEllipses = 1000.0
 
-        
         //-------------------------------- Abriss planimétrique
         parsingVisee();
         layerObservationsTerrestres();
@@ -61,11 +54,8 @@ document.getElementById('inputfile').addEventListener('change', function() {
         // Activer les boutons
         altimetricActivateCheckBox();
 
-
         // Dire à l'utilisateur que l'import s'est bien effectué
         document.getElementById("outputTest").textContent = "Import effectué ✓";
-
-    };
+    }
     fr.readAsText(fileName);
 });
-      
