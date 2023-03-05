@@ -21,10 +21,6 @@
 
 
   <body>
-    <!--
-    <main class="" role="main">
-      <div id="map"><div id="popup"></div>
-    </main>-->
 
     <div class="container-fluid">
       <div class="row">
@@ -38,11 +34,16 @@
           </div>
 
           <!-- Box pour importer le fichier .PRNx -->
-          <div class="mt-2 greyBackground border border-dark p-1">
+          <div class="mt-2 greyBackground border border-dark p-1" ondrop="dropFilePRNx(event)" ondragover="dragOverFilePRNx(event)">
             <h5 class="mx-2">Import du fichier .PRNx</h5>
-            <input class="mx-2 my-1 pr-2 inputFile" type="file" id="inputfile" accept=".prnx"></input>
+            <!-- <input class="mx-2 my-1 pr-2 inputFile" type="file" id="inputfile" accept=".prnx" onchange="readFile()"></input>
+            
+            <button class="buttonRefresh" onclick="refresh()">Refresh</button> -->
+            <label for="pathFile">Chemin :</label>
+            <input type="text" id="pathFile" name="pathFile">
+            <button class="validPathFile" onclick="importFilePRNx()">OK</button>
+            <p class="mx-2 my-1 importInfoPath" id="pathFile"></p>
             <p class="mx-2 my-1 importInfo" id="outputTest"></p>
-            <button onclick="refresh()">Refresh</button>
           </div>      
 
           <!-- Abriss planimétrique -->
@@ -406,6 +407,8 @@
     <script type="text/javascript" src="https://cdn.rawgit.com/eligrey/FileSaver.js/aa9f4e0e/FileSaver.min.js"></script>
     
     <!-- Script personnel -->
+    <script src="./js/importFile.js"></script>
+
     <script src="./js/MapInitialisation.js"></script>
     <script src="./js/ChangeBackground.js"></script>
     <script src="./js/slidingScale.js"></script>
@@ -424,7 +427,6 @@
     <script src="./js/print.js"></script>
     <script src="./js/Export.js"></script>
     <script src="./js/refreshMap.js"></script>
-    <script src="./js/readFile.js"></script>
 
     <script src="./js/main.js"></script>
 

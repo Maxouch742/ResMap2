@@ -1,48 +1,93 @@
 function refresh(){
-
-    console.log(fileName);
-
+    document.getElementById("outputTest").textContent = "";
+    console.log(xmlDoc);
     if (fileName === false){
         alert("Aucun fichier n'est importé. Importez un fichier .PRNx afin de mettre à jour la map");
-    }
-    console.log(fileName);
+    } else {
+        // Requête sur le fichier python pour rafrâichir la map
+        const urlPath = url + '/?path:'+String();
+        $.ajax({
+            url: urlPath,
+            type: 'GET',
+            error: function(request, status, error) { 
+              console.log("Error: " + error)
+            }
+        });
 
+
+        readFile();
+    }
 }
 
 
 function initializeLayers(){
-    // Altimetrie
-    pointsLayerAltimetric = 0;
-    pointsVariableLayerAltimetric = 0;
-    deniveleeLayer = 0;
-    gnssLayerAltimetric = 0;
-    obsCoordHLayer = 0;
-    ellipseLayerAltimetric = 0;
-    ellipRelaAltiLayer = 0;
-    rectangleLayerAltimetric = 0;
-    rectangleRelaLayerAlti = 0;
-    fiabLocalLayerAlti = 0;
-    deniveleeLayer = 0;
-    wiLayerAlti = 0;
-    vectLayerAlti = 0;
+    if (typeof pointsLayer != 'undefined'){
 
-    // Planimetrie
-    pointsLayer = 0;
-    pointsVariableLayer = 0;
-    directionLayer = 0;
-    distanceLayer = 0;
-    ellipseLayer = 0;
-    ellipseRelaLayer = 0;
-    rectangleLayer = 0;
-    rectangleRelaLayer = 0;
-    gnssLayer = 0;
-    obsCoordELayer = 0;
-    obsCoordNLayer = 0;
-    fiabLocalLayer = 0;
-    wiLayer = 0;
-    vectLayer = 0;
+        // Altimetrie
+        map.removeLayer(pointsLayerAltimetric);
+        map.removeLayer(pointsVariableLayerAltimetric);
+        map.removeLayer(deniveleeLayer);
+        map.removeLayer(gnssLayerAltimetric);
+        map.removeLayer(obsCoordHLayer);
+        map.removeLayer(ellipseLayerAltimetric);
+        map.removeLayer(ellipRelaAltiLayer);
+        map.removeLayer(rectangleLayerAltimetric);
+        map.removeLayer(rectangleRelaLayerAlti);
+        map.removeLayer(fiabLocalLayerAlti);
+        map.removeLayer(deniveleeLayer);
+        map.removeLayer(wiLayerAlti);
+        map.removeLayer(vectLayerAlti);
 
-    // Coordonnée
-    listAllPoints = [];
-    listCoordsProject = [];
+        // Planimetrie
+        map.removeLayer(pointsLayer);
+        map.removeLayer(pointsVariableLayer);
+        map.removeLayer(directionLayer);
+        map.removeLayer(distanceLayer);
+        map.removeLayer(ellipseLayer);
+        map.removeLayer(ellipseRelaLayer);
+        map.removeLayer(rectangleLayer);
+        map.removeLayer(rectangleRelaLayer);
+        map.removeLayer(gnssLayer);
+        map.removeLayer(obsCoordELayer);
+        map.removeLayer(obsCoordNLayer);
+        map.removeLayer(fiabLocalLayer);
+        map.removeLayer(wiLayer);
+        map.removeLayer(vectLayer);
+
+        // Coordonnée
+        listAllPoints = [];
+        listCoordsProject = [];
+        xmlDoc = false;
+    }
+}
+
+
+function dropFilePRNx(ev){
+    console.log("File(s) dropped");
+
+    // Prevent default behavior (Prevent file from being opened)
+    ev.preventDefault();
+
+    if (ev.dataTransfer.items) {
+        // Use DataTransferItemList interface to access the file(s)
+        [...ev.dataTransfer.items].forEach((item, i) => {
+            // If dropped items aren't files, reject them
+            if (item.kind === "file") {
+                const file = item.getAsFile();
+                console.log(`… file[${i}].name = ${file.name}`);
+            }
+        });
+    } else {
+        // Use DataTransfer interface to access the file(s)
+        [...ev.dataTransfer.files].forEach((file, i) => {
+            console.log(`file[${i}].name = ${file.name}`);
+        });
+    }
+}
+
+function dragOverFilePRNx(ev){
+    console.log("File(s) in drop zone");
+
+    // Prevent default behavior (Prevent file from being opened)
+    ev.preventDefault();
 }
