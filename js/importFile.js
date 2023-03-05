@@ -1,5 +1,7 @@
 function importFilePRNx(){
 
+  initializeLayers();
+
   // Rcéupérer le path
   const path = document.getElementById("pathFile").value;
 
@@ -9,9 +11,6 @@ function importFilePRNx(){
     const data = results['data'];
     const path = results['path'];
 
-    console.log(data);
-    console.log(path);
-
     if (data == '0' && path == '0'){
       alert("Aucun fichier .PRNx n'est contenu dans le dossier."); 
     } else {
@@ -20,16 +19,6 @@ function importFilePRNx(){
       readFileXML();
     }
   });
-
-  /*
-  // Traitement de la réponse
-  if (contentFile == '0'){
-    alert("Aucun fichier .PRNx n'est contenu dans le dossier.");
-  } else {
-    
-    
-  };
-  */
 };
 
 
