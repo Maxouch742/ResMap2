@@ -30,7 +30,7 @@ function changeLayerVisibility(item){
                 planiDir_layer.setVisible(false);
             };
             break;
-        case 'plani_Dir':
+        case 'plani_Dis':
             if (document.getElementById('checkboxDis').checked === true){
                 planiDis_layer.setVisible(true);
             } else {

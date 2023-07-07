@@ -133,10 +133,10 @@ function parseXML_planiObs(xml){
                     });
 
                     // Feature symbole
-                    const east_symbol1 = points.get(sta_name_dis)['east'] + (points.get(pt_name)['east'] - points.get(sta_name_dis)['east'])*0.15;
-                    const north_symbol1 = points.get(sta_name_dis)['north'] + (points.get(pt_name)['north'] - points.get(sta_name_dis)['north'])*0.15;
-                    const east_symbol2 = points.get(sta_name_dis)['east'] + (points.get(pt_name)['east'] - points.get(sta_name_dis)['east'])*0.25;
-                    const north_symbol2 = points.get(sta_name_dis)['north'] + (points.get(pt_name)['north'] - points.get(sta_name_dis)['north'])*0.25;
+                    const east_symbol1 = points.get(sta_name_dis)['east'] + (points.get(pt_name)['east'] - points.get(sta_name_dis)['east'])*0.12;
+                    const north_symbol1 = points.get(sta_name_dis)['north'] + (points.get(pt_name)['north'] - points.get(sta_name_dis)['north'])*0.12;
+                    const east_symbol2 = points.get(sta_name_dis)['east'] + (points.get(pt_name)['east'] - points.get(sta_name_dis)['east'])*0.22;
+                    const north_symbol2 = points.get(sta_name_dis)['north'] + (points.get(pt_name)['north'] - points.get(sta_name_dis)['north'])*0.22;
                     const planiDis_featureSymbol = new ol.Feature({
                         geometry: new ol.geom.LineString([
                             [east_symbol1, north_symbol1],
@@ -182,24 +182,18 @@ function parseXML_planiObs(xml){
     }
 
     // Layers 
-    planiGNSS_layer = new ol.layer.Vector({
-        source: planiGNSS_source,
-        opacity: 1.0
-    });
+    planiGNSS_layer.setSource( planiGNSS_source );
+    planiGNSS_layer.setOpacity( 1.0 );
     planiGNSS_layer.setZIndex(90);
     map.addLayer(planiGNSS_layer);
     changeLayerVisibility('plani_GNSS');
 
-    planiDir_layer = new ol.layer.Vector({
-        source: planiDir_source
-    });
+    planiDir_layer.setSource( planiDir_source );
     planiDir_layer.setZIndex(92);
     map.addLayer(planiDir_layer);
     changeLayerVisibility('plani_Dir');
 
-    planiDis_layer = new ol.layer.Vector({
-        source: planiDis_source
-    });
+    planiDis_layer.setSource( planiDis_source );
     planiDis_layer.setZIndex(91);
     map.addLayer(planiDis_layer);
     changeLayerVisibility('plani_Dis');

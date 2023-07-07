@@ -10,15 +10,20 @@ function readFilePRNx(){
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(xmlToParse,"text/xml");
 
-      console.log(xmlDoc);
+      // Define layers
+      defineLayers();
 
       // Point management
       affichPoints(xmlDoc, 'planimetric');
-      // Zoom view
-      defineViewByFile();
+      defineViewByFile();   // Zoom view
 
-      // Planimetric
+      //------- PLANIMETRIC
       affichMeasure(xmlDoc, 'planimetric');
+
+
+      //------- ALTIMETRIC
+      affichPoints(xmlDoc, 'altimetric');
+      
 
       
       

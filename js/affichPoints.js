@@ -13,19 +13,9 @@ function affichPoints(xml, type){
 
         if (points_obs.includes(key) === true){
 
-            let E = value.east;
-            let N = value.north;
-            /*if (E > 450000.0 && E < 2000000.0 && N > 70000.0 && N < 1000000.0){
-                E = E + 2000000.0;
-                N = N + 1000000.0;
-            };*/
-
             pt_feature = new ol.Feature({
                 name: key,
-                geometry: new ol.geom.Point([
-                    E,
-                    N
-                ]),
+                geometry: new ol.geom.Point([ value.east, value.north ]),
                 property: {
                     height: value.height
                 }
@@ -84,26 +74,19 @@ function affichPoints(xml, type){
     });
 
     // Create layer
-    planiPtsF_layer = new ol.layer.Vector({
-        source: planiPtsF_source,
-        style: function(feature) {
-            stylePtsF.getText().setText(feature.getId());
-            return stylePtsF;
-        }
+    planiPtsF_layer.setSource( planiPtsF_source );
+    planiPtsF_layer.setStyle( function(feature) {
+        stylePtsF.getText().setText(feature.getId());
+        return stylePtsF;
     });
     planiPtsF_layer.setZIndex(98);
     map.addLayer(planiPtsF_layer);
 
-    planiPtsN_layer = new ol.layer.Vector({
-        source: planiPtsN_source,
-        style: function(feature) {
-            stylePtsN.getText().setText(feature.getId());
-            return stylePtsN;
-        }
+    planiPtsN_layer.setSource( planiPtsN_source );
+    planiPtsN_layer.setStyle( function(feature) {
+        stylePtsN.getText().setText(feature.getId());
+        return stylePtsN;
     });
     planiPtsN_layer.setZIndex(97);
     map.addLayer(planiPtsN_layer);
-
-    console.log('Layers created');
-
 };
