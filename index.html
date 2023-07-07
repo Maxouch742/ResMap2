@@ -41,12 +41,12 @@
           </div>
 
           <!-- Abriss planimétrique -->
-          <button onclick="myFunction('abrissPlanimetrique')" class="w3-button w3-block w3-left-align">Planimétrie</button>
-          <div id="abrissPlanimetrique" class="w3-container w3-hide">
+          <button onclick="myFunction('abrissPlanimetrique')" class="w3-button w3-block w3-left-align w3-blue-grey">Planimétrie</button>
+          <div id="abrissPlanimetrique" class="w3-container w3-hide w3-border">
             <!-- Checkbox : Points fixes -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxPtsF" onchange="changeLayerVisibility('plani_ptsF')" checked>
-              <label class="checkboxLabel" for="checkboxPointsFixes">
+              <label class="checkboxLabel" for="checkboxPtsF">
                 Points fixes
               </label>
             </div>
@@ -54,10 +54,46 @@
             <!-- Checkbox : Points nouveaux -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxPtsN" onchange="changeLayerVisibility('plani_ptsN')" checked>
-              <label class="checkboxLabel" for="checkboxPointsNouv">
+              <label class="checkboxLabel" for="checkboxPtsN">
                 Points nouveaux
               </label>
             </div>
+
+            <!-- Checkbox : Observations GNSS -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxGNSS" onchange="changeLayerVisibility('plani_GNSS')" checked>
+              <label class="checkboxLabel" for="checkboxGNSS">
+                Obs. GNSS
+              </label>
+            </div>
+
+          </div>
+
+          <!-- Abriss altimétrique -->
+          <button onclick="myFunction('abrissAltimetrique')" class="w3-button w3-block w3-left-align w3-blue-grey">Altimétrie</button>
+          <div id="abrissAltimetrique" class="w3-container w3-hide w3-border">
+            <!-- Checkbox : Points fixes -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxPtsF_alti" onchange="changeLayerVisibility('alti_ptsF')">
+              <label class="checkboxLabel" for="checkboxPtsF_alti">
+                Points fixes
+              </label>
+            </div>
+
+            <!-- Checkbox : Points nouveaux -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxPtsN_alti" onchange="changeLayerVisibility('alti_ptsN')">
+              <label class="checkboxLabel" for="checkboxPtsN_alti">
+                Points nouveaux
+              </label>
+            </div>
+
+          </div>
+
+          <!-- Parameter -->
+          <button onclick="myFunction('parameter')" class="w3-button w3-block w3-left-align w3-blue-grey">Paramètres</button>
+          <div id="parameter" class="w3-container w3-hide w3-border">
+            <!-- TODO: scale -->
 
           </div>
         </div>
@@ -84,10 +120,6 @@
         </div>
       </div>
 
-      <div id="popup" class="ol-popup">
-        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-        <div id="popup-content"></div>
-      </div>
 
     </div>
 
@@ -105,7 +137,6 @@
 
     <!---- Personnals scripts -->
     <script src="./js/index_accordion.js"></script>
-    <script src="./js/popup.js"></script>
 
     <script src="./js/defineProj.js"></script>
     <script src="./js/defineBackground.js"></script>
@@ -116,11 +147,13 @@
     <script src="./js/changeBackground.js"></script>
     <script src="./js/changeLayerVisibility.js"></script>
 
-    <script src="./js/affichPoints.js"></script>
-
     <script src="./js/parseXML_points.js"></script>
     <script src="./js/parseXML_variablePoints.js"></script>
-    <script src="./js/parseXML_planiObservations.js"></script>
+    <script src="./js/parseXML_planiObsPoints.js"></script>
+    <script src="./js/parseXML_planiObs.js"></script>
+    
+    <script src="./js/affichPoints.js"></script>
+    <script src="./js/affichMeasure.js"></script>
 
     <script src="./js/readFilePRNx.js"></script>
 

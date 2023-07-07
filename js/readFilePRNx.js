@@ -12,11 +12,15 @@ function readFilePRNx(){
 
       console.log(xmlDoc);
 
-      // Points management
+      // Point management
       affichPoints(xmlDoc, 'planimetric');
-
       // Zoom view
       defineViewByFile();
+
+      // Planimetric
+      affichMeasure(xmlDoc, 'planimetric');
+
+      
       
 
       document.getElementById("outputTest").textContent = "Import effectué ✓";

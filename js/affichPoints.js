@@ -1,8 +1,8 @@
 function affichPoints(xml, type){
 
-    points = parseXML_points(xml);
+    parseXML_points(xml);
     const points_varPlani = parseXML_variablePoints(xml, type);
-    const points_obs = parseXML_planiObservations(xml);
+    const points_obs = parseXML_planiObsPoints(xml);
 
     // Create source layer
     const planiPtsN_source = new ol.source.Vector({});
@@ -15,10 +15,10 @@ function affichPoints(xml, type){
 
             let E = value.east;
             let N = value.north;
-            if (E > 450000.0 && E < 2000000.0 && N > 70000.0 && N < 1000000.0){
+            /*if (E > 450000.0 && E < 2000000.0 && N > 70000.0 && N < 1000000.0){
                 E = E + 2000000.0;
                 N = N + 1000000.0;
-            };
+            };*/
 
             pt_feature = new ol.Feature({
                 name: key,

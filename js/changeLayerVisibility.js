@@ -16,5 +16,12 @@ function changeLayerVisibility(item){
                 planiPtsN_layer.setVisible(false);
             }
             break;
+        case 'plani_GNSS':
+            if (document.getElementById('checkboxGNSS').checked === true){
+                planiGNSS_layer.setVisible(true);
+            } else {
+                planiGNSS_layer.setVisible(false);
+            }
+            break;
     }
 }
