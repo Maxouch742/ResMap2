@@ -37,5 +37,19 @@ function changeLayerVisibility(item){
                 planiDis_layer.setVisible(false);
             };
             break;
+        case 'alti_ptsF':
+            if (document.getElementById('checkboxPtsF_alti').checked === true){
+                altiPtsF_layer.setVisible(true);
+            } else {
+                altiPtsF_layer.setVisible(false);
+            };
+            break;
+        case 'alti_ptsN':
+            if (document.getElementById('checkboxPtsN_alti').checked === true){
+                altiPtsN_layer.setVisible(true);
+            } else {
+                altiPtsN_layer.setVisible(false);
+            };
+            break;
     }
 }

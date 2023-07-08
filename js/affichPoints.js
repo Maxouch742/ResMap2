@@ -74,7 +74,9 @@ function affichPoints(xml, type){
     });
 
     // Create layer
-    planiPtsF_layer.setSource( planiPtsF_source );
+    planiPtsF_layer = new ol.source.Vector({
+        source: planiPtsF_source
+    });
     planiPtsF_layer.setStyle( function(feature) {
         stylePtsF.getText().setText(feature.getId());
         return stylePtsF;
@@ -82,7 +84,9 @@ function affichPoints(xml, type){
     planiPtsF_layer.setZIndex(98);
     map.addLayer(planiPtsF_layer);
 
-    planiPtsN_layer.setSource( planiPtsN_source );
+    planiPtsN_layer = new ol.source.Vector({
+        source: planiPtsN_source
+    });
     planiPtsN_layer.setStyle( function(feature) {
         stylePtsN.getText().setText(feature.getId());
         return stylePtsN;

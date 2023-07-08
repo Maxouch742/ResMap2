@@ -54,6 +54,5 @@ function parseXML_planiObsPoints(xml){
         };
     };
 
-    console.log(planiObs);
     return planiObs
 }

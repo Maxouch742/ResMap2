@@ -1,6 +1,6 @@
 function parseXML_points(xml){
 
-    points = new Map();   
+    const points = new Map();   
     
     // Final coordinates of file
     const coordFinal = xml.getElementsByTagName('finalCoords')[0];
@@ -58,5 +58,7 @@ function parseXML_points(xml){
                 if (pt.getAttribute('meanErrorH') != null){ points.get(pt_name).EMH = parseFloat(pt.getAttribute('meanErrorH')) };
             }
         }
-    }
+    };
+
+    return points
 }
