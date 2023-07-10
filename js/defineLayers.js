@@ -13,5 +13,8 @@ function defineLayers(){
     //// Points
     altiPtsF_layer = new ol.layer.Vector();
     altiPtsN_layer = new ol.layer.Vector();
+    //// Observations
+    altiDH_layer = new ol.layer.Vector();
+    altiGNSS_layer = new ol.layer.Vector();
 
 }

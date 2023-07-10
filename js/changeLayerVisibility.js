@@ -87,5 +87,17 @@ function changeLayerVisibility(item){
                 altiPtsN_layer.setVisible(false);
             };
             break;
+        case 'alti_DH':
+            if (document.getElementById('checkboxDH_alti').checked === true){
+                altiDH_layer.setVisible(true);
+            } else {
+                altiDH_layer.setVisible(false);
+            }
+        case 'alti_GNSS':
+            if (document.getElementById('checkboxGNSS_alti').checked === true){
+                altiGNSS_layer.setVisible(true);
+            } else {
+                altiGNSS_layer.setVisible(false);
+            }
     }
 }

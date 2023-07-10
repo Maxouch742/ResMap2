@@ -104,10 +104,26 @@
             </div>
 
             <!-- Checkbox : Points nouveaux -->
-            <div>
+            <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxPtsN_alti" onchange="changeLayerVisibility('alti_ptsN')">
               <label class="checkboxLabel" for="checkboxPtsN_alti">
                 Points nouveaux
+              </label>
+            </div>
+
+            <!-- Checkbox : Obs. DH -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxDH_alti" onchange="changeLayerVisibility('alti_DH')">
+              <label class="checkboxLabel" for="checkboxDH_alti">
+                Obs. DH
+              </label>
+            </div>
+
+            <!-- Checkbox : Obs. GNSS -->
+            <div class="w3-border-bottom">
+              <input class="form-check-input" type="checkbox" id="checkboxGNSS_alti" onchange="changeLayerVisibility('alti_GNSS')">
+              <label class="checkboxLabel" for="checkboxGNSS_alti">
+                Obs. GNSS
               </label>
             </div>
 
@@ -190,6 +206,7 @@
     <script src="./js/affichPointsPlani.js"></script>
     <script src="./js/affichPointsAlti.js"></script>
     <script src="./js/affichMeasPlani.js"></script>
+    <script src="./js/affichMeasAlti.js"></script>
     <!--<script src="./js/affichPopup.js"></script>-->
 
     <script src="./js/readFilePRNx.js"></script>

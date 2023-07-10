@@ -180,7 +180,7 @@ function affichMeasPlani(xml, pts){
                 };
                 break;
         }
-    }
+    };
 
     // Layers 
     planiGNSS_layer.setSource( planiGNSS_source );

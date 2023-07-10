@@ -1,0 +1,9 @@
+- Calculer réseau géodésique avec Geosuite (dernière version pour avoir .PRNx)
+- Importer fichier
+- Avec les layers, vous affichez ce que vous souhaitez étudier.
+  Rappel avec les wi, ....
+- Symbologie (rectangle, fléche, ronds, points, ...)
+- planimétrie, altimétrie,
+- échelle
+- observations supportés
+- Représentation des réseaux (libre, ajusté, contraint)

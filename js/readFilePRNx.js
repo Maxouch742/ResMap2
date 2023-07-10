@@ -23,6 +23,7 @@ function readFilePRNx(){
 
       // Measure
       affichMeasPlani(xmlDoc, pts_Map);
+      affichMeasAlti(xmlDoc, pts_Map);
 
 
       //affichPoints(xmlDoc, 'planimetric');

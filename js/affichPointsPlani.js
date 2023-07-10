@@ -52,7 +52,7 @@ function affichPointsPlani(pts, pts_var, pts_obs){
     });
     const stylePtsN = new ol.style.Style({
         image: new ol.style.Icon({
-            src: './img/triangle-filled-svgrepo-com.png',
+            src: './img/circle-filled-svgrepo-com.png',
             scale: '0.07',
             color: '#FF2121',
         }),
