@@ -73,6 +73,13 @@ function changeLayerVisibility(item){
                 planiDis_layer.setVisible(false);
             };
             break;
+        case 'plani_ell':
+            if (document.getElementById('checkboxEll').checked === true){
+                planiEll_layer.setVisible(true);
+            } else {
+                planiEll_layer.setVisible(false);
+            };
+            break;
         case 'alti_ptsF':
             if (document.getElementById('checkboxPtsF_alti').checked === true){
                 altiPtsF_layer.setVisible(true);

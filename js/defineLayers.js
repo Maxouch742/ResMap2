@@ -8,6 +8,10 @@ function defineLayers(){
     planiGNSS_layer = new ol.layer.Vector();
     planiDir_layer = new ol.layer.Vector();
     planiDis_layer = new ol.layer.Vector();
+    //// Indicateurs
+    planiEll_layer = new ol.layer.Vector();
+    planiEll_layer.setZIndex(85);
+    map.addLayer(planiEll_layer);
 
     //////// ALTIMETRIC
     //// Points
