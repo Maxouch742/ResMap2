@@ -7,4 +7,5 @@ slider.oninput = function() {
   echelleEllipses = this.value;
   output.innerHTML = echelleEllipses;
   affichPrecision(pts_Map, xmlDoc);
+  affichVecteurs(pts_Map);
 }

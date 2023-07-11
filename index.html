@@ -76,7 +76,7 @@
             </div>
 
             <!-- Checkbox : Observations de distances -->
-            <div>
+            <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxDis" onchange="changeLayerVisibility('plani_Dis')">
               <label class="checkboxLabel" for="checkboxDis">
                 Obs. Distances
@@ -84,10 +84,26 @@
             </div>
 
             <!-- Checkbox : Observations GNSS -->
-            <div class="w3-border-bottom">
+            <div>
               <input class="form-check-input" type="checkbox" id="checkboxGNSS" onchange="changeLayerVisibility('plani_GNSS')">
               <label class="checkboxLabel" for="checkboxGNSS">
-                Obs. GNSS
+                Obs. Session GNSS
+              </label>
+            </div>
+
+            <!-- Checkbox : Observations de coordonnées E -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxCoordE" onchange="changeLayerVisibility('plani_CoordE')">
+              <label class="checkboxLabel" for="checkboxCoordE">
+                Obs. coordonnée Est (axe Y)
+              </label>
+            </div>
+
+            <!-- Checkbox: Observations de coordonnées N -->
+            <div class="w3-border-bottom">
+              <input class="form-check-input" type="checkbox" id="checkboxCoordN" onchange="changeLayerVisibility('plani_CoordN')">
+              <label class="checkboxLabel" for="checkboxCoordN">
+                Obs. coordonnée Nord (axe X)
               </label>
             </div>
 
@@ -95,7 +111,7 @@
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxEll" onchange="changeLayerVisibility('plani_ell')">
               <label class="checkboxLabel" for="checkboxEll">
-                Ell. de confiance
+                Ellipses de confiance
               </label>
             </div>
 
@@ -103,7 +119,47 @@
             <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxEllRel" onchange="changeLayerVisibility('plani_ellRel')">
               <label class="checkboxLabel" for="checkboxEllRel">
-                Ell. de confiance relatives
+                Ellipses de confiance relatives
+              </label>
+            </div>
+
+            <!-- Checkbox : Rectangle de fiabilité -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxRect" onchange="changeLayerVisibility('plani_Rect')">
+              <label class="checkboxLabel" for="checkboxRect">
+                Rectangles de fiabilité
+              </label>
+            </div>
+
+            <!-- Checkbox : Rectangle de fiabilité -->
+            <div class="w3-border-bottom">
+              <input class="form-check-input" type="checkbox" id="checkboxRectRel" onchange="changeLayerVisibility('plani_RectRel')">
+              <label class="checkboxLabel" for="checkboxRectRel">
+                Rectangles de fiabilité relatifs
+              </label>
+            </div>
+
+            <!-- Checkbox : Fiabilité locale (zi) -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxFiabLoc" onchange="changeLayerVisibility('plani_fiabLoc')">
+              <label class="checkboxLabel" for="checkboxFiabLoc">
+                Fiabilité locale (zi)
+              </label>
+            </div>
+
+            <!-- Checkbox : Résidus normés (wi) -->
+            <div class="w3-border-bottom">
+              <input class="form-check-input" type="checkbox" id="checkboxResi" onchange="changeLayerVisibility('plani_resi')">
+              <label class="checkboxLabel" for="checkboxResi">
+                Résidus normés (wi)
+              </label>
+            </div>
+
+            <!-- Checkbox : Vecteur de différence de coordonnées -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxVect" onchange="changeLayerVisibility('plani_vect')">
+              <label class="checkboxLabel" for="checkboxVect">
+                Vecteurs de déplacement
               </label>
             </div>
 
@@ -129,7 +185,7 @@
             </div>
 
             <!-- Checkbox : Obs. DH -->
-            <div>
+            <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxDH_alti" onchange="changeLayerVisibility('alti_DH')">
               <label class="checkboxLabel" for="checkboxDH_alti">
                 Obs. DH
@@ -137,10 +193,18 @@
             </div>
 
             <!-- Checkbox : Obs. GNSS -->
-            <div class="w3-border-bottom">
+            <div>
               <input class="form-check-input" type="checkbox" id="checkboxGNSS_alti" onchange="changeLayerVisibility('alti_GNSS')">
               <label class="checkboxLabel" for="checkboxGNSS_alti">
                 Obs. GNSS
+              </label>
+            </div>
+
+            <!-- Checkbox : Obs. coordonnée H -->
+            <div class="w3-border-bottom">
+              <input class="form-check-input" type="checkbox" id="checkboxCoordH_alti" onchange="changeLayerVisibility('alti_coordH')">
+              <label class="checkboxLabel" for="checkboxCoordH_alti">
+                Obs. coordonnée H
               </label>
             </div>
 
@@ -151,7 +215,7 @@
             <input type="range" min="1" max="10001" step="10" value="1000" class="slider" id="myRange">
             <div>
               <span class="textEchelle" id="textEchelle">Echelle des indicateurs → <span id="echelleValue"></span>:1</span>
-              <div class="textEchelle" id="nivConfiance">Niveau de confiance des ellipses → <span id="nivConfianceValue"></span></div>
+              <div class="textEchelle" id="nivConfiance">Niv. de conf. des ellipses → <span id="nivConfianceValue"></span></div>
             </div>
           </div>
 
@@ -205,6 +269,7 @@
     <script src="./js/index_slider.js"></script>
     <script src="./js/range.js"></script>
     <script src="./js/gisement.js"></script>
+    <script src="./js/gisement2.js"></script>
 
     <script src="./js/defineProj.js"></script>
     <script src="./js/defineBackground.js"></script>
@@ -229,6 +294,7 @@
     <script src="./js/affichMeasPlani.js"></script>
     <script src="./js/affichMeasAlti.js"></script>
     <script src="./js/affichPrecision.js"></script>
+    <script src="./js/affichVecteurs.js"></script>
     <!--<script src="./js/affichPopup.js"></script>-->
 
     <script src="./js/readFilePRNx.js"></script>

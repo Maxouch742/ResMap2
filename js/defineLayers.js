@@ -12,6 +12,9 @@ function defineLayers(){
     planiEll_layer = new ol.layer.Vector();
     planiEll_layer.setZIndex(85);
     map.addLayer(planiEll_layer);
+    planiVect_layer = new ol.layer.Vector();
+    planiVect_layer.setZIndex(80);
+    map.addLayer(planiVect_layer);
 
     //////// ALTIMETRIC
     //// Points

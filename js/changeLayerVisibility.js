@@ -80,6 +80,12 @@ function changeLayerVisibility(item){
                 planiEll_layer.setVisible(false);
             };
             break;
+        case 'plani_vect':
+            if (document.getElementById('checkboxVect').checked === true){
+                planiVect_layer.setVisible(true);
+            } else {
+                planiVect_layer.setVisible(false);
+            }
         case 'alti_ptsF':
             if (document.getElementById('checkboxPtsF_alti').checked === true){
                 altiPtsF_layer.setVisible(true);

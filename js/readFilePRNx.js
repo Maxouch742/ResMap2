@@ -25,6 +25,7 @@ function readFilePRNx(){
       echelleEllipses = 1000.0;
       affichPrecision(pts_Map, xmlDoc);
       //affichFiabilite(pts_Map);
+      affichVecteurs(pts_Map);
 
       // Measure
       affichMeasPlani(xmlDoc, pts_Map);
