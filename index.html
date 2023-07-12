@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <title>ResMap 2</title>
+    <title>ResMap2</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Visualisation simple et facile des résultats de calculs de compensation de réseaux géodésiques">
@@ -15,6 +15,7 @@
     <link href="./css/style.css" rel="stylesheet">
     <link href="./css/popup.css" ref="stylesheet">
     <link href="./css/slider.css" ref="stylesheet">
+    <link href="./css/helpButton.css" ref="stylesheet">
 
     <!----------- OpenLayers -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
@@ -232,7 +233,7 @@
       <!-- Button for layers -->
       <div class="w3-dropdown-hover w3-right" id="layerSelection">
         <button class="w3-button" id="layerButton">
-          <img src="./img/layers-svgrepo-com.png" alt="Selecting the background layer">
+          <img id="imgLayers" src="./img/layers-svgrepo-com.png" alt="Selecting the background layer">
         </button>
         <div class="w3-dropdown-content w3-bar-block" style="right:0">
           <a class="w3-bar-item w3-button" onclick="changeBackground('CN')" >Carte Nationale</a>
@@ -241,6 +242,13 @@
           <a class="w3-bar-item w3-button" onclick="changeBackground('MO')">Mens. Off.</a>
           <a class="w3-bar-item w3-button" onclick="changeBackground('nothing')">-</a>
         </div>
+      </div>
+
+      <!-- Button for help -->
+      <div class="w3-button" id="help">
+        <a href="./html/help.html" target="_blank">
+          <img src="./img/help-svgrepo-com.png" alt="Click for help" id="imgHelp">
+        </a>
       </div>
 
       <!---- Popup ---->
@@ -295,6 +303,7 @@
     <script src="./js/affichMeasAlti.js"></script>
     <script src="./js/affichPrecision.js"></script>
     <script src="./js/affichVecteurs.js"></script>
+    <script src="./js/affichRectangles.js"></script>
     <!--<script src="./js/affichPopup.js"></script>-->
 
     <script src="./js/readFilePRNx.js"></script>

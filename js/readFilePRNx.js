@@ -2,7 +2,7 @@ function readFilePRNx(){
     
     // Get file and path
     let fileName = document.getElementById('inputfile').files[0]
-
+    
     // Reading the contents of the .PRNx file
     let fr = new FileReader();
     fr.onload=function() {
@@ -24,7 +24,7 @@ function readFilePRNx(){
       //indicateurs
       echelleEllipses = 1000.0;
       affichPrecision(pts_Map, xmlDoc);
-      //affichFiabilite(pts_Map);
+      affichRectangles(pts_Map);
       affichVecteurs(pts_Map);
 
       // Measure

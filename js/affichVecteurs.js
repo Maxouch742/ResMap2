@@ -18,8 +18,7 @@ function affichVecteurs(pts){
 
             const gisArrow1 = gisVect + 250.0;
             const gisArrow2 = gisVect + 150.0;
-            console.log(gisVect);
-
+            
             // Définition de la flèche
             const start = [ east, north ];
             const end = [ east + echelleEllipses * norm * Math.sin( gisVect*Math.PI/200.0 ), north + echelleEllipses * norm * Math.cos( gisVect*Math.PI/200.0 ) ];

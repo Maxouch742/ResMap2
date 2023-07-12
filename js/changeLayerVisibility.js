@@ -80,6 +80,12 @@ function changeLayerVisibility(item){
                 planiEll_layer.setVisible(false);
             };
             break;
+        case 'plani_rect':
+            if (document.getElementById('checkboxRect').checked === true) {
+                planiRect_layer.setVisible(true);
+            } else {
+                planiRect_layer.setVisible(false);
+            }
         case 'plani_vect':
             if (document.getElementById('checkboxVect').checked === true){
                 planiVect_layer.setVisible(true);

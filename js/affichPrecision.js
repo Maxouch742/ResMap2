@@ -55,7 +55,6 @@ function affichPrecision(pts, xml){
             if (gis_ema >= 400.0){ gis_ema = gis_ema - 400.0 };
             let rota = gis_ema*Math.PI/200.0;
             
-
             // Définition de l'ellipse
             let listENellipse = [];
             t.forEach(gis => listENellipse.push([
