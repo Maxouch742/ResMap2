@@ -17,6 +17,9 @@ function defineLayers(){
     planiRect_layer.setZIndex(86);
     map.addLayer(planiRect_layer);
 
+    planiFiabLoc_layer = new ol.layer.Vector();
+    planiResi_layer = new ol.layer.Vector();
+
     planiVect_layer = new ol.layer.Vector();
     planiVect_layer.setZIndex(80);
     map.addLayer(planiVect_layer);

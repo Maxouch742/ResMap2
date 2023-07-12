@@ -1,4 +1,4 @@
-function affichPrecision(pts, xml){
+function affichPrecisionPlani(pts, xml){
 
     // Définiiton des sources
     const planiEll_source = new ol.source.Vector({});

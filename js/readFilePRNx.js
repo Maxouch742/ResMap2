@@ -23,8 +23,10 @@ function readFilePRNx(){
 
       //indicateurs
       echelleEllipses = 1000.0;
-      affichPrecision(pts_Map, xmlDoc);
-      affichRectangles(pts_Map);
+      affichPrecisionPlani(pts_Map, xmlDoc);
+      affichRectanglesPlani(pts_Map);
+      affichFiabLocPlani(xmlDoc, pts_Map);
+
       affichVecteurs(pts_Map);
 
       // Measure

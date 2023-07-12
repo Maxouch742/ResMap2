@@ -85,7 +85,15 @@ function changeLayerVisibility(item){
                 planiRect_layer.setVisible(true);
             } else {
                 planiRect_layer.setVisible(false);
-            }
+            };
+            break;
+        case 'plani_fiabLoc':
+            if (document.getElementById('checkboxFiabLoc').checked === true){
+                planiFiabLoc_layer.setVisible(true);
+            } else {
+                planiFiabLoc_layer.setVisible(false);
+            };
+            break;
         case 'plani_vect':
             if (document.getElementById('checkboxVect').checked === true){
                 planiVect_layer.setVisible(true);

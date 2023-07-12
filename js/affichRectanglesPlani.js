@@ -1,4 +1,4 @@
-function affichRectangles(pts){
+function affichRectanglesPlani(pts){
     
     // Create source layer
     const planiRect_source = new ol.source.Vector({});
