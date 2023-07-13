@@ -61,17 +61,88 @@ function affichFiabLocPlani(xml, pts){
                 };
                 planiGNSS_sessionID++ ;
                 break;
-        
+
+            case 'direction':
+                // Station
+                const sta_name = station.getAttribute('name');
+                
+                // Lister les observations
+                const list_obsDir = station.getElementsByTagName('obs');
+                for (let j=0; j<list_obsDir.length; j++){
+                    const pt_name = list_obsDir[j].getAttribute('target');
+                    const pt_obsNr = list_obsDir[j].getAttribute('obsNr');
+                    const pt_zi = parseFloat(list_obsDir[j].getAttribute('zi'));
+                    const [colorFiab, widthFiab, zIndex] = getParameterFeature(pt_zi);
+                    
+                    
+                    // Feature line
+                    const planiDir_feature = new ol.Feature({
+                        geometry: new ol.geom.LineString([ 
+                            [ pts.get(sta_name)['east'], pts.get(sta_name)['north'] ], 
+                            [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ] 
+                        ]),
+                    });
+
+                    // Feature symbole
+                    const east_symbol = pts.get(sta_name)['east'] + (pts.get(pt_name)['east'] - pts.get(sta_name)['east'])*0.1;
+                    const north_symbol = pts.get(sta_name)['north'] + (pts.get(pt_name)['north'] - pts.get(sta_name)['north'])*0.1;
+                    const gis = gisement(pts.get(sta_name)['east']-east_symbol, pts.get(sta_name)['north']-north_symbol);              
+
+                    const planiDir_featureSymbol = new ol.Feature({
+                        geometry: new ol.geom.Point([ 
+                            east_symbol, 
+                            north_symbol ])
+                    });
+                    
+                    // Style
+                    if (pt_obsNr != ''){
+                        planiDir_feature.setStyle( new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: colorFiab,
+                                width: widthFiab
+                            }),
+                            zIndex: zIndex
+                        }));
+                        planiDir_featureSymbol.setStyle( new ol.style.Style({
+                            image: new ol.style.Icon({
+                                src: './img/triangle-svgrepo-com.png',
+                                scale:'0.05',
+                                color: colorFiab,
+                                rotation: gis
+                            }),
+                            zIndex: zIndex
+                        }))
+                    } else {
+                        planiDir_feature.setStyle( new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color:'#717171',
+                                width: 1
+                            })
+                        }));
+                        planiDir_featureSymbol.setStyle( new ol.style.Style({
+                            image: new ol.style.Icon({
+                                src: './img/triangle-svgrepo-com.png',
+                                scale:'0.05',
+                                color:'#717171',
+                                rotation: gis
+                            })
+                        }))
+                    };
+                    planiFiabLoc_source.addFeature(planiDir_feature);
+                    planiFiabLoc_source.addFeature(planiDir_featureSymbol);
+                };
+                break;
         }
     }
 
     // Add to map
     planiFiabLoc_layer.setSource( planiFiabLoc_source );
     planiFiabLoc_layer.setOpacity(1.0);
-    planiFiabLoc_layer.setZIndex(80);
+    //planiFiabLoc_layer.setZIndex(80);
     map.addLayer(planiFiabLoc_layer);
     changeLayerVisibility('plani_fiabLoc');
 };
+
 
 function getParameterFeature(zi){
     
@@ -81,7 +152,7 @@ function getParameterFeature(zi){
 
     if (zi < 25.0) {
         colorFiab = "#FF1700"; //red
-        widthFiab = 3;
+        widthFiab = 2;
         zIndex = 99;
     } 
     else if (zi <= 50.0) {
