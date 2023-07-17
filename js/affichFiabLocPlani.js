@@ -206,9 +206,6 @@ function affichFiabLocPlani(xml, pts){
 
     // Add to map
     planiFiabLoc_layer.setSource( planiFiabLoc_source );
-    //planiFiabLoc_layer.setOpacity(1.0);
-    //planiFiabLoc_layer.setZIndex(80);
-    map.addLayer(planiFiabLoc_layer);
     changeLayerVisibility('plani_fiabLoc');
 };
 

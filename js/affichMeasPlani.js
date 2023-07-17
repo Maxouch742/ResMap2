@@ -8,6 +8,9 @@ function affichMeasPlani(xml, pts){
     const planiDir_source = new ol.source.Vector({});
     const planiDis_source = new ol.source.Vector({});
     
+    const planiCoordE_source = new ol.source.Vector({});
+    const planiCoordN_source = new ol.source.Vector({});
+    
     const planiGNSS_source = new ol.source.Vector({});
     let planiGNSS_sessionID = 1;
     const list_radius = [0.10, 0.13, 0.16, 0.19, 0.22, 0.25, 0.28, 0.31, 0.34];
@@ -179,6 +182,56 @@ function affichMeasPlani(xml, pts){
                     planiDis_source.addFeature(planiDis_featureSymbol);
                 };
                 break;
+        
+            case 'coordinate':
+
+                // list of points
+                const targets_list = station.getElementsByTagName('target');
+                for (let j=0; j<targets_list.length; j++){
+
+                    const target = targets_list[j];
+                    const pt_name = target.getAttribute('name');
+                    
+                    const points_list = target.getElementsByTagName('obs');
+                    for (let k=0; k<points_list.length; k++){
+                        
+                        const obs = points_list[k];
+                        const obs_target = obs.getAttribute('target');
+
+                        const planiCoord_feature = new ol.Feature({
+                            geometry: new ol.geom.Point([
+                                pts.get(pt_name)['east'],
+                                pts.get(pt_name)['north']
+                            ]),
+                            name: pt_name,
+                        });
+
+                        switch (obs_target){
+                            case "Y":
+                                const planiCoord_style1 = new ol.style.Style({
+                                    image: new ol.style.Icon({
+                                        src: './img/E_obs.png',
+                                        scale: '0.13',
+                                        color: '#000000',
+                                    })
+                                });
+                                planiCoord_feature.setStyle(planiCoord_style1);
+                                planiCoordE_source.addFeature(planiCoord_feature);
+                                break;
+                            case "X":
+                                const planiCoord_style2 = new ol.style.Style({
+                                    image: new ol.style.Icon({
+                                        src: './img/N_obs.png',
+                                        scale: '0.13',
+                                        color: '#000000',
+                                    })
+                                });
+                                planiCoord_feature.setStyle(planiCoord_style2);
+                                planiCoordN_source.addFeature(planiCoord_feature);
+                                break;
+                        }
+                    }
+                }
         }
     };
 
@@ -188,9 +241,13 @@ function affichMeasPlani(xml, pts){
     changeLayerVisibility('plani_GNSS');
 
     planiDir_layer.setSource( planiDir_source );
-    changeLayerVisibility('plani_Dir');
-
+    changeLayerVisibility('plani_dir');
     planiDis_layer.setSource( planiDis_source );
-    changeLayerVisibility('plani_Dis');
+    changeLayerVisibility('plani_dis');
+
+    planiCoordE_layer.setSource( planiCoordE_source );
+    changeLayerVisibility('plani_coordE');
+    planiCoordN_layer.setSource( planiCoordN_source );
+    changeLayerVisibility('plani_coordN');
 }
 

@@ -85,7 +85,7 @@ function defineLayers(){
     map.addLayer(altiGNSS_layer);
     // Observation de coordonnée H
     altiCoordH_layer = new ol.layer.Vector();
-    altiCoordH_layer.setZindex(65);
+    altiCoordH_layer.setZIndex(65);
     map.addLayer(altiCoordH_layer);
 
     //// Indicateurs

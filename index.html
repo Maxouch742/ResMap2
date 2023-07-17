@@ -33,14 +33,14 @@
       <div class="row align-items-start">
 
         <!-- Left: menu and drop-down menu -->
-        <div class="col-3 border overflow-y-auto" id="menu">
+        <div class="col border overflow-y-auto" id="menu">
           <div class="w3-center">
             <img src="./img/logoAvecTitre.png" class="imgLogo w3-center" alt="Logo de ResMap2">
           </div>
 
           <!-- Import .PRNx file -->
           <div class="mt-2 greyBackground border border-dark p-1">
-            <h5 class="mx-2">Import du fichier .PRNx</h5>
+            <h3 class="mx-2">Import du fichier .PRNx</h3>
             <input class="mx-2 my-1 pr-2 inputFile" type="file" id="inputfile" accept=".prnx" onchange="readFilePRNx()"></input>
             <p class="mx-2 my-1 importInfo" id="outputTest"> </p>
           </div>
@@ -54,7 +54,7 @@
               <label class="checkboxLabel" for="checkboxAffich" id="labelAffich">Tout supprimer</label>
             </div>-->
             
-            <!-- Checkbox : Points fixes -->
+            <!-- Points fixes -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxPtsF" onchange="changeLayerVisibility('plani_ptsF')" checked>
               <label class="checkboxLabel" for="checkboxPtsF">
@@ -62,7 +62,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Points nouveaux -->
+            <!-- Points nouveaux -->
             <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxPtsN" onchange="changeLayerVisibility('plani_ptsN')" checked>
               <label class="checkboxLabel" for="checkboxPtsN">
@@ -70,7 +70,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Observations de directions -->
+            <!-- Observations de directions -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxDir" onchange="changeLayerVisibility('plani_dir')">
               <label class="checkboxLabel" for="checkboxDir">
@@ -78,7 +78,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Observations de distances -->
+            <!-- Observations de distances -->
             <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxDis" onchange="changeLayerVisibility('plani_dis')">
               <label class="checkboxLabel" for="checkboxDis">
@@ -86,7 +86,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Observations GNSS -->
+            <!-- Observations GNSS -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxGNSS" onchange="changeLayerVisibility('plani_GNSS')">
               <label class="checkboxLabel" for="checkboxGNSS">
@@ -94,7 +94,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Observations de coordonnées E -->
+            <!-- Observations de coordonnées E -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxCoordE" onchange="changeLayerVisibility('plani_coordE')">
               <label class="checkboxLabel" for="checkboxCoordE">
@@ -102,7 +102,7 @@
               </label>
             </div>
 
-            <!-- Checkbox: Observations de coordonnées N -->
+            <!-- Observations de coordonnées N -->
             <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxCoordN" onchange="changeLayerVisibility('plani_coordN')">
               <label class="checkboxLabel" for="checkboxCoordN">
@@ -110,7 +110,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Ellipses de confiances -->
+            <!-- Ellipses de confiances -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxEll" onchange="changeLayerVisibility('plani_ell')">
               <label class="checkboxLabel" for="checkboxEll">
@@ -118,7 +118,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Ellipses de confiances relatives -->
+            <!-- Ellipses de confiances relatives -->
             <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxEllRel" onchange="changeLayerVisibility('plani_ellRel')">
               <label class="checkboxLabel" for="checkboxEllRel">
@@ -126,7 +126,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Rectangle de fiabilité -->
+            <!-- Rectangle de fiabilité -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxRect" onchange="changeLayerVisibility('plani_rect')">
               <label class="checkboxLabel" for="checkboxRect">
@@ -134,7 +134,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Rectangle de fiabilité -->
+            <!-- Rectangle de fiabilité -->
             <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxRectRel" onchange="changeLayerVisibility('plani_RectRel')">
               <label class="checkboxLabel" for="checkboxRectRel">
@@ -142,7 +142,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Fiabilité locale (zi) -->
+            <!-- Fiabilité locale (zi) -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxFiabLoc" onchange="changeLayerVisibility('plani_fiabLoc')">
               <label class="checkboxLabel" for="checkboxFiabLoc">
@@ -150,7 +150,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Résidus normés (wi) -->
+            <!-- Résidus normés (wi) -->
             <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxResi" onchange="changeLayerVisibility('plani_resi')">
               <label class="checkboxLabel" for="checkboxResi">
@@ -158,7 +158,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Vecteur de différence de coordonnées -->
+            <!-- Vecteur de différence de coordonnées -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxVect" onchange="changeLayerVisibility('plani_vect')">
               <label class="checkboxLabel" for="checkboxVect">
@@ -171,7 +171,7 @@
           <!-- Abriss altimétrique -->
           <button onclick="myFunction('abrissAltimetrique')" class="w3-button w3-block w3-left-align w3-blue-grey">Altimétrie</button>
           <div id="abrissAltimetrique" class="w3-container w3-hide w3-border">
-            <!-- Checkbox : Points fixes -->
+            <!-- Points fixes -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxPtsF_alti" onchange="changeLayerVisibility('alti_ptsF')">
               <label class="checkboxLabel" for="checkboxPtsF_alti">
@@ -263,7 +263,7 @@
             <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxVect_alti" onchange="changeLayerVisibility('alti_vect')">
               <label class="checkboxLabel" for="checkboxVect_alti">
-                Résidus normés (wi)
+                Vecteurs de déplacement
               </label>
             </div>
 
@@ -355,7 +355,6 @@
     <script src="./js/parseXML_altiObsPoints.js"></script>
     <script src="./js/parseXML_planiObs.js"></script>
     
-    <!--<script src="./js/affichPoints.js"></script>-->
     <script src="./js/affichPointsPlani.js"></script>
     <script src="./js/affichPointsAlti.js"></script>
     <script src="./js/affichMeasPlani.js"></script>
