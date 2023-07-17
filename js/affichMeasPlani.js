@@ -185,18 +185,12 @@ function affichMeasPlani(xml, pts){
     // Layers 
     planiGNSS_layer.setSource( planiGNSS_source );
     planiGNSS_layer.setOpacity( 1.0 );
-    planiGNSS_layer.setZIndex(90);
-    map.addLayer(planiGNSS_layer);
     changeLayerVisibility('plani_GNSS');
 
     planiDir_layer.setSource( planiDir_source );
-    planiDir_layer.setZIndex(92);
-    map.addLayer(planiDir_layer);
     changeLayerVisibility('plani_Dir');
 
     planiDis_layer.setSource( planiDis_source );
-    planiDis_layer.setZIndex(91);
-    map.addLayer(planiDis_layer);
     changeLayerVisibility('plani_Dis');
 }
 

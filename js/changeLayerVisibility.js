@@ -52,6 +52,20 @@ function changeLayerVisibility(item){
                 planiPtsN_layer.setVisible(false);
             };
             break;
+        case 'plani_dir':
+            if (document.getElementById('checkboxDir').checked === true){
+                planiDir_layer.setVisible(true);
+            } else {
+                planiDir_layer.setVisible(false);
+            };
+            break;
+        case 'plani_dis':
+            if (document.getElementById('checkboxDis').checked === true){
+                planiDis_layer.setVisible(true);
+            } else {
+                planiDis_layer.setVisible(false);
+            };
+            break;
         case 'plani_GNSS':
             if (document.getElementById('checkboxGNSS').checked === true){
                 planiGNSS_layer.setVisible(true);
@@ -59,18 +73,18 @@ function changeLayerVisibility(item){
                 planiGNSS_layer.setVisible(false);
             };
             break;
-        case 'plani_Dir':
-            if (document.getElementById('checkboxDir').checked === true){
-                planiDir_layer.setVisible(true);
+        case 'plani_coordE':
+            if (document.getElementById('checkboxCoordE').checked === true){
+                planiCoordE_layer.setVisible(true);
             } else {
-                planiDir_layer.setVisible(false);
+                planiCoordE_layer.setVisible(false);
             };
             break;
-        case 'plani_Dis':
-            if (document.getElementById('checkboxDis').checked === true){
-                planiDis_layer.setVisible(true);
+        case 'plani_coordN':
+            if (document.getElementById('checkboxCoordN').checked === true){
+                planiCoordN_layer.setVisible(true);
             } else {
-                planiDis_layer.setVisible(false);
+                planiCoordN_layer.setVisible(false);
             };
             break;
         case 'plani_ell':
@@ -80,11 +94,25 @@ function changeLayerVisibility(item){
                 planiEll_layer.setVisible(false);
             };
             break;
+        case 'plani_ellRel':
+            if (document.getElementById('checkboxEllRel').checked === true){
+                planiEllRel_layer.setVisible(true);
+            } else {
+                planiEllRel_layer.setVisible(false);
+            };
+            break;
         case 'plani_rect':
             if (document.getElementById('checkboxRect').checked === true) {
                 planiRect_layer.setVisible(true);
             } else {
                 planiRect_layer.setVisible(false);
+            };
+            break;
+        case 'plani_rectRel':
+            if (document.getElementById('checkboxRectRel').checked === true) {
+                planiRectRel_layer.setVisible(true);
+            } else {
+                planiRectRel_layer.setVisible(false);
             };
             break;
         case 'plani_fiabLoc':
@@ -94,12 +122,21 @@ function changeLayerVisibility(item){
                 planiFiabLoc_layer.setVisible(false);
             };
             break;
+        case 'plani_resi':
+            if (document.getElementById('checkboxResi').checked === true){
+                planiResi_layer.setVisible(true);
+            } else {
+                planiResi_layer.setVisible(false);
+            };
+            break;
         case 'plani_vect':
             if (document.getElementById('checkboxVect').checked === true){
                 planiVect_layer.setVisible(true);
             } else {
                 planiVect_layer.setVisible(false);
-            }
+            };
+            break;
+        
         case 'alti_ptsF':
             if (document.getElementById('checkboxPtsF_alti').checked === true){
                 altiPtsF_layer.setVisible(true);
@@ -119,12 +156,70 @@ function changeLayerVisibility(item){
                 altiDH_layer.setVisible(true);
             } else {
                 altiDH_layer.setVisible(false);
-            }
+            };
+            break;
         case 'alti_GNSS':
             if (document.getElementById('checkboxGNSS_alti').checked === true){
                 altiGNSS_layer.setVisible(true);
             } else {
                 altiGNSS_layer.setVisible(false);
-            }
+            };
+            break;
+        case 'alti_coordH':
+            if (document.getElementById('checkboxCoordH_alti').checked === true){
+                altiCoordH_layer.setVisible(true);
+            } else {
+                altiCoordH_layer.setVisible(false);
+            };
+            break;
+        case 'alti_ell':
+            if (document.getElementById('checkboxEll_alti').checked === true){
+                altiEll_layer.setVisible(false);
+            } else {
+                altiEll_layer.setVisible(true);
+            };
+            break;
+        case 'alti_ellRel':
+            if (document.getElementById('checkboxEllRel_alti').checked === true){
+                altiEllRel_layer.setVisible(false);
+            } else {
+                altiElleRel_layer.setVisible(true);
+            };
+            break;
+        case 'alti_rect':
+            if (document.getElementById('checkboxRect_alti').checked === true){
+                altiRect_layer.setVisible(true);
+            } else {
+                altiRect_layer.setVisible(false);
+            };
+            break;
+        case 'alti_rectRel':
+            if (document.getElementById('checkboxRectRel_alti').checked === true){
+                altiRectRel_layer.setVisible(true);
+            } else {
+                altiRectRel_layer.setVisible(false);
+            };
+            break;
+        case 'alti_fiabLoc':
+            if (document.getElementById('checkboxFiabLoc_alti').checked === true){
+                altiFiabLoc_layer.setVisible(true);
+            } else {
+                altiFiabLoc_layer.setVisible(false);
+            };
+            break;
+        case 'alti_resi':
+            if (document.getElementById('checkboxResi_alti').checked === true){
+                altiResi_layer.setVisible(true);
+            } else {
+                altiResi_layer.setVisible(false);
+            };
+            break;
+        case 'alti_vect':
+            if (document.getElementById('checkboxVect_alti').checked === true){
+                altiVect_layer.setVisible(true);
+            } else {
+                altiVect_layer.setVisible(false);
+            };
+            break;
     }
 }

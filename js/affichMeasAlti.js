@@ -130,12 +130,8 @@ function affichMeasAlti(xml, pts){
     // Layers
     altiGNSS_layer.setSource( altiGNSS_source );
     altiGNSS_layer.setOpacity( 1.0 );
-    altiGNSS_layer.setZIndex(90);
-    map.addLayer(altiGNSS_layer);
     changeLayerVisibility('alti_GNSS');
 
     altiDH_layer.setSource( altiDH_source );
-    altiDH_layer.setZIndex(92);
-    map.addLayer(altiDH_layer);
     changeLayerVisibility('alti_DH');
 }

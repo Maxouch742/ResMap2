@@ -27,3 +27,13 @@
     width: 85%;
     height: 85%;
 }
+
+.imgLogo{
+    margin: 10px;
+    width: 40%;
+}
+
+.text_logo{
+    font-size: 2em;
+    font-weight: bold;
+}

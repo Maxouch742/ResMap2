@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Visualisation simple et facile des résultats de calculs de compensation de réseaux géodésiques">
     <meta name="keywords" content="resmap, ResMap, ResMapBD, LTOP, fichier PRNx, swisstopo">
-    <!--<link rel="icon" href="./img/ResMap2_logo.png" />-->
+    <link rel="icon" href="./img/logoAvecTitre.png" />
 
     <!----------- CSS  ----------->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -34,7 +34,9 @@
 
         <!-- Left: menu and drop-down menu -->
         <div class="col-3 border overflow-y-auto" id="menu">
-          <h1 class="w3-center">ResMap2</h1>
+          <div class="w3-center">
+            <img src="./img/logoAvecTitre.png" class="imgLogo w3-center" alt="Logo de ResMap2">
+          </div>
 
           <!-- Import .PRNx file -->
           <div class="mt-2 greyBackground border border-dark p-1">
@@ -70,7 +72,7 @@
 
             <!-- Checkbox : Observations de directions -->
             <div>
-              <input class="form-check-input" type="checkbox" id="checkboxDir" onchange="changeLayerVisibility('plani_Dir')">
+              <input class="form-check-input" type="checkbox" id="checkboxDir" onchange="changeLayerVisibility('plani_dir')">
               <label class="checkboxLabel" for="checkboxDir">
                 Obs. Directions
               </label>
@@ -78,7 +80,7 @@
 
             <!-- Checkbox : Observations de distances -->
             <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxDis" onchange="changeLayerVisibility('plani_Dis')">
+              <input class="form-check-input" type="checkbox" id="checkboxDis" onchange="changeLayerVisibility('plani_dis')">
               <label class="checkboxLabel" for="checkboxDis">
                 Obs. Distances
               </label>
@@ -94,7 +96,7 @@
 
             <!-- Checkbox : Observations de coordonnées E -->
             <div>
-              <input class="form-check-input" type="checkbox" id="checkboxCoordE" onchange="changeLayerVisibility('plani_CoordE')">
+              <input class="form-check-input" type="checkbox" id="checkboxCoordE" onchange="changeLayerVisibility('plani_coordE')">
               <label class="checkboxLabel" for="checkboxCoordE">
                 Obs. coordonnée Est (axe Y)
               </label>
@@ -102,7 +104,7 @@
 
             <!-- Checkbox: Observations de coordonnées N -->
             <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxCoordN" onchange="changeLayerVisibility('plani_CoordN')">
+              <input class="form-check-input" type="checkbox" id="checkboxCoordN" onchange="changeLayerVisibility('plani_coordN')">
               <label class="checkboxLabel" for="checkboxCoordN">
                 Obs. coordonnée Nord (axe X)
               </label>
@@ -126,7 +128,7 @@
 
             <!-- Checkbox : Rectangle de fiabilité -->
             <div>
-              <input class="form-check-input" type="checkbox" id="checkboxRect" onchange="changeLayerVisibility('plani_Rect')">
+              <input class="form-check-input" type="checkbox" id="checkboxRect" onchange="changeLayerVisibility('plani_rect')">
               <label class="checkboxLabel" for="checkboxRect">
                 Rectangles de fiabilité
               </label>
@@ -185,7 +187,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Obs. DH -->
+            <!-- Observation de type DH -->
             <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxDH_alti" onchange="changeLayerVisibility('alti_DH')">
               <label class="checkboxLabel" for="checkboxDH_alti">
@@ -193,7 +195,7 @@
               </label>
             </div>
 
-            <!-- Checkbox : Obs. GNSS -->
+            <!-- Observation GNSS -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxGNSS_alti" onchange="changeLayerVisibility('alti_GNSS')">
               <label class="checkboxLabel" for="checkboxGNSS_alti">
@@ -201,11 +203,67 @@
               </label>
             </div>
 
-            <!-- Checkbox : Obs. coordonnée H -->
+            <!-- Observation de coordonnée H -->
             <div class="w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxCoordH_alti" onchange="changeLayerVisibility('alti_coordH')">
               <label class="checkboxLabel" for="checkboxCoordH_alti">
                 Obs. coordonnée H
+              </label>
+            </div>
+
+            <!-- Ellipses de confiance -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxEll_alti" onchange="changeLayerVisibility('alti_ell')">
+              <label class="checkboxLabel" for="checkboxEll_alti">
+                Ellipses de confiance
+              </label>
+            </div>
+
+            <!-- Ellipses de confiance relative -->
+            <div class="w3-border-bottom">
+              <input class="form-check-input" type="checkbox" id="checkboxEllRel_alti" onchange="changeLayerVisibility('alti_ellRel')">
+              <label class="checkboxLabel" for="checkboxEllRel_alti">
+                Ellipses de confiance relatives
+              </label>
+            </div>
+
+            <!-- Rectangle de fiabilité -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxRect_alti" onchange="changeLayerVisibility('alti_rect')">
+              <label class="checkboxLabel" for="checkboxRect_alti">
+                Rectangle de fiabilité
+              </label>
+            </div>
+
+            <!-- Rectangle de fiabilité relatif -->
+            <div class="w3-border-bottom">
+              <input class="form-check-input" type="checkbox" id="checkboxRectRel_alti" onchange="changeLayerVisibility('alti_rectRel')">
+              <label class="checkboxLabel" for="checkboxRectRel_alti">
+                Rectangle de fiabilité relatif
+              </label>
+            </div>
+
+            <!-- Fiabilité locale (zi) -->
+            <div>
+              <input class="form-check-input" type="checkbox" id="checkboxFiabLoc_alti" onchange="changeLayerVisibility('alti_fiabLoc')">
+              <label class="checkboxLabel" for="checkboxFiabLoc_alti">
+                Fiabilité locale (zi)
+              </label>
+            </div>
+
+            <!-- Résidus normés (wi) -->
+            <div class="w3-border-bottom">
+              <input class="form-check-input" type="checkbox" id="checkboxResi_alti" onchange="changeLayerVisibility('alti_resi')">
+              <label class="checkboxLabel" for="checkboxResi_alti">
+                Résidus normés (wi)
+              </label>
+            </div>
+
+            <!-- Vecteur de déplacement -->
+            <div class="w3-border-bottom">
+              <input class="form-check-input" type="checkbox" id="checkboxVect_alti" onchange="changeLayerVisibility('alti_vect')">
+              <label class="checkboxLabel" for="checkboxVect_alti">
+                Résidus normés (wi)
               </label>
             </div>
 
@@ -245,11 +303,12 @@
       </div>
 
       <!-- Button for help -->
+      <!--
       <div class="w3-button" id="help">
         <a href="./html/help.html" target="_blank">
           <img src="./img/help-svgrepo-com.png" alt="Click for help" id="imgHelp">
         </a>
-      </div>
+      </div> -->
 
       <!---- Popup ---->
       <div id='popup'></div>
@@ -304,6 +363,7 @@
     <script src="./js/affichPrecisionPlani.js"></script>
     <script src="./js/affichRectanglesPlani.js"></script>
     <script src="./js/affichFiabLocPlani.js"></script>
+    <script src="./js/affichResiNormesPlani.js"></script>
     <script src="./js/affichVecteurs.js"></script>
     <!--<script src="./js/affichPopup.js"></script>-->
 

@@ -78,8 +78,6 @@ function affichPointsAlti(pts_map, pts_var, pts_obs){
         stylePtsF.getText().setText(feature.getId());
         return stylePtsF;
     });
-    altiPtsF_layer.setZIndex(98);
-    map.addLayer(altiPtsF_layer);
     changeLayerVisibility('alti_ptsF');
 
     altiPtsN_layer.setSource(altiPtsN_source);
@@ -87,7 +85,5 @@ function affichPointsAlti(pts_map, pts_var, pts_obs){
         stylePtsN.getText().setText(feature.getId());
         return stylePtsN;
     });
-    altiPtsN_layer.setZIndex(97);
-    map.addLayer(altiPtsN_layer);
     changeLayerVisibility('alti_ptsN');
 }

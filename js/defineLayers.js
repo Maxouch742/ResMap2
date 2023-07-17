@@ -1,35 +1,124 @@
 function defineLayers(){
 
     //////// PLANIMETRIC
-    //// Points
+    //// Points 
+    // Points fixes
     planiPtsF_layer = new ol.layer.Vector();
+    planiPtsF_layer.setZIndex(99);
+    map.addLayer(planiPtsF_layer);
+    // Points nouveaux
     planiPtsN_layer = new ol.layer.Vector();
+    planiPtsN_layer.setZIndex(98);
+    map.addLayer(planiPtsN_layer);
+    
     //// Observations
-    planiGNSS_layer = new ol.layer.Vector();
+    // Observations de direction ('RI')
     planiDir_layer = new ol.layer.Vector();
+    planiDir_layer.setZIndex(97);
+    map.addLayer(planiDir_layer);
+    // Observations de distance ('DP')
     planiDis_layer = new ol.layer.Vector();
+    planiDis_layer.setZIndex(96);
+    map.addLayer(planiDis_layer);
+    // Observations de sessions GNSS
+    planiGNSS_layer = new ol.layer.Vector();
+    planiGNSS_layer.setZIndex(95);
+    map.addLayer(planiGNSS_layer);
+    // Observations de coordonnée Est (calcul LI-AJ)
+    planiCoordE_layer = new ol.layer.Vector();
+    planiCoordE_layer.setZIndex(94);
+    map.addLayer(planiCoordE_layer);
+    // Observations de coordonnée Nord (calcul LI-AJ)
+    planiCoordN_layer = new ol.layer.Vector();
+    planiCoordN_layer.setZIndex(94);
+    map.addLayer(planiCoordN_layer);
+    
     //// Indicateurs
+    // Ellipses de confiance
     planiEll_layer = new ol.layer.Vector();
-    planiEll_layer.setZIndex(85);
+    planiEll_layer.setZIndex(93);
     map.addLayer(planiEll_layer);
-
+    // Ellipses de confiance relative
+    planiEllRel_layer = new ol.layer.Vector();
+    planiEllRel_layer.setZIndex(92);
+    map.addLayer(planiEllRel_layer);
+    // Rectangle de fiabilité
     planiRect_layer = new ol.layer.Vector();
-    planiRect_layer.setZIndex(86);
+    planiRect_layer.setZIndex(91);
     map.addLayer(planiRect_layer);
-
+    // Rectangle de fiabilité relatif
+    planiRectRel_layer = new ol.layer.Vector();
+    planiRectRel_layer.setZIndex(90);
+    map.addLayer(planiRectRel_layer);
+    // Fiabilité locale (zi)
     planiFiabLoc_layer = new ol.layer.Vector();
+    planiFiabLoc_layer.setZIndex(89);
+    map.addLayer(planiFiabLoc_layer);
+    // Résidus normés (wi)
     planiResi_layer = new ol.layer.Vector();
-
+    planiResi_layer.setZIndex(88);
+    map.addLayer(planiResi_layer);
+    // Vecteurs de déplacement
     planiVect_layer = new ol.layer.Vector();
-    planiVect_layer.setZIndex(80);
+    planiVect_layer.setZIndex(87);
     map.addLayer(planiVect_layer);
 
     //////// ALTIMETRIC
     //// Points
+    // Points fixes
     altiPtsF_layer = new ol.layer.Vector();
+    altiPtsF_layer.setZIndex(69);
+    map.addLayer(altiPtsF_layer);
+    // Points nouveaux
     altiPtsN_layer = new ol.layer.Vector();
+    altiPtsN_layer.setZIndex(68);
+    map.addLayer(altiPtsN_layer);
+
     //// Observations
+    // Observation de dénivelée de hauteur
     altiDH_layer = new ol.layer.Vector();
+    altiDH_layer.setZIndex(67);
+    map.addLayer(altiDH_layer);
+    // Observation de session GNSS
     altiGNSS_layer = new ol.layer.Vector();
+    altiGNSS_layer.setZIndex(66);
+    map.addLayer(altiGNSS_layer);
+    // Observation de coordonnée H
+    altiCoordH_layer = new ol.layer.Vector();
+    altiCoordH_layer.setZindex(65);
+    map.addLayer(altiCoordH_layer);
+
+    //// Indicateurs
+    // Ellipses de confiance
+    altiEll_layer = new ol.layer.Vector();
+    altiEll_layer.setZIndex(64);
+    map.addLayer(altiEll_layer);
+    // Ellipses de confiance relatives
+    altiEllRel_layer = new ol.layer.Vector();
+    altiEllRel_layer.setZIndex(63);
+    map.addLayer(altiEllRel_layer);
+    // Rectangle de fiabilité
+    altiRect_layer = new ol.layer.Vector();
+    altiRect_layer.setZIndex(62);
+    map.addLayer(altiRect_layer);
+    // Rectangle de fiabilité relatif
+    altiRectRel_layer = new ol.layer.Vector();
+    altiRectRel_layer.setZIndex(61);
+    map.addLayer(altiRectRel_layer);
+    
+    // Fiabilité locale (zi)
+    altiFiabLoc_layer = new ol.layer.Vector();
+    altiFiabLoc_layer.setZIndex(60);
+    map.addLayer(altiFiabLoc_layer);
+
+    // Résidus normés (wi)
+    altiResi_layer = new ol.layer.Vector();
+    altiResi_layer.setZIndex(59);
+    map.addLayer(altiResi_layer);
+
+    // Vecteur de déplacement
+    altiVect_layer = new ol.layer.Vector();
+    altiVect_layer.setZIndex(58);
+    map.addLayer(altiVect_layer);
 
 }
