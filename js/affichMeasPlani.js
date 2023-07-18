@@ -231,7 +231,8 @@ function affichMeasPlani(xml, pts){
                                 break;
                         }
                     }
-                }
+                };
+                break;
         }
     };
 

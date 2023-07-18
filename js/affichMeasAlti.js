@@ -6,6 +6,7 @@ function affichMeasAlti(xml, pts){
 
     // Definitions des sources des couches
     const altiDH_source = new ol.source.Vector({});
+    const altiCoordH_source = new ol.source.Vector({});
 
     const altiGNSS_source = new ol.source.Vector({});
     let altiGNSS_sessionID = 1;
@@ -124,6 +125,48 @@ function affichMeasAlti(xml, pts){
                     //TODO: gérer les visées réciproques
                 };
                 break;
+            
+            case 'connectionPoints':
+                // list of points
+                const targets_list = station.getElementsByTagName('target');
+                for (let j=0; j<targets_list.length; j++){
+
+                    const target = targets_list[j];
+                    const pt_name = target.getAttribute('name');
+                    
+                    const points_list = target.getElementsByTagName('obs');
+                    for (let k=0; k<points_list.length; k++){
+                        
+                        const obs = points_list[k];
+                        const obs_target = obs.getAttribute('target');
+
+                        if (pts.has(pt_name) === true){
+
+                            const altiCoordH_feature = new ol.Feature({
+                                geometry: new ol.geom.Point([
+                                    pts.get(pt_name)['east'],
+                                    pts.get(pt_name)['north']
+                                ]),
+                                name: pt_name,
+                            });
+
+                            switch (obs_target){
+                                case "HH":
+                                    const altiCoordH_style = new ol.style.Style({
+                                        image: new ol.style.Icon({
+                                            src: './img/H_obs.png',
+                                            scale: '0.15',
+                                            color: '#000000',
+                                        })
+                                    });
+                                    altiCoordH_feature.setStyle(altiCoordH_style);
+                                    altiCoordH_source.addFeature(altiCoordH_feature);
+                                    break;
+                            }
+                        }
+                    }
+                }
+                break;
         }
     };
 
@@ -134,4 +177,7 @@ function affichMeasAlti(xml, pts){
 
     altiDH_layer.setSource( altiDH_source );
     changeLayerVisibility('alti_DH');
+
+    altiCoordH_layer.setSource( altiCoordH_source );
+    changeLayerVisibility('alti_coordH');
 }
