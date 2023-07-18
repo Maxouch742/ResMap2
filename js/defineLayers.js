@@ -50,14 +50,31 @@ function defineLayers(){
     planiRectRel_layer = new ol.layer.Vector();
     planiRectRel_layer.setZIndex(90);
     map.addLayer(planiRectRel_layer);
-    // Fiabilité locale (zi)
-    planiFiabLoc_layer = new ol.layer.Vector();
-    planiFiabLoc_layer.setZIndex(89);
-    map.addLayer(planiFiabLoc_layer);
-    // Résidus normés (wi)
-    planiResi_layer = new ol.layer.Vector();
-    planiResi_layer.setZIndex(88);
-    map.addLayer(planiResi_layer);
+    
+    //// Fiabilité locale (zi)
+    // Directions
+    planiFiabLocDir_layer = new ol.layer.Vector();
+    planiFiabLocDir_layer.setZIndex(89);
+    map.addLayer(planiFiabLocDir_layer);
+    // Distances
+    planiFiabLocDis_layer = new ol.layer.Vector();
+    planiFiabLocDis_layer.setZIndex(88);
+    map.addLayer(planiFiabLocDis_layer);
+    // GNSS
+    planiFiabLocGNSS_layer = new ol.layer.Vector();
+    planiFiabLocGNSS_layer.setZIndex(88);
+    map.addLayer(planiFiabLocGNSS_layer);
+
+    //// Résidus normés (wi)
+    // Directions
+    planiResiDir_layer = new ol.layer.Vector();
+    planiResiDir_layer.setZIndex(89);
+    map.addLayer(planiResiDir_layer);
+    // Distances
+    planiResiDis_layer = new ol.layer.Vector();
+    planiResiDis_layer.setZIndex(88);
+    map.addLayer(planiResiDis_layer);
+
     // Vecteurs de déplacement
     planiVect_layer = new ol.layer.Vector();
     planiVect_layer.setZIndex(87);

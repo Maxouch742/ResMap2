@@ -1,7 +1,9 @@
 function affichFiabLocPlani(xml, pts){
 
     // Create source
-    const planiFiabLoc_source = new ol.source.Vector({});
+    const planiFiabLocDir_source = new ol.source.Vector({});
+    const planiFiabLocDis_source = new ol.source.Vector({});
+    const planiFiabLocGNSS_source = new ol.source.Vector({});
     let planiGNSS_sessionID = 1;
     const list_radius = [0.08, 0.12, 0.16, 0.20, 0.24, 0.28, 0.32, 0.36, 0.40];
     
@@ -38,7 +40,7 @@ function affichFiabLocPlani(xml, pts){
                                 }),
                             });
                             planiFiabLoc_feature.setStyle(planiFiabLoc_style);
-                            planiFiabLoc_source.addFeature(planiFiabLoc_feature);
+                            planiFiabLocGNSS_source.addFeature(planiFiabLoc_feature);
                         };
 
                         const obs2 = obs[1];
@@ -55,7 +57,7 @@ function affichFiabLocPlani(xml, pts){
                                 }),
                             });
                             planiFiabLoc_feature.setStyle(planiFiabLoc_style);
-                            planiFiabLoc_source.addFeature(planiFiabLoc_feature);
+                            planiFiabLocGNSS_source.addFeature(planiFiabLoc_feature);
                         };
                     }
                 };
@@ -127,86 +129,79 @@ function affichFiabLocPlani(xml, pts){
                             })
                         }))
                     };
-                    planiFiabLoc_source.addFeature(planiDir_feature);
-                    planiFiabLoc_source.addFeature(planiDir_featureSymbol);
+                    planiFiabLocDir_source.addFeature(planiDir_feature);
+                    planiFiabLocDir_source.addFeature(planiDir_featureSymbol);
                 };
                 break;
 
             case 'distance':
-                /*// Station
-                const sta_name_dis = station.getAttribute('name');
-                
-                // Lister les observations
-                const list_obsDis = station.getElementsByTagName('obs');
-                for (let j=0; j<list_obsDis.length; j++){
-                    const pt_name = list_obsDis[j].getAttribute('target');
-                    const pt_obsNr = list_obsDis[j].getAttribute('obsNr');
-                    const pt_zi = parseFloat(list_obsDis[j].getAttribute('zi'));
-                    const [colorFiab, widthFiab, zIndex] = getParameterFeature(pt_zi);
+                console.log('OK MAXIME');
 
-                    // Feature line
-                    const planiDisFiab_feature = new ol.Feature({
+                const station_name = station.getAttribute('name');
+                const list_ObsDis = station.getElementsByTagName('obs');
+                for (let j=0; j<list_ObsDis.length; j++){
+                    const obs = list_ObsDis[j];
+                    const obs_name = obs.getAttribute('target');
+                    const obs_Nr = obs.getAttribute('obsNr');
+
+                    const obs_zi = parseFloat(obs.getAttribute('zi'));
+                    const [colorFiab, widthFiab, zIndex] = getParameterFeature(obs_zi);
+
+                    const planiDis_feature = new ol.Feature({
                         geometry: new ol.geom.LineString([
-                            [ pts.get(sta_name_dis)['east'], pts.get(sta_name_dis)['north'] ],
-                            [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ]
-                        ]),
+                            [ pts.get(station_name)['east'], pts.get(station_name)['north'] ],
+                            [ pts.get(obs_name)['east'], pts.get(obs_name)['north'] ] 
+                        ])
                     });
 
-                    // Feature symbole
-                    const east_symbol1 = pts.get(sta_name_dis)['east'] + (pts.get(pt_name)['east'] - pts.get(sta_name_dis)['east'])*0.12;
-                    const north_symbol1 = pts.get(sta_name_dis)['north'] + (pts.get(pt_name)['north'] - pts.get(sta_name_dis)['north'])*0.12;
-                    const east_symbol2 = pts.get(sta_name_dis)['east'] + (pts.get(pt_name)['east'] - pts.get(sta_name_dis)['east'])*0.22;
-                    const north_symbol2 = pts.get(sta_name_dis)['north'] + (pts.get(pt_name)['north'] - pts.get(sta_name_dis)['north'])*0.22;
-                    const planiDisFiab_featureSymbol = new ol.Feature({
+                    // Feature symbol
+                    const east_symbol1 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.12;
+                    const north_symbol1 = pts.get(station_name)['north'] + (pts.get(obs_name)['north'] - pts.get(station_name)['north'])*0.12;
+                    const east_symbol2 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.22;
+                    const north_symbol2 = pts.get(station_name)['north'] + (pts.get(obs_name)['north'] - pts.get(station_name)['north'])*0.22;
+                    console.log(east_symbol1, pts.get(station_name)['east']);
+                    const planiDis_featureSymbol = new ol.Feature({
                         geometry: new ol.geom.LineString([
                             [east_symbol1, north_symbol1],
                             [east_symbol2, north_symbol2]
                         ])
                     });
-                    
+
                     // Style
-                    if (pt_obsNr != ''){
-                        planiDisFiab_feature.setStyle( new ol.style.Style({
+                    if (obs_Nr != ''){
+                        planiDis_feature.setStyle( new ol.style.Style({
                             stroke: new ol.style.Stroke({
                                 color: colorFiab,
-                                width: widthFiab
+                                width: widthFiab,
                             }),
                             zIndex: zIndex
                         }));
-                        planiDisFiab_featureSymbol.setStyle( new ol.style.Style({
+                        planiDis_featureSymbol.setStyle( new ol.style.Style({
                             stroke: new ol.style.Stroke({
                                 color: colorFiab,
-                                width: 6*widthFiab,
+                                width: widthFiab+6,
                                 lineCap: 'square'
                             }),
                             zIndex: zIndex
-                        }))
-                    } else {
-                        planiDisFiab_feature.setStyle( new ol.style.Style({
-                            stroke: new ol.style.Stroke({
-                                color:'#717171',
-                                width: 1
-                            })
-                        }));
-                        planiDisFiab_featureSymbol.setStyle( new ol.style.Style({
-                            stroke: new ol.style.Stroke({
-                                color:'#717171',
-                                width: 6,
-                                lineCap: 'square'
-                            })
                         }))
                     };
-                    planiFiabLoc_source.addFeature( planiDisFiab_feature );
-                    planiFiabLoc_source.addFeature( planiDisFiab_featureSymbol );
-                };*/
+
+                    planiFiabLocDis_source.addFeature(planiDis_feature);
+                    planiFiabLocDis_source.addFeature(planiDis_featureSymbol);
+
+                }
                 // TODO : afficher les zi des distances
                 break;
         }
     }
 
     // Add to map
-    planiFiabLoc_layer.setSource( planiFiabLoc_source );
-    changeLayerVisibility('plani_fiabLoc');
+    planiFiabLocGNSS_layer.setSource(planiFiabLocGNSS_source);
+    changeLayerVisibility('plani_fiabLoc_GNSS');
+    planiFiabLocDir_layer.setSource(planiFiabLocDir_source);
+    changeLayerVisibility('plani_fiabLoc_dir');
+    planiFiabLocDis_layer.setSource(planiFiabLocDis_source);
+    changeLayerVisibility('plani_fiabLoc_dis');
 };
 
 
@@ -216,7 +211,7 @@ function getParameterFeature(zi){
     let zIndex;
     if (zi < 25.0) {
         colorFiab = "#FF1700"; //red
-        widthFiab = 2;
+        widthFiab = 3;
         zIndex = 99;
     } 
     else if (zi <= 50.0) {
@@ -226,12 +221,12 @@ function getParameterFeature(zi){
     } 
     else if (zi <= 75.0) {
         colorFiab = "#ABFF00"; //green
-        widthFiab = 0;
+        widthFiab = 1;
         zIndex = 1;
     } 
     else if (zi <= 100.0) {
         colorFiab = "#2AE100"; //green
-        widthFiab = 0;
+        widthFiab = 1;
         zIndex = 1;
     };
     return [colorFiab, widthFiab, zIndex]

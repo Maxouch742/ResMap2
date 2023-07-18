@@ -16,6 +16,7 @@
     <link href="./css/popup.css" ref="stylesheet">
     <link href="./css/slider.css" ref="stylesheet">
     <link href="./css/helpButton.css" ref="stylesheet">
+    <link href="./css/panel.css" rel="stylesheet">
 
     <!----------- OpenLayers -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
@@ -33,16 +34,16 @@
       <div class="row align-items-start">
 
         <!-- Left: menu and drop-down menu -->
-        <div class="col border overflow-y-auto" id="menu">
+        <div class="col-2 border overflow-y-auto" id="menu">
           <div class="w3-center">
             <img src="./img/logoAvecTitre.png" class="imgLogo w3-center" alt="Logo de ResMap2">
           </div>
 
           <!-- Import .PRNx file -->
           <div class="mt-2 greyBackground border border-dark p-1">
-            <h3 class="mx-2">Import du fichier .PRNx</h3>
-            <input class="mx-2 my-1 pr-2 inputFile" type="file" id="inputfile" accept=".prnx" onchange="readFilePRNx()"></input>
-            <p class="mx-2 my-1 importInfo" id="outputTest"> </p>
+            <h4 class="mx-2">Import du fichier .PRNx</h4>
+            <input class="mx-2 my-1 pr-2 inputFile" type="file" style="font-size: 90%" id="inputfile" accept=".prnx" onchange="readFilePRNx()"></input>
+            <p class="mx-2 my-1 importInfo" style="font-size: 80%" id="outputTest"> </p>
           </div>
 
           <!-- Abriss planimétrique -->
@@ -143,19 +144,56 @@
             </div>
 
             <!-- Fiabilité locale (zi) -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxFiabLoc" onchange="changeLayerVisibility('plani_fiabLoc')">
-              <label class="checkboxLabel" for="checkboxFiabLoc">
-                Fiabilité locale (zi)
-              </label>
+            <div class="mt-2">
+              <button class="accordion py-1">Fiabilité locale (zi)</button>
+              <div class="panel">
+
+                <!-- Zi : Directions -->
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxFiabLoc_Dir" onchange="changeLayerVisibility('plani_fiabLoc_dir')">
+                  <label class="checkboxLabel" for="checkboxFiabLoc_Dir">
+                    Directions
+                  </label>
+                </div>
+
+                <!-- Zi : Distances -->
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxFiabLoc_Dis" onchange="changeLayerVisibility('plani_fiabLoc_dis')">
+                  <label class="checkboxLabel" for="checkboxFiabLoc_Dis">
+                    Distances
+                  </label>
+                </div>
+
+                <!-- Zi : GNSS -->
+                <div>
+                  <input class="form-check-input" type="checkbox" id="checkboxFiabLoc_GNSS" onchange="changeLayerVisibility('plani_fiabLoc_GNSS')">
+                  <label class="checkboxLabel" for="checkboxFiabLoc_GNSS">
+                    Session GNSS
+                  </label>
+                </div>
+
+
+              </div>
             </div>
 
             <!-- Résidus normés (wi) -->
-            <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxResi" onchange="changeLayerVisibility('plani_resi')">
-              <label class="checkboxLabel" for="checkboxResi">
-                Résidus normés (wi)
-              </label>
+            <div class="mt-2">
+              <button class="accordion py-1">Résidus normés (wi)</button>
+              <div class="panel">
+
+                <!-- Wi : Directions -->
+                <input class="form-check-input" type="checkbox" id="checkboxResi_Dir" onchange="changeLayerVisibility('plani_resi_dir')">
+                <label class="checkboxLabel" for="checkboxResi_Dir">
+                  Directions
+                </label>
+
+                <!-- Wi : Distances -->
+                <input class="form-check-input" type="checkbox" id="checkboxResi_Dis" onchange="changeLayerVisibility('plani_resi_dis')">
+                <label class="checkboxLabel" for="checkboxResi_Dis">
+                  Distances
+                </label>
+
+              </div>
             </div>
 
             <!-- Vecteur de différence de coordonnées -->
@@ -281,7 +319,7 @@
         </div>
 
         <!-- Right: map -->
-        <div class="col-9">
+        <div class="col-10">
           <div id="map">
           </div>
         </div>
@@ -333,6 +371,7 @@
 
     <!---- Personnals scripts -->
     <script src="./js/index_accordion.js"></script>
+    <script src="./js/index_accordion2.js"></script>
     <script src="./js/index_slider.js"></script>
     <script src="./js/range.js"></script>
     <script src="./js/gisement.js"></script>

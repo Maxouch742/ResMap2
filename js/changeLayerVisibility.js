@@ -115,18 +115,39 @@ function changeLayerVisibility(item){
                 planiRectRel_layer.setVisible(false);
             };
             break;
-        case 'plani_fiabLoc':
-            if (document.getElementById('checkboxFiabLoc').checked === true){
-                planiFiabLoc_layer.setVisible(true);
+        case 'plani_fiabLoc_dir':
+            if (document.getElementById('checkboxFiabLoc_Dir').checked === true){
+                planiFiabLocDir_layer.setVisible(true);
             } else {
-                planiFiabLoc_layer.setVisible(false);
+                planiFiabLocDir_layer.setVisible(false);
             };
             break;
-        case 'plani_resi':
-            if (document.getElementById('checkboxResi').checked === true){
-                planiResi_layer.setVisible(true);
+        case 'plani_fiabLoc_dis':
+            if (document.getElementById('checkboxFiabLoc_Dis').checked === true){
+                planiFiabLocDis_layer.setVisible(true);
             } else {
-                planiResi_layer.setVisible(false);
+                planiFiabLocDis_layer.setVisible(false);
+            };
+            break;
+        case 'plani_fiabLoc_GNSS':
+            if (document.getElementById('checkboxFiabLoc_GNSS').checked === true){
+                planiFiabLocGNSS_layer.setVisible(true);
+            } else {
+                planiFiabLocGNSS_layer.setVisible(false);
+            };
+            break;
+        case 'plani_resi_dir':
+            if (document.getElementById('checkboxResi_Dir').checked === true){
+                planiResiDir_layer.setVisible(true);
+            } else {
+                planiResiDir_layer.setVisible(false);
+            };
+            break;
+        case 'plani_resi_dis':
+            if (document.getElementById('checkboxResi_Dis').checked === true){
+                planiResiDis_layer.setVisible(true);
+            } else {
+                planiResiDis_layer.setVisible(false);
             };
             break;
         case 'plani_vect':
