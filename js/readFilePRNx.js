@@ -21,18 +21,17 @@ function readFilePRNx(){
       affichPointsPlani(pts_Map, pts_planiVar, pts_planiObs);
       affichPointsAlti(pts_Map, pts_altiVar, pts_altiObs);
 
+      // Measure
+      affichMeasPlani(xmlDoc, pts_Map);
+      affichMeasAlti(xmlDoc, pts_Map);
+
       //indicateurs
       echelleEllipses = 1000.0;
       affichPrecisionPlani(pts_Map, xmlDoc);
       affichRectanglesPlani(pts_Map);
       affichFiabLocPlani(xmlDoc, pts_Map);
       //affichResiNormesPlani(xmlDoc, pts_Map);
-
       affichVecteurs(pts_Map);
-
-      // Measure
-      affichMeasPlani(xmlDoc, pts_Map);
-      affichMeasAlti(xmlDoc, pts_Map);
 
 
       //affichPoints(xmlDoc, 'planimetric');

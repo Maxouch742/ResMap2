@@ -62,22 +62,26 @@ function defineLayers(){
     map.addLayer(planiFiabLocDis_layer);
     // GNSS
     planiFiabLocGNSS_layer = new ol.layer.Vector();
-    planiFiabLocGNSS_layer.setZIndex(88);
+    planiFiabLocGNSS_layer.setZIndex(87);
     map.addLayer(planiFiabLocGNSS_layer);
 
     //// Résidus normés (wi)
     // Directions
     planiResiDir_layer = new ol.layer.Vector();
-    planiResiDir_layer.setZIndex(89);
+    planiResiDir_layer.setZIndex(86);
     map.addLayer(planiResiDir_layer);
     // Distances
     planiResiDis_layer = new ol.layer.Vector();
-    planiResiDis_layer.setZIndex(88);
+    planiResiDis_layer.setZIndex(85);
     map.addLayer(planiResiDis_layer);
+    // GNSS
+    planiResiGNSS_layer = new ol.layer.Vector();
+    planiResiGNSS_layer.setZIndex(84);
+    map.addLayer(planiResiGNSS_layer);
 
     // Vecteurs de déplacement
     planiVect_layer = new ol.layer.Vector();
-    planiVect_layer.setZIndex(87);
+    planiVect_layer.setZIndex(83);
     map.addLayer(planiVect_layer);
 
     //////// ALTIMETRIC

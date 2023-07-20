@@ -150,6 +150,12 @@ function changeLayerVisibility(item){
                 planiResiDis_layer.setVisible(false);
             };
             break;
+        case 'plani_resi_GNSS':
+            if (document.getElementById('checkboxResi_GNSS').checked === true){
+                planiResiGNSS_layer.setVisible(true);
+            } else {
+                planiResiGNSS_layer.setVisible(false);
+            }
         case 'plani_vect':
             if (document.getElementById('checkboxVect').checked === true){
                 planiVect_layer.setVisible(true);
