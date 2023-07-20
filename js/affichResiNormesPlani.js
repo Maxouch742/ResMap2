@@ -4,7 +4,6 @@ function affichResiNormesPlani(xml, pts){
     let biggestWi = xmlDoc.getElementsByTagName("biggestWi");
     let limitWi = parseFloat(biggestWi[0].getAttribute("biggerThan")); // PLANI uniquement = [0] , ALTI = [1]   // TODO: vérifier s'il y a 0 sans ajustement planimétrique
     let limitInf = limitWi - 0.2; // pour paliers
-    console.log(limitInf, limitWi);
 
     // Create source
     const planiResiDir_source = new ol.source.Vector({});
@@ -35,7 +34,6 @@ function affichResiNormesPlani(xml, pts){
                     if (pt_obsNr != ''){
                         const pt_wi = Math.abs(parseFloat(list_obsDir[j].getAttribute('wi')));
                         const [colorResi, widthResi] = getParameterFeature_wi(pt_wi, limitWi, limitInf);
-                        console.log(colorResi);
                         
                         // Feature line
                         const planiDir_feature = new ol.Feature({
@@ -43,13 +41,14 @@ function affichResiNormesPlani(xml, pts){
                                 [ pts.get(sta_name)['east'], pts.get(sta_name)['north'] ], 
                                 [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ] 
                             ]),
-                            style: new ol.style.Style({
-                                stroke: new ol.style.Stroke({
-                                    color: colorResi,
-                                    width: widthResi,
-                                }),
-                            }),
                         });
+                        planiDir_feature.setStyle( new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: colorResi,
+                                width: widthResi,
+                            }),
+                        }));
+                        planiResiDir_source.addFeature(planiDir_feature);
 
                         // Feature symbole
                         const east_symbol = pts.get(sta_name)['east'] + (pts.get(pt_name)['east'] - pts.get(sta_name)['east'])*0.1;
@@ -61,18 +60,16 @@ function affichResiNormesPlani(xml, pts){
                                 east_symbol, 
                                 north_symbol 
                             ]),
-                            style: new ol.style.Style({
-                                image: new ol.style.Icon({
-                                    src: './img/triangle-svgrepo-com.png',
-                                    scale:'0.05',
-                                    color: colorResi,
-                                    rotation: gis
-                                }),
-                            })
                         });
-                        
-                        planiResiDir_source.addFeature(planiDir_feature);
-                        //planiResiDir_source.addFeature(planiDir_featureSymbol);
+                        planiDir_featureSymbol.setStyle( new ol.style.Style({
+                            image: new ol.style.Icon({
+                                src: './img/triangle-svgrepo-com.png',
+                                scale:'0.05',
+                                color: colorResi,
+                                rotation: gis
+                            }),
+                        }));
+                        planiResiDir_source.addFeature(planiDir_featureSymbol);
                     };
                 };
                 break;
@@ -96,13 +93,14 @@ function affichResiNormesPlani(xml, pts){
                                 [ pts.get(station_name)['east'], pts.get(station_name)['north'] ], 
                                 [ pts.get(obs_name)['east'], pts.get(obs_name)['north'] ] 
                             ]),
-                            style: new ol.style.Style({
-                                stroke: new ol.style.Stroke({
-                                    color: colorResi2,
-                                    width: widthResi2
-                                }),
-                            })
                         });
+                        planiDis_feature.setStyle( new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: colorResi2,
+                                width: widthResi2
+                            }),
+                        }));
+                        planiResiDis_source.addFeature(planiDis_feature);
 
                         // Feature symbol
                         const east_symbol1 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.12;
@@ -114,16 +112,14 @@ function affichResiNormesPlani(xml, pts){
                                 [east_symbol1, north_symbol1],
                                 [east_symbol2, north_symbol2]
                             ]),
-                            style: new ol.style.Style({
-                                stroke: new ol.style.Stroke({
-                                    color: colorResi2,
-                                    width: widthResi2+6,
-                                    lineCap: 'square'
-                                }),
+                        });
+                        planiDis_featureSymbol.setStyle( new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: colorResi2,
+                                width: widthResi2+6,
+                                lineCap: 'square'
                             }),
-                        })
-                    
-                        planiResiDis_source.addFeature(planiDis_feature);
+                        }));
                         planiResiDis_source.addFeature(planiDis_featureSymbol);
                     };
                 };
@@ -148,14 +144,14 @@ function affichResiNormesPlani(xml, pts){
                                     pts.get(pt_name)['east'], 
                                     pts.get(pt_name)['north'] 
                                 ]),
-                                style: new ol.style.Style({
-                                    image: new ol.style.Icon({
-                                        src: './img/hexagon_half1_svgrepo-com.png',
-                                        scale: list_radius[planiGNSS_sessionID]/2,
-                                        color: colorFiab,
-                                    }),
-                                })
                             });
+                            planiResi1_feature.setStyle( new ol.style.Style({
+                                image: new ol.style.Icon({
+                                    src: './img/hexagon_half1_svgrepo-com.png',
+                                    scale: list_radius[planiGNSS_sessionID]/2,
+                                    color: colorFiab,
+                                }),
+                            }) );
                             planiResiGNSS_source.addFeature(planiResi1_feature);
                         };
 
@@ -169,24 +165,22 @@ function affichResiNormesPlani(xml, pts){
                                     pts.get(pt_name)['east'], 
                                     pts.get(pt_name)['north'] 
                                 ]),
-                                style: new ol.style.Style({
-                                    image: new ol.style.Icon({
-                                        src: './img/hexagon_half2_svgrepo-com.png',
-                                        scale: list_radius[planiGNSS_sessionID]/2,
-                                        color: colorFiab,
-                                    }),
-                                })
                             });
+                            planiResi2_feature.setStyle( new ol.style.Style({
+                                image: new ol.style.Icon({
+                                    src: './img/hexagon_half2_svgrepo-com.png',
+                                    scale: list_radius[planiGNSS_sessionID]/2,
+                                    color: colorFiab,
+                                }),
+                            }) );
                             planiResiGNSS_source.addFeature(planiResi2_feature);
-                        };
+                        }
                     }
                 };
                 planiGNSS_sessionID++ ;
                 break;
         }
     };
-
-    console.log('ok')
 
     // Layer
     planiResiDir_layer.setSource(planiResiDir_source);

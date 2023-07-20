@@ -30,7 +30,7 @@ function readFilePRNx(){
       affichPrecisionPlani(pts_Map, xmlDoc);
       affichRectanglesPlani(pts_Map);
       affichFiabLocPlani(xmlDoc, pts_Map);
-      //affichResiNormesPlani(xmlDoc, pts_Map);
+      affichResiNormesPlani(xmlDoc, pts_Map);
       affichVecteurs(pts_Map);
 
 
