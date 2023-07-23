@@ -25,7 +25,7 @@ function readFilePRNx(){
       affichMeasPlani(xmlDoc, pts_Map);
       affichMeasAlti(xmlDoc, pts_Map);
 
-      //indicateurs
+      // indicateurs plani
       echelleEllipses = 1000.0;
       affichPrecisionPlani(pts_Map, xmlDoc);
       affichRectanglesPlani(pts_Map);
@@ -33,16 +33,8 @@ function readFilePRNx(){
       affichResiNormesPlani(xmlDoc, pts_Map);
       affichVecteurs(pts_Map);
 
-
-      //affichPoints(xmlDoc, 'planimetric');
-      //
-
-      //------- PLANIMETRIC
-      //affichMeasure(xmlDoc, 'planimetric');
-
-
       //------- ALTIMETRIC
-      //affichPoints(xmlDoc, 'altimetric');
+      affichPrecisionAlti(pts_Map, xmlDoc);
       
 
       

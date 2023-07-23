@@ -20,10 +20,22 @@ function affichVecteurs(pts){
             const gisArrow2 = gisVect + 150.0;
             
             // Définition de la flèche
-            const start = [ east, north ];
-            const end = [ east + echelleEllipses * norm * Math.sin( gisVect*Math.PI/200.0 ), north + echelleEllipses * norm * Math.cos( gisVect*Math.PI/200.0 ) ];
-            const left = [ end[0] + (norm/5) * echelleEllipses * Math.sin( gisArrow1*Math.PI/200.0 ), end[1] + (norm/5) * echelleEllipses * Math.cos( gisArrow1*Math.PI/200.0 ) ];
-            const right = [ end[0] + (norm/5) * echelleEllipses * Math.sin( gisArrow2*Math.PI/200.0 ), end[1] + (norm/5) * echelleEllipses * Math.cos( gisArrow2*Math.PI/200.0 ) ];
+            const start = [ 
+                east, 
+                north
+            ];
+            const end = [ 
+                east + echelleEllipses * norm * Math.sin( gisVect*Math.PI/200.0 ), 
+                north + echelleEllipses * norm * Math.cos( gisVect*Math.PI/200.0 )
+            ];
+            const left = [ 
+                end[0] + (norm/5) * echelleEllipses * Math.sin( gisArrow1*Math.PI/200.0 ), 
+                end[1] + (norm/5) * echelleEllipses * Math.cos( gisArrow1*Math.PI/200.0 )
+            ];
+            const right = [ 
+                end[0] + (norm/5) * echelleEllipses * Math.sin( gisArrow2*Math.PI/200.0 ), 
+                end[1] + (norm/5) * echelleEllipses * Math.cos( gisArrow2*Math.PI/200.0 )
+            ];
 
             // Feature
             const planiVect_feature = new ol.Feature({

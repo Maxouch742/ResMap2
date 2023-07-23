@@ -34,7 +34,7 @@
       <div class="row align-items-start">
 
         <!-- Left: menu and drop-down menu -->
-        <div class="col-2 border overflow-y-auto" id="menu">
+        <div class="col-3 border overflow-y-auto" id="menu">
           <div class="w3-center">
             <img src="./img/logoAvecTitre.png" class="imgLogo w3-center" alt="Logo de ResMap2">
           </div>
@@ -265,7 +265,7 @@
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxEll_alti" onchange="changeLayerVisibility('alti_ell')">
               <label class="checkboxLabel" for="checkboxEll_alti">
-                Ellipses de confiance
+                Intervalle de confiance
               </label>
             </div>
 
@@ -320,18 +320,19 @@
           </div>
 
           <!-- Slider pour l'échelle -->
-          <div class="slidecontainer w3-border">
-            <input type="range" min="1" max="10001" step="100" value="1000" class="slider" id="myRange">
+          <div class="slidecontainer w3-border w3-center">
+            <!-- TODO: disabled range tant que le fichier est pas importé-->
+            <input type="range" min="0" max="15000" step="100" value="7000" class="form-range" id="myRange" style="">
             <div>
-              <span class="textEchelle" id="textEchelle">Echelle des indicateurs → <span id="echelleValue"></span>:1</span>
-              <div class="textEchelle" id="nivConfiance">Niv. de conf. des ellipses → <span id="nivConfianceValue"></span></div>
+              <span class="textEchelle" id="textEchelle">Echelle → <span id="echelleValue"></span>:1</span>
+              <div class="textEchelle" id="nivConfiance">Niveau de confiance des ellipses → <span id="nivConfianceValue"></span></div>
             </div>
           </div>
 
         </div>
 
         <!-- Right: map -->
-        <div class="col-10">
+        <div class="col">
           <div id="map">
           </div>
         </div>
@@ -382,42 +383,43 @@
     
 
     <!---- Personnals scripts -->
-    <script src="./js/index_accordion.js"></script>
-    <script src="./js/index_accordion2.js"></script>
-    <script src="./js/index_slider.js"></script>
-    <script src="./js/range.js"></script>
-    <script src="./js/gisement.js"></script>
-    <script src="./js/gisement2.js"></script>
+    <script src="js/index_accordion.js"></script>
+    <script src="js/index_accordion2.js"></script>
+    <script src="js/index_slider.js"></script>
+    <script src="js/range.js"></script>
+    <script src="js/gisement.js"></script>
+    <script src="js/gisement2.js"></script>
 
-    <script src="./js/defineProj.js"></script>
-    <script src="./js/defineBackground.js"></script>
-    <script src="./js/defineView.js"></script>
-    <script src="./js/defineMap.js"></script>
-    <script src="./js/defineViewByFile.js"></script>
-    <script src="./js/defineLayers.js"></script>
-    <script src="./js/definePopup.js"></script>
+    <script src="js/defineProj.js"></script>
+    <script src="js/defineBackground.js"></script>
+    <script src="js/defineView.js"></script>
+    <script src="js/defineMap.js"></script>
+    <script src="js/defineViewByFile.js"></script>
+    <script src="js/defineLayers.js"></script>
+    <script src="js/definePopup.js"></script>
 
-    <script src="./js/changeBackground.js"></script>
-    <script src="./js/changeLayerVisibility.js"></script>
+    <script src="js/changeBackground.js"></script>
+    <script src="js/changeLayerVisibility.js"></script>
 
-    <script src="./js/getParameterFeature_wi.js"></script>
-    <script src="./js/getParameterFeature_zi.js"></script>
+    <script src="js/getParameterFeature_wi.js"></script>
+    <script src="js/getParameterFeature_zi.js"></script>
 
-    <script src="./js/parseXML_points.js"></script>
-    <script src="./js/parseXML_variablePoints.js"></script>
-    <script src="./js/parseXML_planiObsPoints.js"></script>
-    <script src="./js/parseXML_altiObsPoints.js"></script>
-    <script src="./js/parseXML_planiObs.js"></script>
+    <script src="js/parseXML_points.js"></script>
+    <script src="js/parseXML_variablePoints.js"></script>
+    <script src="js/parseXML_planiObsPoints.js"></script>
+    <script src="js/parseXML_altiObsPoints.js"></script>
+    <script src="js/parseXML_planiObs.js"></script>
     
-    <script src="./js/affichPointsPlani.js"></script>
-    <script src="./js/affichPointsAlti.js"></script>
-    <script src="./js/affichMeasPlani.js"></script>
-    <script src="./js/affichMeasAlti.js"></script>
-    <script src="./js/affichPrecisionPlani.js"></script>
-    <script src="./js/affichRectanglesPlani.js"></script>
-    <script src="./js/affichFiabLocPlani.js"></script>
-    <script src="./js/affichResiNormesPlani.js"></script>
-    <script src="./js/affichVecteurs.js"></script>
+    <script src="js/affichPointsPlani.js"></script>
+    <script src="js/affichPointsAlti.js"></script>
+    <script src="js/affichMeasPlani.js"></script>
+    <script src="js/affichMeasAlti.js"></script>
+    <script src="js/affichPrecisionPlani.js"></script>
+    <script src="js/affichPrecisionAlti.js"></script>
+    <script src="js/affichRectanglesPlani.js"></script>
+    <script src="js/affichFiabLocPlani.js"></script>
+    <script src="js/affichResiNormesPlani.js"></script>
+    <script src="js/affichVecteurs.js"></script>
     <!--<script src="./js/affichPopup.js"></script>-->
 
     <script src="./js/readFilePRNx.js"></script>
