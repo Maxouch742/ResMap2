@@ -38,7 +38,7 @@ function affichPrecisionAlti(pts, xml){
     // Define style
     const altiEll_featureStyle = new ol.style.Style({
         stroke: new ol.style.Stroke({
-            color: '#47EE53',
+            color: '#FF6BF1',
             width: 6
         }),
         text: new ol.style.Text({
@@ -49,7 +49,8 @@ function affichPrecisionAlti(pts, xml){
                 color: "#FF6BF1"
             }),
             stroke: new ol.style.Stroke({
-                color: "#ffffff", width: 3
+                color: "#ffffff", 
+                width: 3
             }),
             offsetX: -10,
             offsetY: 10,

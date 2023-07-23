@@ -71,9 +71,11 @@ function parseXML_points(xml){
             if (pt.getAttribute('na') != null){ points.get(pt_name).NA = parseFloat(pt.getAttribute('na')) };
             if (pt.getAttribute('nb') != null){ points.get(pt_name).NB = parseFloat(pt.getAttribute('nb')) };
             if (pt.getAttribute('azimuthN') != null){ points.get(pt_name).Gis_NA = parseFloat(pt.getAttribute('azimuthN')) };
-            if (pt.getAttribute('nh') != null){ points.get(pt_name).NH = parseFloat(pt.getAttribute('NH')) };
-        }
+            if (pt.getAttribute('nh') != null){ 
+                const nh = parseFloat(pt.getAttribute('nh'));
+                points.get(pt_name).NH = nh;
+            };
+        };
     };
-
     return points
 }

@@ -26,7 +26,7 @@ function readFilePRNx(){
       affichMeasAlti(xmlDoc, pts_Map);
 
       // indicateurs plani
-      echelleEllipses = 1000.0;
+      echelleEllipses = document.getElementById("myRange").value;
       affichPrecisionPlani(pts_Map, xmlDoc);
       affichRectanglesPlani(pts_Map);
       affichFiabLocPlani(xmlDoc, pts_Map);
@@ -35,6 +35,7 @@ function readFilePRNx(){
 
       //------- ALTIMETRIC
       affichPrecisionAlti(pts_Map, xmlDoc);
+      affichRectangleAlti(pts_Map, xmlDoc);
       
 
       
