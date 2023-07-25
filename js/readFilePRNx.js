@@ -40,7 +40,7 @@ function readFilePRNx(){
       affichPrecisionAlti(pts_Map, xmlDoc);
       affichRectangleAlti(pts_Map, xmlDoc); 
       affichFiabLocAlti(pts_Map, xmlDoc);   //TODO
-      affichResiNormesAlti(xmlDoc, pts_Map);//TODO
+      affichResiNormesAlti(pts_Map, xmlDoc);//TODO
       affichVecteursAlti(pts_Map);          //TODO
 
       //------ Relatif

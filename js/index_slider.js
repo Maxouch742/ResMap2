@@ -13,4 +13,5 @@ slider.oninput = function() {
   
   affichPrecisionAlti(pts_Map, xmlDoc);
   affichRectangleAlti(pts_Map, xmlDoc);
+  affichVecteursAlti(pts_Map);
 }

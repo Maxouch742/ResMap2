@@ -302,7 +302,7 @@
                 <div>
                   <input class="form-check-input" type="checkbox" id="checkboxFiabLoc_DH_alti" onchange="changeLayerVisibility('alti_fiabLoc_DH')">
                   <label class="checkboxLabel" for="checkboxFiabLoc_DH_alti">
-                    Directions
+                    DH
                   </label>
                 </div>
 
@@ -318,11 +318,28 @@
             </div>
 
             <!-- Résidus normés (wi) -->
-            <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxResi_alti" onchange="changeLayerVisibility('alti_resi')">
-              <label class="checkboxLabel" for="checkboxResi_alti">
-                Résidus normés (wi)
-              </label>
+            <!-- Fiabilité locale (zi) -->
+            <div class="mt-2">
+              <button class="accordion py-1">Résidus normés (wi)</button>
+              <div class="panel">
+                
+                <!-- DH -->
+                <div class="w3-border-bottom">
+                  <input class="form-check-input" type="checkbox" id="checkboxResi_DH_alti" onchange="changeLayerVisibility('alti_resi_DH')">
+                  <label class="checkboxLabel" for="checkboxResi_DH_alti">
+                    DH
+                  </label>
+                </div>
+
+                <!-- GNSS -->
+                <div class="w3-border-bottom">
+                  <input class="form-check-input" type="checkbox" id="checkboxResi_GNSS_alti" onchange="changeLayerVisibility('alti_resi_GNSS')">
+                  <label class="checkboxLabel" for="checkboxResi_GNSS_alti">
+                    GNSS
+                  </label>
+                </div>
+              
+              </div>
             </div>
 
             <!-- Vecteur de déplacement -->
