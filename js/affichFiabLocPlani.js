@@ -45,7 +45,7 @@ function affichFiabLocPlani(xml, pts){
 
                         const obs2 = obs[1];
                         if (obs2.getAttribute('obsNr') != ''){
-                            const obs2_zi = parseFloat(obs1.getAttribute('zi'));
+                            const obs2_zi = parseFloat(obs2.getAttribute('zi'));
                             const [colorFiab, widthFiab] = getParameterFeature_zi(obs2_zi);
                             
                             const planiFiabLoc_feature = new ol.Feature({ geometry: new ol.geom.Point([ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ]) });

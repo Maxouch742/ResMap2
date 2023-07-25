@@ -1,0 +1,3 @@
+function affichResiNormesAlti(pts, xml){
+    
+}

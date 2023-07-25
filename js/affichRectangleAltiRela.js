@@ -1,0 +1,3 @@
+function affichRectangleAltiRela(pts, xml){
+
+};

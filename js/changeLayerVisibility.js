@@ -191,20 +191,28 @@ function changeLayerVisibility(item){
                 altiRectRel_layer.setVisible(false);
             };
             break;
-        case 'alti_fiabLoc':
-            if (document.getElementById('checkboxFiabLoc_alti').checked === true){
-                altiFiabLoc_layer.setVisible(true);
+        case 'alti_fiabLoc_GNSS':
+            if (document.getElementById('checkboxFiabLoc_GNSS_alti').checked === true){
+                altiFiabLocGNSS_layer.setVisible(true);
             } else {
-                altiFiabLoc_layer.setVisible(false);
+                altiFiabLocGNSS_layer.setVisible(false);
             };
             break;
+        case 'alti_fiabLoc_DH':
+            if (document.getElementById('checkboxFiabLoc_DH_alti').checked === true){
+                altiFiabLocDH_layer.setVisible(true);
+            } else {
+                altiFiabLocDH_layer.setVisible(false);
+            };
+            break;
+        /*
         case 'alti_resi':
             if (document.getElementById('checkboxResi_alti').checked === true){
                 altiResi_layer.setVisible(true);
             } else {
                 altiResi_layer.setVisible(false);
             };
-            break;
+            break;*/
         case 'alti_vect':
             if (document.getElementById('checkboxVect_alti').checked === true){
                 altiVect_layer.setVisible(true);

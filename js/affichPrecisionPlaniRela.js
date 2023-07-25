@@ -1,0 +1,3 @@
+function affichPrecisionPlaniRela(pts, xml){
+
+};

@@ -10,6 +10,8 @@ function readFilePRNx(){
       const parser = new DOMParser();
       xmlDoc = parser.parseFromString(xmlToParse,"text/xml");
 
+      //TODO : traiter les erreurs (etat 14)
+
       // Points management
       pts_Map = parseXML_points(xmlDoc);
       const pts_planiVar = parseXML_variablePoints(xmlDoc, 'planimetric');
@@ -22,11 +24,11 @@ function readFilePRNx(){
       affichPointsAlti(pts_Map, pts_altiVar, pts_altiObs);
 
       // Measure
-      affichMeasPlani(xmlDoc, pts_Map);
-      affichMeasAlti(xmlDoc, pts_Map);
-
-      // indicateurs plani
       echelleEllipses = document.getElementById("myRange").value;
+      
+
+      //------- PLANIMETRIC
+      affichMeasPlani(xmlDoc, pts_Map);
       affichPrecisionPlani(pts_Map, xmlDoc);
       affichRectanglesPlani(pts_Map);
       affichFiabLocPlani(xmlDoc, pts_Map);
@@ -34,12 +36,19 @@ function readFilePRNx(){
       affichVecteurs(pts_Map);
 
       //------- ALTIMETRIC
+      affichMeasAlti(xmlDoc, pts_Map);
       affichPrecisionAlti(pts_Map, xmlDoc);
-      affichRectangleAlti(pts_Map, xmlDoc);
-      
+      affichRectangleAlti(pts_Map, xmlDoc); 
+      affichFiabLocAlti(pts_Map, xmlDoc);   //TODO
+      affichResiNormesAlti(xmlDoc, pts_Map);//TODO
+      affichVecteursAlti(pts_Map);          //TODO
 
+      //------ Relatif
+      affichPrecisionPlaniRela(pts_Map, xmlDoc); //TODO
+      affichRectanglePlaniRela(pts_Map, xmlDoc); //TODO
       
-      
+      affichPrecisionAltiRela(pts_Map, xmlDoc);  //TODO
+      affichRectangleAltiRela(pts_Map, xmlDoc);  //TODO
 
       document.getElementById("outputTest").textContent = "Import effectué ✓";
     };

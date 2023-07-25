@@ -127,10 +127,15 @@ function defineLayers(){
     altiRectRel_layer.setZIndex(61);
     map.addLayer(altiRectRel_layer);
     
-    // Fiabilité locale (zi)
-    altiFiabLoc_layer = new ol.layer.Vector();
-    altiFiabLoc_layer.setZIndex(60);
-    map.addLayer(altiFiabLoc_layer);
+    //// Fiabilité locale (zi)
+    // GNSS
+    altiFiabLocGNSS_layer = new ol.layer.Vector();
+    altiFiabLocGNSS_layer.setZIndex(60);
+    map.addLayer(altiFiabLocGNSS_layer);
+    // DH
+    altiFiabLocDH_layer = new ol.layer.Vector();
+    altiFiabLocDH_layer.setZIndex(59);
+    map.addLayer(altiFiabLocDH_layer);
 
     // Résidus normés (wi)
     altiResi_layer = new ol.layer.Vector();

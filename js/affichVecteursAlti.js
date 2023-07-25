@@ -1,0 +1,3 @@
+function affichVecteursAlti(pts){
+    
+}

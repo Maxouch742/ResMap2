@@ -1,0 +1,3 @@
+function affichPrecisionAltiRela(pts, xml){
+
+}

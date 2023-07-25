@@ -1,0 +1,3 @@
+function affichRectanglePlaniRela(pts, xml){
+    
+}

@@ -2,7 +2,6 @@ function affichRectangleAlti(pts, xml) {
     
     // Layer source
     const altiRect_source = new ol.source.Vector({});
-    console.log(echelleEllipses);
 
     // Liste map
     pts.forEach((value, key) => {
