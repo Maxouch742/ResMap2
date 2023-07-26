@@ -20,6 +20,9 @@ function affichMeasAlti(xml, pts){
 
         switch(sta_type){
             case 'gpsSession':
+                // Display
+                htmlAddCheckboxObservationsAlti_GNSS();
+
                 // Lister les points par session
                 const targets = station.getElementsByTagName('target');
                 for (let j=0; j<targets.length; j++){
@@ -49,7 +52,11 @@ function affichMeasAlti(xml, pts){
                 };
                 altiGNSS_sessionID++ ;
                 break;
+                
             case 'heightDiff':
+                // Display checkbox
+                htmlAddCheckboxObservationsAlti_DH();
+
                 // Station
                 const sta_name_dh = station.getAttribute('name');
                 if (pts.has(sta_name_dh) === true){
@@ -127,6 +134,8 @@ function affichMeasAlti(xml, pts){
                 break;
             
             case 'connectionPoints':
+                htmlAddCheckboxObservationsAlti_CoordH();
+
                 // list of points
                 const targets_list = station.getElementsByTagName('target');
                 for (let j=0; j<targets_list.length; j++){

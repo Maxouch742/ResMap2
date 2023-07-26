@@ -18,6 +18,10 @@ function affichFiabLocAlti(pts, xml){
 
         switch(sta_type){
             case 'gpsSession':
+                // Display checkbox
+                htmlAddCheckboxFiabiliteAlti_GNSS();
+                
+                
                 // Lister les points par session
                 const targets = station.getElementsByTagName('target');
                 for (let j=0; j<targets.length; j++){
@@ -50,6 +54,8 @@ function affichFiabLocAlti(pts, xml){
                 break;
             
             case 'heightDiff':
+                // Display checkbox
+                htmlAddCheckboxFiabiliteAlti_DH();
 
                 // Station
                 const sta_name_dh = station.getAttribute('name');

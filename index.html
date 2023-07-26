@@ -219,7 +219,7 @@
           </div>
 
           <!-- Abriss altimétrique -->
-          <button onclick="myFunction('abrissAltimetrique')" class="w3-button w3-block w3-left-align w3-blue-grey">Altimétrie</button>
+          <button onclick="myFunction('abrissAltimetrique')" class="w3-button w3-block w3-left-align w3-blue-grey" disabled>Altimétrie</button>
           <div id="abrissAltimetrique" class="w3-container w3-hide w3-border">
             <!-- Points fixes -->
             <div>
@@ -238,27 +238,15 @@
             </div>
 
             <!-- Observation de type DH -->
-            <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxDH_alti" onchange="changeLayerVisibility('alti_DH')">
-              <label class="checkboxLabel" for="checkboxDH_alti">
-                Obs. DH
-              </label>
+            <div class="w3-border-bottom" id="obs_altitude_DH">
             </div>
 
             <!-- Observation GNSS -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxGNSS_alti" onchange="changeLayerVisibility('alti_GNSS')">
-              <label class="checkboxLabel" for="checkboxGNSS_alti">
-                Obs. GNSS
-              </label>
+            <div id="obs_altitude_GNSS">
             </div>
 
             <!-- Observation de coordonnée H -->
-            <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxCoordH_alti" onchange="changeLayerVisibility('alti_coordH')">
-              <label class="checkboxLabel" for="checkboxCoordH_alti">
-                Obs. coordonnée H
-              </label>
+            <div class="w3-border-bottom" id="obs_altitude_coordH">
             </div>
 
             <!-- Ellipses de confiance -->
@@ -271,7 +259,6 @@
 
             <!-- Ellipses de confiance relative -->
             <div class="w3-border-bottom" id="ellipseRelativeAlti">
-
             </div>
 
             <!-- Rectangle de fiabilité -->
@@ -288,52 +275,35 @@
 
             <!-- Fiabilité locale (zi) -->
             <div class="mt-2">
-              <button class="accordion py-1">Fiabilité locale (zi)</button>
+              <button class="accordion py-1" id="altitude_zi" disabled>Fiabilité locale (zi)</button>
               <div class="panel">
 
                 <!-- Zi : DH -->
-                <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxFiabLoc_DH_alti" onchange="changeLayerVisibility('alti_fiabLoc_DH')">
-                  <label class="checkboxLabel" for="checkboxFiabLoc_DH_alti">
-                    DH
-                  </label>
+                <div id="zi_altitude_DH">
                 </div>
 
                 <!-- Zi : GNSS -->
-                <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxFiabLoc_GNSS_alti" onchange="changeLayerVisibility('alti_fiabLoc_GNSS')">
-                  <label class="checkboxLabel" for="checkboxFiabLoc_GNSS_alti">
-                    Session GNSS
-                  </label>
+                <div id="zi_altitude_GNSS">
                 </div>
 
                 <!-- Zi : Coordonnée H -->
                 <div id="zi_altitude_coordH">
                 </div>
                 
-              
               </div>
             </div>
 
             <!-- Résidus normés (wi) -->
             <div class="mt-2">
-              <button class="accordion py-1">Résidus normés (wi)</button>
+              <button class="accordion py-1" id="altitude_wi" disabled>Résidus normés (wi)</button>
               <div class="panel">
                 
                 <!-- wi : DH -->
-                <div class="w3-border-bottom">
-                  <input class="form-check-input" type="checkbox" id="checkboxResi_DH_alti" onchange="changeLayerVisibility('alti_resi_DH')">
-                  <label class="checkboxLabel" for="checkboxResi_DH_alti">
-                    DH
-                  </label>
+                <div id="wi_altitude_DH">
                 </div>
 
                 <!-- wi : GNSS -->
-                <div class="w3-border-bottom">
-                  <input class="form-check-input" type="checkbox" id="checkboxResi_GNSS_alti" onchange="changeLayerVisibility('alti_resi_GNSS')">
-                  <label class="checkboxLabel" for="checkboxResi_GNSS_alti">
-                    GNSS
-                  </label>
+                <div id="wi_altitude_GNSS">
                 </div>
 
                 <!-- wi : Observation de coordonnées -->
@@ -344,7 +314,7 @@
             </div>
 
             <!-- Vecteur de déplacement -->
-            <div class="w3-border-bottom">
+            <div class="w3-border-top w3-border-bottom">
               <input class="form-check-input" type="checkbox" id="checkboxVect_alti" onchange="changeLayerVisibility('alti_vect')">
               <label class="checkboxLabel" for="checkboxVect_alti">
                 Vecteurs de déplacement
@@ -475,11 +445,21 @@
 
     <script src="./js/main.js"></script>
 
+    <script src="js/htmlAddCheckboxObservationsAlti_DH.js"></script>
+    <script src="js/htmlAddCheckboxObservationsAlti_GNSS.js"></script>
+    <script src="js/htmlAddCheckboxObservationsAlti_CoordH.js"></script>
 
     <script src="js/htmlAddCheckboxPrecisionAltiRel.js"></script>
     <script src="js/htmlAddCheckboxFiabiliteAltiRel.js"></script>
+    
+    <script src="js/htmlAddCheckboxFiabiliteAlti_DH.js"></script>
+    <script src="js/htmlAddCheckboxFiabiliteAlti_GNSS.js"></script>
     <script src="js/htmlAddCheckboxFiabiliteAlti_CoordH.js"></script>
+
+    <script src="js/htmlAddCheckboxResiAlti_DH.js"></script>
+    <script src="js/htmlAddCheckboxResiAlti_GNSS.js"></script>
     <script src="js/htmlAddCheckboxResiAlti_CoordH.js"></script>
+    
 
   </body>
 </html>

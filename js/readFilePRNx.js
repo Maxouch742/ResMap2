@@ -14,6 +14,9 @@ function readFilePRNx(){
       response = verifyErrors(xmlDoc);
       if (response === 0){
 
+        //TODO : verifier la présence de l'abriss altimetrique
+        //TODO : et activer le bouton
+
         // Points management
         pts_Map = parseXML_points(xmlDoc);
         const pts_planiVar = parseXML_variablePoints(xmlDoc, 'planimetric');

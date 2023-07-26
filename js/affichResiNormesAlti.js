@@ -23,6 +23,9 @@ function affichResiNormesAlti(pts, xml){
 
         switch(sta_type){
             case 'gpsSession':
+                // Display checkbox
+                htmlAddCheckboxResiAlti_GNSS();
+
                 // Lister les points par session
                 const targets = station.getElementsByTagName('target');
                 for (let j=0; j<targets.length; j++){
@@ -53,6 +56,8 @@ function affichResiNormesAlti(pts, xml){
                 break;
         
             case 'heightDiff':
+                // Display checkbox
+                htmlAddCheckboxResiAlti_DH();
 
                 // Station
                 const sta_name_dh = station.getAttribute('name');
