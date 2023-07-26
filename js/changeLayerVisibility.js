@@ -174,7 +174,7 @@ function changeLayerVisibility(item){
             if (document.getElementById('checkboxEllRel_alti').checked === true){
                 altiEllRel_layer.setVisible(true);
             } else {
-                altiElleRel_layer.setVisible(false);
+                altiEllRel_layer.setVisible(false);
             };
             break;
         case 'alti_rect':
