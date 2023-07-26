@@ -2,6 +2,7 @@ function affichFiabLocAlti(pts, xml){
     
     // Create source
     const altiFiabLocDH_source = new ol.source.Vector({});
+    const altiFiabLocCoord_source = new ol.source.Vector({});
     const altiFiabLocGNSS_source = new ol.source.Vector({});
     let planiGNSS_sessionID = 1;
     const list_radius = [0.08, 0.12, 0.16, 0.20, 0.24, 0.28, 0.32, 0.36, 0.40];
@@ -58,11 +59,12 @@ function affichFiabLocAlti(pts, xml){
                     const list_obsDH = station.getElementsByTagName('obs');
                     for (let j=0; j<list_obsDH.length; j++){
                         const pt_name = list_obsDH[j].getAttribute('target');
-                        const pt_obsNr = list_obsDH[j].getAttribute('obsNr');
-                        const obs_zi = parseFloat(list_obsDH[j].getAttribute('zi'));
-                        const [colorFiab, widthFiab] = getParameterFeature_zi(obs_zi);
-
+                        
                         if (pts.has(pt_name) === true){
+
+                            const pt_obsNr = list_obsDH[j].getAttribute('obsNr');
+                            const obs_zi = parseFloat(list_obsDH[j].getAttribute('zi'));
+                            const [colorFiab, widthFiab] = getParameterFeature_zi(obs_zi);
 
                             // Feature line
                             const altiDH_feature = new ol.Feature({
@@ -113,13 +115,63 @@ function affichFiabLocAlti(pts, xml){
                     //TODO: gérer les visées réciproques
                 };
                 break;
+            
+            case 'connectionPoints':
+                // List "targets"
+                const targets_coordH = station.getElementsByTagName('target');
+                for (let j=0; j<targets_coordH.length; j++){
 
+                    const point_name = targets_coordH[j].getAttribute('name');
+                    // If the point has the 2D coordinates
+                    if (pts.has(point_name) === true){
+                        const point_obs = targets_coordH[j].getElementsByTagName('obs')[0];
+                        const point_zi = parseFloat(point_obs.getAttribute('zi'));
+                        const [colorFiab, widthFiab] = getParameterFeature_zi(point_zi);
+
+                        // Feature
+                        const altiFiabLocCoord_feature = new ol.Feature({
+                            geometry: new ol.geom.Point([
+                                pts.get(point_name)['east'],
+                                pts.get(point_name)['north']
+                            ])
+                        });
+                        const altiFiabLocCoord_featureSymbol = new ol.style.Style({
+                            image: new ol.style.Icon({
+                                src: 'img/cross.svg',
+                                scale: String(0.05*widthFiab),
+                                color: String(colorFiab),
+                            }),
+                            text: new ol.style.Text({
+                                text: point_name,
+                                textAlign: "center",
+                                textBaseline: "middle",
+                                font: "italic 15px Calibri",
+                                fill: new ol.style.Fill({
+                                    color: String(colorFiab)
+                                }),
+                                stroke: new ol.style.Stroke({
+                                    color: '#fff', 
+                                    width: 3
+                                }),
+                                offsetX: 25,
+                                offsetY: 0,
+                                rotation: 0,
+                                placement: "point"
+                            })
+                        });
+                        altiFiabLocCoord_feature.setStyle(altiFiabLocCoord_featureSymbol);
+                        altiFiabLocCoord_source.addFeature(altiFiabLocCoord_feature);
+                    }
+
+                };
+                break;
         }
     };
 
-    // Add to map
     altiFiabLocGNSS_layer.setSource(altiFiabLocGNSS_source);
     changeLayerVisibility('alti_fiabLoc_GNSS');
     altiFiabLocDH_layer.setSource(altiFiabLocDH_source);
     changeLayerVisibility('alti_fiabLoc_DH');
+    altiFiabLocCoordH_layer.setSource(altiFiabLocCoord_source);
+    changeLayerVisibility('alti_fiabLoc_coord');
 };

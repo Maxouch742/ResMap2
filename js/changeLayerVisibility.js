@@ -205,6 +205,13 @@ function changeLayerVisibility(item){
                 altiFiabLocDH_layer.setVisible(false);
             };
             break;
+        case 'alti_fiabLoc_coord':
+            if (document.getElementById('checkboxFiabLoc_Coord_alti').checked === true){
+                altiFiabLocCoordH_layer.setVisible(true);
+            } else {
+                altiFiabLocCoordH_layer.setVisible(false);
+            };
+            break;
         case 'alti_resi_GNSS':
             if (document.getElementById('checkboxResi_GNSS_alti').checked === true){
                 altiResiGNSS_layer.setVisible(true);
@@ -224,6 +231,13 @@ function changeLayerVisibility(item){
                 altiVect_layer.setVisible(true);
             } else {
                 altiVect_layer.setVisible(false);
+            };
+            break;
+        case 'alti_resi_coord':
+            if (document.getElementById('checkboxResi_Coord_alti').checked === true){
+                altiResiCoordH_layer.setVisible(true);
+            } else {
+                altiResiCoordH_layer.setVisible(false);
             };
             break;
     }

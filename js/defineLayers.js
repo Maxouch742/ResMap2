@@ -136,6 +136,10 @@ function defineLayers(){
     altiFiabLocGNSS_layer = new ol.layer.Vector();
     altiFiabLocGNSS_layer.setZIndex(60);
     map.addLayer(altiFiabLocGNSS_layer);
+    // Coordonnée H
+    altiFiabLocCoordH_layer = new ol.layer.Vector();
+    altiFiabLocCoordH_layer.setZIndex(60);
+    map.addLayer(altiFiabLocCoordH_layer);
 
     //// Résidus normés (wi)
     // DH
@@ -146,6 +150,10 @@ function defineLayers(){
     altiResiGNSS_layer = new ol.layer.Vector();
     altiResiGNSS_layer.setZIndex(59);
     map.addLayer(altiResiGNSS_layer);
+    // Coordonnée H
+    altiResiCoordH_layer = new ol.layer.Vector();
+    altiResiCoordH_layer.setZIndex(59);
+    map.addLayer(altiResiCoordH_layer);
 
 
     // Vecteur de déplacement

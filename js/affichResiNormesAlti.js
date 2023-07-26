@@ -7,6 +7,7 @@ function affichResiNormesAlti(pts, xml){
 
     // Create source
     const altiResiDH_source = new ol.source.Vector({});
+    const altiResiCoordH_source = new ol.source.Vector({});
     const altiResiGNSS_source = new ol.source.Vector({});
     let planiGNSS_sessionID = 1;
     const list_radius = [0.08, 0.12, 0.16, 0.20, 0.24, 0.28, 0.32, 0.36, 0.40];
@@ -116,6 +117,56 @@ function affichResiNormesAlti(pts, xml){
                     //TODO: gérer les visées réciproques
                 };
                 break;
+            
+            case 'connectionPoints':
+                // List "targets"
+                const targets_coordH = station.getElementsByTagName('target');
+                for (let j=0; j<targets_coordH.length; j++){
+
+                    const point_name = targets_coordH[j].getAttribute('name');
+                    // If the point has the 2D coordinates
+                    if (pts.has(point_name) === true){
+                        const point_obs = targets_coordH[j].getElementsByTagName('obs')[0];
+                        const obs_wi = parseFloat(point_obs.getAttribute('wi'));
+                        const [colorFiab, widthFiab] = getParameterFeature_wi(obs_wi, limitWi, limitInf);
+
+                        // Feature
+                        const altiFiabLocCoord_feature = new ol.Feature({
+                            geometry: new ol.geom.Point([
+                                pts.get(point_name)['east'],
+                                pts.get(point_name)['north']
+                            ])
+                        });
+                        const altiFiabLocCoord_featureSymbol = new ol.style.Style({
+                            image: new ol.style.Icon({
+                                src: 'img/cross.svg',
+                                scale: String(0.05*widthFiab),
+                                color: String(colorFiab),
+                            }),
+                            text: new ol.style.Text({
+                                text: point_name,
+                                textAlign: "center",
+                                textBaseline: "middle",
+                                font: "italic 15px Calibri",
+                                fill: new ol.style.Fill({
+                                    color: String(colorFiab)
+                                }),
+                                stroke: new ol.style.Stroke({
+                                    color: '#fff', 
+                                    width: 3
+                                }),
+                                offsetX: 25,
+                                offsetY: 0,
+                                rotation: 0,
+                                placement: "point"
+                            })
+                        });
+                        altiFiabLocCoord_feature.setStyle(altiFiabLocCoord_featureSymbol);
+                        altiResiCoordH_source.addFeature(altiFiabLocCoord_feature);
+                    }
+
+                };
+                break;
         }
     };
 
@@ -124,4 +175,6 @@ function affichResiNormesAlti(pts, xml){
     changeLayerVisibility('alti_resi_GNSS');
     altiResiDH_layer.setSource(altiResiDH_source);
     changeLayerVisibility('alti_resi_DH');
+    altiResiCoordH_layer.setSource(altiResiCoordH_source);
+    changeLayerVisibility('alti_resi_coord');
 };
