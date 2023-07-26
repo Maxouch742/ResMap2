@@ -270,11 +270,8 @@
             </div>
 
             <!-- Ellipses de confiance relative -->
-            <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxEllRel_alti" onchange="changeLayerVisibility('alti_ellRel')">
-              <label class="checkboxLabel" for="checkboxEllRel_alti">
-                Intervalles de confiance relatives
-              </label>
+            <div class="w3-border-bottom" id="ellipseRelativeAlti">
+
             </div>
 
             <!-- Rectangle de fiabilité -->
@@ -286,11 +283,7 @@
             </div>
 
             <!-- Rectangle de fiabilité relatif -->
-            <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxRectRel_alti" onchange="changeLayerVisibility('alti_rectRel')">
-              <label class="checkboxLabel" for="checkboxRectRel_alti">
-                Rectangles de fiabilité relatifs
-              </label>
+            <div class="w3-border-bottom" id="rectangleRelativeAlti">
             </div>
 
             <!-- Fiabilité locale (zi) -->
@@ -314,13 +307,10 @@
                   </label>
                 </div>
 
-                <!-- Zi : Observation de coordonnées -->
-                <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxFiabLoc_Coord_alti" onchange="changeLayerVisibility('alti_fiabLoc_coord')">
-                  <label class="checkboxLabel" for="checkboxFiabLoc_Coord_alti">
-                    Coordonnée H
-                  </label>
+                <!-- Zi : Coordonnée H -->
+                <div id="zi_altitude_coordH">
                 </div>
+                
               
               </div>
             </div>
@@ -347,11 +337,7 @@
                 </div>
 
                 <!-- wi : Observation de coordonnées -->
-                <div>
-                  <input class="form-check-input" type="checkbox" id="checkboxResi_Coord_alti" onchange="changeLayerVisibility('alti_resi_coord')">
-                  <label class="checkboxLabel" for="checkboxResi_Coord_alti">
-                    Coordonnée H
-                  </label>
+                <div id="wi_altitude_coordH">
                 </div>
               
               </div>
@@ -488,6 +474,12 @@
     <script src="js/verifyErrors.js"></script>
 
     <script src="./js/main.js"></script>
+
+
+    <script src="js/htmlAddCheckboxPrecisionAltiRel.js"></script>
+    <script src="js/htmlAddCheckboxFiabiliteAltiRel.js"></script>
+    <script src="js/htmlAddCheckboxFiabiliteAlti_CoordH.js"></script>
+    <script src="js/htmlAddCheckboxResiAlti_CoordH.js"></script>
 
   </body>
 </html>

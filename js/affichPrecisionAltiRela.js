@@ -52,6 +52,9 @@ function affichPrecisionAltiRela(pts, xml){
         const altiAbriss_type = altiAbriss[i].getAttribute('type');
         if (altiAbriss_type === 'altimetric'){
 
+            // Add checkbox to html page
+            htmlAddCheckboxPrecisionAltiRela();
+
             const ellipses = altiAbriss[i].getElementsByTagName('ellipse');
             for (let j=0; j <ellipses.length ;j++){
                 const ellip = ellipses[j];

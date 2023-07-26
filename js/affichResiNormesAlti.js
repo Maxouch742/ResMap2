@@ -119,6 +119,9 @@ function affichResiNormesAlti(pts, xml){
                 break;
             
             case 'connectionPoints':
+                // Display checkbox
+                htmlAddCheckboxResiAlti_CoordH();
+                
                 // List "targets"
                 const targets_coordH = station.getElementsByTagName('target');
                 for (let j=0; j<targets_coordH.length; j++){

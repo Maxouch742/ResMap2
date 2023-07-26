@@ -41,6 +41,9 @@ function affichRectangleAltiRela(pts, xml){
         const altiAbriss_type = altiAbriss[i].getAttribute('type');
         if (altiAbriss_type === 'altimetric'){
 
+            // display checkbox
+            htmlAddCheckboxFiabiliteAltiRel();
+
             const rectangles = altiAbriss[i].getElementsByTagName('rectangle');
             for (let j=0; j <rectangles.length ;j++){
                 const rect = rectangles[j];

@@ -117,6 +117,9 @@ function affichFiabLocAlti(pts, xml){
                 break;
             
             case 'connectionPoints':
+                // Display checkbox
+                htmlAddCheckboxFiabiliteAlti_CoordH();
+                
                 // List "targets"
                 const targets_coordH = station.getElementsByTagName('target');
                 for (let j=0; j<targets_coordH.length; j++){
