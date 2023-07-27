@@ -24,6 +24,8 @@ function affichMeasPlani(xml, pts){
 
         switch(sta_type){
             case 'gpsSession':
+                htmlAddCheckboxObservationsPlani_GNSS();
+
                 // Lister les points par session
                 const targets = station.getElementsByTagName('target');
                 for (let j=0; j<targets.length; j++){
@@ -51,6 +53,8 @@ function affichMeasPlani(xml, pts){
                 break;
 
             case 'direction':
+                htmlAddCheckboxObservationsPlani_Directions();
+
                 // Station
                 const sta_name = station.getAttribute('name');
                 
@@ -119,6 +123,8 @@ function affichMeasPlani(xml, pts){
                 break;
             
             case  'distance':
+                htmlAddCheckboxObservationsPlani_Distances();
+
                 // Station
                 const sta_name_dis = station.getAttribute('name');
                 
@@ -184,6 +190,8 @@ function affichMeasPlani(xml, pts){
                 break;
         
             case 'coordinate':
+                htmlAddCheckboxObservationsPlani_CoordE();
+                htmlAddCheckboxObservationsPlani_CoordN(); 
 
                 // list of points
                 const targets_list = station.getElementsByTagName('target');

@@ -72,43 +72,23 @@
             </div>
 
             <!-- Observations de directions -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxDir" onchange="changeLayerVisibility('plani_dir')">
-              <label class="checkboxLabel" for="checkboxDir">
-                Obs. Directions
-              </label>
+            <div id="obs_plani_dir">
             </div>
 
             <!-- Observations de distances -->
-            <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxDis" onchange="changeLayerVisibility('plani_dis')">
-              <label class="checkboxLabel" for="checkboxDis">
-                Obs. Distances
-              </label>
+            <div class="w3-border-bottom" id="obs_plani_dis">
             </div>
 
             <!-- Observations GNSS -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxGNSS" onchange="changeLayerVisibility('plani_GNSS')">
-              <label class="checkboxLabel" for="checkboxGNSS">
-                Obs. Session GNSS
-              </label>
+            <div id="obs_plani_GNSS">
             </div>
 
             <!-- Observations de coordonnées E -->
-            <div>
-              <input class="form-check-input" type="checkbox" id="checkboxCoordE" onchange="changeLayerVisibility('plani_coordE')">
-              <label class="checkboxLabel" for="checkboxCoordE">
-                Obs. coordonnée Est (axe Y)
-              </label>
+            <div id="obs_plani_coordE">
             </div>
 
             <!-- Observations de coordonnées N -->
-            <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxCoordN" onchange="changeLayerVisibility('plani_coordN')">
-              <label class="checkboxLabel" for="checkboxCoordN">
-                Obs. coordonnée Nord (axe X)
-              </label>
+            <div class="w3-border-bottom" id="obs_plani_coordN">
             </div>
 
             <!-- Ellipses de confiances -->
@@ -120,11 +100,7 @@
             </div>
 
             <!-- Ellipses de confiances relatives -->
-            <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxEllRel" onchange="changeLayerVisibility('plani_ellRel')">
-              <label class="checkboxLabel" for="checkboxEllRel">
-                Ellipses de confiance relatives
-              </label>
+            <div class="w3-border-bottom" id="plani_ell_rela">
             </div>
 
             <!-- Rectangle de fiabilité -->
@@ -445,12 +421,20 @@
 
     <script src="./js/main.js"></script>
 
+    <script src="js/htmlAddCheckboxObservationsPlani_Directions.js"></script>
+    <script src="js/htmlAddCheckboxObservationsPlani_Distances.js"></script>
+    <script src="js/htmlAddCheckboxObservationsPlani_GNSS.js"></script>
+    <script src="js/htmlAddCheckboxObservationsPlani_CoordE.js"></script>
+    <script src="js/htmlAddCheckboxObservationsPlani_CoordN.js"></script>
+
     <script src="js/htmlAddCheckboxObservationsAlti_DH.js"></script>
     <script src="js/htmlAddCheckboxObservationsAlti_GNSS.js"></script>
     <script src="js/htmlAddCheckboxObservationsAlti_CoordH.js"></script>
 
     <script src="js/htmlAddCheckboxPrecisionAltiRel.js"></script>
     <script src="js/htmlAddCheckboxFiabiliteAltiRel.js"></script>
+
+    <script src="js/htmlAddCheckboxPrecisionPlaniRela.js"></script>
     
     <script src="js/htmlAddCheckboxFiabiliteAlti_DH.js"></script>
     <script src="js/htmlAddCheckboxFiabiliteAlti_GNSS.js"></script>
