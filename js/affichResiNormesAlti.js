@@ -1,8 +1,9 @@
 function affichResiNormesAlti(pts, xml){
     
     // Récupération des balises avec la limite du wi par l'utilisateur lors du calcul LTOP
-    let biggestWi = xmlDoc.getElementsByTagName("biggestWi");
-    let limitWi = parseFloat(biggestWi[1].getAttribute("biggerThan")); // PLANI uniquement = [0] , ALTI = [1]   // TODO: vérifier s'il y a 0 sans ajustement planimétrique
+    const altiAbriss = xml.getElementsByTagName('altimetricAbriss')[0];
+    let biggestWi = altiAbriss.getElementsByTagName("biggestWi");
+    let limitWi = parseFloat(biggestWi[0].getAttribute("biggerThan"));
     let limitInf = limitWi - 0.2; // pour paliers
 
     // Create source
@@ -13,7 +14,6 @@ function affichResiNormesAlti(pts, xml){
     const list_radius = [0.08, 0.12, 0.16, 0.20, 0.24, 0.28, 0.32, 0.36, 0.40];
     
     // Elements du fichier HTML
-    const altiAbriss = xml.getElementsByTagName('altimetricAbriss')[0];
     const stations = altiAbriss.getElementsByTagName('station');
 
     // Parcours de la liste des observations

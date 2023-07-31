@@ -1,8 +1,13 @@
 function affichResiNormesPlani(xml, pts){
 
+    // Elements du fichier HTML
+    const planiAbriss = xml.getElementsByTagName('planimetricAbriss')[0];
+    const stations = planiAbriss.getElementsByTagName('station');
+
+
     // Récupération des balises avec la limite du wi par l'utilisateur lors du calcul LTOP
-    let biggestWi = xmlDoc.getElementsByTagName("biggestWi");
-    let limitWi = parseFloat(biggestWi[0].getAttribute("biggerThan")); // PLANI uniquement = [0] , ALTI = [1]   // TODO: vérifier s'il y a 0 sans ajustement planimétrique
+    let biggestWi = planiAbriss.getElementsByTagName("biggestWi");
+    let limitWi = parseFloat(biggestWi[0].getAttribute("biggerThan"));
     let limitInf = limitWi - 0.2; // pour paliers
 
     // Create source
@@ -12,10 +17,6 @@ function affichResiNormesPlani(xml, pts){
     let planiGNSS_sessionID = 1;
     const list_radius = [0.08, 0.12, 0.16, 0.20, 0.24, 0.28, 0.32, 0.36, 0.40];
     
-    // Elements du fichier HTML
-    const planiAbriss = xml.getElementsByTagName('planimetricAbriss')[0];
-    const stations = planiAbriss.getElementsByTagName('station');
-
     // Parcours de la liste des observations
     for (let i=0; i<stations.length; i++){
         const station = stations[i];
@@ -23,6 +24,9 @@ function affichResiNormesPlani(xml, pts){
 
         switch(sta_type){
             case 'direction':
+                // Display checkbox
+                htmlAddCheckboxResiPlani_Dir();
+
                 // Station
                 const sta_name = station.getAttribute('name');
                 
@@ -75,6 +79,9 @@ function affichResiNormesPlani(xml, pts){
                 break;
             
             case 'distance':
+                // display checkbox
+                htmlAddCheckboxPrecisionPlani_Dis();
+
                 // Station
                 const station_name = station.getAttribute('name');
                 
@@ -126,6 +133,9 @@ function affichResiNormesPlani(xml, pts){
                 break;
             
             case 'gpsSession':
+                // display checkbox 
+                htmlAddCheckboxResiPlani_GNSS();
+                
                 // Lister les points par session
                 const targets = station.getElementsByTagName('target');
                 for (let j=0; j<targets.length; j++){

@@ -18,6 +18,9 @@ function affichFiabLocPlani(xml, pts){
 
         switch(sta_type){
             case 'gpsSession':
+                // Display checkbox
+                htmlAddCheckboxFiabilitePlani_GNSS();
+                
                 // Lister les points par session
                 const targets = station.getElementsByTagName('target');
                 for (let j=0; j<targets.length; j++){
@@ -65,6 +68,10 @@ function affichFiabLocPlani(xml, pts){
                 break;
 
             case 'direction':
+
+                // Display checkbox
+                htmlAddCheckboxFiabilitePlani_Dir();
+
                 // Station
                 const sta_name = station.getAttribute('name');
 
@@ -118,6 +125,11 @@ function affichFiabLocPlani(xml, pts){
                 break;
 
             case 'distance':
+
+                // display checkbox
+                htmlAddCheckboxFiabilitePlani_Dis();
+
+                // list stations
                 const station_name = station.getAttribute('name');
                 const list_ObsDis = station.getElementsByTagName('obs');
                 for (let j=0; j<list_ObsDis.length; j++){
