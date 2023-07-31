@@ -13,6 +13,8 @@ function affichResiNormesPlani(xml, pts){
     // Create source
     const planiResiDir_source = new ol.source.Vector({});
     const planiResiDis_source = new ol.source.Vector({});
+    const planiResiCoordE_source = new ol.source.Vector({});
+    const planiResiCoordN_source = new ol.source.Vector({})
     const planiResiGNSS_source = new ol.source.Vector({});
     let planiGNSS_sessionID = 1;
     const list_radius = [0.08, 0.12, 0.16, 0.20, 0.24, 0.28, 0.32, 0.36, 0.40];
@@ -189,6 +191,107 @@ function affichResiNormesPlani(xml, pts){
                 };
                 planiGNSS_sessionID++ ;
                 break;
+
+            case 'coordinate':
+                
+                // display checkbox
+                htmlAddCheckboxResiPlani_CoordE();
+                htmlAddCheckboxResiPlani_CoordN();
+
+                case 'coordinate':
+                // Display checkbox
+                htmlAddCheckboxFiabilitePlani_CoordE();
+                htmlAddCheckboxFiabilitePlani_CoordN();
+
+                // List "targets"
+                const targets_coordPlani = station.getElementsByTagName('target');
+                for (let j=0; j<targets_coordPlani.length; j++){
+                    
+                    const point_name = targets_coordPlani[j].getAttribute('name');
+                    const obs = targets_coordPlani[j].getElementsByTagName('obs');
+
+                    if (obs.length === 2){
+
+                        const obs1 = obs[0];
+                        if (obs1.getAttribute('obsNr') != ''){
+                            const obs1_wi = Math.abs(parseFloat(obs1.getAttribute('wi')));
+                            const [colorFiab, widthFiab] = getParameterFeature_wi(obs1_wi, limitWi, limitInf);
+                            
+                            const planiResi_CoordE_feature = new ol.Feature({ 
+                                geometry: new ol.geom.Point([ 
+                                    pts.get(point_name)['east'], 
+                                    pts.get(point_name)['north'] 
+                                ]) 
+                            });
+                            const planiResi_CoordE_style = new ol.style.Style({
+                                image: new ol.style.Icon({
+                                    src: './img/Est.svg',
+                                    scale: String(0.02*widthFiab),
+                                    color: String(colorFiab),
+                                }),
+                                text: new ol.style.Text({
+                                    text: point_name,
+                                    textAlign: "center",
+                                    textBaseline: "middle",
+                                    font: "italic 15px Calibri",
+                                    fill: new ol.style.Fill({
+                                        color: String(colorFiab)
+                                    }),
+                                    stroke: new ol.style.Stroke({
+                                        color: '#fff', 
+                                        width: 3
+                                    }),
+                                    offsetX: 20,
+                                    offsetY: -20,
+                                    rotation: 0,
+                                    placement: "point"
+                                })
+                            });
+                            planiResi_CoordE_feature.setStyle(planiResi_CoordE_style);
+                            planiResiCoordE_source.addFeature(planiResi_CoordE_feature);
+                        };
+
+
+                        const obs2 = obs[1];
+                        if (obs2.getAttribute('obsNr') != ''){
+                            const obs2_wi = Math.abs(parseFloat(obs2.getAttribute('wi')));
+                            const [colorFiab, widthFiab] = getParameterFeature_wi(obs2_wi, limitWi, limitInf);
+                            
+                            const planiResi_CoordN_feature = new ol.Feature({ 
+                                geometry: new ol.geom.Point([ 
+                                    pts.get(point_name)['east'], 
+                                    pts.get(point_name)['north'] 
+                                ]) 
+                            });
+                            const planiResi_CoordN_style = new ol.style.Style({
+                                image: new ol.style.Icon({
+                                    src: './img/Nord.svg',
+                                    scale: String(0.02*widthFiab),
+                                    color: String(colorFiab),
+                                }),
+                                text: new ol.style.Text({
+                                    text: point_name,
+                                    textAlign: "center",
+                                    textBaseline: "middle",
+                                    font: "italic 15px Calibri",
+                                    fill: new ol.style.Fill({
+                                        color: String(colorFiab)
+                                    }),
+                                    stroke: new ol.style.Stroke({
+                                        color: '#fff', 
+                                        width: 3
+                                    }),
+                                    offsetX: 20,
+                                    offsetY: -20,
+                                    rotation: 0,
+                                    placement: "point"
+                                })
+                            });
+                            planiResi_CoordN_feature.setStyle(planiResi_CoordN_style);
+                            planiResiCoordN_source.addFeature(planiResi_CoordN_feature);
+                        }
+                    }
+                }
         }
     };
 
@@ -199,4 +302,8 @@ function affichResiNormesPlani(xml, pts){
     changeLayerVisibility('plani_resi_dis');
     planiResiGNSS_layer.setSource(planiResiGNSS_source);
     changeLayerVisibility('plani_resi_GNSS');
+    planiResiCoordE_layer.setSource(planiResiCoordE_source);
+    changeLayerVisibility('plani_resi_coordE');
+    planiResiCoordN_layer.setSource(planiResiCoordN_source);
+    changeLayerVisibility('plani_resi_coordN');
 };

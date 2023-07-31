@@ -86,6 +86,15 @@ function defineLayers(){
     planiResiGNSS_layer = new ol.layer.Vector();
     planiResiGNSS_layer.setZIndex(84);
     map.addLayer(planiResiGNSS_layer);
+    // Coordonnée Est
+    planiResiCoordE_layer = new ol.layer.Vector({});
+    planiResiCoordE_layer.setZIndex(84);
+    map.addLayer(planiResiCoordE_layer);
+    // Coordonnée Nord
+    planiResiCoordN_layer = new ol.layer.Vector({});
+    planiResiCoordN_layer.setZIndex(84);
+    map.addLayer(planiResiCoordN_layer);
+
 
     // Vecteurs de déplacement
     planiVect_layer = new ol.layer.Vector();

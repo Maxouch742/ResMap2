@@ -133,7 +133,22 @@ function changeLayerVisibility(item){
                 planiResiGNSS_layer.setVisible(true);
             } else {
                 planiResiGNSS_layer.setVisible(false);
-            }
+            };
+            break;
+        case 'plani_resi_coordE':
+            if (document.getElementById('checkboxResi_CoordE').checked === true){
+                planiResiCoordE_layer.setVisible(true);
+            } else {
+                planiResiCoordE_layer.setVisible(false);
+            };
+            break;
+        case 'plani_resi_coordN':
+            if (document.getElementById('checkboxResi_CoordN').checked === true){
+                planiResiCoordN_layer.setVisible(true);
+            } else {
+                planiResiCoordN_layer.setVisible(false);
+            };
+            break;
         case 'plani_vect':
             if (document.getElementById('checkboxVect').checked === true){
                 planiVect_layer.setVisible(true);
@@ -142,6 +157,7 @@ function changeLayerVisibility(item){
             };
             break;
         
+
         case 'alti_ptsF':
             if (document.getElementById('checkboxPtsF_alti').checked === true){
                 altiPtsF_layer.setVisible(true);
