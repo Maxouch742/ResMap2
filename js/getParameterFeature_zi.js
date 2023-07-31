@@ -14,12 +14,12 @@ function getParameterFeature_zi(zi){
     } 
     else if (zi <= 75.0) {
         colorFiab = "#ABFF00"; //green
-        widthFiab = 1;
+        widthFiab = 1.2;
         zIndex = 1;
     } 
     else if (zi <= 100.0) {
         colorFiab = "#2AE100"; //green
-        widthFiab = 1;
+        widthFiab = 1.2;
         zIndex = 1;
     };
     return [colorFiab, widthFiab, zIndex]

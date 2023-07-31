@@ -100,6 +100,20 @@ function changeLayerVisibility(item){
                 planiFiabLocGNSS_layer.setVisible(false);
             };
             break;
+        case 'plani_fiabLoc_coordE':
+            if (document.getElementById('checkboxFiabLoc_CoordE').checked === true){
+                planiFiabLocCoordE_layer.setVisible(true);
+            } else {
+                planiFiabLocCoordE_layer.setVisible(false);
+            };
+            break;
+        case 'plani_fiabLoc_coordN':
+            if (document.getElementById('checkboxFiabLoc_CoordN').checked === true){
+                planiFiabLocCoordN_layer.setVisible(true);
+            } else {
+                planiFiabLocCoordN_layer.setVisible(false);
+            };
+            break;
         case 'plani_resi_dir':
             if (document.getElementById('checkboxResi_Dir').checked === true){
                 planiResiDir_layer.setVisible(true);

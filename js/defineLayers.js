@@ -64,6 +64,14 @@ function defineLayers(){
     planiFiabLocGNSS_layer = new ol.layer.Vector();
     planiFiabLocGNSS_layer.setZIndex(87);
     map.addLayer(planiFiabLocGNSS_layer);
+    // Coordonnée Est
+    planiFiabLocCoordE_layer = new ol.layer.Vector();
+    planiFiabLocCoordE_layer.setZIndex(86);
+    map.addLayer(planiFiabLocCoordE_layer);
+    // Coordonnée Nord
+    planiFiabLocCoordN_layer = new ol.layer.Vector();
+    planiFiabLocCoordN_layer.setZIndex(85);
+    map.addLayer(planiFiabLocCoordN_layer);
 
     //// Résidus normés (wi)
     // Directions

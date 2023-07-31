@@ -3,6 +3,8 @@ function affichFiabLocPlani(xml, pts){
     // Create source
     const planiFiabLocDir_source = new ol.source.Vector({});
     const planiFiabLocDis_source = new ol.source.Vector({});
+    const planiFiabLocCoordE_source = new ol.source.Vector({});
+    const planiFiabLocCoordN_source = new ol.source.Vector({});
     const planiFiabLocGNSS_source = new ol.source.Vector({});
     let planiGNSS_sessionID = 1;
     const list_radius = [0.08, 0.12, 0.16, 0.20, 0.24, 0.28, 0.32, 0.36, 0.40];
@@ -63,6 +65,7 @@ function affichFiabLocPlani(xml, pts){
                             planiFiabLocGNSS_source.addFeature(planiFiabLoc_feature);
                         };
                     }
+                    // TODO : traiter les cas où il y a une seule coordonnée
                 };
                 planiGNSS_sessionID++ ;
                 break;
@@ -178,6 +181,102 @@ function affichFiabLocPlani(xml, pts){
                     }
                 };
                 break;
+            
+            case 'coordinate':
+                // Display checkbox
+                htmlAddCheckboxFiabilitePlani_CoordE();
+                htmlAddCheckboxFiabilitePlani_CoordN();
+
+                // List "targets"
+                const targets_coordPlani = station.getElementsByTagName('target');
+                for (let j=0; j<targets_coordPlani.length; j++){
+                    
+                    const point_name = targets_coordPlani[j].getAttribute('name');
+                    const obs = targets_coordPlani[j].getElementsByTagName('obs');
+
+                    if (obs.length === 2){
+
+                        const obs1 = obs[0];
+                        if (obs1.getAttribute('obsNr') != ''){
+                            const obs1_zi = parseFloat(obs1.getAttribute('zi'));
+                            const [colorFiab, widthFiab] = getParameterFeature_zi(obs1_zi);
+                            
+                            const planiFiabLoc_CoordE_feature = new ol.Feature({ 
+                                geometry: new ol.geom.Point([ 
+                                    pts.get(point_name)['east'], 
+                                    pts.get(point_name)['north'] 
+                                ]) 
+                            });
+                            const planiFiabLoc_CoordE_style = new ol.style.Style({
+                                image: new ol.style.Icon({
+                                    src: './img/Est.svg',
+                                    scale: String(0.02*widthFiab),
+                                    color: String(colorFiab),
+                                }),
+                                text: new ol.style.Text({
+                                    text: point_name,
+                                    textAlign: "center",
+                                    textBaseline: "middle",
+                                    font: "italic 15px Calibri",
+                                    fill: new ol.style.Fill({
+                                        color: String(colorFiab)
+                                    }),
+                                    stroke: new ol.style.Stroke({
+                                        color: '#fff', 
+                                        width: 3
+                                    }),
+                                    offsetX: 20,
+                                    offsetY: -20,
+                                    rotation: 0,
+                                    placement: "point"
+                                })
+                            });
+                            planiFiabLoc_CoordE_feature.setStyle(planiFiabLoc_CoordE_style);
+                            planiFiabLocCoordE_source.addFeature(planiFiabLoc_CoordE_feature);
+                        };
+
+
+                        const obs2 = obs[1];
+                        if (obs2.getAttribute('obsNr') != ''){
+                            const obs2_zi = parseFloat(obs1.getAttribute('zi'));
+                            const [colorFiab, widthFiab] = getParameterFeature_zi(obs2_zi);
+                            
+                            const planiFiabLoc_CoordN_feature = new ol.Feature({ 
+                                geometry: new ol.geom.Point([ 
+                                    pts.get(point_name)['east'], 
+                                    pts.get(point_name)['north'] 
+                                ]) 
+                            });
+                            const planiFiabLoc_CoordN_style = new ol.style.Style({
+                                image: new ol.style.Icon({
+                                    src: './img/Nord.svg',
+                                    scale: String(0.02*widthFiab),
+                                    color: String(colorFiab),
+                                }),
+                                text: new ol.style.Text({
+                                    text: point_name,
+                                    textAlign: "center",
+                                    textBaseline: "middle",
+                                    font: "italic 15px Calibri",
+                                    fill: new ol.style.Fill({
+                                        color: String(colorFiab)
+                                    }),
+                                    stroke: new ol.style.Stroke({
+                                        color: '#fff', 
+                                        width: 3
+                                    }),
+                                    offsetX: 20,
+                                    offsetY: -20,
+                                    rotation: 0,
+                                    placement: "point"
+                                })
+                            });
+                            planiFiabLoc_CoordN_feature.setStyle(planiFiabLoc_CoordN_style);
+                            planiFiabLocCoordN_source.addFeature(planiFiabLoc_CoordN_feature);
+                        };
+                    }
+                }
+            
         }
     }
 
@@ -188,4 +287,8 @@ function affichFiabLocPlani(xml, pts){
     changeLayerVisibility('plani_fiabLoc_dir');
     planiFiabLocDis_layer.setSource(planiFiabLocDis_source);
     changeLayerVisibility('plani_fiabLoc_dis');
+    planiFiabLocCoordE_layer.setSource(planiFiabLocCoordE_source);
+    changeLayerVisibility('plani_fiabLoc_coordE');
+    planiFiabLocCoordN_layer.setSource(planiFiabLocCoordN_source);
+    changeLayerVisibility('plani_fiabLoc_coordN');
 };
