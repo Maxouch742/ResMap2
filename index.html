@@ -21,7 +21,6 @@
     <!----------- OpenLayers -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
 
-
     <!-- ol-ext -->
     <!--<link rel="stylesheet" href="./css/ol-ext.css" />-->
   </head>
@@ -41,7 +40,7 @@
 
           <!-- Import .PRNx file -->
           <div class="mt-2 greyBackground border border-dark p-1">
-            <h4 class="mx-2">Import du fichier .PRNx</h4>
+            <h3 class="mx-2">Import du fichier .PRNx</h3>
             <input class="mx-2 my-1 pr-2 inputFile" type="file" style="font-size: 90%" id="inputfile" accept=".prnx" onchange="readFilePRNx()"></input>
             <p class="mx-2 my-1 importInfo" style="font-size: 80%" id="outputTest"> </p>
           </div>
@@ -284,6 +283,41 @@
               </label>
             </div>
 
+          </div>
+
+          <!-- Légende -->
+          <button onclick="myFunction('abrissLegende')" class="w3-button w3-block w3-left-align">
+            <span class="legend">Légende</span>
+          </button>
+          <div id="abrissLegende" class="w3-container w3-hide w3-border">
+
+            <!-- Zi (fiabilité locale) -->
+            <div class="w3-border-bottom">
+              Fiabilité locale (zi)<br>
+              <span class="palier-zi zi1">―― 0 à 25%</span><br>
+              <span class="palier-zi zi2">―― 25 à 50%</span><br>
+              <span class="palier-zi zi3">―― 50 à 75%</span><br>
+              <span class="palier-zi zi4">―― 75 à 100%</span>
+            </div>
+
+            <!-- Wi (résidus normés) -->
+            <div>
+              Résidus normés (wi)
+              <div class="row">
+                <div class="col w3-border-right">
+                  Planimétrie<br>
+                  <span class="palier-wi wi1" id="palierPlaniWi1">―― x à ∞</span><br>
+                  <span class="palier-wi wi2" id="palierPlaniWi2">―― x à x</span><br>
+                  <span class="palier-wi wi3" id="palierPlaniWi3">―― 0.0 à x</span>
+                </div>
+                <div class="col">
+                  Altimétrie<br>
+                  <span class="palier-wi wi1" id="palierAltiWi1">―― x à ∞</span><br>
+                  <span class="palier-wi wi2" id="palierAltiWi2">―― x à x</span><br>
+                  <span class="palier-wi wi3" id="palierAltiWi3">―― 0.0 à x</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Slider pour l'échelle -->

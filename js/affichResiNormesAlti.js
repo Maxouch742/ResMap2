@@ -6,6 +6,11 @@ function affichResiNormesAlti(pts, xml){
     let limitWi = parseFloat(biggestWi[0].getAttribute("biggerThan"));
     let limitInf = limitWi - 0.2; // pour paliers
 
+    // Display legend
+    document.getElementById("palierAltiWi1").innerText = `${limitWi} à ∞`;
+    document.getElementById("palierAltiWi2").innerText = `${limitInf} à ${limitWi}`;
+    document.getElementById("palierAltiWi3").innerText = `0.0 à ${limitInf}`;
+
     // Create source
     const altiResiDH_source = new ol.source.Vector({});
     const altiResiCoordH_source = new ol.source.Vector({});

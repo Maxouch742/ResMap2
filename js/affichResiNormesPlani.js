@@ -10,6 +10,11 @@ function affichResiNormesPlani(xml, pts){
     let limitWi = parseFloat(biggestWi[0].getAttribute("biggerThan"));
     let limitInf = limitWi - 0.2; // pour paliers
 
+    // Display legend
+    document.getElementById("palierPlaniWi1").innerText = `${limitWi} à ∞`;
+    document.getElementById("palierPlaniWi2").innerText = `${limitInf} à ${limitWi}`;
+    document.getElementById("palierPlaniWi3").innerText = `0.0 à ${limitInf}`;
+
     // Create source
     const planiResiDir_source = new ol.source.Vector({});
     const planiResiDis_source = new ol.source.Vector({});
