@@ -8,7 +8,7 @@ function verifyErrors(xml){
         let error_string = "";
         for (let i=0;i<error.length;++i){
             const code = error[i].getAttribute("code");
-            error_string += "- "
+            error_string += "-> "
             error_string += code;
             error_string += " ;\n";
         }

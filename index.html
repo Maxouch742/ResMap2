@@ -111,12 +111,8 @@
               </label>
             </div>
 
-            <!-- Rectangle de fiabilité -->
-            <div class="w3-border-bottom">
-              <input class="form-check-input" type="checkbox" id="checkboxRectRel" onchange="changeLayerVisibility('plani_RectRel')">
-              <label class="checkboxLabel" for="checkboxRectRel">
-                Rectangles de fiabilité relatifs
-              </label>
+            <!-- Rectangle de fiabilité relatifs -->
+            <div class="w3-border-bottom" id="plani_rect_rela">
             </div>
 
             <!-- Fiabilité locale (zi) -->
@@ -195,7 +191,7 @@
           </div>
 
           <!-- Abriss altimétrique -->
-          <button onclick="myFunction('abrissAltimetrique')" class="w3-button w3-block w3-left-align w3-blue-grey" disabled>Altimétrie</button>
+          <button id="buttonAbrissAltimetrique" onclick="myFunction('abrissAltimetrique')" class="w3-button w3-block w3-left-align w3-blue-grey" disabled>Altimétrie</button>
           <div id="abrissAltimetrique" class="w3-container w3-hide w3-border">
             <!-- Points fixes -->
             <div>
@@ -397,7 +393,7 @@
     <script src="js/affichPrecisionPlani.js"></script>
     <script src="js/affichPrecisionAlti.js"></script>
     
-    <script src="js/affichRectanglesPlani.js"></script>
+    <script src="js/affichRectanglePlani.js"></script>
     <script src="js/affichRectangleAlti.js"></script>
 
     <script src="js/affichFiabLocPlani.js"></script>
@@ -431,10 +427,11 @@
     <script src="js/htmlAddCheckboxObservationsAlti_GNSS.js"></script>
     <script src="js/htmlAddCheckboxObservationsAlti_CoordH.js"></script>
 
-    <script src="js/htmlAddCheckboxPrecisionAltiRel.js"></script>
-    <script src="js/htmlAddCheckboxFiabiliteAltiRel.js"></script>
+    <script src="js/htmlAddCheckboxPrecisionAltiRela.js"></script>
+    <script src="js/htmlAddCheckboxFiabiliteAltiRela.js"></script>
 
     <script src="js/htmlAddCheckboxPrecisionPlaniRela.js"></script>
+    <script src="js/htmlAddCheckboxFiabilitePlaniRela.js"></script>
     
     <script src="js/htmlAddCheckboxFiabiliteAlti_DH.js"></script>
     <script src="js/htmlAddCheckboxFiabiliteAlti_GNSS.js"></script>

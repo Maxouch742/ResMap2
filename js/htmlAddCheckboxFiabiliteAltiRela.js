@@ -1,4 +1,4 @@
-function htmlAddCheckboxFiabiliteAltiRel(){
+function htmlAddCheckboxFiabiliteAltiRela(){
 
     const div = document.getElementById('rectangleRelativeAlti');
     div.innerHTML = `<input class="form-check-input" type="checkbox" id="checkboxRectRel_alti" onchange="changeLayerVisibility('alti_rectRel')">`

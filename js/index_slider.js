@@ -8,12 +8,14 @@ slider.oninput = function() {
   output.innerHTML = echelleEllipses;
 
   affichPrecisionPlani(pts_Map, xmlDoc);
-  affichRectanglesPlani(pts_Map);
+  affichPrecisionPlaniRela(pts_Map, xmlDoc, 1);
+  affichRectanglePlani(pts_Map);
+  affichRectanglePlaniRela(pts_Map, xmlDoc, 1);
   affichVecteurs(pts_Map);
   
   affichPrecisionAlti(pts_Map, xmlDoc);
-  affichPrecisionAltiRela(pts_Map, xmlDoc);
+  affichPrecisionAltiRela(pts_Map, xmlDoc, 1);
   affichRectangleAlti(pts_Map, xmlDoc);
-  affichRectangleAltiRela(pts_Map, xmlDoc);
+  affichRectangleAltiRela(pts_Map, xmlDoc, 1);
   affichVecteursAlti(pts_Map);
 }

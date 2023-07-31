@@ -1,4 +1,4 @@
-function affichPrecisionPlaniRela(pts, xml){
+function affichPrecisionPlaniRela(pts, xml, constante){
 
     // Define source layer
     const planiEllRel_source = new ol.source.Vector({});
@@ -55,7 +55,9 @@ function affichPrecisionPlaniRela(pts, xml){
         if (planiAbriss_type === 'planimetric'){
 
             // Add checkbox to html page
-            htmlAddCheckboxPrecisionPlaniRela();
+            if (constante === 0){
+                htmlAddCheckboxPrecisionPlaniRela();
+            };
 
             const ellipses = planiAbriss[i].getElementsByTagName('ellipse');
             for (let j=0; j <ellipses.length ;j++){

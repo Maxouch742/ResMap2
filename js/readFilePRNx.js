@@ -10,12 +10,14 @@ function readFilePRNx(){
       const parser = new DOMParser();
       xmlDoc = parser.parseFromString(xmlToParse,"text/xml");
 
-      //TODO : traiter les erreurs (etat 14)
       response = verifyErrors(xmlDoc);
       if (response === 0){
 
-        //TODO : verifier la présence de l'abriss altimetrique
-        //TODO : et activer le bouton
+        // Vérifier la présence de l'abriss altimétrique
+        const altiAbriss = xmlDoc.getElementsByTagName('altimetricAbriss');
+        if (altiAbriss.length >= 1){
+          document.getElementById("buttonAbrissAltimetrique").disabled = false;
+        }
 
         // Points management
         pts_Map = parseXML_points(xmlDoc);
@@ -34,7 +36,7 @@ function readFilePRNx(){
         //------- PLANIMETRIC
         affichMeasPlani(xmlDoc, pts_Map);
         affichPrecisionPlani(pts_Map, xmlDoc);
-        affichRectanglesPlani(pts_Map);
+        affichRectanglePlani(pts_Map);
         affichFiabLocPlani(xmlDoc, pts_Map);
         affichResiNormesPlani(xmlDoc, pts_Map);
         affichVecteurs(pts_Map);
@@ -43,16 +45,16 @@ function readFilePRNx(){
         affichMeasAlti(xmlDoc, pts_Map);
         affichPrecisionAlti(pts_Map, xmlDoc);
         affichRectangleAlti(pts_Map, xmlDoc); 
-        affichFiabLocAlti(pts_Map, xmlDoc);   //TODO
-        affichResiNormesAlti(pts_Map, xmlDoc);//TODO
-        affichVecteursAlti(pts_Map);          //TODO
+        affichFiabLocAlti(pts_Map, xmlDoc);
+        affichResiNormesAlti(pts_Map, xmlDoc);
+        affichVecteursAlti(pts_Map);
 
         //------ Relatif
-        affichPrecisionPlaniRela(pts_Map, xmlDoc); //TODO
-        affichRectanglePlaniRela(pts_Map, xmlDoc); //TODO
+        affichPrecisionPlaniRela(pts_Map, xmlDoc, 0);
+        affichRectanglePlaniRela(pts_Map, xmlDoc, 0);
         
-        affichPrecisionAltiRela(pts_Map, xmlDoc);  //TODO
-        affichRectangleAltiRela(pts_Map, xmlDoc);  //TODO
+        affichPrecisionAltiRela(pts_Map, xmlDoc, 0);
+        affichRectangleAltiRela(pts_Map, xmlDoc, 0);
 
         document.getElementById("outputTest").textContent = "Import effectué ✓";
       };

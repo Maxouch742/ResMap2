@@ -1,4 +1,4 @@
-function affichPrecisionAltiRela(pts, xml){
+function affichPrecisionAltiRela(pts, xml, constante){
 
     // Define source layer
     const altiEllRel_source = new ol.source.Vector({});
@@ -53,7 +53,9 @@ function affichPrecisionAltiRela(pts, xml){
         if (altiAbriss_type === 'altimetric'){
 
             // Add checkbox to html page
-            htmlAddCheckboxPrecisionAltiRela();
+            if (constante === 0){
+                htmlAddCheckboxPrecisionAltiRela();
+            };
 
             const ellipses = altiAbriss[i].getElementsByTagName('ellipse');
             for (let j=0; j <ellipses.length ;j++){
@@ -63,7 +65,6 @@ function affichPrecisionAltiRela(pts, xml){
 
                 if (pts.has(pt1) === true && pts.has(pt2) === true){
                     const ellip_value = parseFloat(ellip.getAttribute('meanErrorA'))/1000.0;
-                    console.log(ellip_value, ellip_value*1000.0);
                     
                     // Calculate coordinates
                     const pt_moy_E = (pts.get(pt1)['east'] + pts.get(pt2)['east']) / 2.0;
@@ -77,7 +78,6 @@ function affichPrecisionAltiRela(pts, xml){
                         ]),
                         properties: String(parseFloat(ellip_value*1000).toFixed(2))+"mm"
                     });
-                    console.log(altiEllRel_feature.get("properties"));
                     altiEll_style.getText().setText(altiEllRel_feature.get("properties"));
                     altiEllRel_feature.setStyle( function(feature) {
                         altiEll_style.getText().setText(feature.get("properties"));

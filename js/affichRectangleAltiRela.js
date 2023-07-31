@@ -1,4 +1,4 @@
-function affichRectangleAltiRela(pts, xml){
+function affichRectangleAltiRela(pts, xml, constante){
 
     // Define source layer
     const altiRectRel_source = new ol.source.Vector({});
@@ -42,10 +42,12 @@ function affichRectangleAltiRela(pts, xml){
         if (altiAbriss_type === 'altimetric'){
 
             // display checkbox
-            htmlAddCheckboxFiabiliteAltiRel();
+            if (constante === 0){
+                htmlAddCheckboxFiabiliteAltiRela();
+            };
 
             const rectangles = altiAbriss[i].getElementsByTagName('rectangle');
-            for (let j=0; j <rectangles.length ;j++){
+            for (let j=0; j<rectangles.length ;j++){
                 const rect = rectangles[j];
                 const pt1 = rect.getAttribute('point1');
                 const pt2 = rect.getAttribute('point2');
