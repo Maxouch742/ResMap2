@@ -104,6 +104,8 @@ function affichRectanglePlaniRela(pts, xml, constante){
     }
   
     // Add to map
-    planiRectRel_layer.setSource( planiRectRela_source );
-    changeLayerVisibility('plani_rectRel');
+    if (planiRectRela_source.getFeatures().length >= 1){
+        planiRectRel_layer.setSource( planiRectRela_source );
+        changeLayerVisibility('plani_rectRel');
+    }
 }

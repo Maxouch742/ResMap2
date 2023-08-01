@@ -74,17 +74,21 @@ function affichPointsPlani(pts, pts_var, pts_obs){
     });
 
     // Create layer
-    planiPtsF_layer.setSource(planiPtsF_source);
-    planiPtsF_layer.setStyle( function(feature) {
-        stylePtsF.getText().setText(feature.getId());
-        return stylePtsF;
-    });
-    changeLayerVisibility('plani_ptsF');
+    if (planiPtsF_source.getFeatures().length >= 1){
+        planiPtsF_layer.setSource(planiPtsF_source);
+        planiPtsF_layer.setStyle( function(feature) {
+            stylePtsF.getText().setText(feature.getId());
+            return stylePtsF;
+        });
+        changeLayerVisibility('plani_ptsF');
+    };
 
-    planiPtsN_layer.setSource(planiPtsN_source);
-    planiPtsN_layer.setStyle( function(feature) {
-        stylePtsN.getText().setText(feature.getId());
-        return stylePtsN;
-    });
-    changeLayerVisibility('plani_ptsN');
+    if (planiPtsN_source.getFeatures().length >= 1){
+        planiPtsN_layer.setSource(planiPtsN_source);
+        planiPtsN_layer.setStyle( function(feature) {
+            stylePtsN.getText().setText(feature.getId());
+            return stylePtsN;
+        });
+        changeLayerVisibility('plani_ptsN');
+    };
 }

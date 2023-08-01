@@ -112,7 +112,8 @@ function affichPrecisionPlaniRela(pts, xml, constante){
     };
 
     // Set source
-    planiEllRel_layer.setSource(planiEllRel_source);
-    changeLayerVisibility('plani_ellRel');
-
+    if (planiEllRel_source.getFeatures().length >= 1){
+        planiEllRel_layer.setSource(planiEllRel_source);
+        changeLayerVisibility('plani_ellRel');
+    }
 };

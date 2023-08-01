@@ -73,17 +73,21 @@ function affichPointsAlti(pts_map, pts_var, pts_obs){
     });
 
     // Create layer
-    altiPtsF_layer.setSource(altiPtsF_source);
-    altiPtsF_layer.setStyle( function(feature) {
-        stylePtsF.getText().setText(feature.getId());
-        return stylePtsF;
-    });
-    changeLayerVisibility('alti_ptsF');
+    if (altiPtsF_source.getFeatures().length >= 1){
+        altiPtsF_layer.setSource(altiPtsF_source);
+        altiPtsF_layer.setStyle( function(feature) {
+            stylePtsF.getText().setText(feature.getId());
+            return stylePtsF;
+        });
+        changeLayerVisibility('alti_ptsF');
+    };
 
-    altiPtsN_layer.setSource(altiPtsN_source);
-    altiPtsN_layer.setStyle( function(feature) {
-        stylePtsN.getText().setText(feature.getId());
-        return stylePtsN;
-    });
-    changeLayerVisibility('alti_ptsN');
+    if (altiPtsN_source.getFeatures().length >= 1){
+        altiPtsN_layer.setSource(altiPtsN_source);
+        altiPtsN_layer.setStyle( function(feature) {
+            stylePtsN.getText().setText(feature.getId());
+            return stylePtsN;
+        });
+        changeLayerVisibility('alti_ptsN');
+    };
 }

@@ -183,11 +183,19 @@ function affichResiNormesAlti(pts, xml){
         }
     };
 
-    // Layer
-    altiResiGNSS_layer.setSource(altiResiGNSS_source);
-    changeLayerVisibility('alti_resi_GNSS');
-    altiResiDH_layer.setSource(altiResiDH_source);
-    changeLayerVisibility('alti_resi_DH');
-    altiResiCoordH_layer.setSource(altiResiCoordH_source);
-    changeLayerVisibility('alti_resi_coord');
+    // Layera
+    if (altiResiGNSS_source.getFeatures().length >= 1){
+        altiResiGNSS_layer.setSource(altiResiGNSS_source);
+        changeLayerVisibility('alti_resi_GNSS');
+    };
+
+    if (altiResiDH_source.getFeatures().length >= 1){
+        altiResiDH_layer.setSource(altiResiDH_source);
+        changeLayerVisibility('alti_resi_DH');
+    };
+
+    if (altiResiCoordH_source.getFeatures().length >= 1){
+        altiResiCoordH_layer.setSource(altiResiCoordH_source);
+        changeLayerVisibility('alti_resi_coord');
+    }
 };

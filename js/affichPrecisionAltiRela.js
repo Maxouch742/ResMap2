@@ -99,6 +99,8 @@ function affichPrecisionAltiRela(pts, xml, constante){
     };
 
     // Set source
-    altiEllRel_layer.setSource(altiEllRel_source);
-    changeLayerVisibility('alti_ellRel');
+    if (altiEllRel_source.getFeatures().length >= 1){
+        altiEllRel_layer.setSource(altiEllRel_source);
+        changeLayerVisibility('alti_ellRel');
+    }
 }

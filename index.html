@@ -323,7 +323,7 @@
           <!-- Slider pour l'échelle -->
           <div class="slidecontainer w3-border w3-center">
             <!-- TODO: disabled range tant que le fichier est pas importé-->
-            <input type="range" min="0" max="15000" step="100" value="7000" class="form-range" id="myRange" style="">
+            <input type="range" min="0" max="15000" step="100" value="7000" class="form-range" id="myRange">
             <div>
               <span class="textEchelle" id="textEchelle">Echelle → <span id="echelleValue"></span>:1</span>
               <div class="textEchelle" id="nivConfiance">Niveau de confiance des ellipses → <span id="nivConfianceValue"></span></div>
@@ -440,6 +440,8 @@
     <script src="js/readFilePRNx.js"></script>
     <script src="js/verifyErrors.js"></script>
 
+    <script src="js/setInteraction.js"></script>
+
     <script src="./js/main.js"></script>
 
     <script src="js/htmlAddCheckboxObservationsPlani_Directions.js"></script>
@@ -477,7 +479,6 @@
     <script src="js/htmlAddCheckboxResiAlti_DH.js"></script>
     <script src="js/htmlAddCheckboxResiAlti_GNSS.js"></script>
     <script src="js/htmlAddCheckboxResiAlti_CoordH.js"></script>
-    
 
   </body>
 </html>

@@ -177,10 +177,18 @@ function affichFiabLocAlti(pts, xml){
         }
     };
 
-    altiFiabLocGNSS_layer.setSource(altiFiabLocGNSS_source);
-    changeLayerVisibility('alti_fiabLoc_GNSS');
-    altiFiabLocDH_layer.setSource(altiFiabLocDH_source);
-    changeLayerVisibility('alti_fiabLoc_DH');
-    altiFiabLocCoordH_layer.setSource(altiFiabLocCoord_source);
-    changeLayerVisibility('alti_fiabLoc_coord');
+    if (altiFiabLocGNSS_source.getFeatures().length >= 1){
+        altiFiabLocGNSS_layer.setSource(altiFiabLocGNSS_source);
+        changeLayerVisibility('alti_fiabLoc_GNSS');
+    };
+
+    if (altiFiabLocDH_source.getFeatures().length >= 1){
+        altiFiabLocDH_layer.setSource(altiFiabLocDH_source);
+        changeLayerVisibility('alti_fiabLoc_DH');
+    };
+
+    if (altiFiabLocCoord_source.getFeatures.length >= 1){
+        altiFiabLocCoordH_layer.setSource(altiFiabLocCoord_source);
+        changeLayerVisibility('alti_fiabLoc_coord');
+    };
 };

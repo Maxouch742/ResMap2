@@ -245,18 +245,30 @@ function affichMeasPlani(xml, pts){
     };
 
     // Layers 
-    planiGNSS_layer.setSource( planiGNSS_source );
-    planiGNSS_layer.setOpacity( 1.0 );
-    changeLayerVisibility('plani_GNSS');
+    if (planiGNSS_source.getFeatures().length >= 1){
+        planiGNSS_layer.setSource( planiGNSS_source );
+        planiGNSS_layer.setOpacity( 1.0 );
+        changeLayerVisibility('plani_GNSS');
+    };
 
-    planiDir_layer.setSource( planiDir_source );
-    changeLayerVisibility('plani_dir');
-    planiDis_layer.setSource( planiDis_source );
-    changeLayerVisibility('plani_dis');
+    if (planiDir_source.getFeatures().length >= 1){
+        planiDir_layer.setSource( planiDir_source );
+        changeLayerVisibility('plani_dir');
+    };
 
-    planiCoordE_layer.setSource( planiCoordE_source );
-    changeLayerVisibility('plani_coordE');
-    planiCoordN_layer.setSource( planiCoordN_source );
-    changeLayerVisibility('plani_coordN');
+    if (planiDis_source.getFeatures().length >= 1){
+        planiDis_layer.setSource( planiDis_source );
+        changeLayerVisibility('plani_dis');
+    };
+
+    if (planiCoordE_source.getFeatures().length >= 1){
+        planiCoordE_layer.setSource( planiCoordE_source );
+        changeLayerVisibility('plani_coordE');
+    };
+
+    if (planiCoordN_source.getFeatures().length >= 1){
+        planiCoordN_layer.setSource( planiCoordN_source );
+        changeLayerVisibility('plani_coordN');
+    };
 }
 

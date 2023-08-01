@@ -281,14 +281,28 @@ function affichFiabLocPlani(xml, pts){
     }
 
     // Add to map
-    planiFiabLocGNSS_layer.setSource(planiFiabLocGNSS_source);
-    changeLayerVisibility('plani_fiabLoc_GNSS');
-    planiFiabLocDir_layer.setSource(planiFiabLocDir_source);
-    changeLayerVisibility('plani_fiabLoc_dir');
-    planiFiabLocDis_layer.setSource(planiFiabLocDis_source);
-    changeLayerVisibility('plani_fiabLoc_dis');
-    planiFiabLocCoordE_layer.setSource(planiFiabLocCoordE_source);
-    changeLayerVisibility('plani_fiabLoc_coordE');
-    planiFiabLocCoordN_layer.setSource(planiFiabLocCoordN_source);
-    changeLayerVisibility('plani_fiabLoc_coordN');
+    if (planiFiabLocGNSS_source.getFeatures().length >= 1){
+        planiFiabLocGNSS_layer.setSource(planiFiabLocGNSS_source);
+        changeLayerVisibility('plani_fiabLoc_GNSS');
+    };
+
+    if (planiFiabLocDir_source.getFeatures().length >= 1){
+        planiFiabLocDir_layer.setSource(planiFiabLocDir_source);
+        changeLayerVisibility('plani_fiabLoc_dir');
+    };
+
+    if (planiFiabLocDis_source.getFeatures().length >= 1){
+        planiFiabLocDis_layer.setSource(planiFiabLocDis_source);
+        changeLayerVisibility('plani_fiabLoc_dis');
+    };
+
+    if (planiFiabLocCoordE_source.getFeatures().length >= 1){
+        planiFiabLocCoordE_layer.setSource(planiFiabLocCoordE_source);
+        changeLayerVisibility('plani_fiabLoc_coordE');
+    };
+
+    if (planiFiabLocCoordN_source.getFeatures().length >= 1){
+        planiFiabLocCoordN_layer.setSource(planiFiabLocCoordN_source);
+        changeLayerVisibility('plani_fiabLoc_coordN');
+    }
 };

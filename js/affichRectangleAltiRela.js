@@ -92,6 +92,8 @@ function affichRectangleAltiRela(pts, xml, constante){
     };
 
     // Set source
-    altiRectRel_layer.setSource(altiRectRel_source);
-    changeLayerVisibility('alti_rectRel');
+    if (altiRectRel_source.getFeatures().length >= 1){
+        altiRectRel_layer.setSource(altiRectRel_source);
+        changeLayerVisibility('alti_rectRel');
+    }
 };

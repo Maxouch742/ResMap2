@@ -180,13 +180,19 @@ function affichMeasAlti(xml, pts){
     };
 
     // Layers
-    altiGNSS_layer.setSource( altiGNSS_source );
-    altiGNSS_layer.setOpacity( 1.0 );
-    changeLayerVisibility('alti_GNSS');
+    if (altiGNSS_source.getFeatures().length >= 1){
+        altiGNSS_layer.setSource( altiGNSS_source );
+        altiGNSS_layer.setOpacity( 1.0 );
+        changeLayerVisibility('alti_GNSS');
+    };
 
-    altiDH_layer.setSource( altiDH_source );
-    changeLayerVisibility('alti_DH');
+    if (altiDH_source.getFeatures().length >= 1){
+        altiDH_layer.setSource( altiDH_source );
+        changeLayerVisibility('alti_DH');
+    };
 
-    altiCoordH_layer.setSource( altiCoordH_source );
-    changeLayerVisibility('alti_coordH');
+    if (altiCoordH_source.getFeatures().length >= 1){
+        altiCoordH_layer.setSource( altiCoordH_source );
+        changeLayerVisibility('alti_coordH');
+    };
 }
