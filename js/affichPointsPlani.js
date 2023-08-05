@@ -13,7 +13,7 @@ function affichPointsPlani(pts, pts_var, pts_obs){
                     value.east, 
                     value.north 
                 ]),
-                property: {
+                properties: {
                     height: value.height
                 }
             })
