@@ -72,15 +72,19 @@ function affichMeasAlti(xml, pts){
                             // Feature line
                             const altiDH_feature = new ol.Feature({
                                 geometry: new ol.geom.LineString([
-                                    [ 
-                                        pts.get(sta_name_dh)['east'],
-                                        pts.get(sta_name_dh)['north']
-                                    ],
-                                    [
-                                        pts.get(pt_name)['east'],
-                                        pts.get(pt_name)['north']
-                                    ]
-                                ])
+                                    [ pts.get(sta_name_dh)['east'], pts.get(sta_name_dh)['north'] ],
+                                    [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ]
+                                ]),
+                                id: pt_obsNr,
+                                obs: sta_type,
+                                station: sta_name_dh,
+                                visee: pt_name,
+                                value: parseFloat(list_obsDH[j].getAttribute('value')),
+                                group: parseFloat(list_obsDH[j].getAttribute('group')),
+                                zi: parseFloat(list_obsDH[j].getAttribute('zi')),
+                                wi: parseFloat(list_obsDH[j].getAttribute('wi')),
+                                nabla: parseFloat(list_obsDH[j].getAttribute('nabla_rzi')),
+                                corr: parseFloat(list_obsDH[j].getAttribute('corr')),
                             });
 
                             // Feature symbol

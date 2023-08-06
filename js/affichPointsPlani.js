@@ -13,16 +13,20 @@ function affichPointsPlani(pts, pts_var, pts_obs){
                     value.east, 
                     value.north 
                 ]),
-                properties: {
-                    height: value.height
-                }
+                east: value.east,
+                north: value.north,
+                height: value.height,
+                xi: value.xi,
+                eta: value.eta
             })
             pt_feature.setId(key);
 
             // Check if the point is new
             if (pts_var.includes(key) === true){
+                pt_feature.setProperties({"statut":"nouveau"});
                 planiPtsN_source.addFeature(pt_feature);
             } else {
+                pt_feature.setProperties({"statut":"fixe"});
                 planiPtsF_source.addFeature(pt_feature);
             }
         }

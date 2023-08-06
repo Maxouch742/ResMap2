@@ -37,7 +37,15 @@ function affichMeasPlani(xml, pts){
                             pts.get(pt_name)['north']
                         ]),
                         name: station.getAttribute('name'),
-                        properties: 'Session n°'+String(planiGNSS_sessionID),
+                        session_number: String(planiGNSS_sessionID),
+                        id: targets[j].getAttribute('obsNr'),
+                        obs: targets[j].getAttribute('target'),
+                        value: parseFloat(targets[j].getAttribute('value')),
+                        group: parseFloat(targets[j].getAttribute('group')),
+                        zi: parseFloat(targets[j].getAttribute('zi')),
+                        wi: parseFloat(targets[j].getAttribute('wi')),
+                        nabla: parseFloat(targets[j].getAttribute('nabla_rzi')),
+                        corr: parseFloat(targets[j].getAttribute('corr')),
                     });
                     const planiGNSS_style = new ol.style.Style({
                         image: new ol.style.Icon({
@@ -70,6 +78,16 @@ function affichMeasPlani(xml, pts){
                             [ pts.get(sta_name)['east'], pts.get(sta_name)['north'] ],
                             [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ]
                         ]),
+                        id: pt_obsNr,
+                        station: sta_name,
+                        visee: pt_name,
+                        obs: sta_type,
+                        value: parseFloat(list_obsDir[j].getAttribute('value')),
+                        group: parseFloat(list_obsDir[j].getAttribute('group')),
+                        zi: parseFloat(list_obsDir[j].getAttribute('zi')),
+                        wi: parseFloat(list_obsDir[j].getAttribute('wi')),
+                        nabla: parseFloat(list_obsDir[j].getAttribute('nabla_rzi')),
+                        corr: parseFloat(list_obsDir[j].getAttribute('corr')),
                     });
 
                     // Feature symbole
@@ -140,6 +158,16 @@ function affichMeasPlani(xml, pts){
                             [ pts.get(sta_name_dis)['east'], pts.get(sta_name_dis)['north'] ],
                             [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ]
                         ]),
+                        id: pt_obsNr,
+                        obs: sta_type,
+                        station: sta_name_dis,
+                        visee: pt_name,
+                        value: parseFloat(list_obsDis[j].getAttribute('value')),
+                        group: parseFloat(list_obsDis[j].getAttribute('group')),
+                        zi: parseFloat(list_obsDis[j].getAttribute('zi')),
+                        wi: parseFloat(list_obsDis[j].getAttribute('wi')),
+                        nabla: parseFloat(list_obsDis[j].getAttribute('nabla_rzi')),
+                        corr: parseFloat(list_obsDis[j].getAttribute('corr')),
                     });
 
                     // Feature symbole

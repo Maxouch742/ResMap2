@@ -12,11 +12,11 @@
     <!----------- CSS  ----------->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/popup.css" ref="stylesheet">
-    <link href="css/slider.css" ref="stylesheet">
-    <link href="css/helpButton.css" ref="stylesheet">
-    <link href="css/panel.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./css/popup.css" ref="stylesheet">
+    <link href="./css/slider.css" ref="stylesheet">
+    <link href="./css/helpButton.css" ref="stylesheet">
+    <link href="./css/panel.css" rel="stylesheet">
 
     <!----------- OpenLayers -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
@@ -294,10 +294,10 @@
             <!-- Zi (fiabilité locale) -->
             <div class="w3-border-bottom">
               Fiabilité locale (zi)<br>
-              <span class="palier-zi zi1">―― 0 à 25%</span><br>
-              <span class="palier-zi zi2">―― 25 à 50%</span><br>
-              <span class="palier-zi zi3">―― 50 à 75%</span><br>
-              <span class="palier-zi zi4">―― 75 à 100%</span>
+              <span class="palier-zi zi1">― 0 à 25%</span><br>
+              <span class="palier-zi zi2">― 25 à 50%</span><br>
+              <span class="palier-zi zi3">― 50 à 75%</span><br>
+              <span class="palier-zi zi4">― 75 à 100%</span>
             </div>
 
             <!-- Wi (résidus normés) -->
@@ -305,16 +305,16 @@
               Résidus normés (wi)
               <div class="row">
                 <div class="col w3-border-right">
-                  Planimétrie<br>
-                  <span class="palier-wi wi1" id="palierPlaniWi1">―― x à ∞</span><br>
-                  <span class="palier-wi wi2" id="palierPlaniWi2">―― x à x</span><br>
-                  <span class="palier-wi wi3" id="palierPlaniWi3">―― 0.0 à x</span>
+                  <span style="font-style:italic;">Planimétrie</span><br>
+                  <span class="palier-wi wi1" id="palierPlaniWi1">― x à ∞</span><br>
+                  <span class="palier-wi wi2" id="palierPlaniWi2">― x à x</span><br>
+                  <span class="palier-wi wi3" id="palierPlaniWi3">― 0.0 à x</span>
                 </div>
                 <div class="col">
-                  Altimétrie<br>
-                  <span class="palier-wi wi1" id="palierAltiWi1">―― x à ∞</span><br>
-                  <span class="palier-wi wi2" id="palierAltiWi2">―― x à x</span><br>
-                  <span class="palier-wi wi3" id="palierAltiWi3">―― 0.0 à x</span>
+                  <span style="font-style:italic;">Altimétrie</span><br>
+                  <span class="palier-wi wi1" id="palierAltiWi1">― x à ∞</span><br>
+                  <span class="palier-wi wi2" id="palierAltiWi2">― x à x</span><br>
+                  <span class="palier-wi wi3" id="palierAltiWi3">― 0.0 à x</span>
                 </div>
               </div>
             </div>
@@ -326,7 +326,7 @@
             <input type="range" min="0" max="15000" step="100" value="7000" class="form-range" id="myRange">
             <div>
               <span class="textEchelle" id="textEchelle">Echelle → <span id="echelleValue"></span>:1</span>
-              <div class="textEchelle" id="nivConfiance">Niveau de confiance des ellipses → <span id="nivConfianceValue"></span></div>
+              <div class="textEchelle" id="nivConfiance">Niveau de confiance → <span id="nivConfianceValue"></span></div>
             </div>
           </div>
 

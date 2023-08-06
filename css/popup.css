@@ -6,3 +6,16 @@
 
     font-size: 13px;
 }
+
+.popUpTitre{
+    font-weight: bold;
+}
+
+hr {
+    margin-top: 6px;
+    margin-bottom: 0px;
+    color: inherit;
+    background-color: currentColor;
+    border: 0;
+    opacity: .25;
+}
