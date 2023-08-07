@@ -183,6 +183,12 @@
           <!-- Abriss altimétrique -->
           <button id="buttonAbrissAltimetrique" onclick="myFunction('abrissAltimetrique')" class="w3-button w3-block w3-left-align w3-blue-grey" disabled>Altimétrie</button>
           <div id="abrissAltimetrique" class="w3-container w3-hide w3-border">
+            <!-- All remove -->
+            <div class="w3-border-bottom">
+              <input class="form-check-input" type="checkbox" id="checkboxAffich_alti" onchange="changeLayerVisibility('alti_affich')">
+              <label class="checkboxLabel" for="checkboxAffich_alti" id="labelAffich_alti">Tout supprimer</label>
+            </div>
+
             <!-- Points fixes -->
             <div>
               <input class="form-check-input" type="checkbox" id="checkboxPtsF_alti" onchange="changeLayerVisibility('alti_ptsF')">

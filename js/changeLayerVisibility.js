@@ -90,9 +90,6 @@ function changeLayerVisibility(item){
                 document.getElementById('checkboxVect').checked = false;
                 changeLayerVisibility('plani_vect');
                 
-
-            } else {
-                console.log("OK");
             };
             break;
         case 'plani_ptsF':
@@ -250,7 +247,76 @@ function changeLayerVisibility(item){
             };
             break;
         
+        case 'alti_affich':
+            if (document.getElementById('checkboxAffich_alti').checked === true) {
+                document.getElementById('checkboxAffich_alti').checked = false;
+                
+                document.getElementById('checkboxPtsF_alti').checked = false;
+                changeLayerVisibility('alti_ptsF');
+                document.getElementById('checkboxPtsN_alti').checked = false;
+                changeLayerVisibility('alti_ptsN');
 
+                if (document.getElementById('checkboxDH_alti') !== null){
+                    document.getElementById('checkboxDH_alti').checked = false;
+                    changeLayerVisibility('alti_DH');
+                };
+                if (document.getElementById('checkboxGNSS_alti') !== null){
+                    document.getElementById('checkboxGNSS_alti').checked = false;
+                    changeLayerVisibility('alti_GNSS');
+                };
+                if (document.getElementById('checkboxCoordH_alti') !== null){
+                    document.getElementById('checkboxCoordH_alti').checked = false;
+                    changeLayerVisibility('alti_coordH');
+                };
+                
+                document.getElementById('checkboxEll_alti').checked = false;
+                changeLayerVisibility('alti_ell');
+                if (document.getElementById('checkboxEllRel_alti') !== null){
+                    document.getElementById('checkboxEllRel_alti').checked = false;
+                    changeLayerVisibility('alti_ellRel');
+                };
+
+                document.getElementById('checkboxRect_alti').checked = false;
+                changeLayerVisibility('alti_rect');
+                if (document.getElementById('checkboxRectRel_alti') !== null){
+                    document.getElementById('checkboxRectRel_alti').checked = false;
+                    changeLayerVisibility('alti_rectRel');
+                };
+
+                if (document.getElementById('checkboxFiabLoc_GNSS_alti') !== null){
+                    document.getElementById('checkboxFiabLoc_GNSS_alti').checked = false;
+                    changeLayerVisibility('alti_fiabLoc_GNSS');
+                };
+                if (document.getElementById('checkboxFiabLoc_DH_alti') !== null){
+                    document.getElementById('checkboxFiabLoc_DH_alti').checked = false;
+                    changeLayerVisibility('alti_fiabLoc_DH');
+                };
+                if (document.getElementById('checkboxFiabLoc_Coord_alti') !== null){
+                    document.getElementById('checkboxFiabLoc_Coord_alti').checked = false;
+                    changeLayerVisibility('alti_fiabLoc_coord');
+                };
+
+                if (document.getElementById('checkboxResi_GNSS_alti') !== null){
+                    document.getElementById('checkboxResi_GNSS_alti').checked = false;
+                    changeLayerVisibility('alti_resi_GNSS');
+                };
+                if (document.getElementById('checkboxResi_DH_alti') !== null){
+                    document.getElementById('checkboxResi_DH_alti').checked = false;
+                    changeLayerVisibility('alti_resi_DH');
+                };
+
+                if (document.getElementById('checkboxVect_alti') !== null){
+                    document.getElementById('checkboxVect_alti').checked = false;
+                    changeLayerVisibility('alti_vect');
+                };
+
+                if (document.getElementById('checkboxResi_Coord_alti') !== null){
+                    document.getElementById('checkboxResi_Coord_alti').checked = false;
+                    changeLayerVisibility('alti_resi_coord');
+                };
+
+            };
+            break;
         case 'alti_ptsF':
             if (document.getElementById('checkboxPtsF_alti').checked === true){
                 altiPtsF_layer.setVisible(true);
