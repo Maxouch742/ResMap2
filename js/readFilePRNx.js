@@ -1,7 +1,10 @@
 function readFilePRNx(){
     
     // Get file and path
-    let fileName = document.getElementById('inputfile').files[0]
+    let fileName = document.getElementById('inputfile').files[0];
+    console.log(fileName.path);
+    const path = (window.URL || window.webkitURL).createObjectURL(fileName); 
+    console.log(`path: ${path}`);
     
     // Reading the contents of the .PRNx file
     let fr = new FileReader();

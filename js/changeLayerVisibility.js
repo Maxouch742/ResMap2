@@ -2,6 +2,99 @@ function changeLayerVisibility(item){
 
     switch (item){
 
+        case 'plani_affich':
+            if (document.getElementById('checkboxAffich').checked === true) {
+                document.getElementById('checkboxAffich').checked = false;
+                
+                document.getElementById('checkboxPtsF').checked = false;
+                changeLayerVisibility('plani_ptsF');
+                document.getElementById('checkboxPtsN').checked = false;
+                changeLayerVisibility('plani_ptsN');
+
+                if (document.getElementById('checkboxDir') !== null) {
+                    document.getElementById('checkboxDir').checked = false;
+                    changeLayerVisibility('plani_dir');
+                };
+                if (document.getElementById('checkboxDis') !== null) {
+                    document.getElementById('checkboxDis').checked = false;
+                    changeLayerVisibility('plani_dis');
+                };
+                if (document.getElementById('checkboxGNSS') !== null) {
+                    document.getElementById('checkboxGNSS').checked = false;
+                    changeLayerVisibility('plani_GNSS');
+                };
+                if (document.getElementById('checkboxCoordE') !== null) {
+                    document.getElementById('checkboxCoordE').checked = false;
+                    changeLayerVisibility('plani_coordE');
+                };
+                if (document.getElementById('checkboxCoordN') !== null) {
+                    document.getElementById('checkboxCoordN').checked = false;
+                    changeLayerVisibility('plani_coordN');
+                };
+                
+                document.getElementById('checkboxEll').checked = false;
+                changeLayerVisibility('plani_ell');
+                if (document.getElementById('checkboxEllRel') !== null) {
+                    document.getElementById('checkboxEllRel').checked = false;
+                    changeLayerVisibility('plani_ellRel');
+                };
+                document.getElementById('checkboxRect').checked = false;
+                changeLayerVisibility('plani_rect');
+                if (document.getElementById('checkboxRectRel') !== null) {
+                    document.getElementById('checkboxRectRel').checked = false;
+                    changeLayerVisibility('plani_rectRel');
+                };
+
+                if (document.getElementById('checkboxFiabLoc_Dir') !== null) {
+                    document.getElementById('checkboxFiabLoc_Dir').checked = false;
+                    changeLayerVisibility('plani_fiabLoc_dir');
+                };
+                if (document.getElementById('checkboxFiabLoc_Dis') !== null) {
+                    document.getElementById('checkboxFiabLoc_Dis').checked = false;
+                    changeLayerVisibility('plani_fiabLoc_dis');
+                };
+                if (document.getElementById('checkboxFiabLoc_GNSS') !== null) {
+                    document.getElementById('checkboxFiabLoc_GNSS').checked = false;
+                    changeLayerVisibility('plani_fiabLoc_GNSS');
+                };
+                if (document.getElementById('checkboxFiabLoc_CoordE') !== null) {
+                    document.getElementById('checkboxFiabLoc_CoordE').checked = false;
+                    changeLayerVisibility('plani_fiabLoc_coordE');
+                };
+                if (document.getElementById('checkboxFiabLoc_CoordN') !== null) {
+                    document.getElementById('checkboxFiabLoc_CoordN').checked = false;
+                    changeLayerVisibility('plani_fiabLoc_coordN');
+                };
+
+                if (document.getElementById('checkboxResi_Dir') !== null) {
+                    document.getElementById('checkboxResi_Dir').checked = false;
+                    changeLayerVisibility('plani_resi_dir');
+                };
+                if (document.getElementById('checkboxResi_Dis') !== null) {
+                    document.getElementById('checkboxResi_Dis').checked = false;
+                    changeLayerVisibility('plani_resi_dis');
+                };
+                if (document.getElementById('checkboxResi_GNSS') !== null) {
+                    document.getElementById('checkboxResi_GNSS').checked = false;
+                    changeLayerVisibility('plani_resi_GNSS');
+                };
+                if (document.getElementById('checkboxResi_CoordE') !== null) {
+                    document.getElementById('checkboxResi_CoordE').checked = false;
+                    changeLayerVisibility('plani_resi_coordE');
+                };
+                if (document.getElementById('checkboxResi_CoordN') !== null) {
+                    document.getElementById('checkboxResi_CoordN').checked = false;
+                    changeLayerVisibility('plani_resi_coordN');
+                };
+
+                document.getElementById('checkboxVect').checked = false;
+                changeLayerVisibility('plani_vect');
+                
+
+            } else {
+                console.log("OK");
+            };
+            break;
         case 'plani_ptsF':
             if (document.getElementById('checkboxPtsF').checked === true){
                 planiPtsF_layer.setVisible(true);
