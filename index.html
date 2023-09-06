@@ -143,32 +143,34 @@
             </div>
 
             <!-- Résidus normés (wi) -->
-            <div class="mt-2">
+            <!-- Wi : Directions -->
+            <div class="w3-border-bottom">
+              <div id="wi_plani_direction">
+              </div>
+
+              <!-- Wi : Distances -->
+              <div id="wi_plani_distance">
+              </div>
+
+              <!-- Wi : GNSS -->
+              <div id="wi_plani_gnss">
+              </div>
+
+              <!-- Wi : Coord E -->
+              <div id="wi_plani_coordE">
+              </div>
+
+              <!-- Wi : Coord N -->
+              <div id="wi_plani_coordN" >
+              </div>
+            </div>
+
+            <!-- <div class="mt-2">
               <button class="accordion py-1">Résidus normés (wi)</button>
               <div class="panel">
 
-                <!-- Wi : Directions -->
-                <div id="wi_plani_direction">
-                </div>
-
-                <!-- Wi : Distances -->
-                <div id="wi_plani_distance">
-                </div>
-
-                <!-- Wi : GNSS -->
-                <div id="wi_plani_gnss">
-                </div>
-
-                <!-- Wi : Coord E -->
-                <div id="wi_plani_coordE">
-                </div>
-
-                <!-- Wi : Coord N -->
-                <div id="wi_plani_coordN">
-                </div>
-
               </div>
-            </div>
+            </div>-->
 
             <!-- Vecteur de différence de coordonnées -->
             <div>
@@ -441,6 +443,8 @@
 
     <script src="./js/main.js"></script>
 
+    <script src="js/htmlAddCheckboxResiPlani.js"></script>
+
     <script src="js/htmlAddCheckboxObservationsPlani_Directions.js"></script>
     <script src="js/htmlAddCheckboxObservationsPlani_Distances.js"></script>
     <script src="js/htmlAddCheckboxObservationsPlani_GNSS.js"></script>
@@ -467,11 +471,13 @@
     <script src="js/htmlAddCheckboxFiabiliteAlti_GNSS.js"></script>
     <script src="js/htmlAddCheckboxFiabiliteAlti_CoordH.js"></script>
 
+    <!--
     <script src="js/htmlAddCheckboxResiPlani_Dir.js"></script>
     <script src="js/htmlAddCheckboxResiPlani_Dis.js"></script>
     <script src="js/htmlAddCheckboxResiPlani_GNSS.js"></script>
     <script src="js/htmlAddCheckboxResiPlani_CoordE.js"></script>
     <script src="js/htmlAddCheckboxResiPlani_CoordN.js"></script>
+    -->
 
     <script src="js/htmlAddCheckboxResiAlti_DH.js"></script>
     <script src="js/htmlAddCheckboxResiAlti_GNSS.js"></script>

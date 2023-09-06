@@ -32,7 +32,7 @@ function affichResiNormesPlani(xml, pts){
         switch(sta_type){
             case 'direction':
                 // Display checkbox
-                htmlAddCheckboxResiPlani_Dir();
+                htmlAddCheckboxResiPlani('direction');
 
                 // Station
                 const sta_name = station.getAttribute('name');
@@ -87,7 +87,7 @@ function affichResiNormesPlani(xml, pts){
             
             case 'distance':
                 // display checkbox
-                htmlAddCheckboxPrecisionPlani_Dis();
+                htmlAddCheckboxResiPlani('distance');
 
                 // Station
                 const station_name = station.getAttribute('name');
@@ -141,7 +141,7 @@ function affichResiNormesPlani(xml, pts){
             
             case 'gpsSession':
                 // display checkbox 
-                htmlAddCheckboxResiPlani_GNSS();
+                htmlAddCheckboxResiPlani('gnss');
                 
                 // Lister les points par session
                 const targets = station.getElementsByTagName('target');
@@ -200,10 +200,9 @@ function affichResiNormesPlani(xml, pts){
             case 'coordinate':
                 
                 // display checkbox
-                htmlAddCheckboxResiPlani_CoordE();
-                htmlAddCheckboxResiPlani_CoordN();
+                htmlAddCheckboxResiPlani('coord_E');
+                htmlAddCheckboxResiPlani('coord_N');
 
-                case 'coordinate':
                 // Display checkbox
                 htmlAddCheckboxFiabilitePlani_CoordE();
                 htmlAddCheckboxFiabilitePlani_CoordN();
