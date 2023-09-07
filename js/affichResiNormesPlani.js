@@ -203,10 +203,6 @@ function affichResiNormesPlani(xml, pts){
                 htmlAddCheckboxResiPlani('coord_E');
                 htmlAddCheckboxResiPlani('coord_N');
 
-                // Display checkbox
-                htmlAddCheckboxFiabilitePlani_CoordE();
-                htmlAddCheckboxFiabilitePlani_CoordN();
-
                 // List "targets"
                 const targets_coordPlani = station.getElementsByTagName('target');
                 for (let j=0; j<targets_coordPlani.length; j++){
