@@ -2,7 +2,6 @@ map.on('click', function (evt) {
     const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
         return feature; 
     })
-    console.log(feature.getProperties());
     $(elementPopup).popover('dispose');
 
     // Si l'utilisateur a cliqué à côté d'une feature

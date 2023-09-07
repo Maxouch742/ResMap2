@@ -180,7 +180,7 @@
           </div>
 
           <!-- Abriss altimétrique -->
-          <button id="buttonAbrissAltimetrique" onclick="myFunction('abrissAltimetrique')" class="w3-button w3-block w3-left-align w3-blue-grey" disabled>Altimétrie</button>
+          <button id="buttonAbrissAltimetrique" onclick="myFunction('abrissAltimetrique')" class="w3-button w3-block w3-left-align w3-blue-grey">Altimétrie</button>
           <div id="abrissAltimetrique" class="w3-container w3-hide w3-border">
             <!-- All remove -->
             <div class="w3-border-bottom">
@@ -241,43 +241,36 @@
             </div>
 
             <!-- Fiabilité locale (zi) -->
-            <div class="mt-2">
-              <button class="accordion py-1" id="altitude_zi" disabled>Fiabilité locale (zi)</button>
-              <div class="panel">
-
-                <!-- Zi : DH -->
-                <div id="zi_altitude_DH">
-                </div>
-
-                <!-- Zi : GNSS -->
-                <div id="zi_altitude_GNSS">
-                </div>
-
-                <!-- Zi : Coordonnée H -->
-                <div id="zi_altitude_coordH">
-                </div>
-                
+            <div class="w3-border-bottom">
+              <!-- Zi : DH -->
+              <div id="zi_altitude_DH">
               </div>
+
+              <!-- Zi : GNSS -->
+              <div id="zi_altitude_GNSS">
+              </div>
+
+              <!-- Zi : Coordonnée H -->
+              <div id="zi_altitude_coordH">
+              </div>
+            
             </div>
 
             <!-- Résidus normés (wi) -->
-            <div class="mt-2">
-              <button class="accordion py-1" id="altitude_wi" disabled>Résidus normés (wi)</button>
-              <div class="panel">
+            <div class="w3-border-bottom">
                 
-                <!-- wi : DH -->
-                <div id="wi_altitude_DH">
-                </div>
-
-                <!-- wi : GNSS -->
-                <div id="wi_altitude_GNSS">
-                </div>
-
-                <!-- wi : Observation de coordonnées -->
-                <div id="wi_altitude_coordH">
-                </div>
-              
+              <!-- wi : DH -->
+              <div id="wi_altitude_DH">
               </div>
+
+              <!-- wi : GNSS -->
+              <div id="wi_altitude_GNSS">
+              </div>
+
+              <!-- wi : Observation de coordonnées -->
+              <div id="wi_altitude_coordH">
+              </div>
+              
             </div>
 
             <!-- Vecteur de déplacement -->
@@ -291,7 +284,7 @@
           </div>
 
           <!-- Légende -->
-          <button onclick="myFunction('abrissLegende')" class="w3-button w3-block w3-left-align w3-blue-grey">
+          <button onclick="myFunction('abrissLegende')" class="w3-button w3-block w3-left-align" style="background: #93BED3;">
             <span class="legend">Légende</span>
           </button>
           <div id="abrissLegende" class="w3-container w3-hide w3-border">
@@ -443,6 +436,9 @@
     <script src="js/htmlAddCheckboxResiPlani.js"></script>
     <script src="js/htmlAddCheckboxFiabilitePlani.js"></script>
 
+    <script src="js/htmlAddCheckboxResiAlti.js"></script>
+    <script src="js/htmlAddCheckboxFiabiliteAlti.js"></script>
+
     <script src="js/htmlAddCheckboxObservationsPlani_Directions.js"></script>
     <script src="js/htmlAddCheckboxObservationsPlani_Distances.js"></script>
     <script src="js/htmlAddCheckboxObservationsPlani_GNSS.js"></script>
@@ -458,30 +454,7 @@
 
     <script src="js/htmlAddCheckboxPrecisionPlaniRela.js"></script>
     <script src="js/htmlAddCheckboxFiabilitePlaniRela.js"></script>
-
-    <!--
-    <script src="js/htmlAddCheckboxFiabilitePlani_Dir.js"></script>
-    <script src="js/htmlAddCheckboxFiabilitePlani_Dis.js"></script>
-    <script src="js/htmlAddCheckboxFiabilitePlani_GNSS.js"></script>
-    <script src="js/htmlAddCheckboxFiabilitePlani_CoordE.js"></script>
-    <script src="js/htmlAddCheckboxFiabilitePlani_CoordN.js"></script>
-    -->
-    
-    <script src="js/htmlAddCheckboxFiabiliteAlti_DH.js"></script>
-    <script src="js/htmlAddCheckboxFiabiliteAlti_GNSS.js"></script>
-    <script src="js/htmlAddCheckboxFiabiliteAlti_CoordH.js"></script>
-
-    <!--
-    <script src="js/htmlAddCheckboxResiPlani_Dir.js"></script>
-    <script src="js/htmlAddCheckboxResiPlani_Dis.js"></script>
-    <script src="js/htmlAddCheckboxResiPlani_GNSS.js"></script>
-    <script src="js/htmlAddCheckboxResiPlani_CoordE.js"></script>
-    <script src="js/htmlAddCheckboxResiPlani_CoordN.js"></script>
-    -->
-
-    <script src="js/htmlAddCheckboxResiAlti_DH.js"></script>
-    <script src="js/htmlAddCheckboxResiAlti_GNSS.js"></script>
-    <script src="js/htmlAddCheckboxResiAlti_CoordH.js"></script>
+  
 
   </body>
 </html>
