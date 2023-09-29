@@ -238,11 +238,11 @@ function affichResiNormesPlani(xml, pts){
                                         color: String(colorFiab)
                                     }),
                                     stroke: new ol.style.Stroke({
-                                        color: '#fff', 
+                                        color: '#000', 
                                         width: 3
                                     }),
-                                    offsetX: 20,
-                                    offsetY: -20,
+                                    offsetX: 10,
+                                    offsetY: -10,
                                     rotation: 0,
                                     placement: "point"
                                 })
@@ -278,11 +278,11 @@ function affichResiNormesPlani(xml, pts){
                                         color: String(colorFiab)
                                     }),
                                     stroke: new ol.style.Stroke({
-                                        color: '#fff', 
+                                        color: '#000', 
                                         width: 3
                                     }),
-                                    offsetX: 20,
-                                    offsetY: -20,
+                                    offsetX: 10,
+                                    offsetY: 10,
                                     rotation: 0,
                                     placement: "point"
                                 })
