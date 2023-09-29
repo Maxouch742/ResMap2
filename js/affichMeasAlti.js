@@ -21,7 +21,7 @@ function affichMeasAlti(xml, pts){
         switch(sta_type){
             case 'gpsSession':
                 // Display
-                htmlAddCheckboxObservationsAlti_GNSS();
+                htmlAddCheckboxObservationsAlti('gnss');
 
                 // Lister les points par session
                 const targets = station.getElementsByTagName('target');
@@ -55,7 +55,7 @@ function affichMeasAlti(xml, pts){
                 
             case 'heightDiff':
                 // Display checkbox
-                htmlAddCheckboxObservationsAlti_DH();
+                htmlAddCheckboxObservationsAlti('dh');
 
                 // Station
                 const sta_name_dh = station.getAttribute('name');
@@ -138,7 +138,7 @@ function affichMeasAlti(xml, pts){
                 break;
             
             case 'connectionPoints':
-                htmlAddCheckboxObservationsAlti_CoordH();
+                htmlAddCheckboxObservationsAlti('coord_H');
 
                 // list of points
                 const targets_list = station.getElementsByTagName('target');

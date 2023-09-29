@@ -30,8 +30,7 @@ function readFilePRNx(){
         // Vérifier la présence de l'abriss altimétrique
         const altiAbriss = xmlDoc.getElementsByTagName('altimetricAbriss');
         if (altiAbriss.length >= 1){
-          document.getElementById("buttonAbrissAltimetrique").disabled = false;
-
+          
           // Points management
           pts_altiVar = parseXML_variablePoints(xmlDoc, 'altimetric');
           pts_altiObs = parseXML_altiObsPoints(xmlDoc);

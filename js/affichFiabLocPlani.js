@@ -21,7 +21,7 @@ function affichFiabLocPlani(xml, pts){
         switch(sta_type){
             case 'gpsSession':
                 // Display checkbox
-                htmlAddCheckboxFiabilitePlani_GNSS();
+                htmlAddCheckboxFiabilitePlani('gnss');
                 
                 // Lister les points par session
                 const targets = station.getElementsByTagName('target');
@@ -73,7 +73,7 @@ function affichFiabLocPlani(xml, pts){
             case 'direction':
 
                 // Display checkbox
-                htmlAddCheckboxFiabilitePlani_Dir();
+                htmlAddCheckboxFiabilitePlani('direction');
 
                 // Station
                 const sta_name = station.getAttribute('name');
@@ -130,7 +130,7 @@ function affichFiabLocPlani(xml, pts){
             case 'distance':
 
                 // display checkbox
-                htmlAddCheckboxFiabilitePlani_Dis();
+                htmlAddCheckboxFiabilitePlani('distance');
 
                 // list stations
                 const station_name = station.getAttribute('name');
@@ -184,8 +184,8 @@ function affichFiabLocPlani(xml, pts){
             
             case 'coordinate':
                 // Display checkbox
-                htmlAddCheckboxFiabilitePlani_CoordE();
-                htmlAddCheckboxFiabilitePlani_CoordN();
+                htmlAddCheckboxFiabilitePlani('coord_E');
+                htmlAddCheckboxFiabilitePlani('coord_N');
 
                 // List "targets"
                 const targets_coordPlani = station.getElementsByTagName('target');
@@ -222,11 +222,11 @@ function affichFiabLocPlani(xml, pts){
                                         color: String(colorFiab)
                                     }),
                                     stroke: new ol.style.Stroke({
-                                        color: '#fff', 
+                                        color: '#000', 
                                         width: 3
                                     }),
-                                    offsetX: 20,
-                                    offsetY: -20,
+                                    offsetX: 10,
+                                    offsetY: -10,
                                     rotation: 0,
                                     placement: "point"
                                 })
@@ -262,11 +262,11 @@ function affichFiabLocPlani(xml, pts){
                                         color: String(colorFiab)
                                     }),
                                     stroke: new ol.style.Stroke({
-                                        color: '#fff', 
+                                        color: '#000', 
                                         width: 3
                                     }),
-                                    offsetX: 20,
-                                    offsetY: -20,
+                                    offsetX: 10,
+                                    offsetY: 10,
                                     rotation: 0,
                                     placement: "point"
                                 })
