@@ -21,7 +21,7 @@ function readFilePRNx(){
 
       // Points management
       pts_Map = parseXML_points(xmlDoc);
-      const pts_planiVar = parseXML_variablePoints(xmlDoc, 'planimetric');
+      const pts_planiVar = parseXML_variablePoints_fixBug(pts_Map, 'planimetric');
       const pts_planiObs = parseXML_planiObsPoints(xmlDoc);  // get points to targets
       let pts_altiVar = [];
       let pts_altiObs = [];
@@ -31,7 +31,7 @@ function readFilePRNx(){
       if (altiAbriss.length >= 1){
         
         // Points management
-        pts_altiVar = parseXML_variablePoints(xmlDoc, 'altimetric');
+        pts_altiVar = parseXML_variablePoints_fixBug(pts_Map, 'altimetric');
         pts_altiObs = parseXML_altiObsPoints(xmlDoc);
 
         // Layers
