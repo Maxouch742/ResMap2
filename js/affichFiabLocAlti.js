@@ -32,22 +32,25 @@ function affichFiabLocAlti(pts, xml){
                     if (obs.getAttribute('obsNr') != ''){
                         const obs_zi = parseFloat(obs.getAttribute('zi'));
                         const [colorFiab, widthFiab] = getParameterFeature_zi(obs_zi);
+
+                        if(pts.has(pt_name)){
                         
-                        const altiFiabLoc_feature = new ol.Feature({ 
-                            geometry: new ol.geom.Point([ 
-                                pts.get(pt_name)['east'], 
-                                pts.get(pt_name)['north'] 
-                            ]) 
-                        });
-                        const altiFiabLoc_featureStyle = new ol.style.Style({
-                            image: new ol.style.Icon({
-                                src: './img/hexagon-svgrepo-com.svg',
-                                scale: list_radius[planiGNSS_sessionID]/2,
-                                color: colorFiab,
-                            }),
-                        });
-                        altiFiabLoc_feature.setStyle(altiFiabLoc_featureStyle);
-                        altiFiabLocGNSS_source.addFeature(altiFiabLoc_feature);
+                            const altiFiabLoc_feature = new ol.Feature({ 
+                                geometry: new ol.geom.Point([ 
+                                    pts.get(pt_name)['east'], 
+                                    pts.get(pt_name)['north'] 
+                                ]) 
+                            });
+                            const altiFiabLoc_featureStyle = new ol.style.Style({
+                                image: new ol.style.Icon({
+                                    src: './img/hexagon-svgrepo-com.svg',
+                                    scale: list_radius[planiGNSS_sessionID]/2,
+                                    color: colorFiab,
+                                }),
+                            });
+                            altiFiabLoc_feature.setStyle(altiFiabLoc_featureStyle);
+                            altiFiabLocGNSS_source.addFeature(altiFiabLoc_feature);
+                        };
                     };
                 }
                 planiGNSS_sessionID++ ;
@@ -66,7 +69,7 @@ function affichFiabLocAlti(pts, xml){
                     for (let j=0; j<list_obsDH.length; j++){
                         const pt_name = list_obsDH[j].getAttribute('target');
                         
-                        if (pts.has(pt_name) === true){
+                        if (pts.has(sta_name_dh) && pts.has(pt_name)){
 
                             const pt_obsNr = list_obsDH[j].getAttribute('obsNr');
                             const obs_zi = parseFloat(list_obsDH[j].getAttribute('zi'));

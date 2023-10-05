@@ -21,15 +21,15 @@ function affichPrecisionAlti(pts, xml){
 
             const east = value.east;
             const north = value.north;
-            const emh = value.EMH/1000.0;
-
+            const emh_number = value.EMH/1000.0;
+            const emh_string = String(value.EMH.toFixed(2));
             
             const altiEll_feature = new ol.Feature({
                 geometry: new ol.geom.LineString([
-                    [ east, north + emh*kSigma*echelleEllipses/2 ],
-                    [ east, north - emh*kSigma*echelleEllipses/2 ]
+                    [ east, north + emh_number*kSigma*echelleEllipses/2 ],
+                    [ east, north - emh_number*kSigma*echelleEllipses/2 ]
                 ]),
-                properties: String(emh*1000)+"mm"
+                properties: emh_string+"mm"
             });
             altiEll_source.addFeature(altiEll_feature);
         }

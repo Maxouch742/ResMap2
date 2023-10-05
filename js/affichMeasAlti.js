@@ -29,7 +29,7 @@ function affichMeasAlti(xml, pts){
                     const pt_name = targets[j].getAttribute('name');
 
                     // Create feature
-                    if (pts.has(pt_name) === true){
+                    if (pts.has(pt_name)){
                         
                         const altiGNSS_feature = new ol.Feature({
                             geometry: new ol.geom.Point([
@@ -67,7 +67,7 @@ function affichMeasAlti(xml, pts){
                         const pt_name = list_obsDH[j].getAttribute('target');
                         const pt_obsNr = list_obsDH[j].getAttribute('obsNr');
 
-                        if (pts.has(pt_name) === true){
+                        if (pts.has(pt_name) && pts.has(sta_name_dh)){
 
                             // Feature line
                             const altiDH_feature = new ol.Feature({
@@ -153,7 +153,7 @@ function affichMeasAlti(xml, pts){
                         const obs = points_list[k];
                         const obs_target = obs.getAttribute('target');
 
-                        if (pts.has(pt_name) === true){
+                        if (pts.has(pt_name)){
 
                             const altiCoordH_feature = new ol.Feature({
                                 geometry: new ol.geom.Point([

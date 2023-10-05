@@ -41,20 +41,22 @@ function affichResiNormesAlti(pts, xml){
                         const obs_wi = Math.abs(parseFloat(obs.getAttribute('wi')));
                         const [colorFiab, widthFiab] = getParameterFeature_wi(obs_wi, limitWi, limitInf);
                         
-                        const planiResi1_feature = new ol.Feature({ 
-                            geometry: new ol.geom.Point([ 
-                                pts.get(pt_name)['east'], 
-                                pts.get(pt_name)['north'] 
-                            ]),
-                        });
-                        planiResi1_feature.setStyle( new ol.style.Style({
-                            image: new ol.style.Icon({
-                                src: './img/hexagon-svgrepo-com.svg',
-                                scale: list_radius[planiGNSS_sessionID]/2,
-                                color: colorFiab,
-                            }),
-                        }) );
-                        altiResiGNSS_source.addFeature(planiResi1_feature);
+                        if (pts.has(pt_name)){
+                            const planiResi1_feature = new ol.Feature({ 
+                                geometry: new ol.geom.Point([ 
+                                    pts.get(pt_name)['east'], 
+                                    pts.get(pt_name)['north'] 
+                                ]),
+                            });
+                            planiResi1_feature.setStyle( new ol.style.Style({
+                                image: new ol.style.Icon({
+                                    src: './img/hexagon-svgrepo-com.svg',
+                                    scale: list_radius[planiGNSS_sessionID]/2,
+                                    color: colorFiab,
+                                }),
+                            }) );
+                            altiResiGNSS_source.addFeature(planiResi1_feature);
+                        };
                     };
                 };
                 planiGNSS_sessionID++ ;
@@ -66,7 +68,7 @@ function affichResiNormesAlti(pts, xml){
 
                 // Station
                 const sta_name_dh = station.getAttribute('name');
-                if (pts.has(sta_name_dh) === true){
+                if (pts.has(sta_name_dh)){
 
                     // Lister les observations
                     const list_obsDH = station.getElementsByTagName('obs');
@@ -76,7 +78,7 @@ function affichResiNormesAlti(pts, xml){
                         const obs_wi = parseFloat(list_obsDH[j].getAttribute('wi'));
                         const [colorFiab, widthFiab] = getParameterFeature_wi(obs_wi, limitWi, limitInf);
                         
-                        if (pts.has(pt_name) === true){
+                        if (pts.has(pt_name)){
 
                             // Feature line
                             const altiDH_feature = new ol.Feature({
@@ -138,7 +140,7 @@ function affichResiNormesAlti(pts, xml){
 
                     const point_name = targets_coordH[j].getAttribute('name');
                     // If the point has the 2D coordinates
-                    if (pts.has(point_name) === true){
+                    if (pts.has(point_name)){
                         const point_obs = targets_coordH[j].getElementsByTagName('obs')[0];
                         const obs_wi = parseFloat(point_obs.getAttribute('wi'));
                         const [colorFiab, widthFiab] = getParameterFeature_wi(obs_wi, limitWi, limitInf);
