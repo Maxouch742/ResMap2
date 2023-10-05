@@ -2,8 +2,8 @@ function parseXML_points(xml){
 
     const points = new Map();   
     
-    // Final coordinates of file
-    const coordFinal = xml.getElementsByTagName('finalCoords')[0];
+    // Coordonnées du fichier
+    /*const coordFinal = xml.getElementsByTagName('coordinates')[0];
     const coordFinal_list = coordFinal.getElementsByTagName('point');
 
     for (let i=0; i<coordFinal_list.length; i++){
@@ -33,7 +33,7 @@ function parseXML_points(xml){
 
             points.set(pt_name, pt_object)
         }
-    }
+    }*/
 
     // reliability and precision
     const coordinates = xml.getElementsByTagName('coordinates')[0];
@@ -43,7 +43,7 @@ function parseXML_points(xml){
         const pt = coordinates_list[i];
 
         pt_name = pt.getAttribute('name');
-        if (pt_name != 'NULLBERN'){
+        if (pt_name != 'NULLBERN' && pt_name != 'nullbern' && pt_name != 'bern'){
 
             let east_temp = parseFloat(pt.getAttribute('easting'));
             if (east_temp > 450000.0 && east_temp < 2000000.0){

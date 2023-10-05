@@ -1,8 +1,6 @@
 function verifyErrors(xml){
-    
-    let response = 0;
 
-    // Niveau de confiance ellipses
+    // Chercher la présence d'erreurs dans le PRNx
     const error = xml.getElementsByTagName("LTOPError");
     if (error.length >= 1){
         let error_string = "";
@@ -14,6 +12,5 @@ function verifyErrors(xml){
         }
 
         alert("Le calcul n'a pas été exécuté correctement!\nLTOP retourne les erreurs suivantes :\n" + error_string);
-        response = 1;
     }
 }
