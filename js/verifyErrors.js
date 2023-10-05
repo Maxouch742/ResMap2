@@ -16,6 +16,4 @@ function verifyErrors(xml){
         alert("Le calcul n'a pas été exécuté correctement!\nLTOP retourne les erreurs suivantes :\n" + error_string);
         response = 1;
     }
-
-    return response;
 }
