@@ -7,6 +7,8 @@
     height: 100vh;
 }
 
+
+/* POP-UP LAYERS */
 #layerSelection {
     position: absolute;
     right: 20px;
@@ -36,39 +38,5 @@
 .text_logo{
     font-size: 2em;
     font-weight: bold;
-}
-
-.legend {
-    font-style: italic;
-}
-
-.palier-zi {
-    font-style: italic;
-}
-.zi1{
-    color: #FF1700;
-}
-.zi2 {
-    color: #FFD000;
-}
-.zi3 {
-    color: #ABFF00;
-}
-.zi4 {
-    color: #2AE100;
-}
-
-
-.palier-wi {
-    font-style: italic;
-}
-.wi1{
-    color: #FF1700;
-}
-.wi2{
-    color: #FFD000;
-}
-.wi3{
-    color: #2AE100;
 }
 
