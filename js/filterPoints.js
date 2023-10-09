@@ -3,10 +3,12 @@ function filterPoints(){
     input = document.getElementById("filterPoint");
     matricule = input.value;
 
-    console.log("Matricule cherché:", matricule)
+    
 
     // Si le point est présent dans la liste générale
     if (pts_Map.has(matricule)){
+
+        console.log("Matricule trouvé:", matricule)
 
         const check = document.getElementById("filterAbriss").value;
 

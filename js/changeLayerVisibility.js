@@ -255,6 +255,7 @@ function changeLayerVisibility(item){
                 changeLayerVisibility('alti_ptsF');
                 document.getElementById('checkboxPtsN_alti').checked = false;
                 changeLayerVisibility('alti_ptsN');
+                console.log("OKKKKK");
 
                 if (document.getElementById('checkboxDH_alti') !== null){
                     document.getElementById('checkboxDH_alti').checked = false;
