@@ -185,7 +185,7 @@ function affichResiNormesAlti(pts, xml){
         }
     };
 
-    // Layera
+    // Layers
     if (altiResiGNSS_source.getFeatures().length >= 1){
         altiResiGNSS_layer.setSource(altiResiGNSS_source);
         changeLayerVisibility('alti_resi_GNSS');
