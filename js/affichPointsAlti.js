@@ -35,19 +35,13 @@ function affichPointsAlti(pts_map, pts_var, pts_obs){
     // Create layer
     if (altiPtsF_source.getFeatures().length >= 1){
         altiPtsF_layer.setSource(altiPtsF_source);
-        altiPtsF_layer.setStyle( function(feature) {
-            stylePtsF.getText().setText(feature.getId());
-            return stylePtsF;
-        });
+        styleUpdate('altiPtsF', false);
         changeLayerVisibility('alti_ptsF');
     };
 
     if (altiPtsN_source.getFeatures().length >= 1){
         altiPtsN_layer.setSource(altiPtsN_source);
-        altiPtsN_layer.setStyle( function(feature) {
-            stylePtsN_alti.getText().setText(feature.getId());
-            return stylePtsN_alti;
-        });
+        styleUpdate('altiPtsN', false);
         changeLayerVisibility('alti_ptsN');
     };
 }
