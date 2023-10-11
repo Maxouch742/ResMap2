@@ -71,29 +71,6 @@ function affichPrecisionPlani(pts, xml){
             planiEll_source.addFeature(planiEll_feature);
         }
     });
-    
-    // Création du style
-    const styleEllipse = new ol.style.Style({
-        stroke: new ol.style.Stroke({ 
-            color: '#FF6BF1', 
-            width: 1 
-        }),
-        text: new ol.style.Text({
-            textAlign: "center",
-            textBaseline: "middle",
-            font: "italic 13px Calibri",
-            fill: new ol.style.Fill({
-                color: "#FF6BF1"
-            }),
-            stroke: new ol.style.Stroke({
-                color: "#ffffff", width: 3
-            }),
-            offsetX: -10,
-            offsetY: 10,
-            rotation: 0,
-            placement: "point"
-        })
-    });
 
     // Ajout à la map
     planiEll_layer.setSource( planiEll_source );

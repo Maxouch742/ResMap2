@@ -7,7 +7,9 @@ function defineLayersTemp(){
     map.addLayer(tempLayerPts);
 
     // Ellipse
+    tempSourceEll = new ol.source.Vector({});
     tempLayerEll = new ol.layer.Vector();
+    tempLayerEll.setSource(tempSourceEll);
     map.addLayer(tempLayerEll);
 
     // Rectangle

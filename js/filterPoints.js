@@ -32,10 +32,10 @@ function filterPoints(){
                 document.getElementById('checkboxAffich').checked = true;
                 changeLayerVisibility('plani_affich');
 
+                // Savoir si on est sur un point fixe ou point nouveau
 
                 // On parcours l'ensemble des features de la couche des points fixes planimétriques
                 planiPtsF_layer.getSource().getFeatures().forEach(function (feature) {
-
                     if (feature.getProperties().name === matricule) {
                         view.setCenter(feature.getGeometry().getCoordinates());
                         view.setZoom(niveau_zoom);
@@ -47,7 +47,6 @@ function filterPoints(){
 
                 // Parcourir la couche des points nouveaux planimétriques
                 planiPtsN_layer.getSource().getFeatures().forEach(function (feature) {
-
                     if (feature.getProperties().name === matricule) {
                         view.setCenter(feature.getGeometry().getCoordinates());
                         view.setZoom(niveau_zoom);

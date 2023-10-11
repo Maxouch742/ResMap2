@@ -35,30 +35,6 @@ function affichPrecisionAlti(pts, xml){
         }
     });
 
-    // Define style
-    const altiEll_featureStyle = new ol.style.Style({
-        stroke: new ol.style.Stroke({
-            color: '#FF6BF1',
-            width: 6
-        }),
-        text: new ol.style.Text({
-            textAlign: "center",
-            textBaseline: "middle",
-            font: "italic 13px Calibri",
-            fill: new ol.style.Fill({
-                color: "#FF6BF1"
-            }),
-            stroke: new ol.style.Stroke({
-                color: "#ffffff", 
-                width: 3
-            }),
-            offsetX: -10,
-            offsetY: 10,
-            rotation: 0,
-            placement: "point"
-        })
-    });
-
     // Add to the map
     altiEll_layer.setSource( altiEll_source );
     altiEll_layer.setStyle( function(feature) {

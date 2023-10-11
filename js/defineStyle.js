@@ -1,3 +1,7 @@
+//----------------------------------------------------------------------------------------------------------------------
+// POINTS
+//----------------------------------------------------------------------------------------------------------------------
+
 // Points fixes
 stylePtsF = new ol.style.Style({
     image: new ol.style.Icon({
@@ -21,12 +25,7 @@ stylePtsF = new ol.style.Style({
     })
 });
 
-
-//-----------------------------------------------------------
 // PLANIMETRIE
-//-----------------------------------------------------------
-
-// Points nouveaux
 stylePtsN_plani = new ol.style.Style({
     image: new ol.style.Icon({
         src: './img/triangle-filled-svgrepo-com.png',
@@ -49,10 +48,7 @@ stylePtsN_plani = new ol.style.Style({
     })
 });
 
-//-----------------------------------------------------------
 // ALTIMETRIE
-//-----------------------------------------------------------
-
 stylePtsN_alti = new ol.style.Style({
     image: new ol.style.Icon({
         src: './img/triangle-filled-inversed-svgrepo-com.png',
@@ -72,5 +68,57 @@ stylePtsN_alti = new ol.style.Style({
         offsetX: 15.0,
         offsetY: -10.0,
         rotation: 0
+    })
+});
+
+
+//----------------------------------------------------------------------------------------------------------------------
+// ELLIPSES
+//----------------------------------------------------------------------------------------------------------------------
+
+// Planimetrie
+styleEllipse = new ol.style.Style({
+    stroke: new ol.style.Stroke({ 
+        color: '#FF6BF1', 
+        width: 1 
+    }),
+    text: new ol.style.Text({
+        textAlign: "center",
+        textBaseline: "middle",
+        font: "italic 13px Calibri",
+        fill: new ol.style.Fill({
+            color: "#FF6BF1"
+        }),
+        stroke: new ol.style.Stroke({
+            color: "#ffffff", width: 3
+        }),
+        offsetX: -10,
+        offsetY: 10,
+        rotation: 0,
+        placement: "point"
+    })
+});
+
+// Altimetrie
+altiEll_featureStyle = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+        color: '#FF6BF1',
+        width: 6
+    }),
+    text: new ol.style.Text({
+        textAlign: "center",
+        textBaseline: "middle",
+        font: "italic 13px Calibri",
+        fill: new ol.style.Fill({
+            color: "#FF6BF1"
+        }),
+        stroke: new ol.style.Stroke({
+            color: "#ffffff", 
+            width: 3
+        }),
+        offsetX: -10,
+        offsetY: 10,
+        rotation: 0,
+        placement: "point"
     })
 });
