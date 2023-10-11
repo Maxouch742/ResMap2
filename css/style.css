@@ -8,28 +8,6 @@
 }
 
 
-/* POP-UP LAYERS */
-#layerSelection {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-}
-
-#layerButton {
-    background-color: #ffffff;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    padding: 5px;
-    height: 50px;
-    width: 50px;
-}
-
-#imgLayers {
-    width: 85%;
-    height: 85%;
-}
-
 .imgLogo{
     margin: 10px;
     width: 30%;
@@ -40,3 +18,10 @@
     font-weight: bold;
 }
 
+.checkboxLabel{
+    font-size: medium;
+}
+
+h4 {
+    font-weight: bold;
+}
