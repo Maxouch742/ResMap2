@@ -25,6 +25,7 @@ function affichPrecisionAlti(pts, xml){
             const emh_string = String(value.EMH.toFixed(2));
             
             const altiEll_feature = new ol.Feature({
+                name: key,
                 geometry: new ol.geom.LineString([
                     [ east, north + emh_number*kSigma*echelleEllipses/2 ],
                     [ east, north - emh_number*kSigma*echelleEllipses/2 ]
@@ -37,9 +38,6 @@ function affichPrecisionAlti(pts, xml){
 
     // Add to the map
     altiEll_layer.setSource( altiEll_source );
-    altiEll_layer.setStyle( function(feature) {
-        altiEll_featureStyle.getText().setText(feature.get("properties"));
-        return altiEll_featureStyle;
-    });
+    styleUpdate('altiEll', false);
     changeLayerVisibility('alti_ell');
 }

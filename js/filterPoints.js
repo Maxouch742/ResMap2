@@ -80,87 +80,63 @@ function filterPoints(){
                             styleUpdate('planiVect', true);
                         }
                     });
-                }
-
+                };
                 break;
 
             case 'AbrissAlti':
+                // désactiver tous les layers altimétriques
+                document.getElementById('checkboxAffich_alti').checked = true;
+                changeLayerVisibility('alti_affich');
                 // désactiver tous les layers planimétriques
                 document.getElementById('checkboxAffich').checked = true;
                 changeLayerVisibility('plani_affich');
 
+                // Savoir si on est sur un point fixe ou point nouveau
+                let ptsN_alti = false;
+
                 // On parcours l'ensemble des features de la couche des points fixes planimétriques
                 altiPtsF_layer.getSource().getFeatures().forEach(function (feature) {
-
-                    // Si le nom du feature est différent du matricule choisi par l'utilisateur, on change le style du point
-                    if (feature.getProperties().name !== matricule) {
-                        const newStyle = new ol.style.Style({
-                            image: new ol.style.Icon({
-                                src: './img/triangle-filled-svgrepo-com.png',
-                                scale: '0.07',
-                                color: '#979696', 
-                            }),
-                            text: new ol.style.Text({
-                                textAlign: "center",
-                                text: feature.getProperties().name,
-                                textBaseline: "middle",
-                                font: "bold 14px Calibri",
-                                fill: new ol.style.Fill({
-                                    color: '#979696'
-                                }),
-                                stroke: new ol.style.Stroke({
-                                color: "#fff", width: 3
-                                }),
-                                offsetX: 15.0,
-                                offsetY: -10.0,
-                                rotation: 0
-                            })
-                        });
-                        feature.setStyle( newStyle );
-                    }
-                    // si on a le même feature que celui demandé ar l'utilisateur, on zoome alors sur ce point
-                    else {
+                    if (feature.getProperties().name === matricule) {
                         view.setCenter(feature.getGeometry().getCoordinates());
                         view.setZoom(niveau_zoom);
+
+                        tempSourcePts_alti.addFeature(feature);
+                        styleUpdate('altiPtsF', true);
                     }
                 });
 
-                // Parcourir la couche des points nouveaux planimétriques
-                altiPtsF_layer.getSource().getFeatures().forEach(function (feature) {
-
-                    // Si le nom du feature est différent du matricule, on change le style du point
-                    if (feature.getProperties().name !== matricule) {
-                        const newStyle = new ol.style.Style({
-                            image: new ol.style.Icon({
-                                src: './img/triangle-filled-svgrepo-com.png',
-                                scale: '0.07',
-                                color: '#C1C1C1', 
-                            }),
-                            text: new ol.style.Text({
-                                textAlign: "center",
-                                text: feature.getProperties().name,
-                                textBaseline: "middle",
-                                font: "bold 14px Calibri",
-                                fill: new ol.style.Fill({
-                                    color: '#C1C1C1'
-                                }),
-                                stroke: new ol.style.Stroke({
-                                color: "#fff", width: 3
-                                }),
-                                offsetX: 15.0,
-                                offsetY: -10.0,
-                                rotation: 0
-                            })
-                        });
-                        feature.setStyle( newStyle );
-                    }
-                    // si on a le même feature que celui demandé ar l'utilisateur, on zoome alors sur ce point
-                    else {
+                // Parcours de la couche des points nouveaux altimétriques
+                altiPtsN_layer.getSource().getFeatures().forEach(function (feature) {
+                    if (feature.getProperties().name === matricule) {
                         view.setCenter(feature.getGeometry().getCoordinates());
                         view.setZoom(niveau_zoom);
+
+                        tempSourcePts_alti.addFeature(feature);
+                        styleUpdate('altiPtsN', true);
+                        ptsN_alti = true;
                     }
                 });
 
+                if (ptsN_alti){
+                    altiEll_layer.getSource().getFeatures().forEach(function (feature) {
+                        if (feature.getProperties().name === matricule) {
+                            tempSourceEll_alti.addFeature(feature);
+                            styleUpdate('altiEll', true);
+                        }
+                    });
+                    altiRect_layer.getSource().getFeatures().forEach(function (feature) {
+                        if (feature.getProperties().name === matricule) {
+                            tempSourceRect_alti.addFeature(feature);
+                            styleUpdate('altiRect', true);
+                        }
+                    });
+                    altiVect_layer.getSource().getFeatures().forEach(function (feature) {
+                        if (feature.getProperties().name === matricule) {
+                            tempSourceVect_alti.addFeature(feature);
+                            styleUpdate('altiVect', true);
+                        }
+                    });
+                }
                 break;
         }
     } 

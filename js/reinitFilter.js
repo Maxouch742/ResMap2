@@ -10,6 +10,11 @@ function reinitFilter(){
     tempLayerRect.setVisible(false);
     tempLayerVect.setVisible(false);
 
+    tempLayerPts_alti.setVisible(false);
+    tempLayerEll_alti.setVisible(false);
+    tempLayerRect_alti.setVisible(false);
+    tempLayerVect_alti.setVisible(false);
+
     defineViewByFile(pts_Map);
     defineLayersTemp();
 

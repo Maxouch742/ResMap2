@@ -43,6 +43,7 @@ function affichVecteursAlti(pts){
 
             // Feature
             const altiVect_feature = new ol.Feature({
+                name: key,
                 geometry: new ol.geom.LineString([ start, end, left, end, right ]),
                 properties: String(distance.toFixed(2)+"mm")
             });
@@ -50,34 +51,8 @@ function affichVecteursAlti(pts){
         }
     });
 
-    // Création du style vecteurs
-    let styleVect = new ol.style.Style({
-        stroke: new ol.style.Stroke({ 
-            color: '#FF0000', 
-            width: 1 
-        }),
-        text: new ol.style.Text({
-            textAlign: "center",
-            textBaseline: "middle",
-            font: "13px Calibri",
-            fill: new ol.style.Fill({
-            color: "#FF0000"
-            }),
-            stroke: new ol.style.Stroke({
-            color: "#ffffff", width: 3
-            }),
-            offsetX: 10,
-            offsetY: -10,
-            rotation: 0,
-            placement: "point"
-        })
-    });
-
     // Ajout à la map
     altiVect_layer.setSource( altiVect_source );
-    altiVect_layer.setStyle( function(feature){
-        styleVect.getText().setText(feature.get("properties"));
-        return styleVect;
-    });
+    styleUpdate('altiVect', false);
     changeLayerVisibility('alti_vect');            
 }
