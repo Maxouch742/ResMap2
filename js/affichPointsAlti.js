@@ -31,51 +31,7 @@ function affichPointsAlti(pts_map, pts_var, pts_obs){
             }
         }
     });
-
-    // Create style
-    const stylePtsN = new ol.style.Style({
-        image: new ol.style.Icon({
-            src: './img/triangle-filled-inversed-svgrepo-com.png',
-            scale: '0.07',
-            color: '#0C80ED',
-        }),
-        text: new ol.style.Text({
-            textAlign: "center",
-            textBaseline: "middle",
-            font: "bold 14px Calibri",
-            fill: new ol.style.Fill({
-                color: '#0C80ED',
-            }),
-            stroke: new ol.style.Stroke({
-              color: "#ffffff", width: 3
-            }),
-            offsetX: 15.0,
-            offsetY: -10.0,
-            rotation: 0
-        })
-    });
-    const stylePtsF = new ol.style.Style({
-        image: new ol.style.Icon({
-            src: './img/circle-filled-svgrepo-com.png',
-            scale: '0.07',
-            color: '#FF2121',
-        }),
-        text: new ol.style.Text({
-            textAlign: "center",
-            textBaseline: "middle",
-            font: "bold 14px Calibri",
-            fill: new ol.style.Fill({
-              color: "red"
-            }),
-            stroke: new ol.style.Stroke({
-              color: "#ffffff", width: 3
-            }),
-            offsetX: 15.0,
-            offsetY: -10.0,
-            rotation: 0
-        })
-    });
-
+    
     // Create layer
     if (altiPtsF_source.getFeatures().length >= 1){
         altiPtsF_layer.setSource(altiPtsF_source);
@@ -89,8 +45,8 @@ function affichPointsAlti(pts_map, pts_var, pts_obs){
     if (altiPtsN_source.getFeatures().length >= 1){
         altiPtsN_layer.setSource(altiPtsN_source);
         altiPtsN_layer.setStyle( function(feature) {
-            stylePtsN.getText().setText(feature.getId());
-            return stylePtsN;
+            stylePtsN_alti.getText().setText(feature.getId());
+            return stylePtsN_alti;
         });
         changeLayerVisibility('alti_ptsN');
     };

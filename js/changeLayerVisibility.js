@@ -3,6 +3,7 @@ function changeLayerVisibility(item){
     switch (item){
 
         case 'plani_affich':
+            console.log("Tout désélectionner (plani)");
             if (document.getElementById('checkboxAffich').checked === true) {
                 document.getElementById('checkboxAffich').checked = false;
                 
@@ -248,6 +249,7 @@ function changeLayerVisibility(item){
             break;
         
         case 'alti_affich':
+            console.log("Tout désélectionner (alti)");
             if (document.getElementById('checkboxAffich_alti').checked === true) {
                 document.getElementById('checkboxAffich_alti').checked = false;
                 

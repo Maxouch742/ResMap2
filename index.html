@@ -375,7 +375,6 @@
       <!-- Button for filter -->
       <div class="w3-dropdown-hover w3-right" id="filterSelection">
         <button class="w3-button" id="openSidebar">
-          <!--<p>Filtre</p>-->
             <img id="imgFilter" src="./img/filter-svgrepo-com.svg" alt="Filter view">
         </button>
       </div>
@@ -393,14 +392,14 @@
             
         <div class="row">
           <div class="col-8">
-            <button class="button-reinit">Réinit.</button>
+            <button class="button-reinit" onclick="reinitFilter()">Réinit.</button>
           </div>
           <div class="col-4">
-            <input class="form-check-input" type="radio" id="filterAbriss" name="filterAbriss" value="AbrissPlani" onchange="" checked>
+            <input class="form-check-input" type="radio" name="AbrissPlani" value="AbrissPlani" checked>
             <label class="checkboxLabel" for="filterAbrissPlani">
               2D
             </label>
-            <input class="form-check-input" type="radio" id="filterAbriss" name="filterAbriss" value="AbrissAlti" onchange="">
+            <input class="form-check-input" type="radio" name="AbrissPlani" value="AbrissAlti">
             <label class="checkboxLabel" for="filterAbrissAlti">
               1D
             </label>
@@ -508,6 +507,7 @@
     <script src="js/htmlAddCheckboxFiabiliteAltiRela.js"></script>
 
     <script src="js/filterPoints.js"></script>
+    <script src="js/reinitFilter.js"></script>
 
   </body>
 </html>

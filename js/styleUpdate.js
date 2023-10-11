@@ -9,8 +9,8 @@ function styleUpdate(layer) {
             break;
         case 'planiPtsN':
             planiPtsN_layer.setStyle( function(feature) {
-                stylePtsN.getText().setText(feature.getId());
-                return stylePtsN;
+                stylePtsN_plani.getText().setText(feature.getId());
+                return stylePtsN_plani;
             });
             break;
     }

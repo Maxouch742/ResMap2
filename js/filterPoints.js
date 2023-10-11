@@ -1,20 +1,32 @@
 function filterPoints(){
 
-    input = document.getElementById("filterPoint");
-    matricule = input.value;
+    // Récupérer la valeur du point cherché
+    matricule = document.getElementById("filterPoint").value;
 
-    
+    // enlever les boites d'informations
+    document.getElementById("filterPointNot").innerHTML = '';
+    document.getElementById("filterStationNot").innerHTML = '';
+
+    // Paramètres de zoom
+    const niveau_zoom = 18;    
 
     // Si le point est présent dans la liste générale
     if (pts_Map.has(matricule)){
 
         console.log("Matricule trouvé:", matricule)
 
-        const check = document.getElementById("filterAbriss").value;
+        const check = document.getElementsByName("AbrissPlani");
+        let dim;
+        for (let i=0; i<check.length; i++) {
+            if (check[i].checked){
+                dim = check[i].value;
+            }
+        };
 
-        switch (check) {
+        switch (dim) {
             case 'AbrissPlani':
                 // désactiver tous les layers altimétriques
+                document.getElementById('checkboxAffich_alti').checked = true;
                 changeLayerVisibility('alti_affich');
 
                 // On parcours l'ensemble des features de la couche des points fixes planimétriques
@@ -49,7 +61,7 @@ function filterPoints(){
                     // si on a le même feature que celui demandé ar l'utilisateur, on zoome alors sur ce point
                     else {
                         view.setCenter(feature.getGeometry().getCoordinates());
-                        view.setZoom(16);
+                        view.setZoom(niveau_zoom);
                     }
                 });
 
@@ -85,13 +97,27 @@ function filterPoints(){
                     // si on a le même feature que celui demandé ar l'utilisateur, on zoome alors sur ce point
                     else {
                         view.setCenter(feature.getGeometry().getCoordinates());
-                        view.setZoom(16);
+                        view.setZoom(niveau_zoom);
                     }
                 });
+
+                // Affichage des layers
+                planiPtsF_layer.setVisible(true);
+                changeLayerVisibility('plani_ptsF');
+                planiPtsN_layer.setVisible(true);
+                changeLayerVisibility('plani_ptsN');
+                planiEll_layer.setVisible(true);
+                changeLayerVisibility('plani_ell');
+                planiRect_layer.setVisible(true);
+                changeLayerVisibility('plani_rect');
+                planiVect_layer.setVisible(true);
+                changeLayerVisibility('plani_vect');
+
                 break;
 
             case 'AbrissAlti':
                 // désactiver tous les layers planimétriques
+                document.getElementById('checkboxAffich').checked = true;
                 changeLayerVisibility('plani_affich');
 
                 // On parcours l'ensemble des features de la couche des points fixes planimétriques
@@ -126,7 +152,7 @@ function filterPoints(){
                     // si on a le même feature que celui demandé ar l'utilisateur, on zoome alors sur ce point
                     else {
                         view.setCenter(feature.getGeometry().getCoordinates());
-                        view.setZoom(16);
+                        view.setZoom(niveau_zoom);
                     }
                 });
 
@@ -162,18 +188,24 @@ function filterPoints(){
                     // si on a le même feature que celui demandé ar l'utilisateur, on zoome alors sur ce point
                     else {
                         view.setCenter(feature.getGeometry().getCoordinates());
-                        view.setZoom(16);
+                        view.setZoom(niveau_zoom);
                     }
                 });
+
+                // Affichage des layers
+                altiPtsF_layer.setVisible(true);
+                changeLayerVisibility('alti_ptsF');
+                altiPtsN_layer.setVisible(true);
+                changeLayerVisibility('alti_ptsN');
+                altiEll_layer.setVisible(true);
+                changeLayerVisibility('alti_ell');
+                altiRect_layer.setVisible(true);
+                changeLayerVisibility('alti_rect');
+                altiVect_layer.setVisible(true);
+                changeLayerVisibility('alti_vect');
+
                 break;
         }
-
-        
-
-        
-        // TODO : désactiver les autres observations qui n'ont pas le matricule comme point de visée pour vraiment mettre en évidence le point et les observations issues de cela
-
-
     } 
     else {
         // si le point n'est pas présent dans la liste globale, on prévient l'utilisateur
