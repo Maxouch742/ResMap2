@@ -64,11 +64,16 @@ function filterPoints(){
                 if (ptsN) {
                     planiEll_layer.getSource().getFeatures().forEach(function (feature) {
                         if (feature.getProperties().name === matricule) {
-                            console.log("TROP BIEN");
                             tempSourceEll.addFeature(feature);
                             styleUpdate('planiEll', true);
                         }
                     });
+                    planiRect_layer.getSource().getFeatures().forEach(function (feature) {
+                        if (feature.getProperties().name === matricule) {
+                            tempSourceRect.addFeature(feature);
+                            styleUpdate('planiRect', true);
+                        }
+                    })
                 }
 
                 break;

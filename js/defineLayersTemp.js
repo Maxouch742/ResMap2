@@ -13,7 +13,9 @@ function defineLayersTemp(){
     map.addLayer(tempLayerEll);
 
     // Rectangle
+    tempSourceRect = new ol.source.Vector({});
     tempLayerRect = new ol.layer.Vector();
+    tempLayerRect.setSource(tempSourceRect);
     map.addLayer(tempLayerRect);
 
     // Vecteur de déplacement

@@ -43,6 +43,20 @@ function styleUpdate(layer, temp) {
                 });
             };
             break;
+        case 'planiRect':
+            if (temp){
+                tempLayerRect.setStyle( function(feature) {
+                    styleRectangle.getText().setText(feature.get("properties"));
+                    return styleRectangle;
+                });
+            }
+            else {
+                planiRect_layer.setStyle( function(feature) {
+                    styleRectangle.getText().setText(feature.get("properties"));
+                    return styleRectangle;
+                })
+            };
+            break;
         
         case 'altiPtsN':
             altiPtsF_layer.setStyle( function(feature) {
