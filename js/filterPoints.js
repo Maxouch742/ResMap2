@@ -33,6 +33,7 @@ function filterPoints(){
                 changeLayerVisibility('plani_affich');
 
                 // Savoir si on est sur un point fixe ou point nouveau
+                let ptsN = false;
 
                 // On parcours l'ensemble des features de la couche des points fixes planimétriques
                 planiPtsF_layer.getSource().getFeatures().forEach(function (feature) {
@@ -53,8 +54,22 @@ function filterPoints(){
 
                         tempSourcePts.addFeature(feature);
                         styleUpdate('planiPtsN', true);
+
+                        ptsN = true;
                     }
                 });
+
+                // Si le point est nouveau, on affiche l'ellipse, le rectangle et le vecteur de déplacement
+                console.log(ptsN)
+                if (ptsN) {
+                    planiEll_layer.getSource().getFeatures().forEach(function (feature) {
+                        if (feature.getProperties().name === matricule) {
+                            console.log("TROP BIEN");
+                            tempSourceEll.addFeature(feature);
+                            styleUpdate('planiEll', true);
+                        }
+                    });
+                }
 
                 break;
 

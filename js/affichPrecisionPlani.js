@@ -64,6 +64,7 @@ function affichPrecisionPlani(pts, xml){
 
             // Création du feature
             const planiEll_feature = new ol.Feature({
+                name: key,
                 geometry: new ol.geom.LineString(listENellipse),
                 properties: String(ema*1000.0)+"mm",
             });
@@ -74,9 +75,6 @@ function affichPrecisionPlani(pts, xml){
 
     // Ajout à la map
     planiEll_layer.setSource( planiEll_source );
-    planiEll_layer.setStyle( function (feature) { 
-        styleEllipse.getText().setText(feature.get("properties")); 
-        return styleEllipse;
-    });
+    styleUpdate('planiEll', false);
     changeLayerVisibility('plani_ell');
 }
