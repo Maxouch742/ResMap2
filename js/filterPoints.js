@@ -10,7 +10,7 @@ function filterPoints(){
     document.getElementById("filterStationNot").innerHTML = '';
 
     // Paramètres de zoom
-    const niveau_zoom = 18;    
+    const niveau_zoom = 20;    
 
     // Si le point est présent dans la liste générale
     if (pts_Map.has(matricule)){
