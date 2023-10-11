@@ -73,7 +73,13 @@ function filterPoints(){
                             tempSourceRect.addFeature(feature);
                             styleUpdate('planiRect', true);
                         }
-                    })
+                    });
+                    planiVect_layer.getSource().getFeatures().forEach(function (feature) {
+                        if (feature.getProperties().name === matricule) {
+                            tempSourceVect.addFeature(feature);
+                            styleUpdate('planiVect', true);
+                        }
+                    });
                 }
 
                 break;

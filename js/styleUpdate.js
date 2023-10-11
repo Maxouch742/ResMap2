@@ -57,6 +57,20 @@ function styleUpdate(layer, temp) {
                 })
             };
             break;
+        case 'planiVect':
+            if (temp){
+                tempLayerVect.setStyle( function(feature) {
+                    styleVecteur.getText().setText(feature.get("properties"));
+                    return styleVecteur;
+                });
+            }
+            else {
+                planiVect_layer.setStyle( function(feature) {
+                    styleVecteur.getText().setText(feature.get("properties"));
+                    return styleVecteur;
+                })
+            };
+            break;
         
         case 'altiPtsN':
             altiPtsF_layer.setStyle( function(feature) {
