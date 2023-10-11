@@ -7,12 +7,12 @@ function parseXML_variablePoints_fixBug(pts_Map, type){
     pts_Map.forEach((value, key) => {
         switch (type){
             case 'planimetric':
-                if (value.EMA == undefined){
+                if (value.EMA != undefined){
                     variablePoints.push(key);
                 };
                 break;
             case 'altimetric':
-                if (value.EMH == undefined){
+                if (value.EMH != undefined){
                     variablePoints.push(key);
                 }
                 break;
