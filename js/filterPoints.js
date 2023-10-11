@@ -1,5 +1,7 @@
 function filterPoints(){
 
+    defineLayersTemp();
+
     // Récupérer la valeur du point cherché
     matricule = document.getElementById("filterPoint").value;
 
@@ -58,6 +60,7 @@ function filterPoints(){
                     }
                     // si on a le même feature que celui demandé ar l'utilisateur, on zoome alors sur ce point
                     else {
+                        
                         view.setCenter(feature.getGeometry().getCoordinates());
                         view.setZoom(niveau_zoom);
                     }

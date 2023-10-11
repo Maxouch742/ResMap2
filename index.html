@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="./css/helpButton.css">
     <link rel="stylesheet" href="./css/panel.css">
     <link rel="stylesheet" href="./css/legend.css">
-    <link rel="stylesheet" href="./css/sidebar.css">
     <link rel="stylesheet" href="./css/layer.css">
+    <link rel="stylesheet" href="./css/zoom.css">
     
 
     <!----------- OpenLayers -->
@@ -372,6 +372,18 @@
         </div>
       </div>
 
+      <!-- Button for zoom -->
+      <div class="w3-dropdown-hover w3-right" id="zoomSelection">
+        <button class="w3-button" id="zoomButton">
+          <img id="imgZoom" src="./img/zoom-svgrepo-com.png" alt="Zoom of the specific point">
+        </button>
+        <div class="w3-dropdown-content w3-bar-block" style="right:0">
+          <p>N° de point :</p>
+          <input class="w3-input-filter" id="zoomPoint" onchange="zoomPoints()" type="text">
+          <p class="filter-not-match" id="zoomPointNot"></p>
+        </div>
+      </div>
+
       <!-- Button for filter -->
       <div class="w3-dropdown-hover w3-right" id="filterSelection">
         <button class="w3-button" id="openSidebar">
@@ -384,10 +396,12 @@
 
         <h4>Filtre</h4>
         
-        <p>N° de point :</p><input class="w3-input-filter" id="filterPoint" onchange="filterPoints()" type="text">
+        <p>N° de point :</p>
+        <input class="w3-input-filter" id="filterPoint" onchange="filterPoints()" type="text">
         <p class="filter-not-match" id="filterPointNot"></p>
         
-        <p>N° de station :</p><input class="w3-input-filter" id="filterStation" onchange="filterStations()" type="text">
+        <p>N° de station :</p>
+        <input class="w3-input-filter" id="filterStation" onchange="filterStations()" type="text">
         <p class="filter-not-match" id="filterStationNot"></p>
             
         <div class="row">
@@ -442,6 +456,7 @@
     <script src="js/defineMap.js"></script>
     <script src="js/defineViewByFile.js"></script>
     <script src="js/defineLayers.js"></script>
+    <script src="js/defineLayersTemp.js"></script>
     <script src="js/definePopup.js"></script>
     <script src="js/defineStyle.js"></script>
 
@@ -508,6 +523,7 @@
 
     <script src="js/filterPoints.js"></script>
     <script src="js/reinitFilter.js"></script>
+    <script src="js/zoomPoints.js"></script>
 
   </body>
 </html>
