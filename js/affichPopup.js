@@ -22,23 +22,7 @@ map.on('click', function (evt) {
                     E = ${feature.getProperties().east.toFixed(4)} [m]<br>
                     N = ${feature.getProperties().north.toFixed(4)} [m]<br>
                     H = ${feature.getProperties().height.toFixed(4)} [m]<br>
-                    Xi = ${feature.getProperties().xi.toFixed(2)} [cc]<br>
-                    Eta = ${feature.getProperties().eta.toFixed(2)} [cc]<br>
-                </div>`
-                
-                
-                
-                /*`
-                <div style="font-weight:bold">Point : &nbsp;&nbsp;&nbsp;${feature.getProperties().name}</div>
-                <hr>
-                <div class="">Statut : &nbsp;&nbsp;&nbsp;${feature.getProperties().statut}</div>
-                <hr>
-                <div class="">E : &nbsp;&nbsp;&nbsp;${feature.getProperties().east.toFixed(4)} [m]</div>
-                <div class="">N : &nbsp;&nbsp;&nbsp;${feature.getProperties().north.toFixed(4)} [m]</div>
-                <div class="">H : &nbsp;&nbsp;&nbsp;${feature.getProperties().height.toFixed(4)} [m]</div>
-                <div class="">Xi : &nbsp;&nbsp;&nbsp;${feature.getProperties().xi.toFixed(2)} [cc]</div>
-                <div class="">Eta : &nbsp;&nbsp;&nbsp;${feature.getProperties().eta.toFixed(2)} [cc]</div>`
-                */
+                </div>`,
             });
             $(elementPopup).popover("show");
 

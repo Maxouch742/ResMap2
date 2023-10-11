@@ -13,8 +13,6 @@ function filterPoints(){
     // Si le point est présent dans la liste générale
     if (pts_Map.has(matricule)){
 
-        console.log("Matricule trouvé:", matricule)
-
         const check = document.getElementsByName("AbrissPlani");
         let dim;
         for (let i=0; i<check.length; i++) {
@@ -102,6 +100,7 @@ function filterPoints(){
                 });
 
                 // Affichage des layers
+                /*
                 planiPtsF_layer.setVisible(true);
                 changeLayerVisibility('plani_ptsF');
                 planiPtsN_layer.setVisible(true);
@@ -112,6 +111,7 @@ function filterPoints(){
                 changeLayerVisibility('plani_rect');
                 planiVect_layer.setVisible(true);
                 changeLayerVisibility('plani_vect');
+                */
 
                 break;
 

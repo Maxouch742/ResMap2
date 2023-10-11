@@ -61,8 +61,8 @@ function parseXML_points(xml){
                 north: north_temp, //.toFixed(5),
                 height: parseFloat(pt.getAttribute('height')), //.toFixed(5),
                 geoidUnd: parseFloat(pt.getAttribute('geoidUnd')), //.toFixed(5),
-                eta: parseFloat(pt.getAttribute('eta_cc')), //.toFixed(2),
-                xi: parseFloat(pt.getAttribute('xi_cc')), //.toFixed(2),
+                //eta: parseFloat(pt.getAttribute('eta_cc')), //.toFixed(2),
+                //xi: parseFloat(pt.getAttribute('xi_cc')), //.toFixed(2),
             };
             points.set(pt_name, pt_object)
 

@@ -178,4 +178,7 @@ function defineLayers(){
     altiVect_layer.setZIndex(58);
     map.addLayer(altiVect_layer);
 
+
+    ////////----------------------------------------- TEMP
+
 }

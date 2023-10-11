@@ -7,6 +7,7 @@ function affichPointsPlani(pts, pts_var, pts_obs){
     // Create feature
     pts.forEach((value, key) => {
         if (pts_obs.includes(key) === true){
+            console.log(value.xi);
             pt_feature = new ol.Feature({
                 name: key,
                 geometry: new ol.geom.Point([ 
