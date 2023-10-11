@@ -1,0 +1,21 @@
+/* POP-UP LAYERS */
+#layerSelection {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+#layerButton {
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    padding: 5px;
+    height: 50px;
+    width: 50px;
+}
+
+#imgLayers {
+    width: 40px;
+    height: 40px;
+}

@@ -101,7 +101,7 @@ function defineLayers(){
     planiVect_layer.setZIndex(83);
     map.addLayer(planiVect_layer);
 
-    //////// ALTIMETRIC
+    ////////----------------------------------------- ALTIMETRIC
     //// Points
     // Points fixes
     altiPtsF_layer = new ol.layer.Vector();

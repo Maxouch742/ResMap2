@@ -15,6 +15,8 @@ function readFilePRNx(){
       xmlDoc = parser.parseFromString(xmlToParse,"text/xml");
 
       verifyErrors(xmlDoc);
+
+      //window_affichFilter();
       
       // Measure
       echelleEllipses = document.getElementById("myRange").value;

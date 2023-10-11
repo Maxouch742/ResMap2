@@ -32,67 +32,16 @@ function affichPointsPlani(pts, pts_var, pts_obs){
         }
     });
 
-    // Create style
-    const stylePtsN = new ol.style.Style({
-        image: new ol.style.Icon({
-            src: './img/triangle-filled-svgrepo-com.png',
-            scale: '0.07',
-            color: '#FF2121',
-            
-        }),
-        text: new ol.style.Text({
-            textAlign: "center",
-            textBaseline: "middle",
-            font: "bold 14px Calibri",
-            fill: new ol.style.Fill({
-                color: '#FF2121'
-            }),
-            stroke: new ol.style.Stroke({
-              color: "#ffffff", width: 3
-            }),
-            offsetX: 15.0,
-            offsetY: -10.0,
-            rotation: 0
-        })
-    });
-    const stylePtsF = new ol.style.Style({
-        image: new ol.style.Icon({
-            src: './img/circle-filled-svgrepo-com.png',
-            scale: '0.07',
-            color: '#0C80ED',
-        }),
-        text: new ol.style.Text({
-            textAlign: "center",
-            textBaseline: "middle",
-            font: "bold 14px Calibri",
-            fill: new ol.style.Fill({
-                color: "#0C80ED"
-            }),
-            stroke: new ol.style.Stroke({
-                color: "#ffffff", width: 3
-            }),
-            offsetX: 15.0,
-            offsetY: -10.0,
-            rotation: 0
-        })
-    });
-
     // Create layer
     if (planiPtsF_source.getFeatures().length >= 1){
         planiPtsF_layer.setSource(planiPtsF_source);
-        planiPtsF_layer.setStyle( function(feature) {
-            stylePtsF.getText().setText(feature.getId());
-            return stylePtsF;
-        });
+        styleUpdate('planiPtsF');
         changeLayerVisibility('plani_ptsF');
     };
 
     if (planiPtsN_source.getFeatures().length >= 1){
         planiPtsN_layer.setSource(planiPtsN_source);
-        planiPtsN_layer.setStyle( function(feature) {
-            stylePtsN.getText().setText(feature.getId());
-            return stylePtsN;
-        });
+        styleUpdate('planiPtsN');
         changeLayerVisibility('plani_ptsN');
     };
 }

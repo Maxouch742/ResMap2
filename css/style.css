@@ -7,26 +7,6 @@
     height: 100vh;
 }
 
-#layerSelection {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-}
-
-#layerButton {
-    background-color: #ffffff;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    padding: 5px;
-    height: 50px;
-    width: 50px;
-}
-
-#imgLayers {
-    width: 85%;
-    height: 85%;
-}
 
 .imgLogo{
     margin: 10px;
@@ -38,37 +18,10 @@
     font-weight: bold;
 }
 
-.legend {
-    font-style: italic;
+.checkboxLabel{
+    font-size: medium;
 }
 
-.palier-zi {
-    font-style: italic;
+h4 {
+    font-weight: bold;
 }
-.zi1{
-    color: #FF1700;
-}
-.zi2 {
-    color: #FFD000;
-}
-.zi3 {
-    color: #ABFF00;
-}
-.zi4 {
-    color: #2AE100;
-}
-
-
-.palier-wi {
-    font-style: italic;
-}
-.wi1{
-    color: #FF1700;
-}
-.wi2{
-    color: #FFD000;
-}
-.wi3{
-    color: #2AE100;
-}
-
