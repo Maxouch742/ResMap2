@@ -33,6 +33,6 @@ function affichRectangleAlti(pts, xml) {
   
     // Add to map
     altiRect_layer.setSource( altiRect_source );
-    styleUpdate("altiRect", false);
+    styleUpdate("altiRect");
     changeLayerVisibility('alti_rect');
 }

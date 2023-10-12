@@ -1,4 +1,4 @@
-function styleUpdate(layer, temp) {
+function styleUpdate(layer, temp = false) {
 
     switch (layer) {
         case 'planiPtsF':

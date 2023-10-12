@@ -53,6 +53,6 @@ function affichVecteursAlti(pts){
 
     // Ajout à la map
     altiVect_layer.setSource( altiVect_source );
-    styleUpdate('altiVect', false);
+    styleUpdate('altiVect');
     changeLayerVisibility('alti_vect');            
 }

@@ -49,6 +49,6 @@ function affichVecteurs(pts){
 
     // Ajout à la map
     planiVect_layer.setSource( planiVect_source );
-    styleUpdate('planiVect', false);
+    styleUpdate('planiVect');
     changeLayerVisibility('plani_vect');            
 }

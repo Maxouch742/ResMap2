@@ -35,13 +35,13 @@ function affichPointsPlani(pts, pts_var, pts_obs){
     // Create layer
     if (planiPtsF_source.getFeatures().length >= 1){
         planiPtsF_layer.setSource(planiPtsF_source);
-        styleUpdate('planiPtsF', false);
+        styleUpdate('planiPtsF');
         changeLayerVisibility('plani_ptsF');
     };
 
     if (planiPtsN_source.getFeatures().length >= 1){
         planiPtsN_layer.setSource(planiPtsN_source);
-        styleUpdate('planiPtsN', false);
+        styleUpdate('planiPtsN');
         changeLayerVisibility('plani_ptsN');
     };
 }

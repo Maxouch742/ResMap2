@@ -159,5 +159,4 @@ function filterPoints(){
 }
 
 
-//TODO: si des points sont mesurés seulement altimétriquement,ils doivent s'afficher en tant qu'erreur dans la recherche en 2D
 //TODO: afficher les observations

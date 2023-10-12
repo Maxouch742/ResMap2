@@ -75,6 +75,6 @@ function affichPrecisionPlani(pts, xml){
 
     // Ajout à la map
     planiEll_layer.setSource( planiEll_source );
-    styleUpdate('planiEll', false);
+    styleUpdate('planiEll');
     changeLayerVisibility('plani_ell');
 }

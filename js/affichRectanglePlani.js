@@ -42,6 +42,6 @@ function affichRectanglePlani(pts){
   
     // Add to map
     planiRect_layer.setSource( planiRect_source );
-    styleUpdate('planiRect', false);
+    styleUpdate('planiRect');
     changeLayerVisibility('plani_rect');
 }

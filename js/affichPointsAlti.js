@@ -35,13 +35,13 @@ function affichPointsAlti(pts_map, pts_var, pts_obs){
     // Create layer
     if (altiPtsF_source.getFeatures().length >= 1){
         altiPtsF_layer.setSource(altiPtsF_source);
-        styleUpdate('altiPtsF', false);
+        styleUpdate('altiPtsF');
         changeLayerVisibility('alti_ptsF');
     };
 
     if (altiPtsN_source.getFeatures().length >= 1){
         altiPtsN_layer.setSource(altiPtsN_source);
-        styleUpdate('altiPtsN', false);
+        styleUpdate('altiPtsN');
         changeLayerVisibility('alti_ptsN');
     };
 }

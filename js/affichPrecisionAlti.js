@@ -38,6 +38,6 @@ function affichPrecisionAlti(pts, xml){
 
     // Add to the map
     altiEll_layer.setSource( altiEll_source );
-    styleUpdate('altiEll', false);
+    styleUpdate('altiEll');
     changeLayerVisibility('alti_ell');
 }
