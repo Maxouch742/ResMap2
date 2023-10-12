@@ -85,7 +85,6 @@ function filterPoints(){
 
                     // On affiche les observations seulement
                     affichMeasPlani(xmlDoc, pts_Map, matricule);
-                    planiDir_layer.setVisible(true);
                     
                 }
                 else {

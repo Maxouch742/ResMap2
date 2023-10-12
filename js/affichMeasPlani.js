@@ -32,32 +32,34 @@ function affichMeasPlani(xml, pts, visee = false){
                     const pt_name = targets[j].getAttribute('name');
 
                     if (pts.has(pt_name)){
+                        if (visee === false || (visee !== false && visee === pt_name)){
 
-                        const planiGNSS_feature = new ol.Feature({
-                            geometry: new ol.geom.Point([
-                                pts.get(pt_name)['east'],
-                                pts.get(pt_name)['north']
-                            ]),
-                            name: station.getAttribute('name'),
-                            session_number: String(planiGNSS_sessionID),
-                            id: targets[j].getAttribute('obsNr'),
-                            obs: targets[j].getAttribute('target'),
-                            value: parseFloat(targets[j].getAttribute('value')),
-                            group: parseFloat(targets[j].getAttribute('group')),
-                            zi: parseFloat(targets[j].getAttribute('zi')),
-                            wi: parseFloat(targets[j].getAttribute('wi')),
-                            nabla: parseFloat(targets[j].getAttribute('nabla_rzi')),
-                            corr: parseFloat(targets[j].getAttribute('corr')),
-                        });
-                        const planiGNSS_style = new ol.style.Style({
-                            image: new ol.style.Icon({
-                                src: './img/pentagon-svgrepo-com.png',
-                                scale: list_radius[planiGNSS_sessionID],
-                                color: list_colors[planiGNSS_sessionID]
-                            })
-                        });
-                        planiGNSS_feature.setStyle(planiGNSS_style);
-                        planiGNSS_source.addFeature(planiGNSS_feature);
+                            const planiGNSS_feature = new ol.Feature({
+                                geometry: new ol.geom.Point([
+                                    pts.get(pt_name)['east'],
+                                    pts.get(pt_name)['north']
+                                ]),
+                                name: station.getAttribute('name'),
+                                session_number: String(planiGNSS_sessionID),
+                                id: targets[j].getAttribute('obsNr'),
+                                obs: targets[j].getAttribute('target'),
+                                value: parseFloat(targets[j].getAttribute('value')),
+                                group: parseFloat(targets[j].getAttribute('group')),
+                                zi: parseFloat(targets[j].getAttribute('zi')),
+                                wi: parseFloat(targets[j].getAttribute('wi')),
+                                nabla: parseFloat(targets[j].getAttribute('nabla_rzi')),
+                                corr: parseFloat(targets[j].getAttribute('corr')),
+                            });
+                            const planiGNSS_style = new ol.style.Style({
+                                image: new ol.style.Icon({
+                                    src: './img/pentagon-svgrepo-com.png',
+                                    scale: list_radius[planiGNSS_sessionID],
+                                    color: list_colors[planiGNSS_sessionID]
+                                })
+                            });
+                            planiGNSS_feature.setStyle(planiGNSS_style);
+                            planiGNSS_source.addFeature(planiGNSS_feature);
+                        };
                     };
                 };
                 planiGNSS_sessionID++ ;
@@ -291,27 +293,42 @@ function affichMeasPlani(xml, pts, visee = false){
     if (planiGNSS_source.getFeatures().length >= 1){
         planiGNSS_layer.setSource( planiGNSS_source );
         planiGNSS_layer.setOpacity( 1.0 );
-        changeLayerVisibility('plani_GNSS');
+        planiGNSS_layer.setVisible(true);
+        if (visee === false){
+            changeLayerVisibility('plani_GNSS');
+        };
     };
 
     if (planiDir_source.getFeatures().length >= 1){
         planiDir_layer.setSource( planiDir_source );
-        changeLayerVisibility('plani_dir');
+        planiDir_layer.setVisible(true);
+        if (visee === false){
+            changeLayerVisibility('plani_dir');
+        };
     };
 
     if (planiDis_source.getFeatures().length >= 1){
         planiDis_layer.setSource( planiDis_source );
-        changeLayerVisibility('plani_dis');
+        planiDis_layer.setVisible(true);
+        if (visee === false){
+            changeLayerVisibility('plani_dis');
+        };
     };
 
     if (planiCoordE_source.getFeatures().length >= 1){
         planiCoordE_layer.setSource( planiCoordE_source );
-        changeLayerVisibility('plani_coordE');
+        planiCoordE_layer.setVisible(true);
+        if (visee === false){
+            changeLayerVisibility('plani_coordE');
+        };
     };
 
     if (planiCoordN_source.getFeatures().length >= 1){
         planiCoordN_layer.setSource( planiCoordN_source );
-        changeLayerVisibility('plani_coordN');
+        planiCoordN_layer.setVisible(true);
+        if (visee === false){
+            changeLayerVisibility('plani_coordN');
+        };
     };
 }
 
