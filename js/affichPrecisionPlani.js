@@ -1,4 +1,4 @@
-function affichPrecisionPlani(pts, xml){
+function affichPrecisionPlani(pts, xml, visee=false){
 
     // Définiiton des sources
     const planiEll_source = new ol.source.Vector({});
@@ -42,34 +42,37 @@ function affichPrecisionPlani(pts, xml){
     pts.forEach((value, key) => {
         
         if (value.EMA != undefined){
-            
-            // Variable
-            const east = value.east;
-            const north = value.north;
-            const ema = value.EMA/1000.0;
-            const emb = value.EMB/1000.0;
-            let gis_ema = value.Gis_EMA;
 
-            if (gis_ema < 0.0){ gis_ema = gis_ema + 400.0 };
-            gis_ema = gis_ema + 100.0;
-            if (gis_ema >= 400.0){ gis_ema = gis_ema - 400.0 };
-            let rota = gis_ema*Math.PI/200.0;
+            if (visee === false || (visee !== false && visee === key)){
             
-            // Définition de l'ellipse
-            let listENellipse = [];
-            t.forEach(gis => listENellipse.push([
-                ema*kSigma*echelleEllipses*Math.cos(gis*Math.PI/180.0)+east,
-                emb*kSigma*echelleEllipses*Math.sin(gis*Math.PI/180.0)+north
-            ]));
+                // Variable
+                const east = value.east;
+                const north = value.north;
+                const ema = value.EMA/1000.0;
+                const emb = value.EMB/1000.0;
+                let gis_ema = value.Gis_EMA;
 
-            // Création du feature
-            const planiEll_feature = new ol.Feature({
-                name: key,
-                geometry: new ol.geom.LineString(listENellipse),
-                properties: String(ema*1000.0)+"mm",
-            });
-            planiEll_feature.getGeometry().rotate(-rota, [east, north]);
-            planiEll_source.addFeature(planiEll_feature);
+                if (gis_ema < 0.0){ gis_ema = gis_ema + 400.0 };
+                gis_ema = gis_ema + 100.0;
+                if (gis_ema >= 400.0){ gis_ema = gis_ema - 400.0 };
+                let rota = gis_ema*Math.PI/200.0;
+                
+                // Définition de l'ellipse
+                let listENellipse = [];
+                t.forEach(gis => listENellipse.push([
+                    ema*kSigma*echelleEllipses*Math.cos(gis*Math.PI/180.0)+east,
+                    emb*kSigma*echelleEllipses*Math.sin(gis*Math.PI/180.0)+north
+                ]));
+
+                // Création du feature
+                const planiEll_feature = new ol.Feature({
+                    name: key,
+                    geometry: new ol.geom.LineString(listENellipse),
+                    properties: String(ema*1000.0)+"mm",
+                });
+                planiEll_feature.getGeometry().rotate(-rota, [east, north]);
+                planiEll_source.addFeature(planiEll_feature);
+            }
         }
     });
 

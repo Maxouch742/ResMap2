@@ -46,6 +46,10 @@ function filterPoints(){
                             tempSourcePts.addFeature(feature);
                             styleUpdate('planiPtsF', true);
                         }
+                        else {
+                            stylePtsF_filter.getText().setText(feature.getId());
+                            feature.setStyle(stylePtsF_filter);
+                        };
                     });
 
                     // Parcourir la couche des points nouveaux planimétriques
@@ -59,34 +63,22 @@ function filterPoints(){
 
                             ptsN = true;
                         }
+                        else {
+                            stylePtsN_plani_filter.getText().setText(feature.getId());
+                            feature.setStyle(stylePtsN_plani_filter);
+                        }
                     });
 
+                    
                     // Si le point est nouveau, on affiche l'ellipse, le rectangle et le vecteur de déplacement
                     if (ptsN) {
-                        planiEll_layer.getSource().getFeatures().forEach(function (feature) {
-                            if (feature.getProperties().name === matricule) {
-                                tempSourceEll.addFeature(feature);
-                                styleUpdate('planiEll', true);
-                            }
-                        });
-                        planiRect_layer.getSource().getFeatures().forEach(function (feature) {
-                            if (feature.getProperties().name === matricule) {
-                                tempSourceRect.addFeature(feature);
-                                styleUpdate('planiRect', true);
-                            }
-                        });
-                        planiVect_layer.getSource().getFeatures().forEach(function (feature) {
-                            if (feature.getProperties().name === matricule) {
-                                tempSourceVect.addFeature(feature);
-                                styleUpdate('planiVect', true);
-                            }
-                        });
+                        affichPrecisionPlani(pts_Map, xmlDoc, matricule);
+                        affichRectanglePlani(pts_Map, matricule);
+                        affichVecteurs(pts_Map, matricule);
                     };
 
-                    
-                    defineLayers();
-
-                    // On affiche les observations seulement
+                    // On affiche les observations seulement (avec zi et wi)
+                    defineLayers("filter");
                     affichMeasPlani(xmlDoc, pts_Map, matricule);
                     affichFiabLocPlani(xmlDoc, pts_Map, matricule);
                     affichResiNormesPlani(xmlDoc, pts_Map, matricule);

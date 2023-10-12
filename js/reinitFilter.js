@@ -7,9 +7,6 @@ function reinitFilter(){
 
     // Réinitialiser les layers
     tempLayerPts.setVisible(false);
-    tempLayerEll.setVisible(false);
-    tempLayerRect.setVisible(false);
-    tempLayerVect.setVisible(false);
 
     tempLayerPts_alti.setVisible(false);
     tempLayerEll_alti.setVisible(false);
@@ -22,10 +19,11 @@ function reinitFilter(){
     defineLayers();
 
     // Afficher les couches des points fixes et nouveau planimétriques
+    /*
     document.getElementById("checkboxPtsF").checked = true;
     changeLayerVisibility("plani_ptsF");
     document.getElementById("checkboxPtsN").checked = true;
-    changeLayerVisibility("plani_ptsN");
+    changeLayerVisibility("plani_ptsN");*/
 
     // Remettre le radiobutton sur 2D
     const check = document.getElementsByName("AbrissPlani");
@@ -40,6 +38,9 @@ function reinitFilter(){
 
 
     // Mettre à jour les layers
+    affichPrecisionPlani(pts_Map, xmlDoc);
+    affichRectanglePlani(pts_Map);
+    affichVecteurs(pts_Map);
     affichMeasPlani(xmlDoc, pts_Map);
     affichFiabLocPlani(xmlDoc, pts_Map);
     affichResiNormesPlani(xmlDoc, pts_Map);

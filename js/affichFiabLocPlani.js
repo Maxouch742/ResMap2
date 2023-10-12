@@ -171,7 +171,7 @@ function affichFiabLocPlani(xml, pts, visee = false){
 
                         if (pts.has(station_name) && pts.has(obs_name)){
 
-                            if (visee === false || (visee !== false && obs_name)){
+                            if (visee === false || (visee !== false && obs_name === visee)){
                                 const planiDis_feature = new ol.Feature({
                                     geometry: new ol.geom.LineString([
                                         [ pts.get(station_name)['east'], pts.get(station_name)['north'] ],

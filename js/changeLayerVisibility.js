@@ -88,14 +88,7 @@ function changeLayerVisibility(item){
                 };
 
                 document.getElementById('checkboxVect').checked = false;
-                changeLayerVisibility('plani_vect');
-
-                tempLayerPts.setVisible(false);
-                tempLayerEll.setVisible(false);
-                tempLayerRect.setVisible(false);
-                tempLayerVect.setVisible(false);
-                defineLayersTemp()
-                
+                changeLayerVisibility('plani_vect');                
             };
             break;
         case 'plani_ptsF':
