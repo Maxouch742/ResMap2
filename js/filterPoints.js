@@ -62,7 +62,6 @@ function filterPoints(){
                     });
 
                     // Si le point est nouveau, on affiche l'ellipse, le rectangle et le vecteur de déplacement
-                    console.log(ptsN)
                     if (ptsN) {
                         planiEll_layer.getSource().getFeatures().forEach(function (feature) {
                             if (feature.getProperties().name === matricule) {
@@ -83,6 +82,11 @@ function filterPoints(){
                             }
                         });
                     };
+
+                    // On affiche les observations seulement
+                    affichMeasPlani(xmlDoc, pts_Map, matricule);
+                    planiDir_layer.setVisible(true);
+                    
                 }
                 else {
                     document.getElementById("filterPointNot").innerHTML = 'Le point n\'est pas mesuré en 2D!';
