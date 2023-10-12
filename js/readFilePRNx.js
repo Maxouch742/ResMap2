@@ -25,8 +25,8 @@ function readFilePRNx(){
       pts_Map = parseXML_points(xmlDoc);
       const pts_planiVar = parseXML_variablePoints_fixBug(pts_Map, 'planimetric');
       pts_planiObs = parseXML_planiObsPoints(xmlDoc);  // get points to targets
-      let pts_altiVar = [];
-      let pts_altiObs = [];
+      pts_altiVar = [];
+      pts_altiObs = [];
 
       // Vérifier la présence de l'abriss altimétrique
       const altiAbriss = xmlDoc.getElementsByTagName('altimetricAbriss');
