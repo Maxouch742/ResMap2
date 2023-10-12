@@ -24,7 +24,7 @@ function readFilePRNx(){
       // Points management
       pts_Map = parseXML_points(xmlDoc);
       const pts_planiVar = parseXML_variablePoints_fixBug(pts_Map, 'planimetric');
-      const pts_planiObs = parseXML_planiObsPoints(xmlDoc);  // get points to targets
+      pts_planiObs = parseXML_planiObsPoints(xmlDoc);  // get points to targets
       let pts_altiVar = [];
       let pts_altiObs = [];
 
@@ -45,6 +45,9 @@ function readFilePRNx(){
         affichFiabLocAlti(pts_Map, xmlDoc);
         affichResiNormesAlti(pts_Map, xmlDoc);
         affichVecteursAlti(pts_Map);
+
+        // Afficher le radio button 1D pour l'altimétrie
+        window_affichFilter1D();
       };
 
       defineViewByFile(pts_Map);   // Zoom view

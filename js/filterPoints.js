@@ -25,117 +25,129 @@ function filterPoints(){
 
         switch (dim) {
             case 'AbrissPlani':
-                // désactiver tous les layers altimétriques
+                // désactiver tous les layers altimétriques et plani
                 document.getElementById('checkboxAffich_alti').checked = true;
                 changeLayerVisibility('alti_affich');
-                // désactiver tous les layers planimétriques
                 document.getElementById('checkboxAffich').checked = true;
                 changeLayerVisibility('plani_affich');
 
-                // Savoir si on est sur un point fixe ou point nouveau
-                let ptsN = false;
+                // Check si le point est présent en plani
+                if (pts_planiObs.includes(matricule)) {
+                    
+                    // Savoir si on est sur un point fixe ou point nouveau
+                    let ptsN = false;
 
-                // On parcours l'ensemble des features de la couche des points fixes planimétriques
-                planiPtsF_layer.getSource().getFeatures().forEach(function (feature) {
-                    if (feature.getProperties().name === matricule) {
-                        view.setCenter(feature.getGeometry().getCoordinates());
-                        view.setZoom(niveau_zoom);
-
-                        tempSourcePts.addFeature(feature);
-                        styleUpdate('planiPtsF', true);
-                    }
-                });
-
-                // Parcourir la couche des points nouveaux planimétriques
-                planiPtsN_layer.getSource().getFeatures().forEach(function (feature) {
-                    if (feature.getProperties().name === matricule) {
-                        view.setCenter(feature.getGeometry().getCoordinates());
-                        view.setZoom(niveau_zoom);
-
-                        tempSourcePts.addFeature(feature);
-                        styleUpdate('planiPtsN', true);
-
-                        ptsN = true;
-                    }
-                });
-
-                // Si le point est nouveau, on affiche l'ellipse, le rectangle et le vecteur de déplacement
-                console.log(ptsN)
-                if (ptsN) {
-                    planiEll_layer.getSource().getFeatures().forEach(function (feature) {
+                    // On parcours l'ensemble des features de la couche des points fixes planimétriques
+                    planiPtsF_layer.getSource().getFeatures().forEach(function (feature) {
                         if (feature.getProperties().name === matricule) {
-                            tempSourceEll.addFeature(feature);
-                            styleUpdate('planiEll', true);
+                            view.setCenter(feature.getGeometry().getCoordinates());
+                            view.setZoom(niveau_zoom);
+
+                            tempSourcePts.addFeature(feature);
+                            styleUpdate('planiPtsF', true);
                         }
                     });
-                    planiRect_layer.getSource().getFeatures().forEach(function (feature) {
+
+                    // Parcourir la couche des points nouveaux planimétriques
+                    planiPtsN_layer.getSource().getFeatures().forEach(function (feature) {
                         if (feature.getProperties().name === matricule) {
-                            tempSourceRect.addFeature(feature);
-                            styleUpdate('planiRect', true);
+                            view.setCenter(feature.getGeometry().getCoordinates());
+                            view.setZoom(niveau_zoom);
+
+                            tempSourcePts.addFeature(feature);
+                            styleUpdate('planiPtsN', true);
+
+                            ptsN = true;
                         }
                     });
-                    planiVect_layer.getSource().getFeatures().forEach(function (feature) {
-                        if (feature.getProperties().name === matricule) {
-                            tempSourceVect.addFeature(feature);
-                            styleUpdate('planiVect', true);
-                        }
-                    });
+
+                    // Si le point est nouveau, on affiche l'ellipse, le rectangle et le vecteur de déplacement
+                    console.log(ptsN)
+                    if (ptsN) {
+                        planiEll_layer.getSource().getFeatures().forEach(function (feature) {
+                            if (feature.getProperties().name === matricule) {
+                                tempSourceEll.addFeature(feature);
+                                styleUpdate('planiEll', true);
+                            }
+                        });
+                        planiRect_layer.getSource().getFeatures().forEach(function (feature) {
+                            if (feature.getProperties().name === matricule) {
+                                tempSourceRect.addFeature(feature);
+                                styleUpdate('planiRect', true);
+                            }
+                        });
+                        planiVect_layer.getSource().getFeatures().forEach(function (feature) {
+                            if (feature.getProperties().name === matricule) {
+                                tempSourceVect.addFeature(feature);
+                                styleUpdate('planiVect', true);
+                            }
+                        });
+                    };
+                }
+                else {
+                    document.getElementById("filterPointNot").innerHTML = 'Le point n\'est pas mesuré en 2D!';
                 };
                 break;
 
             case 'AbrissAlti':
-                // désactiver tous les layers altimétriques
+                // désactiver tous les layers altimétriques et planimétriques
                 document.getElementById('checkboxAffich_alti').checked = true;
                 changeLayerVisibility('alti_affich');
-                // désactiver tous les layers planimétriques
                 document.getElementById('checkboxAffich').checked = true;
                 changeLayerVisibility('plani_affich');
 
                 // Savoir si on est sur un point fixe ou point nouveau
                 let ptsN_alti = false;
 
-                // On parcours l'ensemble des features de la couche des points fixes planimétriques
-                altiPtsF_layer.getSource().getFeatures().forEach(function (feature) {
-                    if (feature.getProperties().name === matricule) {
-                        view.setCenter(feature.getGeometry().getCoordinates());
-                        view.setZoom(niveau_zoom);
+                // checker si le point existe dans l'abriss 1D
+                if (pts_altiObs.includes(matricule)) {
 
-                        tempSourcePts_alti.addFeature(feature);
-                        styleUpdate('altiPtsF', true);
+                    // On parcours l'ensemble des features de la couche des points fixes planimétriques
+                    altiPtsF_layer.getSource().getFeatures().forEach(function (feature) {
+                        if (feature.getProperties().name === matricule) {
+                            view.setCenter(feature.getGeometry().getCoordinates());
+                            view.setZoom(niveau_zoom);
+
+                            tempSourcePts_alti.addFeature(feature);
+                            styleUpdate('altiPtsF', true);
+                        }
+                    });
+
+                    // Parcours de la couche des points nouveaux altimétriques
+                    altiPtsN_layer.getSource().getFeatures().forEach(function (feature) {
+                        if (feature.getProperties().name === matricule) {
+                            view.setCenter(feature.getGeometry().getCoordinates());
+                            view.setZoom(niveau_zoom);
+
+                            tempSourcePts_alti.addFeature(feature);
+                            styleUpdate('altiPtsN', true);
+                            ptsN_alti = true;
+                        }
+                    });
+
+                    if (ptsN_alti){
+                        altiEll_layer.getSource().getFeatures().forEach(function (feature) {
+                            if (feature.getProperties().name === matricule) {
+                                tempSourceEll_alti.addFeature(feature);
+                                styleUpdate('altiEll', true);
+                            }
+                        });
+                        altiRect_layer.getSource().getFeatures().forEach(function (feature) {
+                            if (feature.getProperties().name === matricule) {
+                                tempSourceRect_alti.addFeature(feature);
+                                styleUpdate('altiRect', true);
+                            }
+                        });
+                        altiVect_layer.getSource().getFeatures().forEach(function (feature) {
+                            if (feature.getProperties().name === matricule) {
+                                tempSourceVect_alti.addFeature(feature);
+                                styleUpdate('altiVect', true);
+                            }
+                        });
                     }
-                });
-
-                // Parcours de la couche des points nouveaux altimétriques
-                altiPtsN_layer.getSource().getFeatures().forEach(function (feature) {
-                    if (feature.getProperties().name === matricule) {
-                        view.setCenter(feature.getGeometry().getCoordinates());
-                        view.setZoom(niveau_zoom);
-
-                        tempSourcePts_alti.addFeature(feature);
-                        styleUpdate('altiPtsN', true);
-                        ptsN_alti = true;
-                    }
-                });
-
-                if (ptsN_alti){
-                    altiEll_layer.getSource().getFeatures().forEach(function (feature) {
-                        if (feature.getProperties().name === matricule) {
-                            tempSourceEll_alti.addFeature(feature);
-                            styleUpdate('altiEll', true);
-                        }
-                    });
-                    altiRect_layer.getSource().getFeatures().forEach(function (feature) {
-                        if (feature.getProperties().name === matricule) {
-                            tempSourceRect_alti.addFeature(feature);
-                            styleUpdate('altiRect', true);
-                        }
-                    });
-                    altiVect_layer.getSource().getFeatures().forEach(function (feature) {
-                        if (feature.getProperties().name === matricule) {
-                            tempSourceVect_alti.addFeature(feature);
-                            styleUpdate('altiVect', true);
-                        }
-                    });
+                }
+                else {
+                    document.getElementById("filterPointNot").innerHTML = 'Le point n\'est pas mesuré en 1D!';
                 }
                 break;
         }
@@ -145,3 +157,7 @@ function filterPoints(){
         document.getElementById("filterPointNot").innerHTML = 'Le point n\'existe pas !';
     }
 }
+
+
+//TODO: si des points sont mesurés seulement altimétriquement,ils doivent s'afficher en tant qu'erreur dans la recherche en 2D
+//TODO: afficher les observations
