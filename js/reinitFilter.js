@@ -19,6 +19,7 @@ function reinitFilter(){
     // Rezoomer sur l'ensemble du réseau géodésique
     defineViewByFile(pts_Map);
     defineLayersTemp();
+    defineLayers();
 
     // Afficher les couches des points fixes et nouveau planimétriques
     document.getElementById("checkboxPtsF").checked = true;

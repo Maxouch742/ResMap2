@@ -394,7 +394,19 @@
       <!-- Sidebar pour le filtre -->
       <div class="sidebar" id="mySidebar">
 
-        <h4>Filtres</h4>
+        <!-- Titre -->
+        <h4 style="margin-bottom: 10px;">Filtres</h4>
+          
+        <div class="row align-items-start align-middle">
+          <!-- 2D -->
+          <div class="col">
+            <input class="form-check-input" type="radio" name="AbrissPlani" value="AbrissPlani" checked>
+            <label class="checkboxLabel" for="filterAbrissPlani">2D</label>
+          </div>
+          
+          <!-- 1D -->
+          <div class="col" id="filter_1D"></div>
+        </div>
 
         <!-- Filtre de points -->
         <button id="buttonFilterPoints" onclick="myFunction('divFilterPoints')" class="w3-button w3-block w3-left-align w3-blue-grey">
@@ -427,21 +439,9 @@
           <p class="filter-not-match" id="filterStationNot"></p>
 
         </div>
-            
-        <div class="row">
-          <div class="col-8">
-            <button class="button-reinit" onclick="reinitFilter()">Réinit.</button>
-          </div>
-          <div class="col-4">
-            <input class="form-check-input" type="radio" name="AbrissPlani" value="AbrissPlani" checked>
-            <label class="checkboxLabel" for="filterAbrissPlani">
-              2D
-            </label>
-            <div id="filter_1D"></div>
-          </div>
-        </div>
 
-        <button class="btn btn-danger" id="closeSidebar">Fermer</button>
+        <button class="btn btn-danger" id="reinitFilter" onclick="reinitFilter()">Réinitialiser</button>
+        <button class="btn btn-info" id="closeSidebar">Fermer</button>
       </div>
 
     </div>
