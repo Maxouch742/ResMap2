@@ -41,4 +41,5 @@ function reinitFilter(){
     // Mettre à jour les layers
     affichMeasPlani(xmlDoc, pts_Map);
     affichFiabLocPlani(xmlDoc, pts_Map);
+    affichResiNormesPlani(xmlDoc, pts_Map);
 }

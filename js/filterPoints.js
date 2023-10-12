@@ -86,6 +86,7 @@ function filterPoints(){
                     // On affiche les observations seulement
                     affichMeasPlani(xmlDoc, pts_Map, matricule);
                     affichFiabLocPlani(xmlDoc, pts_Map, matricule);
+                    affichResiNormesPlani(xmlDoc, pts_Map, matricule);
                     
                 }
                 else {
