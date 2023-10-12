@@ -36,4 +36,9 @@ function reinitFilter(){
             check[i].checked = false;
         }
     };
+
+
+    // Mettre à jour les layers
+    affichMeasPlani(xmlDoc, pts_Map);
+    affichFiabLocPlani(xmlDoc, pts_Map);
 }

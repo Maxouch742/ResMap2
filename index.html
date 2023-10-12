@@ -384,25 +384,49 @@
         </div>
       </div>
 
-      <!-- Button for filter
+      <!-- Button for filter -->
       <div class="w3-dropdown-hover w3-right" id="filterSelection">
         <button class="w3-button" id="openSidebar">
             <img id="imgFilter" src="./img/filter-svgrepo-com.svg" alt="Filter view">
         </button>
-      </div> -->
+      </div>
 
       <!-- Sidebar pour le filtre -->
       <div class="sidebar" id="mySidebar">
 
-        <h4>Filtre</h4>
+        <h4>Filtres</h4>
+
+        <!-- Filtre de points -->
+        <button id="buttonFilterPoints" onclick="myFunction('divFilterPoints')" class="w3-button w3-block w3-left-align w3-blue-grey">
+          Point
+        </button>
+        <div id="divFilterPoints" class="w3-container w3-hide w3-border">
+
+          <!-- Input -->
+          <p style="font-weight:bold;">N° de point visé :</p>
+          <input class="w3-input-filter" id="filterPoint" onchange="filterPoints()" type="text">
+          <p class="filter-not-match" id="filterPointNot"></p>
+
+          <!-- Layers -->
+          <div id="filterPointsLayers">
+
+          </div>
+          <!-- /. fin layers -->
+        </div>
+              
         
-        <p style="font-weight:bold;">N° de point visé :</p>
-        <input class="w3-input-filter" id="filterPoint" onchange="filterPoints()" type="text">
-        <p class="filter-not-match" id="filterPointNot"></p>
-        
-        <p style="font-weight:bold;">N° de station :</p>
-        <input class="w3-input-filter" id="filterStation" onchange="filterStations()" type="text">
-        <p class="filter-not-match" id="filterStationNot"></p>
+        <!-- Filtre de stations-->
+        <button id="buttonFilterStation" onclick="myFunction('divFilterStation')" class="w3-button w3-block w3-left-align w3-blue-grey">
+          Station
+        </button>
+        <div id="divFilterStation" class="w3-container w3-hide w3-border">
+
+          <!-- Input -->
+          <p style="font-weight:bold;">N° de station :</p>
+          <input class="w3-input-filter" id="filterStation" onchange="filterStations()" type="text">
+          <p class="filter-not-match" id="filterStationNot"></p>
+
+        </div>
             
         <div class="row">
           <div class="col-8">

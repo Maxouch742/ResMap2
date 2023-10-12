@@ -1,4 +1,4 @@
-function affichFiabLocAlti(pts, xml){
+function affichFiabLocAlti(pts, xml, visee = false){
     
     // Create source
     const altiFiabLocDH_source = new ol.source.Vector({});

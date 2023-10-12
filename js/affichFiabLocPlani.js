@@ -1,4 +1,4 @@
-function affichFiabLocPlani(xml, pts){
+function affichFiabLocPlani(xml, pts, visee = false){
 
     // Create source
     const planiFiabLocDir_source = new ol.source.Vector({});
@@ -37,22 +37,24 @@ function affichFiabLocPlani(xml, pts){
                             const [colorFiab, widthFiab] = getParameterFeature_zi(obs1_zi);
                             
                             if(pts.has(pt_name)){
+                                if (visee === false || (visee !== false && pt_name === visee)){
 
-                                const planiFiabLoc_feature = new ol.Feature({ 
-                                    geometry: new ol.geom.Point([ 
-                                        pts.get(pt_name)['east'], 
-                                        pts.get(pt_name)['north'] 
-                                    ]) 
-                                });
-                                const planiFiabLoc_style = new ol.style.Style({
-                                    image: new ol.style.Icon({
-                                        src: './img/hexagon_half1_svgrepo-com.png',
-                                        scale: list_radius[planiGNSS_sessionID]/2,
-                                        color: colorFiab,
-                                    }),
-                                });
-                                planiFiabLoc_feature.setStyle(planiFiabLoc_style);
-                                planiFiabLocGNSS_source.addFeature(planiFiabLoc_feature);
+                                    const planiFiabLoc_feature = new ol.Feature({ 
+                                        geometry: new ol.geom.Point([ 
+                                            pts.get(pt_name)['east'], 
+                                            pts.get(pt_name)['north'] 
+                                        ]) 
+                                    });
+                                    const planiFiabLoc_style = new ol.style.Style({
+                                        image: new ol.style.Icon({
+                                            src: './img/hexagon_half1_svgrepo-com.png',
+                                            scale: list_radius[planiGNSS_sessionID]/2,
+                                            color: colorFiab,
+                                        }),
+                                    });
+                                    planiFiabLoc_feature.setStyle(planiFiabLoc_style);
+                                    planiFiabLocGNSS_source.addFeature(planiFiabLoc_feature);
+                                };
                             };
                         };
 
@@ -62,22 +64,23 @@ function affichFiabLocPlani(xml, pts){
                             const [colorFiab, widthFiab] = getParameterFeature_zi(obs2_zi);
 
                             if (pts.has(pt_name)){
-                            
-                                const planiFiabLoc_feature = new ol.Feature({ 
-                                    geometry: new ol.geom.Point([ 
-                                        pts.get(pt_name)['east'], 
-                                        pts.get(pt_name)['north'] 
-                                    ]) 
-                                });
-                                const planiFiabLoc_style = new ol.style.Style({
-                                    image: new ol.style.Icon({
-                                        src: './img/hexagon_half2_svgrepo-com.png',
-                                        scale: list_radius[planiGNSS_sessionID]/2,
-                                        color: colorFiab,
-                                    }),
-                                });
-                                planiFiabLoc_feature.setStyle(planiFiabLoc_style);
-                                planiFiabLocGNSS_source.addFeature(planiFiabLoc_feature);
+                                if (visee === false || (visee !== false && pt_name === visee)){
+                                    const planiFiabLoc_feature = new ol.Feature({ 
+                                        geometry: new ol.geom.Point([ 
+                                            pts.get(pt_name)['east'], 
+                                            pts.get(pt_name)['north'] 
+                                        ]) 
+                                    });
+                                    const planiFiabLoc_style = new ol.style.Style({
+                                        image: new ol.style.Icon({
+                                            src: './img/hexagon_half2_svgrepo-com.png',
+                                            scale: list_radius[planiGNSS_sessionID]/2,
+                                            color: colorFiab,
+                                        }),
+                                    });
+                                    planiFiabLoc_feature.setStyle(planiFiabLoc_style);
+                                    planiFiabLocGNSS_source.addFeature(planiFiabLoc_feature);
+                                };
                             };
                         };
                     }
@@ -105,42 +108,44 @@ function affichFiabLocPlani(xml, pts){
                         const [colorFiab, widthFiab, zIndexFiab] = getParameterFeature_zi(pt_zi);
 
                         if (pts.has(sta_name) && pts.has(pt_name)){
-                        
-                            // Feature line
-                            const planiDir_feature = new ol.Feature({
-                                geometry: new ol.geom.LineString([ 
-                                    [ pts.get(sta_name)['east'], pts.get(sta_name)['north'] ], 
-                                    [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ] 
-                                ]),
-                            });
-                            planiDir_feature.setStyle( new ol.style.Style({
-                                stroke: new ol.style.Stroke({
-                                    color: colorFiab,
-                                    width: widthFiab
-                                })
-                            }));
-                            planiFiabLocDir_source.addFeature(planiDir_feature);
 
-                            // Feature symbole
-                            const east_symbol = pts.get(sta_name)['east'] + (pts.get(pt_name)['east'] - pts.get(sta_name)['east'])*0.1;
-                            const north_symbol = pts.get(sta_name)['north'] + (pts.get(pt_name)['north'] - pts.get(sta_name)['north'])*0.1;
-                            const gis = gisement(pts.get(sta_name)['east']-east_symbol, pts.get(sta_name)['north']-north_symbol);              
+                            if (visee === false || (visee !== false && visee === pt_name)){
+                                // Feature line
+                                const planiDir_feature = new ol.Feature({
+                                    geometry: new ol.geom.LineString([ 
+                                        [ pts.get(sta_name)['east'], pts.get(sta_name)['north'] ], 
+                                        [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ] 
+                                    ]),
+                                });
+                                planiDir_feature.setStyle( new ol.style.Style({
+                                    stroke: new ol.style.Stroke({
+                                        color: colorFiab,
+                                        width: widthFiab
+                                    })
+                                }));
+                                planiFiabLocDir_source.addFeature(planiDir_feature);
 
-                            const planiDir_featureSymbol = new ol.Feature({
-                                geometry: new ol.geom.Point([ 
-                                    east_symbol, 
-                                    north_symbol
-                                ])
-                            });
-                            planiDir_featureSymbol.setStyle( new ol.style.Style({
-                                image: new ol.style.Icon({
-                                    src: './img/triangle-svgrepo-com.png',
-                                    scale:'0.05',
-                                    color: colorFiab,
-                                    rotation: gis
-                                })
-                            }));
-                            planiFiabLocDir_source.addFeature(planiDir_featureSymbol);
+                                // Feature symbole
+                                const east_symbol = pts.get(sta_name)['east'] + (pts.get(pt_name)['east'] - pts.get(sta_name)['east'])*0.1;
+                                const north_symbol = pts.get(sta_name)['north'] + (pts.get(pt_name)['north'] - pts.get(sta_name)['north'])*0.1;
+                                const gis = gisement(pts.get(sta_name)['east']-east_symbol, pts.get(sta_name)['north']-north_symbol);              
+
+                                const planiDir_featureSymbol = new ol.Feature({
+                                    geometry: new ol.geom.Point([ 
+                                        east_symbol, 
+                                        north_symbol
+                                    ])
+                                });
+                                planiDir_featureSymbol.setStyle( new ol.style.Style({
+                                    image: new ol.style.Icon({
+                                        src: './img/triangle-svgrepo-com.png',
+                                        scale:'0.05',
+                                        color: colorFiab,
+                                        rotation: gis
+                                    })
+                                }));
+                                planiFiabLocDir_source.addFeature(planiDir_featureSymbol);
+                            };
                         };
                     };
                 };
@@ -166,39 +171,41 @@ function affichFiabLocPlani(xml, pts){
 
                         if (pts.has(station_name) && pts.has(obs_name)){
 
-                            const planiDis_feature = new ol.Feature({
-                                geometry: new ol.geom.LineString([
-                                    [ pts.get(station_name)['east'], pts.get(station_name)['north'] ],
-                                    [ pts.get(obs_name)['east'], pts.get(obs_name)['north'] ] 
-                                ])
-                            });
-                            planiDis_feature.setStyle( new ol.style.Style({
-                                stroke: new ol.style.Stroke({
-                                    color: colorFiab,
-                                    width: widthFiab,
-                                })
-                            }));
-                            planiFiabLocDis_source.addFeature(planiDis_feature);
-                            
-                            // Feature symbol
-                            const east_symbol1 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.12;
-                            const north_symbol1 = pts.get(station_name)['north'] + (pts.get(obs_name)['north'] - pts.get(station_name)['north'])*0.12;
-                            const east_symbol2 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.22;
-                            const north_symbol2 = pts.get(station_name)['north'] + (pts.get(obs_name)['north'] - pts.get(station_name)['north'])*0.22;
-                            const planiDis_featureSymbol = new ol.Feature({
-                                geometry: new ol.geom.LineString([
-                                    [east_symbol1, north_symbol1],
-                                    [east_symbol2, north_symbol2]
-                                ])
-                            });
-                            planiDis_featureSymbol.setStyle( new ol.style.Style({
-                                stroke: new ol.style.Stroke({
-                                    color: colorFiab,
-                                    width: widthFiab+6,
-                                    lineCap: 'square'
-                                })
-                            }));
-                            planiFiabLocDis_source.addFeature(planiDis_featureSymbol);
+                            if (visee === false || (visee !== false && obs_name)){
+                                const planiDis_feature = new ol.Feature({
+                                    geometry: new ol.geom.LineString([
+                                        [ pts.get(station_name)['east'], pts.get(station_name)['north'] ],
+                                        [ pts.get(obs_name)['east'], pts.get(obs_name)['north'] ] 
+                                    ])
+                                });
+                                planiDis_feature.setStyle( new ol.style.Style({
+                                    stroke: new ol.style.Stroke({
+                                        color: colorFiab,
+                                        width: widthFiab,
+                                    })
+                                }));
+                                planiFiabLocDis_source.addFeature(planiDis_feature);
+                                
+                                // Feature symbol
+                                const east_symbol1 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.12;
+                                const north_symbol1 = pts.get(station_name)['north'] + (pts.get(obs_name)['north'] - pts.get(station_name)['north'])*0.12;
+                                const east_symbol2 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.22;
+                                const north_symbol2 = pts.get(station_name)['north'] + (pts.get(obs_name)['north'] - pts.get(station_name)['north'])*0.22;
+                                const planiDis_featureSymbol = new ol.Feature({
+                                    geometry: new ol.geom.LineString([
+                                        [east_symbol1, north_symbol1],
+                                        [east_symbol2, north_symbol2]
+                                    ])
+                                });
+                                planiDis_featureSymbol.setStyle( new ol.style.Style({
+                                    stroke: new ol.style.Stroke({
+                                        color: colorFiab,
+                                        width: widthFiab+6,
+                                        lineCap: 'square'
+                                    })
+                                }));
+                                planiFiabLocDis_source.addFeature(planiDis_featureSymbol);
+                            }
                         }
                     }
                 };
@@ -224,39 +231,42 @@ function affichFiabLocPlani(xml, pts){
                             const [colorFiab, widthFiab] = getParameterFeature_zi(obs1_zi);
 
                             if (pts.has(point_name)){
+
+                                if (visee === false || (visee !== false && visee === point_name)){
                             
-                                const planiFiabLoc_CoordE_feature = new ol.Feature({ 
-                                    geometry: new ol.geom.Point([ 
-                                        pts.get(point_name)['east'], 
-                                        pts.get(point_name)['north'] 
-                                    ]) 
-                                });
-                                const planiFiabLoc_CoordE_style = new ol.style.Style({
-                                    image: new ol.style.Icon({
-                                        src: './img/Est.svg',
-                                        scale: String(0.02*widthFiab),
-                                        color: String(colorFiab),
-                                    }),
-                                    text: new ol.style.Text({
-                                        text: point_name,
-                                        textAlign: "center",
-                                        textBaseline: "middle",
-                                        font: "italic 15px Calibri",
-                                        fill: new ol.style.Fill({
-                                            color: String(colorFiab)
+                                    const planiFiabLoc_CoordE_feature = new ol.Feature({ 
+                                        geometry: new ol.geom.Point([ 
+                                            pts.get(point_name)['east'], 
+                                            pts.get(point_name)['north'] 
+                                        ]) 
+                                    });
+                                    const planiFiabLoc_CoordE_style = new ol.style.Style({
+                                        image: new ol.style.Icon({
+                                            src: './img/Est.svg',
+                                            scale: String(0.02*widthFiab),
+                                            color: String(colorFiab),
                                         }),
-                                        stroke: new ol.style.Stroke({
-                                            color: '#000', 
-                                            width: 3
-                                        }),
-                                        offsetX: 10,
-                                        offsetY: -10,
-                                        rotation: 0,
-                                        placement: "point"
-                                    })
-                                });
-                                planiFiabLoc_CoordE_feature.setStyle(planiFiabLoc_CoordE_style);
-                                planiFiabLocCoordE_source.addFeature(planiFiabLoc_CoordE_feature);
+                                        text: new ol.style.Text({
+                                            text: point_name,
+                                            textAlign: "center",
+                                            textBaseline: "middle",
+                                            font: "italic 15px Calibri",
+                                            fill: new ol.style.Fill({
+                                                color: String(colorFiab)
+                                            }),
+                                            stroke: new ol.style.Stroke({
+                                                color: '#000', 
+                                                width: 3
+                                            }),
+                                            offsetX: 10,
+                                            offsetY: -10,
+                                            rotation: 0,
+                                            placement: "point"
+                                        })
+                                    });
+                                    planiFiabLoc_CoordE_feature.setStyle(planiFiabLoc_CoordE_style);
+                                    planiFiabLocCoordE_source.addFeature(planiFiabLoc_CoordE_feature);
+                                };
                             };
                         };
 
@@ -267,38 +277,40 @@ function affichFiabLocPlani(xml, pts){
                             const [colorFiab, widthFiab] = getParameterFeature_zi(obs2_zi);
                             
                             if (pts.has(point_name)){
-                                const planiFiabLoc_CoordN_feature = new ol.Feature({ 
-                                    geometry: new ol.geom.Point([ 
-                                        pts.get(point_name)['east'], 
-                                        pts.get(point_name)['north'] 
-                                    ]) 
-                                });
-                                const planiFiabLoc_CoordN_style = new ol.style.Style({
-                                    image: new ol.style.Icon({
-                                        src: './img/Nord.svg',
-                                        scale: String(0.02*widthFiab),
-                                        color: String(colorFiab),
-                                    }),
-                                    text: new ol.style.Text({
-                                        text: point_name,
-                                        textAlign: "center",
-                                        textBaseline: "middle",
-                                        font: "italic 15px Calibri",
-                                        fill: new ol.style.Fill({
-                                            color: String(colorFiab)
+                                if (visee === false || (visee !== false && visee === point_name)){
+                                    const planiFiabLoc_CoordN_feature = new ol.Feature({ 
+                                        geometry: new ol.geom.Point([ 
+                                            pts.get(point_name)['east'], 
+                                            pts.get(point_name)['north'] 
+                                        ]) 
+                                    });
+                                    const planiFiabLoc_CoordN_style = new ol.style.Style({
+                                        image: new ol.style.Icon({
+                                            src: './img/Nord.svg',
+                                            scale: String(0.02*widthFiab),
+                                            color: String(colorFiab),
                                         }),
-                                        stroke: new ol.style.Stroke({
-                                            color: '#000', 
-                                            width: 3
-                                        }),
-                                        offsetX: 10,
-                                        offsetY: 10,
-                                        rotation: 0,
-                                        placement: "point"
-                                    })
-                                });
-                                planiFiabLoc_CoordN_feature.setStyle(planiFiabLoc_CoordN_style);
-                                planiFiabLocCoordN_source.addFeature(planiFiabLoc_CoordN_feature);
+                                        text: new ol.style.Text({
+                                            text: point_name,
+                                            textAlign: "center",
+                                            textBaseline: "middle",
+                                            font: "italic 15px Calibri",
+                                            fill: new ol.style.Fill({
+                                                color: String(colorFiab)
+                                            }),
+                                            stroke: new ol.style.Stroke({
+                                                color: '#000', 
+                                                width: 3
+                                            }),
+                                            offsetX: 10,
+                                            offsetY: 10,
+                                            rotation: 0,
+                                            placement: "point"
+                                        })
+                                    });
+                                    planiFiabLoc_CoordN_feature.setStyle(planiFiabLoc_CoordN_style);
+                                    planiFiabLocCoordN_source.addFeature(planiFiabLoc_CoordN_feature);
+                                };
                             };
                         };
                     }
