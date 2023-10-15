@@ -384,40 +384,64 @@
         </div>
       </div>
 
-      <!-- Button for filter
+      <!-- Button for filter -->
       <div class="w3-dropdown-hover w3-right" id="filterSelection">
         <button class="w3-button" id="openSidebar">
             <img id="imgFilter" src="./img/filter-svgrepo-com.svg" alt="Filter view">
         </button>
-      </div> -->
+      </div>
 
       <!-- Sidebar pour le filtre -->
       <div class="sidebar" id="mySidebar">
 
-        <h4>Filtre</h4>
-        
-        <p style="font-weight:bold;">N° de point visé :</p>
-        <input class="w3-input-filter" id="filterPoint" onchange="filterPoints()" type="text">
-        <p class="filter-not-match" id="filterPointNot"></p>
-        
-        <p style="font-weight:bold;">N° de station :</p>
-        <input class="w3-input-filter" id="filterStation" onchange="filterStations()" type="text">
-        <p class="filter-not-match" id="filterStationNot"></p>
-            
-        <div class="row">
-          <div class="col-8">
-            <button class="button-reinit" onclick="reinitFilter()">Réinit.</button>
-          </div>
-          <div class="col-4">
+        <!-- Titre -->
+        <h4 style="margin-bottom: 10px;">Filtres</h4>
+          
+        <div class="row align-items-start align-middle">
+          <!-- 2D -->
+          <div class="col">
             <input class="form-check-input" type="radio" name="AbrissPlani" value="AbrissPlani" checked>
-            <label class="checkboxLabel" for="filterAbrissPlani">
-              2D
-            </label>
-            <div id="filter_1D"></div>
+            <label class="checkboxLabel" for="filterAbrissPlani">2D</label>
           </div>
+          
+          <!-- 1D -->
+          <div class="col" id="filter_1D"></div>
         </div>
 
-        <button class="btn btn-danger" id="closeSidebar">Fermer</button>
+        <!-- Filtre de points -->
+        <button id="buttonFilterPoints" onclick="myFunction('divFilterPoints')" class="w3-button w3-block w3-left-align w3-blue-grey">
+          Point
+        </button>
+        <div id="divFilterPoints" class="w3-container w3-hide w3-border">
+
+          <!-- Input -->
+          <p style="font-weight:bold;">N° de point visé :</p>
+          <input class="w3-input-filter" id="filterPoint" onchange="filterPoints()" type="text">
+          <p class="filter-not-match" id="filterPointNot"></p>
+
+          <!-- Layers -->
+          <div id="filterPointsLayers">
+
+          </div>
+          <!-- /. fin layers -->
+        </div>
+              
+        
+        <!-- Filtre de stations-->
+        <button id="buttonFilterStation" onclick="myFunction('divFilterStation')" class="w3-button w3-block w3-left-align w3-blue-grey">
+          Station
+        </button>
+        <div id="divFilterStation" class="w3-container w3-hide w3-border">
+
+          <!-- Input -->
+          <p style="font-weight:bold;">N° de station :</p>
+          <input class="w3-input-filter" id="filterStation" onchange="filterStations()" type="text">
+          <p class="filter-not-match" id="filterStationNot"></p>
+
+        </div>
+
+        <button class="btn btn-danger" id="reinitFilter" onclick="reinitFilter()">Réinitialiser</button>
+        <button class="btn btn-info" id="closeSidebar">Fermer</button>
       </div>
 
     </div>

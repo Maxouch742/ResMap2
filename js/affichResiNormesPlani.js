@@ -1,4 +1,4 @@
-function affichResiNormesPlani(xml, pts){
+function affichResiNormesPlani(xml, pts, visee = false){
 
     // Elements du fichier HTML
     const planiAbriss = xml.getElementsByTagName('planimetricAbriss')[0];
@@ -48,41 +48,44 @@ function affichResiNormesPlani(xml, pts){
                         
                         if (pts.has(sta_name) && pts.has(pt_name)){
 
-                            // Feature line
-                            const planiDir_feature = new ol.Feature({
-                                geometry: new ol.geom.LineString([ 
-                                    [ pts.get(sta_name)['east'], pts.get(sta_name)['north'] ], 
-                                    [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ] 
-                                ]),
-                            });
-                            planiDir_feature.setStyle( new ol.style.Style({
-                                stroke: new ol.style.Stroke({
-                                    color: colorResi,
-                                    width: widthResi,
-                                }),
-                            }));
-                            planiResiDir_source.addFeature(planiDir_feature);
+                            if (visee === false || (visee !== false && visee === pt_name)){
 
-                            // Feature symbole
-                            const east_symbol = pts.get(sta_name)['east'] + (pts.get(pt_name)['east'] - pts.get(sta_name)['east'])*0.1;
-                            const north_symbol = pts.get(sta_name)['north'] + (pts.get(pt_name)['north'] - pts.get(sta_name)['north'])*0.1;
-                            const gis = gisement(pts.get(sta_name)['east']-east_symbol, pts.get(sta_name)['north']-north_symbol);              
+                                // Feature line
+                                const planiDir_feature = new ol.Feature({
+                                    geometry: new ol.geom.LineString([ 
+                                        [ pts.get(sta_name)['east'], pts.get(sta_name)['north'] ], 
+                                        [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ] 
+                                    ]),
+                                });
+                                planiDir_feature.setStyle( new ol.style.Style({
+                                    stroke: new ol.style.Stroke({
+                                        color: colorResi,
+                                        width: widthResi,
+                                    }),
+                                }));
+                                planiResiDir_source.addFeature(planiDir_feature);
 
-                            const planiDir_featureSymbol = new ol.Feature({
-                                geometry: new ol.geom.Point([ 
-                                    east_symbol, 
-                                    north_symbol 
-                                ]),
-                            });
-                            planiDir_featureSymbol.setStyle( new ol.style.Style({
-                                image: new ol.style.Icon({
-                                    src: './img/triangle-svgrepo-com.png',
-                                    scale:'0.05',
-                                    color: colorResi,
-                                    rotation: gis
-                                }),
-                            }));
-                            planiResiDir_source.addFeature(planiDir_featureSymbol);
+                                // Feature symbole
+                                const east_symbol = pts.get(sta_name)['east'] + (pts.get(pt_name)['east'] - pts.get(sta_name)['east'])*0.1;
+                                const north_symbol = pts.get(sta_name)['north'] + (pts.get(pt_name)['north'] - pts.get(sta_name)['north'])*0.1;
+                                const gis = gisement(pts.get(sta_name)['east']-east_symbol, pts.get(sta_name)['north']-north_symbol);              
+
+                                const planiDir_featureSymbol = new ol.Feature({
+                                    geometry: new ol.geom.Point([ 
+                                        east_symbol, 
+                                        north_symbol 
+                                    ]),
+                                });
+                                planiDir_featureSymbol.setStyle( new ol.style.Style({
+                                    image: new ol.style.Icon({
+                                        src: './img/triangle-svgrepo-com.png',
+                                        scale:'0.05',
+                                        color: colorResi,
+                                        rotation: gis
+                                    }),
+                                }));
+                                planiResiDir_source.addFeature(planiDir_featureSymbol);
+                            };
                         };
                     };
                 };
@@ -105,41 +108,43 @@ function affichResiNormesPlani(xml, pts){
                         const [colorResi2, widthResi2] = getParameterFeature_wi(obsDir_wi, limitWi, limitInf);
                         
                         if (pts.has(station_name) && pts.has(obs_name)){
+                            if (visee === false || (visee !== false && visee === obs_name)){
+    
+                                // Feature line
+                                const planiDis_feature = new ol.Feature({
+                                    geometry: new ol.geom.LineString([ 
+                                        [ pts.get(station_name)['east'], pts.get(station_name)['north'] ], 
+                                        [ pts.get(obs_name)['east'], pts.get(obs_name)['north'] ] 
+                                    ]),
+                                });
+                                planiDis_feature.setStyle( new ol.style.Style({
+                                    stroke: new ol.style.Stroke({
+                                        color: colorResi2,
+                                        width: widthResi2
+                                    }),
+                                }));
+                                planiResiDis_source.addFeature(planiDis_feature);
 
-                            // Feature line
-                            const planiDis_feature = new ol.Feature({
-                                geometry: new ol.geom.LineString([ 
-                                    [ pts.get(station_name)['east'], pts.get(station_name)['north'] ], 
-                                    [ pts.get(obs_name)['east'], pts.get(obs_name)['north'] ] 
-                                ]),
-                            });
-                            planiDis_feature.setStyle( new ol.style.Style({
-                                stroke: new ol.style.Stroke({
-                                    color: colorResi2,
-                                    width: widthResi2
-                                }),
-                            }));
-                            planiResiDis_source.addFeature(planiDis_feature);
-
-                            // Feature symbol
-                            const east_symbol1 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.12;
-                            const north_symbol1 = pts.get(station_name)['north'] + (pts.get(obs_name)['north'] - pts.get(station_name)['north'])*0.12;
-                            const east_symbol2 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.22;
-                            const north_symbol2 = pts.get(station_name)['north'] + (pts.get(obs_name)['north'] - pts.get(station_name)['north'])*0.22;
-                            const planiDis_featureSymbol = new ol.Feature({
-                                geometry: new ol.geom.LineString([
-                                    [east_symbol1, north_symbol1],
-                                    [east_symbol2, north_symbol2]
-                                ]),
-                            });
-                            planiDis_featureSymbol.setStyle( new ol.style.Style({
-                                stroke: new ol.style.Stroke({
-                                    color: colorResi2,
-                                    width: widthResi2+6,
-                                    lineCap: 'square'
-                                }),
-                            }));
-                            planiResiDis_source.addFeature(planiDis_featureSymbol);
+                                // Feature symbol
+                                const east_symbol1 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.12;
+                                const north_symbol1 = pts.get(station_name)['north'] + (pts.get(obs_name)['north'] - pts.get(station_name)['north'])*0.12;
+                                const east_symbol2 = pts.get(station_name)['east'] + (pts.get(obs_name)['east'] - pts.get(station_name)['east'])*0.22;
+                                const north_symbol2 = pts.get(station_name)['north'] + (pts.get(obs_name)['north'] - pts.get(station_name)['north'])*0.22;
+                                const planiDis_featureSymbol = new ol.Feature({
+                                    geometry: new ol.geom.LineString([
+                                        [east_symbol1, north_symbol1],
+                                        [east_symbol2, north_symbol2]
+                                    ]),
+                                });
+                                planiDis_featureSymbol.setStyle( new ol.style.Style({
+                                    stroke: new ol.style.Stroke({
+                                        color: colorResi2,
+                                        width: widthResi2+6,
+                                        lineCap: 'square'
+                                    }),
+                                }));
+                                planiResiDis_source.addFeature(planiDis_featureSymbol);
+                            };
                         };
                     };
                 };
@@ -163,20 +168,22 @@ function affichResiNormesPlani(xml, pts){
                             const [colorFiab, widthFiab] = getParameterFeature_wi(obs1_wi, limitWi, limitInf);
                             
                             if (pts.has(pt_name)){
-                                const planiResi1_feature = new ol.Feature({ 
-                                    geometry: new ol.geom.Point([ 
-                                        pts.get(pt_name)['east'], 
-                                        pts.get(pt_name)['north'] 
-                                    ]),
-                                });
-                                planiResi1_feature.setStyle( new ol.style.Style({
-                                    image: new ol.style.Icon({
-                                        src: './img/hexagon_half1_svgrepo-com.png',
-                                        scale: list_radius[planiGNSS_sessionID]/2,
-                                        color: colorFiab,
-                                    }),
-                                }) );
-                                planiResiGNSS_source.addFeature(planiResi1_feature);
+                                if (visee === false || (visee !== false && visee === pt_name)){
+                                    const planiResi1_feature = new ol.Feature({ 
+                                        geometry: new ol.geom.Point([ 
+                                            pts.get(pt_name)['east'], 
+                                            pts.get(pt_name)['north'] 
+                                        ]),
+                                    });
+                                    planiResi1_feature.setStyle( new ol.style.Style({
+                                        image: new ol.style.Icon({
+                                            src: './img/hexagon_half1_svgrepo-com.png',
+                                            scale: list_radius[planiGNSS_sessionID]/2,
+                                            color: colorFiab,
+                                        }),
+                                    }) );
+                                    planiResiGNSS_source.addFeature(planiResi1_feature);
+                                };
                             };
                         };
 
@@ -186,20 +193,22 @@ function affichResiNormesPlani(xml, pts){
                             const [colorFiab, widthFiab] = getParameterFeature_wi(obs2_wi, limitWi, limitInf);
                             
                             if (pts.has(pt_name)){
-                                const planiResi2_feature = new ol.Feature({ 
-                                    geometry: new ol.geom.Point([ 
-                                        pts.get(pt_name)['east'], 
-                                        pts.get(pt_name)['north'] 
-                                    ]),
-                                });
-                                planiResi2_feature.setStyle( new ol.style.Style({
-                                    image: new ol.style.Icon({
-                                        src: './img/hexagon_half2_svgrepo-com.png',
-                                        scale: list_radius[planiGNSS_sessionID]/2,
-                                        color: colorFiab,
-                                    }),
-                                }) );
-                                planiResiGNSS_source.addFeature(planiResi2_feature);
+                                if (visee === false || (visee !== false && visee === pt_name)){
+                                    const planiResi2_feature = new ol.Feature({ 
+                                        geometry: new ol.geom.Point([ 
+                                            pts.get(pt_name)['east'], 
+                                            pts.get(pt_name)['north'] 
+                                        ]),
+                                    });
+                                    planiResi2_feature.setStyle( new ol.style.Style({
+                                        image: new ol.style.Icon({
+                                            src: './img/hexagon_half2_svgrepo-com.png',
+                                            scale: list_radius[planiGNSS_sessionID]/2,
+                                            color: colorFiab,
+                                        }),
+                                    }) );
+                                    planiResiGNSS_source.addFeature(planiResi2_feature);
+                                };
                             };
                         }
                     }
@@ -228,39 +237,41 @@ function affichResiNormesPlani(xml, pts){
                             const [colorFiab, widthFiab] = getParameterFeature_wi(obs1_wi, limitWi, limitInf);
                             
                             if (pts.has(point_name)){
-                                const planiResi_CoordE_feature = new ol.Feature({ 
-                                    geometry: new ol.geom.Point([ 
-                                        pts.get(point_name)['east'], 
-                                        pts.get(point_name)['north'] 
-                                    ]) 
-                                });
-                                const planiResi_CoordE_style = new ol.style.Style({
-                                    image: new ol.style.Icon({
-                                        src: './img/Est.svg',
-                                        scale: String(0.02*widthFiab),
-                                        color: String(colorFiab),
-                                    }),
-                                    text: new ol.style.Text({
-                                        text: point_name,
-                                        textAlign: "center",
-                                        textBaseline: "middle",
-                                        font: "italic 15px Calibri",
-                                        fill: new ol.style.Fill({
-                                            color: String(colorFiab)
+                                if (visee === false || (visee !== false && visee === point_name)){
+                                    const planiResi_CoordE_feature = new ol.Feature({ 
+                                        geometry: new ol.geom.Point([ 
+                                            pts.get(point_name)['east'], 
+                                            pts.get(point_name)['north'] 
+                                        ]) 
+                                    });
+                                    const planiResi_CoordE_style = new ol.style.Style({
+                                        image: new ol.style.Icon({
+                                            src: './img/Est.svg',
+                                            scale: String(0.02*widthFiab),
+                                            color: String(colorFiab),
                                         }),
-                                        stroke: new ol.style.Stroke({
-                                            color: '#000', 
-                                            width: 3
-                                        }),
-                                        offsetX: 10,
-                                        offsetY: -10,
-                                        rotation: 0,
-                                        placement: "point"
-                                    })
-                                });
-                                planiResi_CoordE_feature.setStyle(planiResi_CoordE_style);
-                                planiResiCoordE_source.addFeature(planiResi_CoordE_feature);
-                            }
+                                        text: new ol.style.Text({
+                                            text: point_name,
+                                            textAlign: "center",
+                                            textBaseline: "middle",
+                                            font: "italic 15px Calibri",
+                                            fill: new ol.style.Fill({
+                                                color: String(colorFiab)
+                                            }),
+                                            stroke: new ol.style.Stroke({
+                                                color: '#000', 
+                                                width: 3
+                                            }),
+                                            offsetX: 10,
+                                            offsetY: -10,
+                                            rotation: 0,
+                                            placement: "point"
+                                        })
+                                    });
+                                    planiResi_CoordE_feature.setStyle(planiResi_CoordE_style);
+                                    planiResiCoordE_source.addFeature(planiResi_CoordE_feature);
+                                };
+                            };
                         };
 
 
@@ -270,38 +281,40 @@ function affichResiNormesPlani(xml, pts){
                             const [colorFiab, widthFiab] = getParameterFeature_wi(obs2_wi, limitWi, limitInf);
                             
                             if (pts.has(point_name)){
-                                const planiResi_CoordN_feature = new ol.Feature({ 
-                                    geometry: new ol.geom.Point([ 
-                                        pts.get(point_name)['east'], 
-                                        pts.get(point_name)['north'] 
-                                    ]) 
-                                });
-                                const planiResi_CoordN_style = new ol.style.Style({
-                                    image: new ol.style.Icon({
-                                        src: './img/Nord.svg',
-                                        scale: String(0.02*widthFiab),
-                                        color: String(colorFiab),
-                                    }),
-                                    text: new ol.style.Text({
-                                        text: point_name,
-                                        textAlign: "center",
-                                        textBaseline: "middle",
-                                        font: "italic 15px Calibri",
-                                        fill: new ol.style.Fill({
-                                            color: String(colorFiab)
+                                if (visee === false || (visee !== false && visee === point_name)){
+                                    const planiResi_CoordN_feature = new ol.Feature({ 
+                                        geometry: new ol.geom.Point([ 
+                                            pts.get(point_name)['east'], 
+                                            pts.get(point_name)['north'] 
+                                        ]) 
+                                    });
+                                    const planiResi_CoordN_style = new ol.style.Style({
+                                        image: new ol.style.Icon({
+                                            src: './img/Nord.svg',
+                                            scale: String(0.02*widthFiab),
+                                            color: String(colorFiab),
                                         }),
-                                        stroke: new ol.style.Stroke({
-                                            color: '#000', 
-                                            width: 3
-                                        }),
-                                        offsetX: 10,
-                                        offsetY: 10,
-                                        rotation: 0,
-                                        placement: "point"
-                                    })
-                                });
-                                planiResi_CoordN_feature.setStyle(planiResi_CoordN_style);
-                                planiResiCoordN_source.addFeature(planiResi_CoordN_feature);
+                                        text: new ol.style.Text({
+                                            text: point_name,
+                                            textAlign: "center",
+                                            textBaseline: "middle",
+                                            font: "italic 15px Calibri",
+                                            fill: new ol.style.Fill({
+                                                color: String(colorFiab)
+                                            }),
+                                            stroke: new ol.style.Stroke({
+                                                color: '#000', 
+                                                width: 3
+                                            }),
+                                            offsetX: 10,
+                                            offsetY: 10,
+                                            rotation: 0,
+                                            placement: "point"
+                                        })
+                                    });
+                                    planiResi_CoordN_feature.setStyle(planiResi_CoordN_style);
+                                    planiResiCoordN_source.addFeature(planiResi_CoordN_feature);
+                                }
                             }
                         }
                     }

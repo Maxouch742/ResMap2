@@ -25,7 +25,7 @@ stylePtsF = new ol.style.Style({
     })
 });
 
-// PLANIMETRIE
+// Points nouveaux - PLANIMETRIE
 stylePtsN_plani = new ol.style.Style({
     image: new ol.style.Icon({
         src: './img/triangle-filled-svgrepo-com.png',
@@ -48,7 +48,7 @@ stylePtsN_plani = new ol.style.Style({
     })
 });
 
-// ALTIMETRIE
+// Points nouveaux - ALTIMETRIE
 stylePtsN_alti = new ol.style.Style({
     image: new ol.style.Icon({
         src: './img/triangle-filled-inversed-svgrepo-com.png',
@@ -71,6 +71,75 @@ stylePtsN_alti = new ol.style.Style({
     })
 });
 
+
+// Filter -- Points fixes
+stylePtsF_filter = new ol.style.Style({
+    image: new ol.style.Icon({
+        src: './img/circle-filled-svgrepo-com.png',
+        scale: '0.07',
+        color: '#979696',
+    }),
+    text: new ol.style.Text({
+        textAlign: "center",
+        textBaseline: "middle",
+        font: "bold 14px Calibri",
+        fill: new ol.style.Fill({
+            color: "#979696"
+        }),
+        stroke: new ol.style.Stroke({
+            color: "#ffffff", width: 2
+        }),
+        offsetX: 15.0,
+        offsetY: -10.0,
+        rotation: 0
+    })
+});
+
+// Filter -- Points nouveaux - PLANIMETRIE
+stylePtsN_plani_filter = new ol.style.Style({
+    image: new ol.style.Icon({
+        src: './img/triangle-filled-svgrepo-com.png',
+        scale: '0.07',
+        color: '#C1C1C1',  // bleu
+    }),
+    text: new ol.style.Text({
+        textAlign: "center",
+        textBaseline: "middle",
+        font: "bold 14px Calibri",
+        fill: new ol.style.Fill({
+            color: '#C1C1C1'
+        }),
+        stroke: new ol.style.Stroke({
+          color: "#ffffff", width: 3
+        }),
+        offsetX: 15.0,
+        offsetY: -10.0,
+        rotation: 0
+    })
+});
+
+// Filter -- Points nouveaux - ALTIMETRIE
+stylePtsN_alti_filter = new ol.style.Style({
+    image: new ol.style.Icon({
+        src: './img/triangle-filled-inversed-svgrepo-com.png',
+        scale: '0.07',
+        color: '#C1C1C1',  // bleu
+    }),
+    text: new ol.style.Text({
+        textAlign: "center",
+        textBaseline: "middle",
+        font: "bold 14px Calibri",
+        fill: new ol.style.Fill({
+            color: '#C1C1C1'
+        }),
+        stroke: new ol.style.Stroke({
+          color: "#ffffff", width: 3
+        }),
+        offsetX: 15.0,
+        offsetY: -10.0,
+        rotation: 0
+    })
+});
 
 //----------------------------------------------------------------------------------------------------------------------
 // ELLIPSES

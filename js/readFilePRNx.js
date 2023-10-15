@@ -23,7 +23,7 @@ function readFilePRNx(){
 
       // Points management
       pts_Map = parseXML_points(xmlDoc);
-      const pts_planiVar = parseXML_variablePoints_fixBug(pts_Map, 'planimetric');
+      pts_planiVar = parseXML_variablePoints_fixBug(pts_Map, 'planimetric');
       pts_planiObs = parseXML_planiObsPoints(xmlDoc);  // get points to targets
       pts_altiVar = [];
       pts_altiObs = [];

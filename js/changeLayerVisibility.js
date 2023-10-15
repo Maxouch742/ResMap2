@@ -88,14 +88,7 @@ function changeLayerVisibility(item){
                 };
 
                 document.getElementById('checkboxVect').checked = false;
-                changeLayerVisibility('plani_vect');
-
-                tempLayerPts.setVisible(false);
-                tempLayerEll.setVisible(false);
-                tempLayerRect.setVisible(false);
-                tempLayerVect.setVisible(false);
-                defineLayersTemp()
-                
+                changeLayerVisibility('plani_vect');                
             };
             break;
         case 'plani_ptsF':
@@ -320,13 +313,6 @@ function changeLayerVisibility(item){
                     document.getElementById('checkboxResi_Coord_alti').checked = false;
                     changeLayerVisibility('alti_resi_coord');
                 };
-
-                tempLayerPts_alti.setVisible(false);
-                tempLayerEll_alti.setVisible(false);
-                tempLayerRect_alti.setVisible(false);
-                tempLayerVect_alti.setVisible(false);
-                defineLayersTemp();
-
             };
             break;
         case 'alti_ptsF':

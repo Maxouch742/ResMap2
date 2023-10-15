@@ -52,7 +52,7 @@
 }
 
 .sidebar.open {
-    width: 250px;
+    width: 275px;
     right: 0px;
 }
 
@@ -60,4 +60,10 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
+}
+
+#reinitFilter{
+    position: absolute;
+    bottom: 10px;
+    right: 150px;
 }
