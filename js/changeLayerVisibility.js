@@ -313,13 +313,6 @@ function changeLayerVisibility(item){
                     document.getElementById('checkboxResi_Coord_alti').checked = false;
                     changeLayerVisibility('alti_resi_coord');
                 };
-
-                tempLayerPts_alti.setVisible(false);
-                tempLayerEll_alti.setVisible(false);
-                tempLayerRect_alti.setVisible(false);
-                tempLayerVect_alti.setVisible(false);
-                defineLayersTemp();
-
             };
             break;
         case 'alti_ptsF':

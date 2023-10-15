@@ -1,4 +1,4 @@
-function affichPrecisionAlti(pts, xml){
+function affichPrecisionAlti(pts, xml, visee=false){
 
     // Définition des sources
     const altiEll_source = new ol.source.Vector({});
@@ -19,20 +19,23 @@ function affichPrecisionAlti(pts, xml){
             
         if (value.EMH != undefined){
 
-            const east = value.east;
-            const north = value.north;
-            const emh_number = value.EMH/1000.0;
-            const emh_string = String(value.EMH.toFixed(2));
-            
-            const altiEll_feature = new ol.Feature({
-                name: key,
-                geometry: new ol.geom.LineString([
-                    [ east, north + emh_number*kSigma*echelleEllipses/2 ],
-                    [ east, north - emh_number*kSigma*echelleEllipses/2 ]
-                ]),
-                properties: emh_string+"mm"
-            });
-            altiEll_source.addFeature(altiEll_feature);
+            if (visee === false || (visee !== false && visee === key)){
+
+                const east = value.east;
+                const north = value.north;
+                const emh_number = value.EMH/1000.0;
+                const emh_string = String(value.EMH.toFixed(2));
+                
+                const altiEll_feature = new ol.Feature({
+                    name: key,
+                    geometry: new ol.geom.LineString([
+                        [ east, north + emh_number*kSigma*echelleEllipses/2 ],
+                        [ east, north - emh_number*kSigma*echelleEllipses/2 ]
+                    ]),
+                    properties: emh_string+"mm"
+                });
+                altiEll_source.addFeature(altiEll_feature);
+            }
         }
     });
 
