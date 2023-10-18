@@ -211,7 +211,16 @@ function affichMeasPlani(xml, pts, visee = false, station_matricule = false){
                                 geometry: new ol.geom.LineString([
                                     [east_symbol1, north_symbol1],
                                     [east_symbol2, north_symbol2]
-                                ])
+                                ]),
+                                obs: sta_type,
+                                station: sta_name_dis,
+                                visee: pt_name,
+                                value: parseFloat(list_obsDis[j].getAttribute('value')),
+                                group: parseFloat(list_obsDis[j].getAttribute('group')),
+                                zi: parseFloat(list_obsDis[j].getAttribute('zi')),
+                                wi: parseFloat(list_obsDis[j].getAttribute('wi')),
+                                nabla: parseFloat(list_obsDis[j].getAttribute('nabla_rzi')),
+                                corr: parseFloat(list_obsDis[j].getAttribute('corr')),
                             });
                             
                             // Style

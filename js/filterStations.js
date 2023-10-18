@@ -51,6 +51,34 @@ function filterStations(){
                     });
                 }
 
+                list_layer = [
+                    planiDir_layer, 
+                    planiDis_layer,
+                    planiGNSS_layer,
+                    planiCoordE_layer,
+                    planiCoordN_layer,
+
+                    planiFiabLocDir_layer,
+                    planiFiabLocDis_layer,
+                    planiFiabLocGNSS_layer,
+                    planiFiabLocCoordE_layer,
+                    planiFiabLocCoordN_layer,
+
+                    planiResiDir_layer,
+                    planiResiDis_layer,
+                    planiResiGNSS_layer,
+                    planiResiCoordE_layer,
+                    planiResiCoordN_layer,
+                ];
+                for (let i=0; i<list_layer.length; i++){
+                    list_layer[i].getSource().getFeatures().forEach(function (feature){
+                        if (feature.getProperties().station !== matricule_sta){
+                            list_layer[i].getSource().removeFeature(feature);
+                        }
+                    });
+                };
+
+
                 // Zoomer sur le point
                 view.setCenter(matricule_feature.getGeometry().getCoordinates());
                 view.setZoom(niveau_zoom);
@@ -61,18 +89,21 @@ function filterStations(){
 
                 // On affiche les observations seulement (avec zi et wi)
                 //defineLayers("filter");
-                affichMeasPlani(xmlDoc, pts_Map, false, matricule_sta);
-                affichFiabLocPlani(xmlDoc, pts_Map, false, matricule_sta);
-                affichResiNormesPlani(xmlDoc, pts_Map, false, matricule_sta);
+                // affichMeasPlani(xmlDoc, pts_Map, false, matricule_sta);
+                // affichFiabLocPlani(xmlDoc, pts_Map, false, matricule_sta);
+                // affichResiNormesPlani(xmlDoc, pts_Map, false, matricule_sta);
 
-                if (document.getElementById('checkboxDir') !== null) {
-                    document.getElementById('checkboxDir').checked = true;
-                    changeLayerVisibility('plani_dir');
-                };
-                if (document.getElementById('checkboxDir') !== null) {
-                    document.getElementById('checkboxDis').checked = true;
-                    changeLayerVisibility('plani_dis');
-                };
+                // if (document.getElementById('checkboxDir') !== null) {
+                //     document.getElementById('checkboxDir').checked = true;
+                //     changeLayerVisibility('plani_dir');
+                // };
+                // if (document.getElementById('checkboxDir') !== null) {
+                //     document.getElementById('checkboxDis').checked = true;
+                //     changeLayerVisibility('plani_dis');
+                // };
+
+
+
             }
             else {
                 document.getElementById("filterStationNot").innerHTML = 'La station n\'existe pas en 2D!';
