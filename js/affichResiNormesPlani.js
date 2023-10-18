@@ -1,4 +1,4 @@
-function affichResiNormesPlani(xml, pts, visee = false){
+function affichResiNormesPlani(xml, pts, visee = false, matricule_station = false){
 
     // Elements du fichier HTML
     const planiAbriss = xml.getElementsByTagName('planimetricAbriss')[0];
@@ -48,7 +48,9 @@ function affichResiNormesPlani(xml, pts, visee = false){
                         
                         if (pts.has(sta_name) && pts.has(pt_name)){
 
-                            if (visee === false || (visee !== false && visee === pt_name)){
+                            if ((visee === false && matricule_station === false) || 
+                                (visee !== false && matricule_station === false && visee === pt_name) ||
+                                (visee === false && matricule_station !== false && matricule_station === sta_name)){
 
                                 // Feature line
                                 const planiDir_feature = new ol.Feature({
@@ -237,7 +239,11 @@ function affichResiNormesPlani(xml, pts, visee = false){
                             const [colorFiab, widthFiab] = getParameterFeature_wi(obs1_wi, limitWi, limitInf);
                             
                             if (pts.has(point_name)){
-                                if (visee === false || (visee !== false && visee === point_name)){
+                                
+                                if ((visee === false && matricule_station === false) || 
+                                    (visee !== false && matricule_station === false && visee === point_name) ||
+                                    (visee === false && matricule_station !== false && matricule_station === point_name)){
+
                                     const planiResi_CoordE_feature = new ol.Feature({ 
                                         geometry: new ol.geom.Point([ 
                                             pts.get(point_name)['east'], 
@@ -281,7 +287,11 @@ function affichResiNormesPlani(xml, pts, visee = false){
                             const [colorFiab, widthFiab] = getParameterFeature_wi(obs2_wi, limitWi, limitInf);
                             
                             if (pts.has(point_name)){
-                                if (visee === false || (visee !== false && visee === point_name)){
+                                
+                                if ((visee === false && matricule_station === false) || 
+                                    (visee !== false && matricule_station === false && visee === point_name) ||
+                                    (visee === false && matricule_station !== false && matricule_station === point_name)){
+
                                     const planiResi_CoordN_feature = new ol.Feature({ 
                                         geometry: new ol.geom.Point([ 
                                             pts.get(point_name)['east'], 

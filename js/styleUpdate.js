@@ -1,17 +1,11 @@
-function styleUpdate(layer, temp = false, tempp = false) {
+function styleUpdate(layer, temp = false) {
 
     switch (layer) {
         case 'planiPtsF':
-            if (temp === true && tempp === false){
-                tempLayerPts.setStyle( function(feature) {
-                    stylePtsF.getText().setText(feature.getId());
-                    return stylePtsF;
-                });
-            } else if (temp === true && tempp === true){
-                console.log("OKOKOK");
-                tempLayerPts_sta.setStyle( function(feature) {
-                    stylePtsF.getText().setText(feature.getId());
-                    return stylePtsF;
+            if (temp){
+                planiPtsF_layer.setStyle( function(feature) {
+                    stylePtsF_filter.getText().setText(feature.getId());
+                    return stylePtsF_filter;
                 });
             } else {
                 planiPtsF_layer.setStyle( function(feature) {
@@ -21,15 +15,10 @@ function styleUpdate(layer, temp = false, tempp = false) {
             };            
             break;
         case 'planiPtsN':
-            if (temp === true && tempp === false){
-                tempLayerPts.setStyle( function(feature) {
-                    stylePtsN_plani.getText().setText(feature.getId());
-                    return stylePtsN_plani;
-                });
-            } else if (temp === true && tempp === true){
-                tempLayerPts_sta.setStyle( function(feature) {
-                    stylePtsN_plani.getText().setText(feature.getId());
-                    return stylePtsN_plani;
+            if (temp){
+                planiPtsN_layer.setStyle( function(feature) {
+                    stylePtsN_plani_filter.getText().setText(feature.getId());
+                    return stylePtsN_plani_filter;
                 });
             } else {
                 planiPtsN_layer.setStyle( function(feature) {

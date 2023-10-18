@@ -165,7 +165,7 @@ function affichMeasPlani(xml, pts, visee = false, station_matricule = false){
 
                     if (pts.has(sta_name_dis) && pts.has(pt_name)){
                         if ((visee === false && station_matricule === false) || 
-                            (visee !== false && station_matricule === false && pt_name === visee)
+                            (visee !== false && station_matricule === false && pt_name === visee) ||
                             (visee === false && station_matricule !== false && station_matricule === sta_name_dis)){
                     
                             // Feature line
@@ -254,37 +254,43 @@ function affichMeasPlani(xml, pts, visee = false, station_matricule = false){
 
                         if (pts.has(pt_name)){
 
-                            const planiCoord_feature = new ol.Feature({
-                                geometry: new ol.geom.Point([
-                                    pts.get(pt_name)['east'],
-                                    pts.get(pt_name)['north']
-                                ]),
-                                name: pt_name,
-                            });
+                            if ((visee === false && station_matricule === false) || 
+                                (visee !== false && station_matricule === false && pt_name === visee) ||
+                                (visee === false && station_matricule !== false && station_matricule === pt_name)){
+                     
 
-                            switch (obs_target){
-                                case "Y":
-                                    const planiCoord_style1 = new ol.style.Style({
-                                        image: new ol.style.Icon({
-                                            src: './img/E_obs.png',
-                                            scale: '0.13',
-                                            color: '#000000',
-                                        })
-                                    });
-                                    planiCoord_feature.setStyle(planiCoord_style1);
-                                    planiCoordE_source.addFeature(planiCoord_feature);
-                                    break;
-                                case "X":
-                                    const planiCoord_style2 = new ol.style.Style({
-                                        image: new ol.style.Icon({
-                                            src: './img/N_obs.png',
-                                            scale: '0.13',
-                                            color: '#000000',
-                                        })
-                                    });
-                                    planiCoord_feature.setStyle(planiCoord_style2);
-                                    planiCoordN_source.addFeature(planiCoord_feature);
-                                    break;
+                                const planiCoord_feature = new ol.Feature({
+                                    geometry: new ol.geom.Point([
+                                        pts.get(pt_name)['east'],
+                                        pts.get(pt_name)['north']
+                                    ]),
+                                    name: pt_name,
+                                });
+
+                                switch (obs_target){
+                                    case "Y":
+                                        const planiCoord_style1 = new ol.style.Style({
+                                            image: new ol.style.Icon({
+                                                src: './img/E_obs.png',
+                                                scale: '0.13',
+                                                color: '#000000',
+                                            })
+                                        });
+                                        planiCoord_feature.setStyle(planiCoord_style1);
+                                        planiCoordE_source.addFeature(planiCoord_feature);
+                                        break;
+                                    case "X":
+                                        const planiCoord_style2 = new ol.style.Style({
+                                            image: new ol.style.Icon({
+                                                src: './img/N_obs.png',
+                                                scale: '0.13',
+                                                color: '#000000',
+                                            })
+                                        });
+                                        planiCoord_feature.setStyle(planiCoord_style2);
+                                        planiCoordN_source.addFeature(planiCoord_feature);
+                                        break;
+                                }
                             }
                         }
                     }
