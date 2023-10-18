@@ -5,14 +5,21 @@ function reinitFilter(){
     document.getElementById("filterPoint").value = '';
     document.getElementById("filterStation").value = '';
 
+    // désactiver tous les layers altimétriques et plani
+    document.getElementById('checkboxAffich_alti').checked = true;
+    changeLayerVisibility('alti_affich');
+    document.getElementById('checkboxAffich').checked = true;
+    changeLayerVisibility('plani_affich');
+
     // Réinitialiser les layers
     tempLayerPts.setVisible(false);
     tempLayerPts_alti.setVisible(false);
+    tempLayerPts_sta.setVisible(false);
 
     // Rezoomer sur l'ensemble du réseau géodésique
     defineViewByFile(pts_Map);
-    defineLayersTemp();
-    defineLayers();
+    //defineLayersTemp();
+    //defineLayers();
 
     // Remettre le radiobutton sur 2D
     const check = document.getElementsByName("AbrissPlani");

@@ -1,4 +1,20 @@
 function affichFiabLocPlani(xml, pts, visee = false, matricule_station = false){
+    
+    if (planiFiabLocDir_layer.getSource() !== null){
+        planiFiabLocDir_layer.getSource().clear();
+    };
+    if (planiFiabLocDis_layer.getSource() !== null){
+        planiFiabLocDis_layer.getSource().clear();
+    }
+    if (planiFiabLocGNSS_layer.getSource() !== null){
+        planiFiabLocGNSS_layer.getSource().clear();
+    }
+    if (planiFiabLocCoordE_layer.getSource() !== null){
+        planiFiabLocCoordE_layer.getSource().clear();
+    }
+    if (planiFiabLocCoordN_layer.getSource() !== null){
+        planiFiabLocCoordN_layer.getSource().clear();
+    }
 
     // Create source
     const planiFiabLocDir_source = new ol.source.Vector({});

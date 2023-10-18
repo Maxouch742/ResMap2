@@ -1,4 +1,20 @@
 function affichResiNormesPlani(xml, pts, visee = false, matricule_station = false){
+    
+    if (planiResiDir_layer.getSource() !== null){
+        planiResiDir_layer.getSource().clear();
+    };
+    if (planiResiDis_layer.getSource() !== null){
+        planiResiDis_layer.getSource().clear();
+    }
+    if (planiResiGNSS_layer.getSource() !== null){
+        planiResiGNSS_layer.getSource().clear();
+    }
+    if (planiResiCoordE_layer.getSource() !== null){
+        planiResiCoordE_layer.getSource().clear();
+    }
+    if (planiResiCoordN_layer.getSource() !== null){
+        planiResiCoordN_layer.getSource().clear();
+    }
 
     // Elements du fichier HTML
     const planiAbriss = xml.getElementsByTagName('planimetricAbriss')[0];

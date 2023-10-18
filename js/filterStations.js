@@ -3,7 +3,7 @@ function filterStations(){
     const niveau_zoom = 17;
 
     // Récupérer la valeur du point cherché
-    matricule = document.getElementById("filterStation").value;
+    matricule_sta = document.getElementById("filterStation").value;
 
     //reinitFilter();
 
@@ -19,7 +19,7 @@ function filterStations(){
     switch (dim){
         case 'AbrissPlani':
             // Si le point est présent dans la liste des stations planimétriques
-            if (planiStation.includes(matricule)){
+            if (planiStation.includes(matricule_sta)){
 
                 // désactiver tous les layers altimétriques
                 document.getElementById('checkboxAffich_alti').checked = true;
@@ -33,10 +33,10 @@ function filterStations(){
                 let point_nouveau_fixe = false;
 
                 // Récupérer le feature du point
-                let matricule_feature = planiPtsF_layer.getSource().getFeatureById(matricule);
+                let matricule_feature = planiPtsF_layer.getSource().getFeatureById(matricule_sta);
                 if (matricule_feature === null){
                     point_nouveau_fixe = true;
-                    matricule_feature = planiPtsN_layer.getSource().getFeatureById(matricule);
+                    matricule_feature = planiPtsN_layer.getSource().getFeatureById(matricule_sta);
                 };
                 tempSourcePts_sta.addFeature(matricule_feature);
                 if (point_nouveau_fixe){
@@ -55,15 +55,15 @@ function filterStations(){
                 view.setCenter(matricule_feature.getGeometry().getCoordinates());
                 view.setZoom(niveau_zoom);
 
-                //affichPrecisionPlani(pts_Map, xmlDoc, matricule);
-                //affichRectanglePlani(pts_Map, matricule);
-                //affichVecteurs(pts_Map, matricule);
+                //affichPrecisionPlani(pts_Map, xmlDoc, matricule_sta);
+                //affichRectanglePlani(pts_Map, matricule_sta);
+                //affichVecteurs(pts_Map, matricule_sta);
 
                 // On affiche les observations seulement (avec zi et wi)
                 //defineLayers("filter");
-                affichMeasPlani(xmlDoc, pts_Map, false, matricule);
-                affichFiabLocPlani(xmlDoc, pts_Map, false, matricule);
-                affichResiNormesPlani(xmlDoc, pts_Map, false, matricule);
+                affichMeasPlani(xmlDoc, pts_Map, false, matricule_sta);
+                affichFiabLocPlani(xmlDoc, pts_Map, false, matricule_sta);
+                affichResiNormesPlani(xmlDoc, pts_Map, false, matricule_sta);
 
                 if (document.getElementById('checkboxDir') !== null) {
                     document.getElementById('checkboxDir').checked = true;
@@ -73,11 +73,6 @@ function filterStations(){
                     document.getElementById('checkboxDis').checked = true;
                     changeLayerVisibility('plani_dis');
                 };
-
-
-                
-
-
             }
             else {
                 document.getElementById("filterStationNot").innerHTML = 'La station n\'existe pas en 2D!';
