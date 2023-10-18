@@ -1,4 +1,4 @@
-function affichMeasPlani(xml, pts, visee = false){
+function affichMeasPlani(xml, pts, visee = false, station_matricule = false){
 
     // Elements du fichier HTML
     const planiAbriss = xml.getElementsByTagName('planimetricAbriss')[0];
@@ -78,7 +78,9 @@ function affichMeasPlani(xml, pts, visee = false){
                     const pt_obsNr = list_obsDir[j].getAttribute('obsNr');
 
                     if (pts.has(sta_name) && pts.has(pt_name)) {
-                        if (visee === false || (visee !== false && pt_name === visee)){
+                        if ((visee === false && station_matricule === false) || 
+                            (station_matricule === false && visee !== false && pt_name === visee) ||
+                            (station_matricule !== false && visee === false && sta_name === station_matricule)){
                     
                             // Feature line
                             const planiDir_feature = new ol.Feature({
@@ -162,7 +164,9 @@ function affichMeasPlani(xml, pts, visee = false){
                     const pt_obsNr = list_obsDis[j].getAttribute('obsNr');
 
                     if (pts.has(sta_name_dis) && pts.has(pt_name)){
-                        if (visee === false || (visee !== false && pt_name === visee)){
+                        if ((visee === false && station_matricule === false) || 
+                            (visee !== false && station_matricule === false && pt_name === visee)
+                            (visee === false && station_matricule !== false && station_matricule === sta_name_dis)){
                     
                             // Feature line
                             const planiDis_feature = new ol.Feature({

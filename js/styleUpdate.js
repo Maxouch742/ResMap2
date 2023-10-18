@@ -1,14 +1,19 @@
-function styleUpdate(layer, temp = false) {
+function styleUpdate(layer, temp = false, tempp = false) {
 
     switch (layer) {
         case 'planiPtsF':
-            if (temp){
+            if (temp === true && tempp === false){
                 tempLayerPts.setStyle( function(feature) {
                     stylePtsF.getText().setText(feature.getId());
                     return stylePtsF;
                 });
-            }
-            else {
+            } else if (temp === true && tempp === true){
+                console.log("OKOKOK");
+                tempLayerPts_sta.setStyle( function(feature) {
+                    stylePtsF.getText().setText(feature.getId());
+                    return stylePtsF;
+                });
+            } else {
                 planiPtsF_layer.setStyle( function(feature) {
                     stylePtsF.getText().setText(feature.getId());
                     return stylePtsF;
@@ -16,13 +21,17 @@ function styleUpdate(layer, temp = false) {
             };            
             break;
         case 'planiPtsN':
-            if (temp){
+            if (temp === true && tempp === false){
                 tempLayerPts.setStyle( function(feature) {
                     stylePtsN_plani.getText().setText(feature.getId());
                     return stylePtsN_plani;
                 });
-            }
-            else {
+            } else if (temp === true && tempp === true){
+                tempLayerPts_sta.setStyle( function(feature) {
+                    stylePtsN_plani.getText().setText(feature.getId());
+                    return stylePtsN_plani;
+                });
+            } else {
                 planiPtsN_layer.setStyle( function(feature) {
                     stylePtsN_plani.getText().setText(feature.getId());
                     return stylePtsN_plani;

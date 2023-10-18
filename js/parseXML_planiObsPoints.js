@@ -1,6 +1,10 @@
 function parseXML_planiObsPoints(xml){
 
+    // Liste des matricules observés (visées et stations)
     const planiObs = [];
+
+    // Liste des stations
+    const planiStation = [];
     
     const planiAbriss = xml.getElementsByTagName('planimetricAbriss')[0];
     const stations = planiAbriss.getElementsByTagName('station');
@@ -26,6 +30,10 @@ function parseXML_planiObsPoints(xml){
                 if (planiObs.includes(sta) === false){
                     planiObs.push(sta)
                 };
+                if (planiStation.includes(sta) === false){
+                    planiStation.push(sta)
+                };
+
                 // target id
                 const obs = stations[i].getElementsByTagName('obs')
                 for (let j=0; j<obs.length; j++){
@@ -42,6 +50,10 @@ function parseXML_planiObsPoints(xml){
                 if (planiObs.includes(staa) === false){
                     planiObs.push(staa)
                 };
+                if (planiStation.includes(staa) === false){
+                    planiStation.push(staa)
+                };
+
                 // target id
                 const obss = stations[i].getElementsByTagName('obs')
                 for (let j=0; j<obss.length; j++){
@@ -54,5 +66,5 @@ function parseXML_planiObsPoints(xml){
         };
     };
 
-    return planiObs
+    return [planiObs, planiStation]
 }

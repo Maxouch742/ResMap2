@@ -25,14 +25,15 @@ function filterPoints(){
 
         switch (dim) {
             case 'AbrissPlani':
-                // désactiver tous les layers altimétriques et plani
-                document.getElementById('checkboxAffich_alti').checked = true;
-                changeLayerVisibility('alti_affich');
-                document.getElementById('checkboxAffich').checked = true;
-                changeLayerVisibility('plani_affich');
 
                 // Check si le point est présent en plani
                 if (pts_planiObs.includes(matricule)) {
+
+                    // désactiver tous les layers altimétriques et plani
+                    document.getElementById('checkboxAffich_alti').checked = true;
+                    changeLayerVisibility('alti_affich');
+                    document.getElementById('checkboxAffich').checked = true;
+                    changeLayerVisibility('plani_affich');
                     
                     // Savoir si on est sur un point fixe ou point nouveau
                     let ptsN = false;
