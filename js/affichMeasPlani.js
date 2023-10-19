@@ -1,21 +1,5 @@
 function affichMeasPlani(xml, pts, visee = false, station_matricule = false){
 
-    if (planiDir_layer.getSource() !== null){
-        planiDir_layer.getSource().clear();
-    };
-    if (planiDis_layer.getSource() !== null){
-        planiDis_layer.getSource().clear();
-    }
-    if (planiGNSS_layer.getSource() !== null){
-        planiGNSS_layer.getSource().clear();
-    }
-    if (planiCoordE_layer.getSource() !== null){
-        planiCoordE_layer.getSource().clear();
-    }
-    if (planiCoordN_layer.getSource() !== null){
-        planiCoordN_layer.getSource().clear();
-    }
-
     // Elements du fichier HTML
     const planiAbriss = xml.getElementsByTagName('planimetricAbriss')[0];
     const stations = planiAbriss.getElementsByTagName('station');

@@ -1,20 +1,4 @@
 function affichResiNormesPlani(xml, pts, visee = false, matricule_station = false){
-    
-    if (planiResiDir_layer.getSource() !== null){
-        planiResiDir_layer.getSource().clear();
-    };
-    if (planiResiDis_layer.getSource() !== null){
-        planiResiDis_layer.getSource().clear();
-    }
-    if (planiResiGNSS_layer.getSource() !== null){
-        planiResiGNSS_layer.getSource().clear();
-    }
-    if (planiResiCoordE_layer.getSource() !== null){
-        planiResiCoordE_layer.getSource().clear();
-    }
-    if (planiResiCoordN_layer.getSource() !== null){
-        planiResiCoordN_layer.getSource().clear();
-    }
 
     // Elements du fichier HTML
     const planiAbriss = xml.getElementsByTagName('planimetricAbriss')[0];
@@ -74,6 +58,8 @@ function affichResiNormesPlani(xml, pts, visee = false, matricule_station = fals
                                         [ pts.get(sta_name)['east'], pts.get(sta_name)['north'] ], 
                                         [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ] 
                                     ]),
+                                    station: sta_name,
+                                    visee: pt_name
                                 });
                                 planiDir_feature.setStyle( new ol.style.Style({
                                     stroke: new ol.style.Stroke({
@@ -93,6 +79,8 @@ function affichResiNormesPlani(xml, pts, visee = false, matricule_station = fals
                                         east_symbol, 
                                         north_symbol 
                                     ]),
+                                    station: sta_name,
+                                    visee: pt_name
                                 });
                                 planiDir_featureSymbol.setStyle( new ol.style.Style({
                                     image: new ol.style.Icon({
@@ -134,6 +122,8 @@ function affichResiNormesPlani(xml, pts, visee = false, matricule_station = fals
                                         [ pts.get(station_name)['east'], pts.get(station_name)['north'] ], 
                                         [ pts.get(obs_name)['east'], pts.get(obs_name)['north'] ] 
                                     ]),
+                                    station: station_name,
+                                    visee: obs_name
                                 });
                                 planiDis_feature.setStyle( new ol.style.Style({
                                     stroke: new ol.style.Stroke({
@@ -153,6 +143,8 @@ function affichResiNormesPlani(xml, pts, visee = false, matricule_station = fals
                                         [east_symbol1, north_symbol1],
                                         [east_symbol2, north_symbol2]
                                     ]),
+                                    station: station_name,
+                                    visee: obs_name
                                 });
                                 planiDis_featureSymbol.setStyle( new ol.style.Style({
                                     stroke: new ol.style.Stroke({
@@ -192,6 +184,8 @@ function affichResiNormesPlani(xml, pts, visee = false, matricule_station = fals
                                             pts.get(pt_name)['east'], 
                                             pts.get(pt_name)['north'] 
                                         ]),
+                                        station: pt_name,
+                                        visee: pt_name
                                     });
                                     planiResi1_feature.setStyle( new ol.style.Style({
                                         image: new ol.style.Icon({
@@ -217,6 +211,8 @@ function affichResiNormesPlani(xml, pts, visee = false, matricule_station = fals
                                             pts.get(pt_name)['east'], 
                                             pts.get(pt_name)['north'] 
                                         ]),
+                                        station: pt_name,
+                                        visee: pt_name
                                     });
                                     planiResi2_feature.setStyle( new ol.style.Style({
                                         image: new ol.style.Icon({
@@ -264,7 +260,9 @@ function affichResiNormesPlani(xml, pts, visee = false, matricule_station = fals
                                         geometry: new ol.geom.Point([ 
                                             pts.get(point_name)['east'], 
                                             pts.get(point_name)['north'] 
-                                        ]) 
+                                        ]),
+                                        station: point_name,
+                                        visee: point_name
                                     });
                                     const planiResi_CoordE_style = new ol.style.Style({
                                         image: new ol.style.Icon({
@@ -312,7 +310,9 @@ function affichResiNormesPlani(xml, pts, visee = false, matricule_station = fals
                                         geometry: new ol.geom.Point([ 
                                             pts.get(point_name)['east'], 
                                             pts.get(point_name)['north'] 
-                                        ]) 
+                                        ]),
+                                        station: point_name,
+                                        visee: point_name
                                     });
                                     const planiResi_CoordN_style = new ol.style.Style({
                                         image: new ol.style.Icon({

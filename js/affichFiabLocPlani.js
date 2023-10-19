@@ -43,7 +43,9 @@ function affichFiabLocPlani(xml, pts, visee = false, matricule_station = false){
                                         geometry: new ol.geom.Point([ 
                                             pts.get(pt_name)['east'], 
                                             pts.get(pt_name)['north'] 
-                                        ]) 
+                                        ]),
+                                        station: pt_name,
+                                        visee: pt_name
                                     });
                                     const planiFiabLoc_style = new ol.style.Style({
                                         image: new ol.style.Icon({
@@ -69,7 +71,9 @@ function affichFiabLocPlani(xml, pts, visee = false, matricule_station = false){
                                         geometry: new ol.geom.Point([ 
                                             pts.get(pt_name)['east'], 
                                             pts.get(pt_name)['north'] 
-                                        ]) 
+                                        ]),
+                                        station: pt_name,
+                                        visee: pt_name
                                     });
                                     const planiFiabLoc_style = new ol.style.Style({
                                         image: new ol.style.Icon({
@@ -118,6 +122,8 @@ function affichFiabLocPlani(xml, pts, visee = false, matricule_station = false){
                                         [ pts.get(sta_name)['east'], pts.get(sta_name)['north'] ], 
                                         [ pts.get(pt_name)['east'], pts.get(pt_name)['north'] ] 
                                     ]),
+                                    station: sta_name,
+                                    visee: pt_name
                                 });
                                 planiDir_feature.setStyle( new ol.style.Style({
                                     stroke: new ol.style.Stroke({
@@ -136,7 +142,9 @@ function affichFiabLocPlani(xml, pts, visee = false, matricule_station = false){
                                     geometry: new ol.geom.Point([ 
                                         east_symbol, 
                                         north_symbol
-                                    ])
+                                    ]),
+                                    station: sta_name,
+                                    visee: pt_name
                                 });
                                 planiDir_featureSymbol.setStyle( new ol.style.Style({
                                     image: new ol.style.Icon({
@@ -180,7 +188,9 @@ function affichFiabLocPlani(xml, pts, visee = false, matricule_station = false){
                                     geometry: new ol.geom.LineString([
                                         [ pts.get(station_name)['east'], pts.get(station_name)['north'] ],
                                         [ pts.get(obs_name)['east'], pts.get(obs_name)['north'] ] 
-                                    ])
+                                    ]),
+                                    station: station_name,
+                                    visee: obs_name
                                 });
                                 planiDis_feature.setStyle( new ol.style.Style({
                                     stroke: new ol.style.Stroke({
@@ -199,7 +209,9 @@ function affichFiabLocPlani(xml, pts, visee = false, matricule_station = false){
                                     geometry: new ol.geom.LineString([
                                         [east_symbol1, north_symbol1],
                                         [east_symbol2, north_symbol2]
-                                    ])
+                                    ]),
+                                    station: station_name,
+                                    visee: obs_name
                                 });
                                 planiDis_featureSymbol.setStyle( new ol.style.Style({
                                     stroke: new ol.style.Stroke({
@@ -244,7 +256,9 @@ function affichFiabLocPlani(xml, pts, visee = false, matricule_station = false){
                                         geometry: new ol.geom.Point([ 
                                             pts.get(point_name)['east'], 
                                             pts.get(point_name)['north'] 
-                                        ]) 
+                                        ]),
+                                        station: point_name,
+                                        visee: point_name,
                                     });
                                     const planiFiabLoc_CoordE_style = new ol.style.Style({
                                         image: new ol.style.Icon({
@@ -292,7 +306,9 @@ function affichFiabLocPlani(xml, pts, visee = false, matricule_station = false){
                                         geometry: new ol.geom.Point([ 
                                             pts.get(point_name)['east'], 
                                             pts.get(point_name)['north'] 
-                                        ]) 
+                                        ]),
+                                        station: point_name,
+                                        visee: point_name
                                     });
                                     const planiFiabLoc_CoordN_style = new ol.style.Style({
                                         image: new ol.style.Icon({
