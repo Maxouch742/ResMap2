@@ -23,4 +23,11 @@ function defineLayersTemp(){
     tempLayerPts_sta = new ol.layer.Vector();
     tempLayerPts_sta.setSource(tempSourcePts_sta);
     map.addLayer(tempLayerPts_sta);
+
+    // altimetrie
+    tempSourcePts_sta_alti = new ol.source.Vector({});
+    tempLayerPts_sta_alti = new ol.layer.Vector();
+    tempLayerPts_sta_alti.setSource(tempSourcePts_sta_alti);
+    map.addLayer(tempLayerPts_sta_alti);
+
 }

@@ -72,9 +72,9 @@ function styleUpdate(layer, temp = false) {
         
         case 'altiPtsF':
             if (temp){
-                tempLayerPts_alti.setStyle( function(feature) {
-                    stylePtsF.getText().setText(feature.getId());
-                    return stylePtsF;
+                altiPtsF_layer.setStyle( function(feature) {
+                    stylePtsF_filter.getText().setText(feature.getId());
+                    return stylePtsF_filter;
                 })
             }
             else {
@@ -86,9 +86,9 @@ function styleUpdate(layer, temp = false) {
             break;
         case 'altiPtsN':
             if (temp){
-                tempLayerPts_alti.setStyle( function(feature) {
-                    stylePtsN_alti.getText().setText(feature.getId());
-                    return stylePtsN_alti;
+                altiPtsN_layer.setStyle( function(feature) {
+                    stylePtsN_alti_filter.getText().setText(feature.getId());
+                    return stylePtsN_alti_filter;
                 });
             }
             else {

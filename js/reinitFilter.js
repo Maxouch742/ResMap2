@@ -15,11 +15,10 @@ function reinitFilter(){
     tempLayerPts.setVisible(false);
     tempLayerPts_alti.setVisible(false);
     tempLayerPts_sta.setVisible(false);
+    tempLayerPts_sta_alti.setVisible(false);
 
     // Rezoomer sur l'ensemble du réseau géodésique
     defineViewByFile(pts_Map);
-    //defineLayersTemp();
-    //defineLayers();
 
     // Remettre le radiobutton sur 2D
     const check = document.getElementsByName("AbrissPlani");
@@ -31,7 +30,6 @@ function reinitFilter(){
             check[i].checked = false;
         }
     };
-
 
     // Mettre à jour les layers
     affichPointsPlani(pts_Map, pts_planiVar, pts_planiObs);

@@ -32,7 +32,7 @@ function readFilePRNx(){
         
         // Points management
         pts_altiVar = parseXML_variablePoints_fixBug(pts_Map, 'altimetric');
-        pts_altiObs = parseXML_altiObsPoints(xmlDoc);
+        [pts_altiObs, altiStation] = parseXML_altiObsPoints(xmlDoc);
 
         // Layers
         affichMeasAlti(xmlDoc, pts_Map);
