@@ -5,4 +5,5 @@ defineLayersTemp();
 dragAndDropInteraction = 0;
 setInteraction();
 
-matricule = 0;
+matricule = false;
+matricule_sta = false;
