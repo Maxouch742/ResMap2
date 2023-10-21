@@ -7,15 +7,19 @@ slider.oninput = function() {
   echelleEllipses = this.value;
   output.innerHTML = echelleEllipses;
 
-  affichPrecisionPlani(pts_Map, xmlDoc, matricule);
+  if (matricule !== ''){
+    affichPrecisionPlani(pts_Map, xmlDoc, matricule);
+    affichRectanglePlani(pts_Map, matricule);
+  
+    affichPrecisionAlti(pts_Map, xmlDoc, matricule);
+    affichRectangleAlti(pts_Map, xmlDoc, matricule);
+  };
+  
   affichPrecisionPlaniRela(pts_Map, xmlDoc, 1);
-  affichRectanglePlani(pts_Map, matricule);
   affichRectanglePlaniRela(pts_Map, xmlDoc, 1);
   affichVecteurs(pts_Map, matricule);
   
-  affichPrecisionAlti(pts_Map, xmlDoc, matricule);
   affichPrecisionAltiRela(pts_Map, xmlDoc, 1);
-  affichRectangleAlti(pts_Map, xmlDoc, matricule);
   affichRectangleAltiRela(pts_Map, xmlDoc, 1);
   affichVecteursAlti(pts_Map, matricule);
 }

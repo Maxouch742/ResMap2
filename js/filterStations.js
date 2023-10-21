@@ -37,17 +37,17 @@ function filterStations(){
                     tempLayerPts_sta.setStyle( function(feature) {
                         stylePtsN_plani.getText().setText(feature.getId());
                         return stylePtsN_plani;
-                    });
+                    })
                 } else {
                     tempSourcePts_sta.addFeature(matricule_feature);
                     tempLayerPts_sta.setStyle( function(feature) {
                         stylePtsF.getText().setText(feature.getId());
                         return stylePtsF;
-                    });
-                }
+                    })
+                };
 
                 // Suppression des features non utiles
-                list_layer = [
+                const list_layer = [
                     planiDir_layer, 
                     planiDis_layer,
                     planiGNSS_layer,
@@ -66,20 +66,43 @@ function filterStations(){
                     planiResiCoordE_layer,
                     planiResiCoordN_layer,
                 ];
+
+                const liste_points_visees = [matricule_sta];
+
                 for (let i=0; i<list_layer.length; i++){
-                    list_layer[i].getSource().getFeatures().forEach(function (feature){
-                        if (feature.getProperties().station !== matricule_sta){
-                            list_layer[i].getSource().removeFeature(feature);
-                        }
-                    });
+                    if (list_layer[i].getSource() !== null){
+                        list_layer[i].getSource().getFeatures().forEach(function (feature){
+                            if (feature.getProperties().station !== matricule_sta){
+                                list_layer[i].getSource().removeFeature(feature);
+                            } else {
+                                if (liste_points_visees.includes(feature.getProperties().visee) === false){
+                                    liste_points_visees.push(feature.getProperties().visee);
+                                }
+                            }
+                        });
+                    };
+                };
+
+                // Sélection de points pour les ellipses et les rectangles
+                const list_layer_PrecFiab = [
+                    planiEll_layer,
+                    planiRect_layer
+                ];
+                for (let i=0; i<list_layer_PrecFiab.length; i++){
+                    if (list_layer_PrecFiab[i].getSource() !== null){
+                        list_layer_PrecFiab[i].getSource().getFeatures().forEach(function (feature){
+                            if (liste_points_visees.includes(feature.getProperties().name) === false){
+                                list_layer_PrecFiab[i].getSource().removeFeature(feature);
+                            }
+                        })
+                    }
                 };
 
                 // Zoomer sur le point
                 view.setCenter(matricule_feature.getGeometry().getCoordinates());
                 view.setZoom(niveau_zoom);
 
-            }
-            else {
+            } else {
                 document.getElementById("filterStationNot").innerHTML = 'La station n\'existe pas en 2D!';
             }
             break;
