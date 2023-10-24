@@ -35,55 +35,81 @@ function filterPoints(){
                     document.getElementById('checkboxAffich').checked = true;
                     changeLayerVisibility('plani_affich');
                     
-                    // Savoir si on est sur un point fixe ou point nouveau
-                    let ptsN = false;
+                    // Changer les symboles des points nouveaux et fixes
+                    styleUpdate('planiPtsF', true);
+                    styleUpdate('planiPtsN', true);
 
-                    // On parcours l'ensemble des features de la couche des points fixes planimétriques
-                    planiPtsF_layer.getSource().getFeatures().forEach(function (feature) {
-                        if (feature.getProperties().name === matricule) {
-                            view.setCenter(feature.getGeometry().getCoordinates());
-                            view.setZoom(niveau_zoom);
-
-                            tempSourcePts.addFeature(feature);
-                            styleUpdate('planiPtsF', true);
-                        }
-                        else {
-                            stylePtsF_filter.getText().setText(feature.getId());
-                            feature.setStyle(stylePtsF_filter);
-                        };
-                    });
-
-                    // Parcourir la couche des points nouveaux planimétriques
-                    planiPtsN_layer.getSource().getFeatures().forEach(function (feature) {
-                        if (feature.getProperties().name === matricule) {
-                            view.setCenter(feature.getGeometry().getCoordinates());
-                            view.setZoom(niveau_zoom);
-
-                            tempSourcePts.addFeature(feature);
-                            styleUpdate('planiPtsN', true);
-
-                            ptsN = true;
-                        }
-                        else {
-                            stylePtsN_plani_filter.getText().setText(feature.getId());
-                            feature.setStyle(stylePtsN_plani_filter);
-                        }
-                    });
-
-                    
-                    // Si le point est nouveau, on affiche l'ellipse, le rectangle et le vecteur de déplacement
-                    if (ptsN) {
-                        affichPrecisionPlani(pts_Map, xmlDoc, matricule);
-                        affichRectanglePlani(pts_Map, matricule);
-                        affichVecteurs(pts_Map, matricule);
+                    // Récupérer le feature du point
+                    let matricule_feature = planiPtsF_layer.getSource().getFeatureById(matricule);
+                    if (matricule_feature === null){
+                        matricule_feature = planiPtsN_layer.getSource().getFeatureById(matricule);
+                        tempSourcePts.addFeature(matricule_feature);
+                        tempLayerPts.setStyle( function(feature) {
+                            stylePtsN_plani.getText().setText(feature.getId());
+                            return stylePtsN_plani;
+                        });
+                    } else {
+                        tempSourcePts.addFeature(matricule_feature);
+                        tempLayerPts.setStyle( function(feature) {
+                            stylePtsF.getText().setText(feature.getId());
+                            return stylePtsF;
+                        })
                     };
 
-                    // On affiche les observations seulement (avec zi et wi)
-                    defineLayers("filter");
-                    affichMeasPlani(xmlDoc, pts_Map, matricule);
-                    affichFiabLocPlani(xmlDoc, pts_Map, matricule);
-                    affichResiNormesPlani(xmlDoc, pts_Map, matricule);
-                    
+                    // Suppression des features non utiles
+                    const list_layer = [
+                        planiDir_layer, 
+                        planiDis_layer,
+                        planiGNSS_layer,
+                        planiCoordE_layer,
+                        planiCoordN_layer,
+
+                        planiFiabLocDir_layer,
+                        planiFiabLocDis_layer,
+                        planiFiabLocGNSS_layer,
+                        planiFiabLocCoordE_layer,
+                        planiFiabLocCoordN_layer,
+
+                        planiResiDir_layer,
+                        planiResiDis_layer,
+                        planiResiGNSS_layer,
+                        planiResiCoordE_layer,
+                        planiResiCoordN_layer,
+                    ];
+                    const liste_points_stations = [matricule];
+                    for (let i=0; i<list_layer.length; i++){
+                        if (list_layer[i].getSource() !== null){
+                            list_layer[i].getSource().getFeatures().forEach(function (feature){
+                                if (feature.getProperties().visee !== matricule){
+                                    list_layer[i].getSource().removeFeature(feature);
+                                } else {
+                                    if (liste_points_stations.includes(feature.getProperties().station) === false){
+                                        liste_points_stations.push(feature.getProperties().station);
+                                    }
+                                }
+                            });
+                        };
+                    };  
+
+                    // Sélection de points pour les ellipses et les rectangles
+                    const list_layer_PrecFiab = [
+                        planiEll_layer,
+                        planiRect_layer,
+                        planiVect_layer
+                    ];
+                    for (let i=0; i<list_layer_PrecFiab.length; i++){
+                        if (list_layer_PrecFiab[i].getSource() !== null){
+                            list_layer_PrecFiab[i].getSource().getFeatures().forEach(function (feature){
+                                if (liste_points_stations.includes(feature.getProperties().name) === false){
+                                    list_layer_PrecFiab[i].getSource().removeFeature(feature);
+                                }
+                            })
+                        }
+                    };
+    
+                    // Zoomer sur le point
+                    view.setCenter(matricule_feature.getGeometry().getCoordinates());
+                    view.setZoom(niveau_zoom);                  
                 }
                 else {
                     document.getElementById("filterPointNot").innerHTML = 'Le point n\'est pas mesuré en 2D!';
@@ -91,54 +117,87 @@ function filterPoints(){
                 break;
 
             case 'AbrissAlti':
-                // désactiver tous les layers altimétriques et planimétriques
-                document.getElementById('checkboxAffich_alti').checked = true;
-                changeLayerVisibility('alti_affich');
-                document.getElementById('checkboxAffich').checked = true;
-                changeLayerVisibility('plani_affich');
 
-                // Savoir si on est sur un point fixe ou point nouveau
-                let ptsN_alti = false;
-
-                // checker si le point existe dans l'abriss 1D
                 if (pts_altiObs.includes(matricule)) {
 
-                    // On parcours l'ensemble des features de la couche des points fixes planimétriques
-                    altiPtsF_layer.getSource().getFeatures().forEach(function (feature) {
-                        if (feature.getProperties().name === matricule) {
-                            view.setCenter(feature.getGeometry().getCoordinates());
-                            view.setZoom(niveau_zoom);
+                    // désactiver tous les layers altimétriques et planimétriques
+                    document.getElementById('checkboxAffich_alti').checked = true;
+                    changeLayerVisibility('alti_affich');
+                    document.getElementById('checkboxAffich').checked = true;
+                    changeLayerVisibility('plani_affich');
 
-                            tempSourcePts_alti.addFeature(feature);
-                            styleUpdate('altiPtsF', true);
-                        }
-                        else {
-                            stylePtsF_filter.getText().setText(feature.getId());
-                            feature.setStyle(stylePtsF_filter);
+                    // Mise à jour du style
+                    styleUpdate("altiPtsF", true);
+                    styleUpdate("altiPtsN", true);
+
+                    // Récupérer le feature du point
+                    let matricule_feature = altiPtsF_layer.getSource().getFeatureById(matricule);
+                    if (matricule_feature === null){
+                        matricule_feature = altiPtsN_layer.getSource().getFeatureById(matricule);
+                        tempSourcePts_alti.addFeature(matricule_feature)
+                        tempLayerPts_alti.setStyle( function (feature) {
+                            stylePtsN_alti.getText().setText(feature.getId());
+                            return stylePtsN_alti;
+                        });
+                    } else {
+                        tempSourcePts_alti.addFeature(matricule_feature)
+                        tempLayerPts_alti.setStyle( function (feature) {
+                            stylePtsF.getText().setText(feature.getId());
+                            return stylePtsF;
+                        });
+                    };
+
+                    // Créer une liste de points visées
+                    const list_points_station_alti = [matricule];
+
+                    // Suppression des features non utiles
+                    const list_layer_alti = [
+                        altiDH_layer, 
+                        altiGNSS_layer,
+                        altiCoordH_layer,
+
+                        altiFiabLocDH_layer,
+                        altiFiabLocGNSS_layer,
+                        altiFiabLocCoordH_layer,
+
+                        altiResiDH_layer,
+                        altiResiGNSS_layer,
+                        altiResiCoordH_layer,
+                    ];
+                    for (let i=0; i<list_layer_alti.length; i++){
+                        if (list_layer_alti[i].getSource() !== null){
+                            list_layer_alti[i].getSource().getFeatures().forEach(function (feature){
+                                if (feature.getProperties().visee !== matricule){
+                                    list_layer_alti[i].getSource().removeFeature(feature);
+                                } else {
+                                    if (list_points_station_alti.includes(feature.getProperties().station) === false){
+                                        list_points_station_alti.push(feature.getProperties().station);
+                                    }
+                                }
+                            });
+
                         };
-                    });
+                    };
 
-                    // Parcours de la couche des points nouveaux altimétriques
-                    altiPtsN_layer.getSource().getFeatures().forEach(function (feature) {
-                        if (feature.getProperties().name === matricule) {
-                            view.setCenter(feature.getGeometry().getCoordinates());
-                            view.setZoom(niveau_zoom);
-
-                            tempSourcePts_alti.addFeature(feature);
-                            styleUpdate('altiPtsN', true);
-                            ptsN_alti = true;
+                    // Sélection des points pour les ellipses et les rectangles
+                    const list_layer_PrecFiab_alti = [
+                        altiEll_layer,
+                        altiRect_layer,
+                        altiVect_layer
+                    ];
+                    for (let i=0; i<list_layer_PrecFiab_alti.length; i++){
+                        if (list_layer_PrecFiab_alti[i].getSource() !== null){
+                            list_layer_PrecFiab_alti[i].getSource().getFeatures().forEach(function (feature){
+                                if (list_points_station_alti.includes(feature.getProperties().name) === false){
+                                    list_layer_PrecFiab_alti[i].getSource().removeFeature(feature);
+                                }
+                            })
                         }
-                        else {
-                            stylePtsN_alti_filter.getText().setText(feature.getId());
-                            feature.setStyle(stylePtsN_alti_filter);
-                        }
-                    });
+                    };
 
-                    if (ptsN_alti){
-                       affichPrecisionAlti(pts_Map, xmlDoc, matricule);
-                       affichRectangleAlti(pts_Map, xmlDoc, matricule);
-                       affichVecteursAlti(pts_Map, matricule)
-                    }
+                    // Zoomer sur le point
+                    view.setCenter(matricule_feature.getGeometry().getCoordinates());
+                    view.setZoom(niveau_zoom);
                 }
                 else {
                     document.getElementById("filterPointNot").innerHTML = 'Le point n\'est pas mesuré en 1D!';
