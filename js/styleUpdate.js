@@ -3,12 +3,11 @@ function styleUpdate(layer, temp = false) {
     switch (layer) {
         case 'planiPtsF':
             if (temp){
-                tempLayerPts.setStyle( function(feature) {
-                    stylePtsF.getText().setText(feature.getId());
-                    return stylePtsF;
+                planiPtsF_layer.setStyle( function(feature) {
+                    stylePtsF_filter.getText().setText(feature.getId());
+                    return stylePtsF_filter;
                 });
-            }
-            else {
+            } else {
                 planiPtsF_layer.setStyle( function(feature) {
                     stylePtsF.getText().setText(feature.getId());
                     return stylePtsF;
@@ -17,12 +16,11 @@ function styleUpdate(layer, temp = false) {
             break;
         case 'planiPtsN':
             if (temp){
-                tempLayerPts.setStyle( function(feature) {
-                    stylePtsN_plani.getText().setText(feature.getId());
-                    return stylePtsN_plani;
+                planiPtsN_layer.setStyle( function(feature) {
+                    stylePtsN_plani_filter.getText().setText(feature.getId());
+                    return stylePtsN_plani_filter;
                 });
-            }
-            else {
+            } else {
                 planiPtsN_layer.setStyle( function(feature) {
                     stylePtsN_plani.getText().setText(feature.getId());
                     return stylePtsN_plani;
@@ -74,9 +72,9 @@ function styleUpdate(layer, temp = false) {
         
         case 'altiPtsF':
             if (temp){
-                tempLayerPts_alti.setStyle( function(feature) {
-                    stylePtsF.getText().setText(feature.getId());
-                    return stylePtsF;
+                altiPtsF_layer.setStyle( function(feature) {
+                    stylePtsF_filter.getText().setText(feature.getId());
+                    return stylePtsF_filter;
                 })
             }
             else {
@@ -88,9 +86,9 @@ function styleUpdate(layer, temp = false) {
             break;
         case 'altiPtsN':
             if (temp){
-                tempLayerPts_alti.setStyle( function(feature) {
-                    stylePtsN_alti.getText().setText(feature.getId());
-                    return stylePtsN_alti;
+                altiPtsN_layer.setStyle( function(feature) {
+                    stylePtsN_alti_filter.getText().setText(feature.getId());
+                    return stylePtsN_alti_filter;
                 });
             }
             else {

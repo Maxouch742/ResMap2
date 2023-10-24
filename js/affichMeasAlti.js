@@ -37,7 +37,9 @@ function affichMeasAlti(xml, pts){
                                 pts.get(pt_name)['north']
                             ]),
                             name: station.getAttribute('name'),
-                            properties: 'Session n°'+String(altiGNSS_sessionID)
+                            properties: 'Session n°'+String(altiGNSS_sessionID),
+                            station: pt_name,
+                            visee: pt_name,
                         });
                         const altiGNSS_style = new ol.style.Style({
                             image: new ol.style.Icon({
@@ -94,7 +96,9 @@ function affichMeasAlti(xml, pts){
                             const altiDH_featureSymbol = new ol.Feature({
                                 geometry: new ol.geom.Point([
                                     symbol_eart, symbol_north
-                                ])
+                                ]),
+                                station: sta_name_dh,
+                                visee: pt_name,
                             });
 
                             // Style
@@ -161,6 +165,8 @@ function affichMeasAlti(xml, pts){
                                     pts.get(pt_name)['north']
                                 ]),
                                 name: pt_name,
+                                station: pt_name,
+                                visee: pt_name,
                             });
 
                             switch (obs_target){

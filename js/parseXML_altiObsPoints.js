@@ -1,6 +1,10 @@
 function parseXML_altiObsPoints(xml){
     
+    // listes des matricules observées (visées et stations)
     const altiObs = [];
+
+    // Liste des stations
+    const altiStation = [];
     
     const altiAbriss = xml.getElementsByTagName('altimetricAbriss')[0];
     const stations = altiAbriss.getElementsByTagName('station');
@@ -26,6 +30,9 @@ function parseXML_altiObsPoints(xml){
                 if (altiObs.includes(sta) === false){
                     altiObs.push(sta)
                 };
+                if (altiStation.includes(sta) === false){
+                    altiStation.push(sta)
+                }
                 // target id
                 const obs = stations[i].getElementsByTagName('obs')
                 for (let j=0; j<obs.length; j++){
@@ -38,5 +45,5 @@ function parseXML_altiObsPoints(xml){
         };
     };
 
-    return altiObs
+    return [altiObs, altiStation]
 }

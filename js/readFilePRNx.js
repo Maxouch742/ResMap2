@@ -15,8 +15,6 @@ function readFilePRNx(){
       xmlDoc = parser.parseFromString(xmlToParse,"text/xml");
 
       verifyErrors(xmlDoc);
-
-      //window_affichFilter();
       
       // Measure
       echelleEllipses = document.getElementById("myRange").value;
@@ -24,7 +22,7 @@ function readFilePRNx(){
       // Points management
       pts_Map = parseXML_points(xmlDoc);
       pts_planiVar = parseXML_variablePoints_fixBug(pts_Map, 'planimetric');
-      pts_planiObs = parseXML_planiObsPoints(xmlDoc);  // get points to targets
+      [pts_planiObs, planiStation] = parseXML_planiObsPoints(xmlDoc);  // get points to targets
       pts_altiVar = [];
       pts_altiObs = [];
 
@@ -34,7 +32,7 @@ function readFilePRNx(){
         
         // Points management
         pts_altiVar = parseXML_variablePoints_fixBug(pts_Map, 'altimetric');
-        pts_altiObs = parseXML_altiObsPoints(xmlDoc);
+        [pts_altiObs, altiStation] = parseXML_altiObsPoints(xmlDoc);
 
         // Layers
         affichMeasAlti(xmlDoc, pts_Map);

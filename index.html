@@ -2,11 +2,12 @@
 <html>
 
   <head>
-    <title>ResMap2</title>
+    <title>ResMap LTOP</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Visualisation simple et facile des résultats de calculs de compensation de réseaux géodésiques">
     <meta name="keywords" content="resmap, ResMap, ResMapBD, LTOP, fichier PRNx, swisstopo">
+    <meta name="author" content="Maxime Fourquaux, INSIT">
     <link rel="icon" href="./img/logoAvecTitre.png" />
 
     <!----------- CSS  ----------->
@@ -42,7 +43,7 @@
 
           <!-- Logo -->
           <div class="w3-center">
-            <img src="img/logoAvecTitre.png" class="imgLogo w3-center" alt="Logo de ResMap2">
+            <img src="img/logoAvecTitre2.png" class="imgLogo w3-center" alt="Logo de ResMap2">
           </div>
 
           <!-- Import .PRNx file -->
@@ -385,11 +386,11 @@
       </div>
 
       <!-- Button for filter -->
-      <!--<div class="w3-dropdown-hover w3-right" id="filterSelection">
+      <div class="w3-dropdown-hover w3-right" id="filterSelection">
         <button class="w3-button" id="openSidebar">
             <img id="imgFilter" src="./img/filter-svgrepo-com.svg" alt="Filter view">
         </button>
-      </div>-->
+      </div>
 
       <!-- Sidebar pour le filtre -->
       <div class="sidebar" id="mySidebar">
@@ -418,12 +419,6 @@
           <p style="font-weight:bold;">N° de point visé :</p>
           <input class="w3-input-filter" id="filterPoint" onchange="filterPoints()" type="text">
           <p class="filter-not-match" id="filterPointNot"></p>
-
-          <!-- Layers -->
-          <div id="filterPointsLayers">
-
-          </div>
-          <!-- /. fin layers -->
         </div>
               
         
@@ -494,7 +489,6 @@
     <script src="js/parseXML_variablePoints_fixBug.js"></script>
     <script src="js/parseXML_planiObsPoints.js"></script>
     <script src="js/parseXML_altiObsPoints.js"></script>
-    <script src="js/parseXML_planiObs.js"></script>
     
     <script src="js/affichPointsPlani.js"></script>
     <script src="js/affichPointsAlti.js"></script>
@@ -544,6 +538,7 @@
     <script src="js/htmlAddCheckboxFiabiliteAltiRela.js"></script>
 
     <script src="js/filterPoints.js"></script>
+    <script src="js/filterStations.js"></script>
     <script src="js/reinitFilter.js"></script>
     <script src="js/zoomPoints.js"></script>
 

@@ -47,6 +47,8 @@ function affichResiNormesAlti(pts, xml){
                                     pts.get(pt_name)['east'], 
                                     pts.get(pt_name)['north'] 
                                 ]),
+                                station: pt_name,
+                                visee: pt_name,
                             });
                             planiResi1_feature.setStyle( new ol.style.Style({
                                 image: new ol.style.Icon({
@@ -91,7 +93,9 @@ function affichResiNormesAlti(pts, xml){
                                         pts.get(pt_name)['east'],
                                         pts.get(pt_name)['north']
                                     ]
-                                ])
+                                ]),
+                                station: sta_name_dh,
+                                visee: pt_name,
                             });
 
                             // Feature symbol
@@ -102,7 +106,9 @@ function affichResiNormesAlti(pts, xml){
                                 geometry: new ol.geom.Point([
                                     symbol_eart, 
                                     symbol_north
-                                ])
+                                ]),
+                                station: sta_name_dh,
+                                visee: pt_name,
                             });
 
                             // Style
@@ -150,7 +156,9 @@ function affichResiNormesAlti(pts, xml){
                             geometry: new ol.geom.Point([
                                 pts.get(point_name)['east'],
                                 pts.get(point_name)['north']
-                            ])
+                            ]),
+                            station: point_name,
+                            name: point_name,
                         });
                         const altiFiabLocCoord_featureSymbol = new ol.style.Style({
                             image: new ol.style.Icon({

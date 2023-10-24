@@ -39,7 +39,9 @@ function affichFiabLocAlti(pts, xml, visee = false){
                                 geometry: new ol.geom.Point([ 
                                     pts.get(pt_name)['east'], 
                                     pts.get(pt_name)['north'] 
-                                ]) 
+                                ]),
+                                station: pt_name,
+                                visee: pt_name
                             });
                             const altiFiabLoc_featureStyle = new ol.style.Style({
                                 image: new ol.style.Icon({
@@ -86,7 +88,9 @@ function affichFiabLocAlti(pts, xml, visee = false){
                                         pts.get(pt_name)['east'],
                                         pts.get(pt_name)['north']
                                     ]
-                                ])
+                                ]),
+                                station: sta_name_dh,
+                                visee: pt_name,
                             });
 
                             // Feature symbol
@@ -97,7 +101,9 @@ function affichFiabLocAlti(pts, xml, visee = false){
                                 geometry: new ol.geom.Point([
                                     symbol_eart, 
                                     symbol_north
-                                ])
+                                ]),
+                                station: sta_name_dh,
+                                visee: pt_name
                             });
 
                             // Style
@@ -145,7 +151,9 @@ function affichFiabLocAlti(pts, xml, visee = false){
                             geometry: new ol.geom.Point([
                                 pts.get(point_name)['east'],
                                 pts.get(point_name)['north']
-                            ])
+                            ]),
+                            station: point_name,
+                            visee: point_name,
                         });
                         const altiFiabLocCoord_featureSymbol = new ol.style.Style({
                             image: new ol.style.Icon({
