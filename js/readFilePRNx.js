@@ -63,6 +63,8 @@ function readFilePRNx(){
       affichVecteurs(pts_Map);
 
       document.getElementById("outputTest").textContent = "Import effectué ✓";
+      document.getElementById("zoomButton").disabled = false;
+      document.getElementById("openSidebar").disabled = false;
     };
     fr.readAsText(fileName);
 
