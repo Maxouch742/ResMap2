@@ -1,4 +1,4 @@
-function affichFiabLocAlti(pts, xml, visee = false){
+function affichFiabLocAlti(pts, xml){
     
     // Create source
     const altiFiabLocDH_source = new ol.source.Vector({});
@@ -31,7 +31,7 @@ function affichFiabLocAlti(pts, xml, visee = false){
                     let obs = target.getElementsByTagName('obs')[0];
                     if (obs.getAttribute('obsNr') != ''){
                         const obs_zi = parseFloat(obs.getAttribute('zi'));
-                        const [colorFiab, widthFiab] = getParameterFeature_zi(obs_zi);
+                        const [colorFiab, widthFiab] = getParameterFeature_zi(obs_zi, '1D');
 
                         if(pts.has(pt_name)){
                         
@@ -75,7 +75,7 @@ function affichFiabLocAlti(pts, xml, visee = false){
 
                             const pt_obsNr = list_obsDH[j].getAttribute('obsNr');
                             const obs_zi = parseFloat(list_obsDH[j].getAttribute('zi'));
-                            const [colorFiab, widthFiab] = getParameterFeature_zi(obs_zi);
+                            const [colorFiab, widthFiab] = getParameterFeature_zi(obs_zi, '1D');
 
                             // Feature line
                             const altiDH_feature = new ol.Feature({
@@ -144,7 +144,7 @@ function affichFiabLocAlti(pts, xml, visee = false){
                     if (pts.has(point_name) === true){
                         const point_obs = targets_coordH[j].getElementsByTagName('obs')[0];
                         const point_zi = parseFloat(point_obs.getAttribute('zi'));
-                        const [colorFiab, widthFiab] = getParameterFeature_zi(point_zi);
+                        const [colorFiab, widthFiab] = getParameterFeature_zi(point_zi, '1D');
 
                         // Feature
                         const altiFiabLocCoord_feature = new ol.Feature({

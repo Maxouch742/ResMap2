@@ -65,6 +65,23 @@ function readFilePRNx(){
       document.getElementById("outputTest").textContent = "Import effectué ✓";
       document.getElementById("zoomButton").disabled = false;
       document.getElementById("openSidebar").disabled = false;
+
+      document.getElementById("zi0_2D").textContent = zi0_2D;
+      document.getElementById("zi25_2D").textContent = zi25_2D;
+      document.getElementById("zi50_2D").textContent = zi50_2D;
+      document.getElementById("zi75_2D").textContent = zi75_2D;
+      
+      document.getElementById("zi0_1D").textContent = zi0_1D;
+      document.getElementById("zi25_1D").textContent = zi25_1D;
+      document.getElementById("zi50_1D").textContent = zi50_1D;
+      document.getElementById("zi75_1D").textContent = zi75_1D;
+      
+      document.getElementById("wiInf_2D").textContent = wiInf_2D;
+      document.getElementById("wi2_2D").textContent = wi2_2D;
+      document.getElementById("wi0_2D").textContent = wi0_2D;
+      document.getElementById("wiInf_1D").textContent = wiInf_1D;
+      document.getElementById("wi2_1D").textContent = wi2_1D;
+      document.getElementById("wi0_1D").textContent = wi0_1D;
     };
     fr.readAsText(fileName);
 

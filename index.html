@@ -295,7 +295,7 @@
 
           <!-- Légende -->
           <button onclick="myFunction('abrissLegende')" class="w3-button w3-block w3-left-align" style="background: #93BED3;">
-            <span class="legend">Légende</span>
+            <span class="legend">Légende et statistiques</span>
           </button>
           <div id="abrissLegende" class="w3-container w3-hide w3-border">
 
@@ -304,10 +304,10 @@
               <p style="font-weight: bold; margin-bottom: 1px;">
                 Fiabilité locale (zi)
               </p>
-              <span class="palier-zi zi1">― 0 à 25%</span><br>
-              <span class="palier-zi zi2">― 25 à 50%</span><br>
-              <span class="palier-zi zi3">― 50 à 75%</span><br>
-              <span class="palier-zi zi4">― 75 à 100%</span>
+              <span class="palier-zi zi1">― 0 à 25%</span> <span style="font-style:italic; font-size: small;">(2D: <span id="zi0_2D">0</span> obs. | 1D: <span id="zi0_1D">0</span> obs.)</span><br>
+              <span class="palier-zi zi2">― 25 à 50%</span> <span style="font-style:italic; font-size: small;">(2D: <span id="zi25_2D">0</span> obs. | 1D: <span id="zi25_1D">0</span> obs.)</span><br>
+              <span class="palier-zi zi3">― 50 à 75%</span> <span style="font-style:italic; font-size: small;">(2D: <span id="zi50_2D">0</span> obs. | 1D: <span id="zi50_1D">0</span> obs.)</span><br>
+              <span class="palier-zi zi4">― 75 à 100%</span> <span style="font-style:italic; font-size: small;">(2D: <span id="zi75_2D">0</span> obs. | 1D: <span id="zi75_1D">0</span> obs.)</span>
             </div>
             <!-- /. fin Zi -->
 
@@ -319,15 +319,15 @@
               <div class="row">
                 <div class="col w3-border-right">
                   <span style="font-style:italic;">Planimétrie</span><br>
-                  <span class="palier-wi wi1" id="palierPlaniWi1">― x à ∞</span><br>
-                  <span class="palier-wi wi2" id="palierPlaniWi2">― x à x</span><br>
-                  <span class="palier-wi wi3" id="palierPlaniWi3">― 0.0 à x</span>
+                  <span class="palier-wi wi1" id="palierPlaniWi1">― x à ∞</span> <span style="font-style:italic; font-size: small;">(<span id="wiInf_2D">0</span> obs.)</span><br>
+                  <span class="palier-wi wi2" id="palierPlaniWi2">― x à x</span> <span style="font-style:italic; font-size: small;">(<span id="wi2_2D">0</span> obs.)</span><br>
+                  <span class="palier-wi wi3" id="palierPlaniWi3">― 0.0 à x</span> <span style="font-style:italic; font-size: small;">(<span id="wi0_2D">0</span> obs.)</span>
                 </div>
                 <div class="col">
                   <span style="font-style:italic;">Altimétrie</span><br>
-                  <span class="palier-wi wi1" id="palierAltiWi1">― x à ∞</span><br>
-                  <span class="palier-wi wi2" id="palierAltiWi2">― x à x</span><br>
-                  <span class="palier-wi wi3" id="palierAltiWi3">― 0.0 à x</span>
+                  <span class="palier-wi wi1" id="palierAltiWi1">― x à ∞</span> <span style="font-style:italic; font-size: small;">(<span id="wiInf_1D">0</span> obs.)</span><br>
+                  <span class="palier-wi wi2" id="palierAltiWi2">― x à x</span> <span style="font-style:italic; font-size: small;">(<span id="wi2_1D">0</span> obs.)</span><br>
+                  <span class="palier-wi wi3" id="palierAltiWi3">― 0.0 à x</span> <span style="font-style:italic; font-size: small;">(<span id="wi0_1D">0</span> obs.)</span>
                 </div>
               </div>
             </div>

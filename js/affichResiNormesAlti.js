@@ -39,7 +39,7 @@ function affichResiNormesAlti(pts, xml){
                     const obs = targets[j].getElementsByTagName('obs')[0];
                     if (obs.getAttribute('obsNr') != ''){
                         const obs_wi = Math.abs(parseFloat(obs.getAttribute('wi')));
-                        const [colorFiab, widthFiab] = getParameterFeature_wi(obs_wi, limitWi, limitInf);
+                        const [colorFiab, widthFiab] = getParameterFeature_wi(obs_wi, limitWi, limitInf, '1D');
                         
                         if (pts.has(pt_name)){
                             const planiResi1_feature = new ol.Feature({ 
@@ -78,7 +78,7 @@ function affichResiNormesAlti(pts, xml){
                         const pt_name = list_obsDH[j].getAttribute('target');
                         const pt_obsNr = list_obsDH[j].getAttribute('obsNr');
                         const obs_wi = parseFloat(list_obsDH[j].getAttribute('wi'));
-                        const [colorFiab, widthFiab] = getParameterFeature_wi(obs_wi, limitWi, limitInf);
+                        const [colorFiab, widthFiab] = getParameterFeature_wi(obs_wi, limitWi, limitInf, '1D');
                         
                         if (pts.has(pt_name)){
 
@@ -149,7 +149,7 @@ function affichResiNormesAlti(pts, xml){
                     if (pts.has(point_name)){
                         const point_obs = targets_coordH[j].getElementsByTagName('obs')[0];
                         const obs_wi = parseFloat(point_obs.getAttribute('wi'));
-                        const [colorFiab, widthFiab] = getParameterFeature_wi(obs_wi, limitWi, limitInf);
+                        const [colorFiab, widthFiab] = getParameterFeature_wi(obs_wi, limitWi, limitInf, '1D');
 
                         // Feature
                         const altiFiabLocCoord_feature = new ol.Feature({
