@@ -86,7 +86,8 @@ function filterStations(){
                 // Sélection de points pour les ellipses et les rectangles
                 const list_layer_PrecFiab = [
                     planiEll_layer,
-                    planiRect_layer
+                    planiRect_layer,
+                    planiVect_layer
                 ];
                 for (let i=0; i<list_layer_PrecFiab.length; i++){
                     if (list_layer_PrecFiab[i].getSource() !== null){
@@ -135,6 +136,9 @@ function filterStations(){
                     });
                 }
 
+                // Créer une liste de points visées
+                const list_points_visees_alti = [matricule_sta];
+
                 // Suppression des features non utiles
                 const list_layer_alti = [
                     altiDH_layer, 
@@ -155,15 +159,41 @@ function filterStations(){
                         list_layer_alti[i].getSource().getFeatures().forEach(function (feature){
                             if (feature.getProperties().station !== matricule_sta){
                                 list_layer_alti[i].getSource().removeFeature(feature);
+                            } else {
+                                if (list_points_visees_alti.includes(feature.getProperties().visee) === false){
+                                    list_points_visees_alti.push(feature.getProperties().visee);
+                                }
                             }
                         });
 
                     };
                 };
 
+                // Sélection des points pour les ellipses et les rectangles
+                const list_layer_PrecFiab_alti = [
+                    altiEll_layer,
+                    altiRect_layer,
+                    altiVect_layer
+                ];
+                for (let i=0; i<list_layer_PrecFiab_alti.length; i++){
+                    if (list_layer_PrecFiab_alti[i].getSource() !== null){
+                        list_layer_PrecFiab_alti[i].getSource().getFeatures().forEach(function (feature){
+                            if (list_points_visees_alti.includes(feature.getProperties().name) === false){
+                                list_layer_PrecFiab_alti[i].getSource().removeFeature(feature);
+                            }
+                        })
+                    }
+                };
+
                 // Zoomer sur le point
                 view.setCenter(matricule_feature.getGeometry().getCoordinates());
                 view.setZoom(niveau_zoom);
+
+                // Afficher les points fixes et planimétriques
+                document.getElementById("checkboxPtsN_alti").checked = true;
+                document.getElementById("checkboxPtsF_alti").checked = true;
+                changeLayerVisibility("alti_ptsN");
+                changeLayerVisibility("alti_ptsF");
             }
             else {
                 document.getElementById("filterStationNot").innerHTML = 'La station n\'existe pas en 1D!';

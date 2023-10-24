@@ -46,4 +46,6 @@ function reinitFilter(){
     affichFiabLocAlti(pts_Map, xmlDoc);
     affichResiNormesAlti(pts_Map, xmlDoc);
     affichVecteursAlti(pts_Map);
+
+    defineLayersTemp();
 }
