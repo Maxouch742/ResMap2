@@ -1,39 +1,6 @@
 function parseXML_points(xml){
 
     const points = new Map();   
-    
-    // Coordonnées du fichier
-    /*const coordFinal = xml.getElementsByTagName('coordinates')[0];
-    const coordFinal_list = coordFinal.getElementsByTagName('point');
-
-    for (let i=0; i<coordFinal_list.length; i++){
-        const pt = coordFinal_list[i];
-
-        pt_name = pt.getAttribute('name');
-        if (pt_name != 'NULLBERN'){
-
-            east_temp = parseFloat(pt.getAttribute('easting'));
-            if (east_temp > 450000.0 && east_temp < 2000000.0){
-                east_temp = east_temp + 2000000.0;
-            };
-            north_temp = parseFloat(pt.getAttribute('northing'));
-            if (north_temp > 70000.0 && north_temp < 1000000.0){
-                north_temp = north_temp + 1000000.0;
-            };
-            
-            const pt_object = {
-                type: pt.getAttribute('type'),
-                east: east_temp, //.toFixed(5),
-                north: north_temp, //.toFixed(5),
-                height: parseFloat(pt.getAttribute('height')), //.toFixed(5),
-                geoidUnd: parseFloat(pt.getAttribute('geoidUnd')), //.toFixed(5),
-                eta: parseFloat(pt.getAttribute('eta_cc')), //.toFixed(2),
-                xi: parseFloat(pt.getAttribute('xi_cc')), //.toFixed(2),
-            };
-
-            points.set(pt_name, pt_object)
-        }
-    }*/
 
     // reliability and precision
     const coordinates = xml.getElementsByTagName('coordinates')[0];
